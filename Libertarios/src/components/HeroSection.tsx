@@ -95,8 +95,14 @@ export function HeroSection() {
           </h1>
 
           {/* Subheadline */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed opacity-0 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-6 leading-relaxed opacity-0 animate-fade-in" style={{ animationDelay: "0.4s" }}>
             Plataforma abierta para entender cuántas personas en España se identifican con la libertad individual y qué significa realmente apoyar ideas libertarias.
+          </p>
+          
+          {/* Mission statement */}
+          <p className="text-base md:text-lg text-foreground/80 max-w-2xl mx-auto mb-12 leading-relaxed opacity-0 animate-fade-in font-medium" style={{ animationDelay: "0.45s" }}>
+            Nuestro objetivo: dar visibilidad a las personas con opiniones libertarias en España y 
+            <span className="text-primary"> quitarles las etiquetas negativas</span> que a menudo se les atribuyen.
           </p>
 
           {/* CTAs */}

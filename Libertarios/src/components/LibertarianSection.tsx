@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { BookOpen, History, Scale, CheckCircle, ArrowRight } from "lucide-react";
 
@@ -63,9 +64,11 @@ export function LibertarianSection() {
               En esta plataforma explicamos los fundamentos, el contexto histórico,
               las diferencias con otras corrientes y qué significa realmente apoyar la libertad individual.
             </p>
-            <Button variant="cta" size="lg">
-              Aprender más
-              <ArrowRight className="ml-2" />
+            <Button variant="cta" size="lg" asChild>
+              <Link href="/libertario">
+                Aprender más
+                <ArrowRight className="ml-2" />
+              </Link>
             </Button>
           </div>
         </div>

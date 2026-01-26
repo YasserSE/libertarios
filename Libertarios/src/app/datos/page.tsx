@@ -1,6 +1,7 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SpainMap } from "@/components/SpainMap";
+import { QuadrantDistribution } from "@/components/QuadrantDistribution";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { mockUsers } from "@/data/mockRegisteredUsers";
@@ -125,8 +126,17 @@ export default function DatosPage() {
           </div>
         </section>
 
-        {/* Demographics */}
+        {/* Quadrant Distribution */}
         <section className="py-16 lg:py-24">
+          <div className="container">
+            <div className="max-w-6xl mx-auto">
+              <QuadrantDistribution />
+            </div>
+          </div>
+        </section>
+
+        {/* Demographics */}
+        <section className="py-16 lg:py-24 bg-card border-y border-border">
           <div className="container">
             <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground text-center mb-12">
               Datos demográficos
