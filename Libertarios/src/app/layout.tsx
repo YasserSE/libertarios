@@ -3,7 +3,7 @@ import "./globals.css";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
-  title: "Eje Libertario",
+  title: "Libertarios.eu",
   description: "Descubre tu posición en el espectro político libertario",
 };
 

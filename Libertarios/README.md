@@ -1,4 +1,4 @@
-# Eje Libertario - Next.js Application
+# Libertarios.eu - Next.js Application
 
 A Next.js application for visualizing and understanding libertarian political positions in Spain.
 
