@@ -13,6 +13,9 @@ import {
 } from "@/components/ui/select";
 import { ArrowRight, Check, MapPin, User, Calendar, Heart, Globe } from "lucide-react";
 import { toast } from "sonner";
+import { submitRegistration } from "@/app/registro/actions";
+import { resolveProvince } from "@/data/geo/spain-provinces";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const provinces = [
   "A Coruña", "Álava", "Albacete", "Alicante", "Almería", "Asturias", "Ávila",
@@ -77,7 +80,9 @@ export function RegistrationForm({ onComplete, quadrantPosition }: RegistrationF
     gender: "",
     orientation: "",
     nationality: "",
+    email: "",
   });
+  const [consent, setConsent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async () => {
@@ -87,19 +92,39 @@ export function RegistrationForm({ onComplete, quadrantPosition }: RegistrationF
     }
 
     setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
+
+    // El formulario trabaja con nombres de provincia; la base con códigos INE.
+    // Se traduce aquí, contra el mismo registro que usan los mapas, para que un
+    // nombre bilingüe («Baleares» / «Illes Balears») no rompa el alta.
+    const province = resolveProvince({ properties: { name: formData.province } });
+
+    const result = await submitRegistration({
+      email: formData.email,
+      consent: true,
+      country: "ES",
+      region: province?.code ?? null,
+      economic: quadrantPosition.economic,
+      social: quadrantPosition.social,
+      method: "test",
+      ageRange: formData.ageRange || null,
+      gender: formData.gender || null,
+    });
+
+    setIsSubmitting(false);
+
+    if (!result.ok) {
+      toast.error(result.error);
+      return;
+    }
+
     const registrationData: RegistrationData = {
       ...formData,
       economic: quadrantPosition.economic,
       social: quadrantPosition.social,
     };
-    
-    toast.success("¡Registro completado! Gracias por participar.");
+
+    toast.success("Registro completado. Gracias por contarte.");
     onComplete?.(registrationData);
-    setIsSubmitting(false);
   };
 
   const isStep1Valid = formData.province && formData.city;
@@ -403,10 +428,49 @@ export function RegistrationForm({ onComplete, quadrantPosition }: RegistrationF
             )}
           </div>
 
-          <p className="text-xs text-muted-foreground text-center">
-            Al registrarte, aceptas que tus datos se muestren de forma anónima y agregada.
-            Cumplimos con la normativa RGPD.
-          </p>
+          {/*
+            El correo es lo único que permite deduplicar altas y atender una
+            petición de borrado. No se almacena: se guarda su hash con un pepper
+            del servidor, así que ni nosotros podemos recuperarlo.
+          */}
+          <div className="space-y-2">
+            <Label htmlFor="email">Correo electrónico *</Label>
+            <Input
+              id="email"
+              type="email"
+              inputMode="email"
+              autoComplete="email"
+              required
+              placeholder="tu@correo.com"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              className="bg-background"
+            />
+            <p className="text-xs leading-relaxed text-muted-foreground">
+              No lo guardamos. Se convierte en un hash irreversible que solo sirve para no
+              contarte dos veces y para poder borrarte si lo pides. No recibirás correos.
+            </p>
+          </div>
+
+          {/*
+            La posición política es categoría especial del art. 9 del RGPD: exige
+            consentimiento explícito y afirmativo, no una casilla premarcada ni
+            un «al continuar aceptas».
+          */}
+          <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-border bg-background p-4">
+            <Checkbox
+              checked={consent}
+              onCheckedChange={(v) => setConsent(v === true)}
+              className="mt-0.5"
+              aria-describedby="consent-text"
+            />
+            <span id="consent-text" className="text-sm leading-relaxed text-muted-foreground">
+              Doy mi consentimiento explícito para que se registre mi posición política y se
+              publique de forma <strong className="text-foreground">agregada y anónima</strong>.
+              Sé que puedo pedir su borrado en cualquier momento escribiendo a{" "}
+              <span className="text-foreground">contacto@libertarios.es</span>.
+            </span>
+          </label>
 
           <div className="flex gap-3">
             <Button variant="outline" className="flex-1" onClick={() => setStep(3)}>
@@ -416,7 +480,7 @@ export function RegistrationForm({ onComplete, quadrantPosition }: RegistrationF
               variant="hero"
               className="flex-1"
               onClick={handleSubmit}
-              disabled={isSubmitting || !quadrantPosition}
+              disabled={isSubmitting || !quadrantPosition || !consent || !formData.email}
             >
               {isSubmitting ? "Registrando..." : "Confirmar registro"}
             </Button>

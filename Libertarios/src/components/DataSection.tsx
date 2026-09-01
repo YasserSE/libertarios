@@ -1,8 +1,6 @@
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { SpainMap } from "@/components/SpainMap";
-import { InternationalMap } from "@/components/InternationalMap";
 import { MapPin, Users, Calendar, Heart, Globe, ArrowRight } from "lucide-react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const dataCategories = [
   { icon: MapPin, label: "Distribución geográfica", value: "52 provincias" },
@@ -42,35 +40,6 @@ export function DataSection() {
               <p className="text-sm text-muted-foreground">{category.value}</p>
             </div>
           ))}
-        </div>
-
-        {/* Maps section with tabs */}
-        <div className="bg-background border border-border rounded-2xl p-8 shadow-card mb-8">
-          <Tabs defaultValue="spain" className="w-full">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-              <h3 className="font-display text-2xl font-semibold text-foreground">
-                Distribución geográfica de simpatizantes
-              </h3>
-              <TabsList className="grid w-full sm:w-auto grid-cols-2">
-                <TabsTrigger value="spain" className="gap-2">
-                  <MapPin className="w-4 h-4" />
-                  España
-                </TabsTrigger>
-                <TabsTrigger value="international" className="gap-2">
-                  <Globe className="w-4 h-4" />
-                  Internacional
-                </TabsTrigger>
-              </TabsList>
-            </div>
-
-            <TabsContent value="spain" className="mt-0">
-              <SpainMap />
-            </TabsContent>
-
-            <TabsContent value="international" className="mt-0">
-              <InternationalMap />
-            </TabsContent>
-          </Tabs>
         </div>
 
         {/* Chart preview */}
@@ -153,9 +122,11 @@ export function DataSection() {
                 ))}
               </div>
 
-              <Button variant="cta" size="lg" className="w-full mt-6">
-                Explorar todos los gráficos
-                <ArrowRight className="ml-2" />
+              <Button variant="cta" size="lg" className="w-full mt-6" asChild>
+                <Link href="/datos">
+                  Explorar todos los gráficos
+                  <ArrowRight className="ml-2" />
+                </Link>
               </Button>
             </div>
           </div>

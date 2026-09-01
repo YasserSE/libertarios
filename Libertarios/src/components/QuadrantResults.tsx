@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { InteractiveQuadrant } from "./InteractiveQuadrant";
 import { mockUsers } from "@/data/mockRegisteredUsers";
+import { REFERENCE_SETS, nearestReferences } from "@/data/quadrantReferences";
+import { ReferenceAvatar } from "./maps/ReferenceAvatar";
 import { RotateCcw, Share2, Users, ArrowRight, UserPlus, Twitter, Facebook, Link2, Check, Download } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -159,10 +161,63 @@ export function QuadrantResults({ economic, social, onReset }: QuadrantResultsPr
       
       {/* Quadrant visualization */}
       <div className="bg-card border border-border rounded-2xl p-6 shadow-card">
-        <InteractiveQuadrant 
+        <InteractiveQuadrant
           userPosition={{ economic, social }}
           showAllUsers={true}
+          defaultLayers={["country"]}
         />
+      </div>
+
+      {/* Reference points nearest to the result. A coordinate means little on
+          its own; "cerca de Suiza, lejos de Cuba" is what makes it legible. */}
+      <div className="bg-card border border-border rounded-2xl p-6 shadow-card">
+        <h3 className="font-display font-semibold text-foreground">
+          Qué hay cerca de tu posición
+        </h3>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Referencias más próximas en el cuadrante. Sirven para dar escala, no para etiquetarte.
+        </p>
+
+        <div className="mt-5 grid gap-5 sm:grid-cols-2">
+          {REFERENCE_SETS.map((set) => {
+            const nearest = nearestReferences(
+              { economic, social },
+              { kinds: [set.kind], limit: 3 },
+            );
+            return (
+              <div key={set.kind}>
+                <p className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  {set.label}
+                </p>
+                <ul className="space-y-1.5">
+                  {nearest.map((point) => (
+                    <li
+                      key={point.id}
+                      className="flex items-center justify-between gap-3 rounded-lg bg-background px-3 py-2"
+                    >
+                      <span className="flex min-w-0 items-center gap-2">
+                        <ReferenceAvatar point={point} size={24} />
+                        <span className="min-w-0 truncate text-sm font-medium text-foreground">
+                          {point.label}
+                        </span>
+                      </span>
+                      <span className="shrink-0 text-xs tabular-nums text-muted-foreground">
+                        {point.economic > 0 ? "+" : ""}
+                        {point.economic} / {point.social > 0 ? "+" : ""}
+                        {point.social}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })}
+        </div>
+
+        <p className="mt-5 text-[11px] italic leading-snug text-muted-foreground">
+          Estar cerca de un punto no implica coincidir con él: dos posiciones idénticas en dos ejes
+          pueden nacer de razones muy distintas.
+        </p>
       </div>
       
       {/* Comparison stats */}

@@ -34,8 +34,9 @@ export function Footer() {
               </span>
             </div>
             <p className="text-background/60 text-sm leading-relaxed mb-4">
-              Una plataforma abierta para entender el pensamiento libertario en España.
-              Sin afiliaciones políticas. Solo datos, ideas y transparencia.
+              Contamos a quienes creen que en España falta una alternativa liberal.
+              Queremos que exista, y lo decimos. Los datos que publicamos no están para
+              convencerte: están para que compruebes si es verdad.
             </p>
             <a
               href="mailto:contacto@libertarios.es"

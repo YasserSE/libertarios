@@ -1,9 +1,10 @@
 import { defineConfig } from "vitest/config";
-import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
 export default defineConfig({
-  plugins: [react()],
+  // JSX is transformed by esbuild using the tsconfig's react-jsx setting; no
+  // Vite React plugin needed (the old @vitejs/plugin-react-swc import was a
+  // leftover from the pre-Next.js setup and was never in package.json).
   test: {
     environment: "jsdom",
     globals: true,

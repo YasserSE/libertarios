@@ -1,170 +1,294 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { ArrowLeft, ArrowRight, Check, ListChecks, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { quadrantQuestions, answerOptions } from "@/data/quadrantQuestions";
-import { ArrowLeft, ArrowRight, RotateCcw, Lightbulb } from "lucide-react";
+import {
+  answerOptions,
+  quadrantQuestions,
+  scoreQuadrant,
+} from "@/data/quadrantQuestions";
 
 interface QuadrantTestProps {
   onComplete: (economic: number, social: number) => void;
 }
 
+type Stage = "answering" | "review";
+
+const TOTAL = quadrantQuestions.length;
+
 export function QuadrantTest({ onComplete }: QuadrantTestProps) {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
-  const [showInsight, setShowInsight] = useState(false);
-  
-  const question = quadrantQuestions[currentQuestion];
-  const progress = ((currentQuestion + 1) / quadrantQuestions.length) * 100;
-  
-  // Reset insight when question changes
+  const [stage, setStage] = useState<Stage>("answering");
+
+  const question = quadrantQuestions[index];
+  const answeredCount = Object.keys(answers).length;
+  const progress = (answeredCount / TOTAL) * 100;
+  const currentAnswer = answers[question?.id];
+
+  const goNext = useCallback(() => {
+    setIndex((i) => (i < TOTAL - 1 ? i + 1 : i));
+    if (index === TOTAL - 1) setStage("review");
+  }, [index]);
+
+  const advanceTimer = useRef<number | null>(null);
+
+  const answer = useCallback(
+    (value: number) => {
+      setAnswers((prev) => ({ ...prev, [question.id]: value }));
+
+      // Avanzar solo, con una pausa corta para que se vea la selección: veinte
+      // preguntas con un clic extra cada una son veinte clics de fricción.
+      //
+      // Cancelar el avance pendiente no es opcional. Cambiar de respuesta —o
+      // teclear rápido, que con las teclas 1-5 es lo normal— programaba un
+      // segundo avance, y los dos temporizadores saltaban dos preguntas
+      // dejando una sin responder por el camino.
+      if (advanceTimer.current !== null) window.clearTimeout(advanceTimer.current);
+      advanceTimer.current = window.setTimeout(() => {
+        advanceTimer.current = null;
+        setIndex((i) => {
+          if (i < TOTAL - 1) return i + 1;
+          setStage("review");
+          return i;
+        });
+      }, 180);
+    },
+    [question],
+  );
+
+  useEffect(
+    () => () => {
+      if (advanceTimer.current !== null) window.clearTimeout(advanceTimer.current);
+    },
+    [],
+  );
+
+  // Responder con las teclas 1–5 y navegar con las flechas.
   useEffect(() => {
-    setShowInsight(false);
-  }, [currentQuestion]);
-  
-  const handleAnswer = (value: number) => {
-    setAnswers(prev => ({ ...prev, [question.id]: value }));
-    // Show insight after a brief delay
-    setTimeout(() => setShowInsight(true), 300);
-  };
-  
-  const handleNext = () => {
-    if (currentQuestion < quadrantQuestions.length - 1) {
-      setCurrentQuestion(prev => prev + 1);
-    } else {
-      calculateResults();
-    }
-  };
-  
-  const handlePrev = () => {
-    if (currentQuestion > 0) {
-      setCurrentQuestion(prev => prev - 1);
-    }
-  };
-  
-  const handleReset = () => {
-    setCurrentQuestion(0);
-    setAnswers({});
-    setShowInsight(false);
-  };
-  
-  const calculateResults = () => {
-    let economicScore = 0;
-    let socialScore = 0;
-    let economicCount = 0;
-    let socialCount = 0;
-    
-    for (const q of quadrantQuestions) {
-      const answer = answers[q.id] || 0;
-      const adjustedScore = answer * q.direction;
-      
-      if (q.axis === 'economic') {
-        economicScore += adjustedScore;
-        economicCount++;
-      } else {
-        socialScore += adjustedScore;
-        socialCount++;
+    if (stage !== "answering") return;
+    const onKey = (e: KeyboardEvent) => {
+      const n = Number(e.key);
+      if (n >= 1 && n <= answerOptions.length) {
+        e.preventDefault();
+        answer(answerOptions[n - 1].value);
+        return;
       }
-    }
-    
-    // Normalize to -100 to 100 scale
-    const economic = Math.round((economicScore / (economicCount * 2)) * 100);
-    const social = Math.round((socialScore / (socialCount * 2)) * 100);
-    
-    onComplete(economic, social);
+      if (e.key === "ArrowRight") setIndex((i) => Math.min(i + 1, TOTAL - 1));
+      if (e.key === "ArrowLeft") setIndex((i) => Math.max(i - 1, 0));
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [stage, answer]);
+
+  const score = useMemo(() => scoreQuadrant(answers), [answers]);
+  const unanswered = useMemo(
+    () => quadrantQuestions.filter((q) => answers[q.id] === undefined),
+    [answers],
+  );
+
+  const reset = () => {
+    setAnswers({});
+    setIndex(0);
+    setStage("answering");
   };
-  
-  const currentAnswer = answers[question.id];
-  const canProceed = currentAnswer !== undefined;
-  
+
+  if (stage === "review") {
+    return (
+      <ReviewStage
+        answers={answers}
+        unanswered={unanswered}
+        onEdit={(id) => {
+          setIndex(quadrantQuestions.findIndex((q) => q.id === id));
+          setStage("answering");
+        }}
+        onReset={reset}
+        onSubmit={() => onComplete(score.economic, score.social)}
+      />
+    );
+  }
+
   return (
-    <div className="bg-card border border-border rounded-2xl p-6 md:p-8 shadow-card max-w-2xl mx-auto">
-      {/* Progress bar */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
-          <span>Pregunta {currentQuestion + 1} de {quadrantQuestions.length}</span>
-          <button 
-            onClick={handleReset}
-            className="flex items-center gap-1 hover:text-foreground transition-colors"
-          >
-            <RotateCcw className="w-4 h-4" />
-            Reiniciar
-          </button>
+    <div className="rounded-2xl border border-border bg-card p-6 shadow-card sm:p-8">
+      <div className="mb-6">
+        <div className="mb-2 flex items-baseline justify-between text-sm">
+          <span className="font-medium text-foreground">
+            Pregunta {index + 1} <span className="text-muted-foreground">de {TOTAL}</span>
+          </span>
+          <span className="tabular-nums text-muted-foreground">{answeredCount} respondidas</span>
         </div>
-        <div className="h-2 bg-muted rounded-full overflow-hidden">
-          <div 
-            className="h-full gradient-primary transition-all duration-500"
+        <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
+          <div
+            className="h-full rounded-full bg-primary transition-[width] duration-300"
             style={{ width: `${progress}%` }}
           />
         </div>
       </div>
-      
-      {/* Question */}
-      <div className="mb-8">
-        <div className="inline-block px-3 py-1 rounded-full text-xs font-medium bg-accent text-accent-foreground mb-4">
-          {question.axis === 'economic' ? '💰 Reflexión económica' : '🗽 Reflexión social'}
-        </div>
-        <h3 className="font-display text-lg md:text-xl lg:text-2xl font-semibold text-foreground leading-relaxed">
-          {question.text}
-        </h3>
+
+      <p className="mb-1 text-xs font-medium uppercase tracking-wide text-primary">
+        {question.topic}
+      </p>
+      <h3 className="mb-7 font-display text-xl font-semibold leading-snug text-foreground sm:text-2xl">
+        {question.text}
+      </h3>
+
+      <div role="radiogroup" aria-label="Tu respuesta" className="space-y-2">
+        {answerOptions.map((option, i) => {
+          const selected = currentAnswer === option.value;
+          return (
+            <button
+              key={option.value}
+              type="button"
+              role="radio"
+              aria-checked={selected}
+              onClick={() => answer(option.value)}
+              className={`flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                selected
+                  ? "border-primary bg-primary/10 text-foreground"
+                  : "border-border bg-background text-muted-foreground hover:border-primary/40 hover:text-foreground"
+              }`}
+            >
+              <span
+                className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md border text-[11px] font-semibold tabular-nums ${
+                  selected
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-border text-muted-foreground"
+                }`}
+              >
+                {selected ? <Check className="h-3.5 w-3.5" /> : i + 1}
+              </span>
+              <span className="text-sm font-medium">{option.label}</span>
+            </button>
+          );
+        })}
       </div>
-      
-      {/* Answer options */}
-      <div className="space-y-3 mb-6">
-        {answerOptions.map((option) => (
-          <button
-            key={option.value}
-            onClick={() => handleAnswer(option.value)}
-            className={`w-full p-4 rounded-xl border-2 text-left transition-all duration-200 ${
-              currentAnswer === option.value
-                ? 'border-primary bg-accent shadow-md'
-                : 'border-border hover:border-primary/50 bg-background hover:bg-muted/30'
-            }`}
-          >
-            <span className={`font-medium ${
-              currentAnswer === option.value ? 'text-primary' : 'text-foreground'
-            }`}>
-              {option.label}
-            </span>
-          </button>
-        ))}
-      </div>
-      
-      {/* Insight - shown after answering */}
-      {showInsight && question.insight && (
-        <div className="mb-8 p-4 rounded-xl bg-primary/5 border border-primary/20 animate-fade-in">
-          <div className="flex items-start gap-3">
-            <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-              <Lightbulb className="w-4 h-4 text-primary" />
-            </div>
-            <div>
-              <p className="text-sm font-medium text-primary mb-1">Reflexión</p>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {question.insight}
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-      
-      {/* Navigation */}
-      <div className="flex items-center justify-between">
+
+      <p className="mt-4 text-xs text-muted-foreground">
+        Puedes responder con las teclas <kbd className="rounded border border-border px-1">1</kbd>–
+        <kbd className="rounded border border-border px-1">5</kbd> y moverte con las flechas.
+      </p>
+
+      <div className="mt-6 flex items-center justify-between gap-3 border-t border-border pt-5">
         <Button
-          variant="outline"
-          onClick={handlePrev}
-          disabled={currentQuestion === 0}
+          variant="ghost"
+          size="sm"
+          onClick={() => setIndex((i) => Math.max(i - 1, 0))}
+          disabled={index === 0}
         >
-          <ArrowLeft className="w-4 h-4 mr-2" />
+          <ArrowLeft className="h-4 w-4" />
           Anterior
         </Button>
-        
-        <Button
-          variant="cta"
-          onClick={handleNext}
-          disabled={!canProceed}
-        >
-          {currentQuestion === quadrantQuestions.length - 1 ? 'Ver resultados' : 'Siguiente'}
-          <ArrowRight className="w-4 h-4 ml-2" />
+
+        <div className="flex items-center gap-2">
+          <Button variant="ghost" size="sm" onClick={reset} disabled={answeredCount === 0}>
+            <RotateCcw className="h-4 w-4" />
+            Reiniciar
+          </Button>
+          {/* En la última pregunta hay que poder llegar a la revisión aunque
+              queden huecos: si no, saltarse una pregunta y avanzar hasta el
+              final dejaba al usuario sin salida. */}
+          {answeredCount === TOTAL || index === TOTAL - 1 ? (
+            <Button variant="cta" size="sm" onClick={() => setStage("review")}>
+              Revisar respuestas
+              <ListChecks className="h-4 w-4" />
+            </Button>
+          ) : (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={goNext}
+              disabled={index === TOTAL - 1}
+            >
+              Saltar
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Revisión antes del resultado.
+ *
+ * Aquí es donde aparece qué medía cada pregunta. Mostrarlo entre pregunta y
+ * pregunta —como hacía la versión anterior— convierte el test en un argumento:
+ * el usuario aprende qué respuesta «toca» y las siguientes dejan de medir nada.
+ */
+function ReviewStage({
+  answers,
+  unanswered,
+  onEdit,
+  onReset,
+  onSubmit,
+}: {
+  answers: Record<number, number>;
+  unanswered: typeof quadrantQuestions;
+  onEdit: (id: number) => void;
+  onReset: () => void;
+  onSubmit: () => void;
+}) {
+  const label = (value: number | undefined) =>
+    answerOptions.find((o) => o.value === value)?.label ?? "Sin responder";
+
+  return (
+    <div className="rounded-2xl border border-border bg-card p-6 shadow-card sm:p-8">
+      <h3 className="font-display text-xl font-semibold text-foreground sm:text-2xl">
+        Revisa tus respuestas
+      </h3>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+        Ahora sí: debajo de cada respuesta puedes ver qué medía la pregunta. Toca cualquiera para
+        cambiarla antes de ver tu posición.
+      </p>
+
+      {unanswered.length > 0 && (
+        <p className="mt-4 rounded-xl border border-primary/25 bg-primary/10 px-4 py-3 text-sm text-foreground">
+          Te quedan <strong>{unanswered.length}</strong> sin responder. Puedes verlo así — el
+          cálculo solo usa lo que has contestado — pero con menos respuestas la posición es menos
+          fiable.
+        </p>
+      )}
+
+      <ol className="mt-6 space-y-2">
+        {quadrantQuestions.map((q, i) => {
+          const value = answers[q.id];
+          return (
+            <li key={q.id}>
+              <button
+                type="button"
+                onClick={() => onEdit(q.id)}
+                className="w-full rounded-xl border border-border bg-background p-4 text-left transition-colors hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              >
+                <div className="flex items-baseline justify-between gap-3">
+                  <span className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
+                    {i + 1}. {q.topic}
+                  </span>
+                  <span
+                    className={`shrink-0 text-xs font-semibold ${
+                      value === undefined ? "text-muted-foreground" : "text-primary"
+                    }`}
+                  >
+                    {label(value)}
+                  </span>
+                </div>
+                <p className="mt-1 text-sm font-medium leading-snug text-foreground">{q.text}</p>
+                <p className="mt-1.5 text-xs leading-snug text-muted-foreground">{q.rationale}</p>
+              </button>
+            </li>
+          );
+        })}
+      </ol>
+
+      <div className="mt-6 flex flex-col gap-3 border-t border-border pt-5 sm:flex-row sm:justify-between">
+        <Button variant="ghost" size="sm" onClick={onReset}>
+          <RotateCcw className="h-4 w-4" />
+          Empezar de nuevo
+        </Button>
+        <Button variant="cta" onClick={onSubmit}>
+          Ver mi posición
+          <ArrowRight className="h-4 w-4" />
         </Button>
       </div>
     </div>

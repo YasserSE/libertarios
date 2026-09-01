@@ -49,6 +49,18 @@
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
 
+    /* Choropleth ramp — one hue, light→dark, 5 steps.
+       Validated for light mode against surface #fafbfc: monotone OKLCH
+       lightness, adjacent ΔL ≥ 0.06, lightest step 2.13:1 contrast.
+       Re-validate before editing any step. */
+    --choro-1: #27c4a4;
+    --choro-2: #1ba78b;
+    --choro-3: #128c74;
+    --choro-4: #0c6f5b;
+    --choro-5: #075545;
+    --choro-empty: hsl(210 16% 90%);
+    --choro-stroke: hsl(0 0% 100% / 0.85);
+
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
@@ -91,6 +103,17 @@
     --gradient-hero: linear-gradient(180deg, hsl(220 25% 8%) 0%, hsl(220 30% 12%) 100%);
     --gradient-section: linear-gradient(180deg, hsl(220 25% 10%) 0%, hsl(220 25% 8%) 100%);
     
+    /* Dark mode is a selected ramp, not a flip of the light one: its own steps
+       from the same hue, validated against surface #12171f (lightest step
+       2.17:1, adjacent ΔL ≥ 0.06). */
+    --choro-1: #085949;
+    --choro-2: #0d735e;
+    --choro-3: #149077;
+    --choro-4: #1cab8e;
+    --choro-5: #28c8a8;
+    --choro-empty: hsl(220 18% 22%);
+    --choro-stroke: hsl(220 25% 8% / 0.75);
+
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 168 70% 45%;

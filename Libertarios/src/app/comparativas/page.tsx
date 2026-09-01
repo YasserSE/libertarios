@@ -1,11 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { ArrowRight, Scale, Users, Building, Coins, Shield, Heart, GripVertical, Plus, X } from "lucide-react";
+import { ArrowRight, ChevronDown, Scale, GripVertical, Plus, X } from "lucide-react";
+import {
+  COMPARISON_ASPECTS,
+  IDEOLOGIES,
+  LIBERTARIANISM,
+  type Ideology,
+} from "@/data/ideologies";
+import { MiniQuadrant, PositionLabel } from "@/components/aprende/MiniQuadrant";
+import { QuadrantFigures } from "@/components/aprende/QuadrantFigures";
+import { ReferenceAvatar } from "@/components/maps/ReferenceAvatar";
+import { REFERENCE_SETS } from "@/data/quadrantReferences";
 import {
   DndContext,
   closestCenter,
@@ -24,172 +34,38 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-interface Ideology {
-  id: string;
-  name: string;
-  color: string;
-  description: string;
-  keyPoints: string[];
-  comparisons: {
-    propiedadPrivada: string;
-    libertadEconomica: string;
-    libertadIndividual: string;
-    rolEstado: string;
-    derechosSociales: string;
-  };
+/**
+ * Intensidad de 0 a 4 en un aspecto.
+ *
+ * La tabla anterior solo tenía prosa: cinco frases distintas por fila que no se
+ * pueden comparar de un vistazo. La barra da el orden de magnitud y la frase
+ * explica el matiz; hacen falta las dos, y el número queda en el `title` y en
+ * el texto accesible para quien no distinga la barra.
+ */
+function RatingBar({ value, accent = false }: { value: number; accent?: boolean }) {
+  const levels = ["Nulo", "Bajo", "Medio", "Alto", "Máximo"];
+  return (
+    <span
+      className="flex items-center gap-1"
+      title={`${levels[value]} (${value} de 4)`}
+      role="img"
+      aria-label={`${levels[value]}, ${value} de 4`}
+    >
+      {[0, 1, 2, 3].map((i) => (
+        <span
+          key={i}
+          className={`h-1.5 w-5 rounded-full ${
+            i < value
+              ? accent
+                ? "bg-primary"
+                : "bg-foreground/45"
+              : "bg-muted"
+          }`}
+        />
+      ))}
+    </span>
+  );
 }
-
-const allIdeologies: Ideology[] = [
-  {
-    id: "socialismo",
-    name: "Socialismo",
-    color: "bg-red-500",
-    description: "Sistema que busca la propiedad colectiva de los medios de producción y la redistribución de la riqueza.",
-    keyPoints: [
-      "Propiedad estatal o colectiva de industrias clave",
-      "Redistribución de ingresos mediante impuestos progresivos",
-      "Servicios públicos universales (sanidad, educación)",
-      "Regulación extensa del mercado laboral",
-    ],
-    comparisons: {
-      propiedadPrivada: "Limitada, con control estatal",
-      libertadEconomica: "Mercado regulado y planificación parcial",
-      libertadIndividual: "Amplia con restricciones económicas",
-      rolEstado: "Amplio, regulador y redistribuidor",
-      derechosSociales: "Amplios, garantizados por ley",
-    },
-  },
-  {
-    id: "comunismo",
-    name: "Comunismo",
-    color: "bg-red-700",
-    description: "Ideología que aspira a una sociedad sin clases, sin Estado y sin propiedad privada.",
-    keyPoints: [
-      "Abolición de la propiedad privada",
-      "Economía planificada centralmente",
-      "Dictadura del proletariado como fase transitoria",
-      "Sociedad sin clases como objetivo final",
-    ],
-    comparisons: {
-      propiedadPrivada: "Abolida completamente",
-      libertadEconomica: "Economía planificada centralmente",
-      libertadIndividual: "Subordinada al bien colectivo",
-      rolEstado: "Total inicialmente, desaparece después",
-      derechosSociales: "Determinados por el colectivo",
-    },
-  },
-  {
-    id: "fascismo",
-    name: "Fascismo",
-    color: "bg-slate-700",
-    description: "Ideología ultranacionalista y autoritaria que prioriza el Estado sobre el individuo.",
-    keyPoints: [
-      "Nacionalismo extremo y culto al Estado",
-      "Líder carismático con poderes absolutos",
-      "Supresión de libertades individuales",
-      "Economía corporativista controlada por el Estado",
-    ],
-    comparisons: {
-      propiedadPrivada: "Nominal, subordinada al Estado",
-      libertadEconomica: "Economía dirigida por el Estado",
-      libertadIndividual: "Mínima, subordinada al Estado",
-      rolEstado: "Totalitario y omnipresente",
-      derechosSociales: "Restringidos según conveniencia estatal",
-    },
-  },
-  {
-    id: "conservadurismo",
-    name: "Conservadurismo",
-    color: "bg-blue-600",
-    description: "Filosofía que defiende la tradición, el orden social establecido y cambios graduales.",
-    keyPoints: [
-      "Respeto por las instituciones tradicionales",
-      "Valores familiares y religiosos",
-      "Economía de mercado con regulación moderada",
-      "Cambio social gradual y prudente",
-    ],
-    comparisons: {
-      propiedadPrivada: "Respetada con algunas regulaciones",
-      libertadEconomica: "Mercado con regulación moderada",
-      libertadIndividual: "Alta con restricciones morales",
-      rolEstado: "Moderado, enfocado en orden",
-      derechosSociales: "Tradicionales, graduales",
-    },
-  },
-  {
-    id: "socialdemocracia",
-    name: "Socialdemocracia",
-    color: "bg-rose-500",
-    description: "Modelo que combina economía de mercado con Estado del bienestar amplio.",
-    keyPoints: [
-      "Economía mixta con sector privado y público",
-      "Estado del bienestar extenso",
-      "Sindicatos fuertes y negociación colectiva",
-      "Impuestos altos para financiar servicios públicos",
-    ],
-    comparisons: {
-      propiedadPrivada: "Respetada con impuestos altos",
-      libertadEconomica: "Mercado regulado con bienestar",
-      libertadIndividual: "Alta con protección social",
-      rolEstado: "Amplio bienestar y regulación",
-      derechosSociales: "Muy amplios, universales",
-    },
-  },
-  {
-    id: "anarquismo",
-    name: "Anarquismo",
-    color: "bg-zinc-900",
-    description: "Filosofía que rechaza toda forma de autoridad jerárquica y Estado.",
-    keyPoints: [
-      "Abolición del Estado y autoridad",
-      "Autogestión y organización horizontal",
-      "Comunidades autónomas y federadas",
-      "Rechazo a la propiedad privada de medios de producción",
-    ],
-    comparisons: {
-      propiedadPrivada: "Personal sí, productiva colectiva",
-      libertadEconomica: "Autogestión sin capitalismo",
-      libertadIndividual: "Máxima sin jerarquías",
-      rolEstado: "Inexistente, abolido",
-      derechosSociales: "Definidos por comunidad",
-    },
-  },
-  {
-    id: "nacionalismo",
-    name: "Nacionalismo",
-    color: "bg-amber-600",
-    description: "Ideología centrada en la identidad y soberanía de la nación.",
-    keyPoints: [
-      "Prioridad a intereses nacionales",
-      "Protección de cultura e identidad",
-      "Soberanía sobre globalización",
-      "Control de fronteras e inmigración",
-    ],
-    comparisons: {
-      propiedadPrivada: "Respetada si beneficia la nación",
-      libertadEconomica: "Proteccionismo económico",
-      libertadIndividual: "Subordinada a interés nacional",
-      rolEstado: "Fuerte en defensa nacional",
-      derechosSociales: "Para ciudadanos nacionales",
-    },
-  },
-];
-
-const libertarianComparisons = {
-  propiedadPrivada: "Derecho fundamental e inviolable",
-  libertadEconomica: "Mercado libre sin intervención",
-  libertadIndividual: "Máxima, limitada solo por no agredir a otros",
-  rolEstado: "Mínimo o inexistente",
-  derechosSociales: "Máxima libertad personal",
-};
-
-const comparisonAspects = [
-  { key: "propiedadPrivada", label: "Propiedad privada", icon: Building },
-  { key: "libertadEconomica", label: "Libertad económica", icon: Coins },
-  { key: "libertadIndividual", label: "Libertad individual", icon: Heart },
-  { key: "rolEstado", label: "Rol del Estado", icon: Shield },
-  { key: "derechosSociales", label: "Derechos sociales", icon: Users },
-] as const;
 
 function SortableIdeologyChip({ ideology, onRemove }: { ideology: Ideology; onRemove: () => void }) {
   const {
@@ -260,7 +136,30 @@ function IdeologySelector({
 }
 
 export default function ComparativasPage() {
-  const [selectedIds, setSelectedIds] = useState<string[]>(["socialismo", "comunismo", "fascismo"]);
+  const [selectedIds, setSelectedIds] = useState<string[]>(["socialdemocracia", "conservadurismo", "socialismo"]);
+  // La tabla es densa y ocupa toda la pantalla: se abre a petición, no de
+  // entrada. Quien llega buscando la comparación tiene el enlace arriba.
+  const [tableOpen, setTableOpen] = useState(false);
+
+  // El navegador intenta saltar al ancla antes de que esta página —cliente y con
+  // dnd-kit— termine de hidratar, así que la posición se pierde y te deja
+  // arriba. Se repite el salto una vez montado.
+  useEffect(() => {
+    if (!window.location.hash) return;
+    const id = window.location.hash.slice(1);
+    requestAnimationFrame(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }, []);
+
+  // Seis fichas, en orden explícito y cubriendo todo el rango del eje: de +88 a
+  // −62. Una rejilla de tres columnas se completa exacta y el enganche no se
+  // convierte en otro listado largo.
+  const HOOK_IDS = ["milei", "rallo", "bukele", "trump", "sanchez", "lula"];
+  const allPoints = REFERENCE_SETS.flatMap((set) => set.points);
+  const hooks = HOOK_IDS.map((id) => allPoints.find((p) => p.id === id)).filter(
+    (p): p is NonNullable<typeof p> => Boolean(p),
+  );
   
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -270,10 +169,10 @@ export default function ComparativasPage() {
   );
 
   const selectedIdeologies = selectedIds
-    .map((id) => allIdeologies.find((i) => i.id === id))
+    .map((id) => IDEOLOGIES.find((i) => i.id === id))
     .filter(Boolean) as Ideology[];
 
-  const availableIdeologies = allIdeologies.filter((i) => !selectedIds.includes(i.id));
+  const availableIdeologies = IDEOLOGIES.filter((i) => !selectedIds.includes(i.id));
 
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
@@ -309,6 +208,73 @@ export default function ComparativasPage() {
                 Selecciona y arrastra las ideologías que quieras comparar con el libertarismo.
                 La tabla se actualiza instantáneamente.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Acceso directo a la tabla, lo primero tras la cabecera */}
+        <section className="pb-4">
+          <div className="container">
+            <div className="mx-auto flex max-w-3xl flex-col items-center gap-3 sm:flex-row sm:justify-center">
+              <Button
+                variant="cta"
+                onClick={() => {
+                  setTableOpen(true);
+                  requestAnimationFrame(() =>
+                    document.getElementById("tabla")?.scrollIntoView({ behavior: "smooth" }),
+                  );
+                }}
+              >
+                Ver la tabla comparativa
+                <ArrowRight className="ml-1.5 h-4 w-4" />
+              </Button>
+              <Button variant="outline" asChild>
+                <a href="#referentes">Ver los referentes actuales</a>
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Enganche: caras conocidas antes que conceptos */}
+        <section className="py-12">
+          <div className="container">
+            <div className="mx-auto mb-8 max-w-2xl text-center">
+              <h2 className="font-display text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+                Empieza por las caras
+              </h2>
+              <p className="mt-3 leading-relaxed text-muted-foreground">
+                Las etiquetas se entienden mejor con ejemplos. Toca cualquiera y se abre el
+                cuadrante ya filtrado, con esa ficha señalada.
+              </p>
+            </div>
+
+            <div className="mx-auto grid max-w-4xl gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {hooks.map((point) => (
+                <Link
+                  key={point.id}
+                  href={`/cuadrante?capas=${point.kind}&ref=${point.id}`}
+                  className="group flex gap-3 rounded-2xl border border-border bg-card p-4 transition-colors hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  <ReferenceAvatar point={point} size={44} />
+                  <div className="min-w-0">
+                    <p className="font-display font-semibold leading-tight text-foreground">
+                      {point.label}
+                    </p>
+                    <p className="mt-0.5 font-display text-[11px] font-semibold tabular-nums text-primary">
+                      E {point.economic > 0 ? "+" : ""}
+                      {point.economic} · S {point.social > 0 ? "+" : ""}
+                      {point.social}
+                    </p>
+                    <p className="mt-1.5 line-clamp-3 text-xs leading-snug text-muted-foreground">
+                      {point.note}
+                    </p>
+                    <span className="mt-2 inline-flex items-center gap-1 text-[11px] font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
+                      Ver en el cuadrante
+                      <ArrowRight className="h-3 w-3" />
+                    </span>
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         </section>
@@ -393,15 +359,30 @@ export default function ComparativasPage() {
         </section>
 
         {/* Dynamic comparison table */}
-        <section className="py-12 bg-card border-y border-border">
+        <section id="tabla" className="scroll-mt-20 border-y border-border bg-card py-12">
           <div className="container">
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground text-center mb-4">
+            <h2 className="mb-4 text-center font-display text-2xl font-bold text-foreground md:text-3xl">
               Tabla comparativa
             </h2>
-            <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
-              Comparación directa de posiciones en aspectos fundamentales
+            <p className="mx-auto mb-6 max-w-2xl text-center text-muted-foreground">
+              Comparación directa de posiciones en aspectos fundamentales.
             </p>
 
+            <div className="mb-10 text-center">
+              <Button
+                variant={tableOpen ? "outline" : "cta"}
+                onClick={() => setTableOpen((v) => !v)}
+                aria-expanded={tableOpen}
+                aria-controls="tabla-comparativa"
+              >
+                {tableOpen ? "Ocultar tabla" : "Mostrar tabla comparativa"}
+                <ChevronDown
+                  className={`ml-1.5 h-4 w-4 transition-transform ${tableOpen ? "rotate-180" : ""}`}
+                />
+              </Button>
+            </div>
+
+            <div id="tabla-comparativa" hidden={!tableOpen}>
             {selectedIdeologies.length === 0 ? (
               <div className="text-center py-12 text-muted-foreground">
                 Selecciona al menos una ideología para ver la comparación
@@ -414,43 +395,58 @@ export default function ComparativasPage() {
                       <th className="text-left py-4 px-4 font-display font-semibold text-foreground">
                         Aspecto
                       </th>
-                      <th className="text-left py-4 px-4 font-display font-semibold text-primary">
-                        Libertarismo
+                      <th className="min-w-[11rem] py-4 px-4 text-left font-display font-semibold text-primary">
+                        <div className="flex items-center gap-2">
+                          <div className="h-3 w-3 rounded-full bg-primary" />
+                          Libertarismo
+                        </div>
+                        <span className="mt-0.5 block font-body text-[11px] font-normal tabular-nums text-muted-foreground">
+                          E +{LIBERTARIANISM.position.economic} · S +{LIBERTARIANISM.position.social}
+                        </span>
                       </th>
                       {selectedIdeologies.map((ideology) => (
                         <th
                           key={ideology.id}
-                          className="text-left py-4 px-4 font-display font-semibold text-foreground"
+                          className="min-w-[11rem] py-4 px-4 text-left font-display font-semibold text-foreground"
                         >
                           <div className="flex items-center gap-2">
-                            <div className={`w-3 h-3 rounded-full ${ideology.color}`} />
+                            <div className={`h-3 w-3 rounded-full ${ideology.color}`} />
                             {ideology.name}
                           </div>
+                          <span className="mt-0.5 block font-body text-[11px] font-normal tabular-nums text-muted-foreground">
+                            E {ideology.position.economic > 0 ? "+" : ""}
+                            {ideology.position.economic} · S{" "}
+                            {ideology.position.social > 0 ? "+" : ""}
+                            {ideology.position.social}
+                          </span>
                         </th>
                       ))}
                     </tr>
                   </thead>
                   <tbody>
-                    {comparisonAspects.map((aspect) => (
+                    {COMPARISON_ASPECTS.map((aspect) => (
                       <tr
                         key={aspect.key}
                         className="border-b border-border/50 hover:bg-accent/30 transition-colors"
                       >
-                        <td className="py-4 px-4">
-                          <div className="flex items-center gap-2">
-                            <aspect.icon className="w-4 h-4 text-muted-foreground" />
-                            <span className="font-medium text-foreground">{aspect.label}</span>
-                          </div>
+                        <td className="py-4 px-4 align-top">
+                          <span className="font-medium text-foreground">{aspect.label}</span>
                         </td>
-                        <td className="py-4 px-4 text-sm text-primary font-medium">
-                          {libertarianComparisons[aspect.key]}
+                        <td className="py-4 px-4 align-top">
+                          <RatingBar value={LIBERTARIANISM.ratings[aspect.key]} accent />
+                          <span className="mt-1.5 block text-sm font-medium text-primary">
+                            {LIBERTARIANISM.comparisons[aspect.key]}
+                          </span>
                         </td>
                         {selectedIdeologies.map((ideology) => (
                           <td
                             key={ideology.id}
-                            className="py-4 px-4 text-sm text-muted-foreground animate-fade-in"
+                            className="animate-fade-in py-4 px-4 align-top"
                           >
-                            {ideology.comparisons[aspect.key]}
+                            <RatingBar value={ideology.ratings[aspect.key]} />
+                            <span className="mt-1.5 block text-sm text-muted-foreground">
+                              {ideology.comparisons[aspect.key]}
+                            </span>
                           </td>
                         ))}
                       </tr>
@@ -459,11 +455,12 @@ export default function ComparativasPage() {
                 </table>
               </div>
             )}
+            </div>
           </div>
         </section>
 
         {/* Ideology detail cards */}
-        {selectedIdeologies.length > 0 && (
+        {tableOpen && selectedIdeologies.length > 0 && (
           <section className="py-16 lg:py-24">
             <div className="container">
               <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground text-center mb-12">
@@ -475,14 +472,20 @@ export default function ComparativasPage() {
                     key={ideology.id}
                     className="bg-card border border-border rounded-2xl p-6 hover:shadow-card transition-all animate-scale-in"
                   >
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className={`w-4 h-4 rounded-full ${ideology.color}`} />
-                      <h3 className="font-display text-xl font-semibold text-foreground">
-                        {ideology.name}
-                      </h3>
+                    <div className="mb-4 flex items-start gap-3">
+                      <MiniQuadrant position={ideology.position} size={56} />
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-2">
+                          <div className={`h-3 w-3 shrink-0 rounded-full ${ideology.color}`} />
+                          <h3 className="font-display text-xl font-semibold text-foreground">
+                            {ideology.name}
+                          </h3>
+                        </div>
+                        <PositionLabel position={ideology.position} />
+                      </div>
                     </div>
                     <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                      {ideology.description}
+                      {ideology.summary}
                     </p>
                     <ul className="space-y-2">
                       {ideology.keyPoints.map((point, i) => (
@@ -499,6 +502,8 @@ export default function ComparativasPage() {
           </section>
         )}
 
+        <QuadrantFigures />
+
         {/* Disclaimer */}
         <section className="py-16">
           <div className="container">
@@ -507,9 +512,11 @@ export default function ComparativasPage() {
                 Nota sobre estas comparaciones
               </h3>
               <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                Estas descripciones son simplificaciones con fines educativos. Cada ideología tiene múltiples 
-                variantes y matices. El objetivo no es atacar ni promover ninguna posición, sino facilitar 
-                la comprensión de las diferencias fundamentales.
+                Son simplificaciones con fines educativos: cada ideología tiene variantes que discrepan
+                entre sí tanto como discrepan del resto. Las coordenadas usan la misma escala que el
+                cuadrante y el test, con el eje económico anclado en el tamaño del Estado. El objetivo
+                no es atacar ni promover ninguna posición, sino que las diferencias se puedan leer en
+                paralelo.
               </p>
               <Button variant="cta" asChild>
                 <Link href="/libertario">

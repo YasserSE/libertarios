@@ -1,32 +1,32 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { SpainMap } from "@/components/SpainMap";
+import { SpainProvinceMap } from "@/components/maps/SpainProvinceMap";
 import { QuadrantDistribution } from "@/components/QuadrantDistribution";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { mockUsers } from "@/data/mockRegisteredUsers";
+import { getCountrySnapshot } from "@/lib/affiliates/repository";
 import { ArrowRight, MapPin, Users, Calendar, Heart, Globe, TrendingUp } from "lucide-react";
 
 // Calculate stats from mock data
+const spain = getCountrySnapshot("ES")!;
+const activeProvinces = spain.regions.filter((r) => r.count > 0);
+
 const calculateStats = () => {
   const ageGroups: Record<string, number> = {};
   const genders: Record<string, number> = {};
-  const provinces: Record<string, number> = {};
-  
+
   mockUsers.forEach((user, index) => {
     // Age groups (simulated from index)
     const ageGroup = index % 4 === 0 ? "18-30" : index % 4 === 1 ? "31-45" : index % 4 === 2 ? "46-60" : "60+";
     ageGroups[ageGroup] = (ageGroups[ageGroup] || 0) + 1;
-    
+
     // Genders (simulated)
     const gender = index % 10 < 7 ? "Hombre" : index % 10 < 9 ? "Mujer" : "Otro";
     genders[gender] = (genders[gender] || 0) + 1;
-    
-    // Provinces
-    provinces[user.province] = (provinces[user.province] || 0) + 1;
   });
-  
-  return { ageGroups, genders, provinces };
+
+  return { ageGroups, genders };
 };
 
 const stats = calculateStats();
@@ -41,10 +41,11 @@ const genderData = Object.entries(stats.genders).map(([label, value]) => ({
   value: Math.round((value / mockUsers.length) * 100),
 }));
 
-const topProvinces = Object.entries(stats.provinces)
-  .sort((a, b) => b[1] - a[1])
-  .slice(0, 10)
-  .map(([name, count]) => ({ name, count, percentage: Math.round((count / mockUsers.length) * 100) }));
+const topProvinces = activeProvinces.slice(0, 10).map((r) => ({
+  name: r.meta.name,
+  count: r.count,
+  percentage: (r.share * 100).toFixed(1),
+}));
 
 export default function DatosPage() {
   return (
@@ -71,8 +72,8 @@ export default function DatosPage() {
           <div className="container">
             <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 max-w-5xl mx-auto">
               {[
-                { icon: Users, label: "Total registrados", value: mockUsers.length.toLocaleString() },
-                { icon: MapPin, label: "Provincias", value: Object.keys(stats.provinces).length.toString() },
+                { icon: Users, label: "Total registrados", value: spain.count.toLocaleString("es-ES") },
+                { icon: MapPin, label: "Provincias", value: `${activeProvinces.length} / 52` },
                 { icon: Calendar, label: "Edad media", value: "34 años" },
                 { icon: Globe, label: "Nacionalidades", value: "15+" },
                 { icon: TrendingUp, label: "Este mes", value: "+127" },
@@ -98,9 +99,7 @@ export default function DatosPage() {
             </p>
             
             <div className="max-w-4xl mx-auto">
-              <div className="bg-background border border-border rounded-2xl p-8 shadow-card">
-                <SpainMap />
-              </div>
+              <SpainProvinceMap regions={spain.regions} />
             </div>
 
             {/* Top provinces */}

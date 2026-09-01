@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { QuadrantTest } from "@/components/QuadrantTest";
@@ -8,10 +9,37 @@ import { QuadrantResults } from "@/components/QuadrantResults";
 import { InteractiveQuadrant } from "@/components/InteractiveQuadrant";
 import { Button } from "@/components/ui/button";
 import { Play, MousePointer, Info } from "lucide-react";
+import { quadrantQuestions } from "@/data/quadrantQuestions";
 
 type Mode = 'intro' | 'test' | 'manual' | 'results';
 
+const REFERENCE_KINDS = ["country", "thinker", "leader", "party-es", "party-eu"] as const;
+type Kind = (typeof REFERENCE_KINDS)[number];
+
+/**
+ * `useSearchParams` obliga a un límite de Suspense en una ruta estática; sin él
+ * el build falla.
+ */
 export default function QuadrantPage() {
+  return (
+    <Suspense fallback={null}>
+      <QuadrantPageContent />
+    </Suspense>
+  );
+}
+
+function QuadrantPageContent() {
+  const searchParams = useSearchParams();
+
+  // Enlaces profundos desde el resto del sitio: /cuadrante?capas=leader&ref=milei
+  // abre el cuadrante ya filtrado y con esa ficha señalada.
+  const layers = (searchParams.get("capas") ?? "")
+    .split(",")
+    .map((k) => k.trim())
+    .filter((k): k is Kind => (REFERENCE_KINDS as readonly string[]).includes(k));
+  const focusId = searchParams.get("ref");
+  const initialLayers: Kind[] = layers.length > 0 ? layers : ["country"];
+
   const [mode, setMode] = useState<Mode>('intro');
   const [userPosition, setUserPosition] = useState<{ economic: number; social: number } | null>(null);
 
@@ -78,10 +106,10 @@ export default function QuadrantPage() {
                       Realizar el test
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      Responde 12 preguntas para descubrir tu posición ideológica de forma guiada.
+                      Responde {quadrantQuestions.length} preguntas equilibradas para situarte en los dos ejes.
                     </p>
                     <span className="inline-block mt-4 text-sm font-medium text-primary">
-                      ~3 minutos →
+                      ~4 minutos →
                     </span>
                   </button>
 
@@ -110,7 +138,11 @@ export default function QuadrantPage() {
                 <h3 className="font-display text-lg font-semibold text-foreground mb-4 text-center">
                   Vista previa del cuadrante
                 </h3>
-                <InteractiveQuadrant showAllUsers={true} />
+                <InteractiveQuadrant
+                  showAllUsers={true}
+                  defaultLayers={initialLayers}
+                  focusId={focusId}
+                />
               </div>
             </div>
           )}

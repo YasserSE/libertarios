@@ -13,17 +13,17 @@ export function CTASection() {
       <div className="container relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-            Tu punto de vista también cuenta
+            Un movimiento empieza por saber cuántos sois
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-10">
-            Registrarte como simpatizante no implica afiliación, militancia ni exposición pública.
-            Es una forma sencilla de contribuir a una fotografía más honesta del pensamiento político en España.
+            No implica afiliación, militancia ni exposición pública: nadie verá tu nombre. Es la
+            diferencia entre ser una opinión aislada y ser una cifra que se puede enseñar.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <Button variant="hero" size="xl" asChild>
               <Link href="/registro">
-                Registrarme como simpatizante
+                Contarme
                 <ArrowRight className="ml-2" />
               </Link>
             </Button>

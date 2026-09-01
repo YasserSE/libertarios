@@ -15,8 +15,8 @@ const values = [
   },
   {
     icon: Shield,
-    title: "Neutralidad",
-    description: "No promovemos ningún partido ni candidato. Solo información objetiva y educativa.",
+    title: "Posición declarada",
+    description: "Queremos que exista una alternativa liberal en España y lo decimos. No apoyamos a ningún partido ni candidato concreto.",
   },
   {
     icon: Lock,
@@ -89,8 +89,8 @@ export default function ProyectoPage() {
                 Sobre el proyecto
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Una plataforma abierta para entender el pensamiento libertario en España.
-                Sin afiliaciones políticas. Solo datos, ideas y transparencia.
+                Contamos a quienes creen que en España falta una alternativa liberal, y publicamos
+                cómo lo medimos para que cualquiera pueda discutirlo.
               </p>
             </div>
           </div>
@@ -115,12 +115,13 @@ export default function ProyectoPage() {
                   El libertarismo, en particular, suele ser malinterpretado o reducido a estereotipos.
                 </p>
                 <p className="text-muted-foreground leading-relaxed mb-6">
-                  Este proyecto nace para ofrecer una alternativa: un espacio donde las personas puedan 
-                  expresar su afinidad con la libertad individual y donde esos datos se muestren de forma 
-                  clara, anónima y accesible.
+                  En España no hay un movimiento libertario organizado: hay personas sueltas que no
+                  saben cuántas son. Este proyecto empieza por lo primero que falta —contarlas— y
+                  enseña el resultado de forma clara, anónima y verificable.
                 </p>
                 <p className="text-foreground font-medium">
-                  Aquí no se trata de convencer, sino de entender.
+                  Tenemos una posición. Los datos, no: la escala deja a España del lado
+                  intervencionista y publicamos las objeciones que más incomodan.
                 </p>
               </div>
             </div>

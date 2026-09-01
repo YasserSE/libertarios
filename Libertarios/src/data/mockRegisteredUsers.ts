@@ -1,3 +1,5 @@
+import { SPAIN_PROVINCE_COUNTS } from "@/data/mock/affiliate-counts";
+
 export interface RegisteredUser {
   id: string;
   economic: number; // -100 to 100
@@ -6,8 +8,24 @@ export interface RegisteredUser {
   provinceCode: string;
 }
 
+/**
+ * Deterministic PRNG (mulberry32).
+ *
+ * These users are generated at module load on both the server and the client,
+ * so `Math.random()` produced a different dataset on each side and every
+ * component reading it hydrated with mismatched numbers. A fixed seed makes the
+ * two renders identical.
+ */
+const createRandom = (seed: number) => () => {
+  seed = (seed + 0x6d2b79f5) | 0;
+  let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+  t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+  return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+};
+
 // Generate mock registered users
-export const generateMockUsers = (count: number = 500): RegisteredUser[] => {
+export const generateMockUsers = (count: number = 500, seed = 20260901): RegisteredUser[] => {
+  const random = createRandom(seed);
   const provinces = [
     { name: "Madrid", code: "MD", weight: 0.18 },
     { name: "Barcelona", code: "B", weight: 0.15 },
@@ -75,13 +93,13 @@ export const generateMockUsers = (count: number = 500): RegisteredUser[] => {
   
   for (let i = 0; i < count; i++) {
     // Select quadrant based on weight
-    const random = Math.random();
+    const quadrantRandom = random();
     let cumulative = 0;
     let selectedQuadrant = quadrantWeights[0];
     
     for (const quadrant of quadrantWeights) {
       cumulative += quadrant.weight;
-      if (random <= cumulative) {
+      if (quadrantRandom <= cumulative) {
         selectedQuadrant = quadrant;
         break;
       }
@@ -90,14 +108,14 @@ export const generateMockUsers = (count: number = 500): RegisteredUser[] => {
     // Generate position within selected quadrant range with some variance
     const economic = Math.round(
       selectedQuadrant.economicRange[0] + 
-      Math.random() * (selectedQuadrant.economicRange[1] - selectedQuadrant.economicRange[0]) +
-      (Math.random() - 0.5) * 15 // Add variance
+      random() * (selectedQuadrant.economicRange[1] - selectedQuadrant.economicRange[0]) +
+      (random() - 0.5) * 15 // Add variance
     );
     
     const social = Math.round(
       selectedQuadrant.socialRange[0] + 
-      Math.random() * (selectedQuadrant.socialRange[1] - selectedQuadrant.socialRange[0]) +
-      (Math.random() - 0.5) * 15 // Add variance
+      random() * (selectedQuadrant.socialRange[1] - selectedQuadrant.socialRange[0]) +
+      (random() - 0.5) * 15 // Add variance
     );
     
     // Clamp to valid range
@@ -105,7 +123,7 @@ export const generateMockUsers = (count: number = 500): RegisteredUser[] => {
     const clampedSocial = Math.min(100, Math.max(-100, social));
     
     // Select province based on weight
-    const provinceRandom = Math.random();
+    const provinceRandom = random();
     let cumulativeProvince = 0;
     let selectedProvince = provinces[0];
     
@@ -129,7 +147,14 @@ export const generateMockUsers = (count: number = 500): RegisteredUser[] => {
   return users;
 };
 
-export const mockUsers = generateMockUsers(2847);
+/**
+ * La nube de puntos del cuadrante tiene que ser exactamente la gente contada en
+ * España. Estaba fijada a 2.847 mientras el mapa decía 2.492, así que la misma
+ * página afirmaba dos totales distintos. Se deriva del dato en vez de repetirlo.
+ */
+const SPAIN_TOTAL = Object.values(SPAIN_PROVINCE_COUNTS).reduce((a, b) => a + b, 0);
+
+export const mockUsers = generateMockUsers(SPAIN_TOTAL);
 
 // Get users by province for the map
 export const getUsersByProvince = () => {
