@@ -17,7 +17,7 @@ import { QuadrantFigures } from "@/components/aprende/QuadrantFigures";
 import { CountryPairs } from "@/components/aprende/CountryPairs";
 import { FaceExplorer } from "@/components/aprende/FaceExplorer";
 import { ReferenceAvatar } from "@/components/maps/ReferenceAvatar";
-import { REFERENCE_SETS } from "@/data/quadrantReferences";
+import { FEATURED_FIGURE_IDS } from "@/data/quadrantReferences";
 import {
   DndContext,
   closestCenter,
@@ -44,8 +44,6 @@ import { CSS } from "@dnd-kit/utilities";
  * explica el matiz; hacen falta las dos, y el número queda en el `title` y en
  * el texto accesible para quien no distinga la barra.
  */
-const HOOK_IDS = ["milei", "rallo", "bukele", "trump", "sanchez", "lula"];
-
 function RatingBar({ value, accent = false }: { value: number; accent?: boolean }) {
   const levels = ["Nulo", "Bajo", "Medio", "Alto", "Máximo"];
   return (
@@ -393,7 +391,7 @@ export default function ComparativasPage() {
         </section>
 
         <FaceExplorer
-          ids={HOOK_IDS}
+          ids={FEATURED_FIGURE_IDS}
           title="Empieza por las caras"
           intro="Los mismos referentes, colocados donde les toca. Toca cualquiera para ver por qué está ahí: las medidas concretas que sostienen su posición."
         />

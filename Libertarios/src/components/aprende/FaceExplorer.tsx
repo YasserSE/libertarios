@@ -9,8 +9,17 @@ import { REFERENCE_SETS, type ReferencePoint } from "@/data/quadrantReferences";
 
 const ALL = REFERENCE_SETS.flatMap((set) => set.points);
 const sign = (n: number) => `${n > 0 ? "+" : ""}${n}`;
-const toX = (economic: number) => ((economic + 100) / 200) * 100;
-const toY = (social: number) => 100 - ((social + 100) / 200) * 100;
+/**
+ * Los puntos se dibujan dentro de un margen, no contra el borde.
+ *
+ * La escala sigue siendo lineal y exacta —solo cambia el encuadre—, pero quien
+ * cae en un extremo deja de quedar pegado al rótulo del eje. Sin esto, «Meloni»
+ * y «Trump» se escribían encima de «CONTROL SOCIAL».
+ */
+const PAD = 7;
+const SPAN = 100 - PAD * 2;
+const toX = (economic: number) => PAD + ((economic + 100) / 200) * SPAN;
+const toY = (social: number) => 100 - PAD - ((social + 100) / 200) * SPAN;
 
 /**
  * Las caras, sobre el cuadrante, con su ficha al lado.
@@ -43,28 +52,33 @@ export function FaceExplorer({ ids, title, intro }: { ids: string[]; title: stri
     // Los obstáculos son las otras etiquetas **y los propios distintivos**: la
     // primera versión solo esquivaba etiquetas, y el nombre de Sánchez acababa
     // escrito encima del círculo de Lula.
-    const blocked = points.map((p) => ({
-      x: toX(p.economic),
-      y: toY(p.social),
-      halfHeight: 5.5,
-    }));
+    const blocked = [
+      // Las bandas de los rótulos de eje, arriba y abajo.
+      { x: 50, y: 4, halfHeight: 4 },
+      { x: 50, y: 98, halfHeight: 4 },
+      ...points.map((p) => ({
+        x: toX(p.economic),
+        y: toY(p.social),
+        halfHeight: 4.6,
+      })),
+    ];
     const result = new Map<string, number>();
 
     for (const point of [...points].sort((a, b) => toY(a.social) - toY(b.social))) {
       const cx = toX(point.economic);
       // Debajo por defecto; arriba cuando el borde inferior queda cerca, que es
       // lo que recortaba el nombre de quien cae en la franja más autoritaria.
-      const below = toY(point.social) + 7;
+      const below = toY(point.social) + 6;
       const direction = below > 92 ? -1 : 1;
-      let y = direction === 1 ? below : toY(point.social) - 6;
+      let y = direction === 1 ? below : toY(point.social) - 5.2;
       while (
         blocked.some(
-          (q) => Math.abs(q.x - cx) < 16 && Math.abs(q.y - y) < q.halfHeight,
+          (q) => Math.abs(q.x - cx) < 14 && Math.abs(q.y - y) < q.halfHeight,
         )
       ) {
-        y += 4.2 * direction;
+        y += 3.6 * direction;
       }
-      blocked.push({ x: cx, y, halfHeight: 3.2 });
+      blocked.push({ x: cx, y, halfHeight: 2.8 });
       result.set(point.id, y);
     }
     return result;
@@ -83,7 +97,7 @@ export function FaceExplorer({ ids, title, intro }: { ids: string[]; title: stri
         <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
           {/* Cuadrante */}
           <div className="rounded-3xl border border-border bg-card p-4 sm:p-6">
-            <div className="relative mx-auto aspect-square w-full max-w-lg">
+            <div className="relative mx-auto aspect-square w-full max-w-xl">
               <svg viewBox="0 0 100 100" className="h-full w-full" role="img" aria-label={title}>
                 <rect width="100" height="100" className="fill-background" rx="3" />
                 <rect x="50" y="0" width="50" height="50" className="fill-primary/[0.07]" />
@@ -119,7 +133,7 @@ export function FaceExplorer({ ids, title, intro }: { ids: string[]; title: stri
                     const cx = toX(point.economic);
                     const cy = toY(point.social);
                     const active = point.id === selected?.id;
-                    const r = active ? 5 : 3.6;
+                    const r = active ? 4.6 : 3.1;
                     return (
                       <g
                         key={point.id}
@@ -161,7 +175,7 @@ export function FaceExplorer({ ids, title, intro }: { ids: string[]; title: stri
                           y={labelY.get(point.id) ?? cy + r + 3}
                           textAnchor="middle"
                           className={`text-[2.6px] ${active ? "fill-foreground font-semibold" : "fill-foreground/70"}`}
-                          style={{ paintOrder: "stroke", stroke: "hsl(var(--background))", strokeWidth: 0.9 }}
+                          style={{ paintOrder: "stroke", stroke: "hsl(var(--background))", strokeWidth: 1 }}
                         >
                           {point.short}
                         </text>

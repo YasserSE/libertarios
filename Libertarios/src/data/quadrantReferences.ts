@@ -296,3 +296,29 @@ export function nearestReferences(
     .sort((a, b) => a.distance - b.distance)
     .slice(0, limit);
 }
+
+/**
+ * Referentes destacados del explorador de caras.
+ *
+ * Todos tienen medidas documentadas en `policies`, que es lo que hace que la
+ * ficha valga algo al pulsarlos: sin ellas la coordenada es solo una opinión
+ * nuestra. En orden descendente de libertad económica, para que la lista de
+ * abajo del gráfico se lea como una escala.
+ */
+export const FEATURED_FIGURE_IDS = [
+  "rallo",
+  "milei",
+  "bukele",
+  "modi",
+  "feijoo",
+  "macron",
+  "meloni",
+  "trump",
+  "abascal",
+  "orban",
+  "starmer",
+  "lepen",
+  "sanchez",
+  "xi",
+  "lula",
+];

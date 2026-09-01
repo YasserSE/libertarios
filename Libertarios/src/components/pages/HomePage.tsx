@@ -8,6 +8,8 @@ import { NewsResourcesSection } from "@/components/NewsResourcesSection";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
 import { AffiliateMapSection, type MapScope } from "@/components/maps/AffiliateMapSection";
+import { FaceExplorer } from "@/components/aprende/FaceExplorer";
+import { FEATURED_FIGURE_IDS } from "@/data/quadrantReferences";
 import { getCountrySnapshot, getEuropeSnapshot } from "@/lib/affiliates/repository";
 import { isRegistrationConfigured } from "@/lib/registration/register";
 
@@ -35,6 +37,11 @@ export function HomePage({ scope }: { scope: MapScope }) {
         {/* La comparación va inmediatamente después del mapa: es el gancho que
             explica de qué van los dos ejes que el hero acaba de mostrar. */}
         <CompareSection />
+        <FaceExplorer
+          ids={FEATURED_FIGURE_IDS}
+          title="Y esto, ¿quién lo gobierna?"
+          intro="Quince gobernantes y economistas colocados donde les toca. Toca cualquiera para ver las medidas concretas que sostienen su posición."
+        />
         <AboutSection registrationOpen={registrationOpen} />
         <QuadrantSection />
         <DataSection />
