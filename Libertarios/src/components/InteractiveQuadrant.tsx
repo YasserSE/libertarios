@@ -176,7 +176,7 @@ export function InteractiveQuadrant({
   showLayerControls = true,
   focusId = null,
 }: InteractiveQuadrantProps) {
-  const { ref: quadrantRef, animate } = useAnimateInView<HTMLDivElement>();
+  const { ref: quadrantRef, entering, animate } = useAnimateInView<HTMLDivElement>();
   const [activeKinds, setActiveKinds] = useState<ReferenceKind[]>(defaultLayers);
   // Con una capa de referencia activa de salida, la nube estorba más que ayuda.
   const [showUsers, setShowUsers] = useState(showAllUsers && defaultLayers.length === 0);
@@ -324,7 +324,7 @@ export function InteractiveQuadrant({
               <line x1="0" y1={pos} x2="100" y2={pos} className="stroke-border/40" strokeWidth="0.12" />
             </g>
           ))}
-          <g className={animate ? "quadrant-axis" : ""} style={{ transformOrigin: "50px 50px" }}>
+          <g className={entering ? "quadrant-axis" : ""} style={{ transformOrigin: "50px 50px" }}>
             <line x1="50" y1="0" x2="50" y2="100" className="stroke-border" strokeWidth="0.35" />
             <line x1="0" y1="50" x2="100" y2="50" className="stroke-border" strokeWidth="0.35" />
           </g>
@@ -386,10 +386,10 @@ export function InteractiveQuadrant({
                   tabIndex={0}
                   role="button"
                   aria-label={`${point.label}. Económico ${point.economic}, social ${point.social}. ${point.note}`}
-                  className={`cursor-help focus:outline-none ${animate ? "quadrant-point" : ""}`}
+                  className={`cursor-help focus:outline-none ${entering ? "quadrant-point" : ""}`}
                   style={{
                     transformOrigin: `${cx}px ${cy}px`,
-                    animationDelay: animate ? `${enterDelay.get(point.id) ?? 0}ms` : undefined,
+                    animationDelay: entering ? `${enterDelay.get(point.id) ?? 0}ms` : undefined,
                   }}
                 >
                   {/* Diana invisible: el distintivo es pequeño, el objetivo no. */}
@@ -424,7 +424,7 @@ export function InteractiveQuadrant({
 
           {userPosition && (
             <g
-              className={`pointer-events-none ${animate ? "quadrant-you" : ""}`}
+              className={`pointer-events-none ${entering ? "quadrant-you" : ""}`}
               style={{
                 transformOrigin: `${toX(userPosition.economic)}px ${toY(userPosition.social)}px`,
               }}

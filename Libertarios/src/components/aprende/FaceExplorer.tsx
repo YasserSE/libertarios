@@ -39,7 +39,7 @@ export function FaceExplorer({ ids, title, intro }: { ids: string[]; title: stri
     .map((id) => ALL.find((p) => p.id === id))
     .filter((p): p is ReferencePoint => Boolean(p));
 
-  const { ref: quadrantRef, animate } = useAnimateInView<HTMLDivElement>();
+  const { ref: quadrantRef, entering } = useAnimateInView<HTMLDivElement>();
   const [selectedId, setSelectedId] = useState(points[0]?.id ?? null);
   const selected = points.find((p) => p.id === selectedId) ?? points[0];
 
@@ -157,11 +157,11 @@ export function FaceExplorer({ ids, title, intro }: { ids: string[]; title: stri
                           }
                         }}
                         className={`cursor-pointer focus:outline-none ${
-                          animate ? "quadrant-point" : ""
+                          entering ? "quadrant-point" : ""
                         }`}
                         style={{
                           transformOrigin: `${cx}px ${cy}px`,
-                          animationDelay: animate ? `${enterDelay.get(point.id) ?? 0}ms` : undefined,
+                          animationDelay: entering ? `${enterDelay.get(point.id) ?? 0}ms` : undefined,
                         }}
                       >
                         <circle cx={cx} cy={cy} r="6" fill="transparent" />
@@ -222,16 +222,10 @@ export function FaceExplorer({ ids, title, intro }: { ids: string[]; title: stri
 
           {/* Ficha */}
           {selected && (
-            /* La `key` hace que React monte una ficha nueva al cambiar de
-               referente, y con ella se reinicia la animación de entrada. Sin
-               esto el contenido se sustituía de golpe y costaba ver que había
-               cambiado algo. */
-            <div
-              key={selected.id}
-              className={`rounded-3xl border border-border bg-card p-6 lg:p-7 ${
-                animate ? "detail-in" : ""
-              }`}
-            >
+            /* Sin animación al cambiar de referente. Relanzarla en cada clic
+               convertía en un aspaviento algo que se hace muchas veces
+               seguidas: el contenido cambia y se lee, que es lo que se busca. */
+            <div className="rounded-3xl border border-border bg-card p-6 lg:p-7">
               <div className="flex items-start gap-4">
                 <ReferenceAvatar point={selected} size={56} />
                 <div className="min-w-0">

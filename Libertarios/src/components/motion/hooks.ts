@@ -165,9 +165,10 @@ export function useEnterAnimation<T extends Element>() {
  * añaden desde aquí y no en el marcado: si no vamos a animar, no se ponen, y lo
  * que queda es el gráfico completo. El HTML del servidor sale siempre entero.
  */
-export function useAnimateInView<T extends Element>() {
+export function useAnimateInView<T extends Element>(entryWindowMs = 2200) {
   const { ref, inView } = useInView<T>(0, 0, true);
   const [visible, setVisible] = useState(false);
+  const [entryOver, setEntryOver] = useState(false);
 
   useIsomorphicLayoutEffect(() => {
     const sync = () => setVisible(document.visibilityState === "visible");
@@ -180,5 +181,23 @@ export function useAnimateInView<T extends Element>() {
     return () => document.removeEventListener("visibilitychange", sync);
   }, []);
 
-  return { ref, animate: visible && inView };
+  /**
+   * La entrada se retira cuando ha terminado, y eso no es limpieza: es lo que
+   * impide que se repita sola.
+   *
+   * Los puntos del cuadrante se reordenan para que el señalado quede encima de
+   * los demás, y reordenar hijos de un SVG mueve el nodo en el DOM, lo que
+   * reinicia su animación CSS. Con la clase puesta indefinidamente, cada clic y
+   * cada paso del ratón volvían a lanzar la entrada de medio cuadrante. Pasada
+   * la ventana de entrada la clase desaparece y el gráfico queda inerte.
+   */
+  const entering = visible && inView && !entryOver;
+
+  useEffect(() => {
+    if (!visible || !inView) return;
+    const timer = window.setTimeout(() => setEntryOver(true), entryWindowMs);
+    return () => window.clearTimeout(timer);
+  }, [visible, inView, entryWindowMs]);
+
+  return { ref, entering, animate: visible && inView };
 }
