@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/Link";
 import { Button } from "@/components/ui/button";
 import { BookOpen, History, Scale, CheckCircle, ArrowRight } from "lucide-react";
 

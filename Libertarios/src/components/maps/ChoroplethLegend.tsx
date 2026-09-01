@@ -1,6 +1,8 @@
 "use client";
 
 import { CHOROPLETH_FILLS, NO_DATA_FILL, binLabel, type ChoroplethScale } from "@/lib/maps/scale";
+import { getDictionary } from "@/i18n/getDictionary";
+import { useLocale } from "@/i18n/Link";
 
 interface ChoroplethLegendProps {
   scale: ChoroplethScale;
@@ -15,6 +17,7 @@ interface ChoroplethLegendProps {
  * colour alone — the ranges are readable in greyscale and by screen readers.
  */
 export function ChoroplethLegend({ scale, unit }: ChoroplethLegendProps) {
+  const m = getDictionary(useLocale()).map;
   if (scale.breaks.length === 0) return null;
 
   return (
@@ -45,7 +48,7 @@ export function ChoroplethLegend({ scale, unit }: ChoroplethLegendProps) {
           className="block h-3 w-6 rounded-sm border border-border"
           style={{ background: NO_DATA_FILL }}
         />
-        <span className="text-[11px] text-muted-foreground">Sin registros</span>
+        <span className="text-[11px] text-muted-foreground">{m.noData}</span>
       </div>
     </div>
   );

@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { Link, useLocale } from "@/i18n/Link";
+import { getDictionary } from "@/i18n/getDictionary";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, Play, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -23,59 +25,51 @@ type NavEntry =
   | { label: string; href: string }
   | { label: string; children: { label: string; href: string; description: string }[] };
 
-const NAV: NavEntry[] = [
-  {
-    label: "Mapas",
-    children: [
-      { label: "Europa", href: "/", description: "Simpatizantes país a país" },
-      { label: "España", href: "/spain", description: "Detalle por provincia" },
-      { label: "Datos y gráficos", href: "/datos", description: "Demografía y cuadrante" },
-    ],
-  },
-  { label: "Test ideológico", href: "/cuadrante" },
-  {
-    label: "Aprende",
-    children: [
-      {
-        label: "¿Qué es ser libertario?",
-        href: "/libertario",
-        description: "Ideas base, sin etiquetas",
-      },
-      { label: "Comparativas", href: "/comparativas", description: "Frente a otras corrientes" },
-      { label: "Recursos", href: "/noticias", description: "Dónde leer sobre esto" },
-    ],
-  },
-  { label: "El proyecto", href: "/proyecto" },
-];
-
-/** Flat list of every destination, for the mobile drawer. */
-const MOBILE_GROUPS: { title: string; items: { label: string; href: string }[] }[] = [
-  {
-    title: "Mapas",
-    items: [
-      { label: "Europa", href: "/" },
-      { label: "España", href: "/spain" },
-      { label: "Datos y gráficos", href: "/datos" },
-    ],
-  },
-  {
-    title: "Aprende",
-    items: [
-      { label: "¿Qué es ser libertario?", href: "/libertario" },
-      { label: "Comparativas", href: "/comparativas" },
-      { label: "Recursos", href: "/noticias" },
-    ],
-  },
-  {
-    title: "Más",
-    items: [
-      { label: "Test ideológico", href: "/cuadrante" },
-      { label: "El proyecto", href: "/proyecto" },
-    ],
-  },
-];
-
 export function Header() {
+  const locale = useLocale();
+  const t = getDictionary(locale).nav;
+
+  const NAV: NavEntry[] = [
+    {
+      label: t.maps,
+      children: [
+        { label: t.mapsEurope, href: "/", description: t.mapsEuropeHint },
+        { label: t.mapsSpain, href: "/spain", description: t.mapsSpainHint },
+        { label: t.mapsData, href: "/datos", description: t.mapsDataHint },
+      ],
+    },
+    { label: t.test, href: "/cuadrante" },
+    {
+      label: t.learn,
+      children: [
+        { label: t.learnWhat, href: "/libertario", description: t.learnWhatHint },
+        { label: t.learnCompare, href: "/comparativas", description: t.learnCompareHint },
+        { label: t.learnResources, href: "/noticias", description: t.learnResourcesHint },
+      ],
+    },
+    { label: t.project, href: "/proyecto" },
+  ];
+
+  const MOBILE_GROUPS = [
+    {
+      title: t.maps,
+      items: [
+        { label: t.mapsEurope, href: "/" },
+        { label: t.mapsSpain, href: "/spain" },
+        { label: t.mapsData, href: "/datos" },
+      ],
+    },
+    {
+      title: t.learn,
+      items: [
+        { label: t.learnWhat, href: "/libertario" },
+        { label: t.learnCompare, href: "/comparativas" },
+        { label: t.learnResources, href: "/noticias" },
+      ],
+    },
+    { title: t.more, items: [{ label: t.test, href: "/cuadrante" }, { label: t.project, href: "/proyecto" }] },
+  ];
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
@@ -117,7 +111,7 @@ export function Header() {
           <Link
             href="/"
             className="flex shrink-0 items-center gap-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            aria-label="Libertarios.eu — inicio"
+            aria-label={t.home}
           >
             <span className="gradient-primary flex h-8 w-8 items-center justify-center rounded-lg">
               <span className="font-display text-sm font-bold text-primary-foreground">L</span>
@@ -183,27 +177,31 @@ export function Header() {
           </nav>
 
           <div className="hidden shrink-0 items-center gap-2 lg:flex">
+            <LanguageSwitcher label={t.language} />
             <Button variant="outline" size="sm" asChild>
               <Link href="/cuadrante">
                 <Play className="h-3.5 w-3.5" />
-                Hacer el test
+                {t.doTest}
               </Link>
             </Button>
             <Button variant="cta" size="sm" asChild>
-              <Link href="/registro">Registrarme</Link>
+              <Link href="/registro">{t.register}</Link>
             </Button>
           </div>
 
+          <div className="flex items-center gap-1 lg:hidden">
+            <LanguageSwitcher label={t.language} />
           <button
             type="button"
             onClick={() => setIsMenuOpen((v) => !v)}
             className="rounded-lg p-2 text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring lg:hidden"
-            aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-label={isMenuOpen ? t.closeMenu : t.openMenu}
             aria-expanded={isMenuOpen}
             aria-controls="mobile-nav"
           >
             {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
+          </div>
         </div>
       </div>
 
@@ -236,11 +234,11 @@ export function Header() {
               <Button variant="outline" size="lg" className="w-full" asChild>
                 <Link href="/cuadrante">
                   <Play className="h-4 w-4" />
-                  Hacer el test
+                  {t.doTest}
                 </Link>
               </Button>
               <Button variant="cta" size="lg" className="w-full" asChild>
-                <Link href="/registro">Registrarme</Link>
+                <Link href="/registro">{t.register}</Link>
               </Button>
             </div>
           </nav>

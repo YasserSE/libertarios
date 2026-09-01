@@ -135,6 +135,15 @@ const thinkers: ReferencePoint[] = [
   { id: "piketty", kind: "thinker", initials: "TP", label: "Thomas Piketty", short: "Piketty", economic: -72, social: 60, note: "Fiscalidad fuertemente progresiva contra la concentración de capital." },
   { id: "lange", kind: "thinker", initials: "OL", label: "Oskar Lange", short: "Lange", economic: -82, social: -52, note: "Su respuesta a Mises y Hayek en el debate del cálculo económico sostenía que una junta central podía fijar precios. Acabó sirviendo al régimen comunista polaco." },
   { id: "dobb", kind: "thinker", initials: "MD", label: "Maurice Dobb", short: "Dobb", economic: -90, social: -58, note: "Economista marxista de Cambridge; defensor de la planificación central soviética hasta el final." },
+  { id: "bastiat", kind: "thinker", initials: "FB", role: "Economista, Francia 🇫🇷", label: "Frédéric Bastiat", short: "Bastiat", economic: 80, social: 70, note: "«La Ley» y la falacia de la ventana rota. El divulgador liberal más claro que ha dado Francia." },
+  { id: "einaudi", kind: "thinker", initials: "LE", role: "Economista y presidente, Italia 🇮🇹", label: "Luigi Einaudi", short: "Einaudi", economic: 70, social: 60, note: "Liberal italiano y presidente de la República; estabilizó la lira tras la guerra." },
+  { id: "erhard", kind: "thinker", initials: "LE", role: "Economista y canciller, Alemania 🇩🇪", label: "Ludwig Erhard", short: "Erhard", economic: 58, social: 50, note: "Padre de la economía social de mercado y del milagro alemán: liberalizó precios contra el criterio de los ocupantes aliados." },
+  { id: "sala-i-martin", kind: "thinker", initials: "XS", role: "Economista, Cataluña 🏴", label: "Xavier Sala-i-Martín", short: "Sala-i-Martín", economic: 68, social: 65, note: "Economista catalán de Columbia; divulgador del crecimiento y crítico del intervencionismo." },
+  { id: "guimaraes-pinto", kind: "thinker", initials: "CG", role: "Economista, Portugal 🇵🇹", label: "Carlos Guimarães Pinto", short: "Guimarães Pinto", economic: 72, social: 62, note: "Economista y fundador de Iniciativa Liberal, el partido que llevó el liberalismo al parlamento portugués." },
+  { id: "torres-lopez", kind: "thinker", initials: "JT", role: "Economista, España 🇪🇸", label: "Juan Torres López", short: "Torres López", economic: -70, social: 58, note: "Economista heterodoxo español; ha asesorado a la izquierda en política fiscal y de vivienda." },
+  { id: "navarro", kind: "thinker", initials: "VN", role: "Economista, Cataluña 🏴", label: "Vicenç Navarro", short: "Navarro", economic: -78, social: 60, note: "Catedrático catalán de políticas públicas; defensor de un Estado del bienestar de máximos." },
+  { id: "louca", kind: "thinker", initials: "FL", role: "Economista, Portugal 🇵🇹", label: "Francisco Louçã", short: "Louçã", economic: -80, social: 62, note: "Economista y fundador del Bloco de Esquerda; crítico de la austeridad y de la troika." },
+  { id: "gramsci", kind: "thinker", initials: "AG", role: "Filósofo político, Italia 🇮🇹", label: "Antonio Gramsci", short: "Gramsci", economic: -88, social: -15, note: "Hegemonía cultural: la idea de que el poder se sostiene en el consenso antes que en la fuerza. Su lugar en el eje social se discute.", contested: true },
   {
     id: "marx",
     kind: "thinker",
@@ -229,7 +238,7 @@ export const REFERENCE_SETS: ReferenceSet[] = [
   {
     kind: "thinker",
     label: "Economistas y figuras",
-    hint: "23 pensadores, los cuatro cuadrantes",
+    hint: "32 pensadores, los cuatro cuadrantes",
     basis:
       "Lectura de su obra publicada. Es el conjunto más interpretativo de los cuatro: nadie escribió su propia coordenada. Cubre los cuatro cuadrantes a propósito — hay economistas defendiendo cada combinación de los dos ejes, no solo la libertaria.",
     points: thinkers,

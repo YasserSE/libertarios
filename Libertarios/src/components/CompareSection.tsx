@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/Link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { MiniQuadrant } from "@/components/aprende/MiniQuadrant";

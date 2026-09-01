@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/Link";
 import { ArrowRight, MapPin, TrendingDown, Vote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getCountrySnapshot } from "@/lib/affiliates/repository";
@@ -18,7 +18,7 @@ import { getReferenceSet } from "@/data/quadrantReferences";
  * mañana cambia la calibración, cambia la tesis; y si la calibración dejara de
  * sostenerla, se vería.
  */
-export function AboutSection() {
+export function AboutSection({ registrationOpen }: { registrationOpen: boolean }) {
   const spain = getCountrySnapshot("ES")!;
 
   // El país europeo con más libertad económica según nuestra propia escala. Se
@@ -125,9 +125,19 @@ export function AboutSection() {
         </div>
 
         <p className="mx-auto mt-8 max-w-3xl text-center text-sm text-muted-foreground">
-          El registro todavía no está abierto: las {spain.count.toLocaleString("es-ES")} personas
-          que ves en el mapa de España son una simulación para enseñar cómo funcionará. Cuando se
-          abra, nadie te pedirá el voto, ni militancia, ni que salgas en ninguna lista.
+          {registrationOpen ? (
+            <>
+              Ahora mismo somos {spain.count.toLocaleString("es-ES")} personas contadas en España.
+              Nadie te pide el voto, ni militancia, ni que salgas en ninguna lista.
+            </>
+          ) : (
+            <>
+              El registro todavía no está abierto: las {spain.count.toLocaleString("es-ES")}{" "}
+              personas que ves en el mapa de España son una simulación para enseñar cómo
+              funcionará. Cuando se abra, nadie te pedirá el voto, ni militancia, ni que salgas en
+              ninguna lista.
+            </>
+          )}
         </p>
       </div>
     </section>

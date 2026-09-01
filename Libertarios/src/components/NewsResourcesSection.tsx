@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/Link";
 import { ArrowRight, BookOpen, Compass, Scale } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RESOURCE_SECTIONS } from "@/data/resources";

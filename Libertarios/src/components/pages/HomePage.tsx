@@ -9,6 +9,7 @@ import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
 import { AffiliateMapSection, type MapScope } from "@/components/maps/AffiliateMapSection";
 import { getCountrySnapshot, getEuropeSnapshot } from "@/lib/affiliates/repository";
+import { isRegistrationConfigured } from "@/lib/registration/register";
 
 /**
  * The home page, rendered at one of two scopes.
@@ -20,15 +21,21 @@ import { getCountrySnapshot, getEuropeSnapshot } from "@/lib/affiliates/reposito
 export function HomePage({ scope }: { scope: MapScope }) {
   const europe = getEuropeSnapshot();
   const spain = getCountrySnapshot("ES")!;
+  const registrationOpen = isRegistrationConfigured();
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <main>
-        <AffiliateMapSection europe={europe} spain={spain} scope={scope} />
+        <AffiliateMapSection
+          europe={europe}
+          spain={spain}
+          scope={scope}
+          registrationOpen={registrationOpen}
+        />
         {/* La comparación va inmediatamente después del mapa: es el gancho que
             explica de qué van los dos ejes que el hero acaba de mostrar. */}
         <CompareSection />
-        <AboutSection />
+        <AboutSection registrationOpen={registrationOpen} />
         <QuadrantSection />
         <DataSection />
         <LibertarianSection />

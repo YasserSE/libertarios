@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/select";
 import { ArrowRight, Check, MapPin, User, Calendar, Heart, Globe } from "lucide-react";
 import { toast } from "sonner";
-import { submitRegistration } from "@/app/registro/actions";
+import { submitRegistration } from "@/app/[locale]/registro/actions";
 import { resolveProvince } from "@/data/geo/spain-provinces";
 import { Checkbox } from "@/components/ui/checkbox";
 

@@ -3,7 +3,7 @@ import { Footer } from "@/components/Footer";
 import { SpainProvinceMap } from "@/components/maps/SpainProvinceMap";
 import { QuadrantDistribution } from "@/components/QuadrantDistribution";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from "@/i18n/Link";
 import { mockUsers } from "@/data/mockRegisteredUsers";
 import { getCountrySnapshot } from "@/lib/affiliates/repository";
 import { ArrowRight, MapPin, Users, Calendar, Heart, Globe, TrendingUp } from "lucide-react";

@@ -8,6 +8,8 @@ import { createChoroplethScale } from "@/lib/maps/scale";
 import { formatPerMillion } from "@/lib/affiliates/format";
 import { MapTooltip, type TooltipDatum } from "./MapTooltip";
 import { MapCanvas } from "./MapCanvas";
+import { getDictionary } from "@/i18n/getDictionary";
+import { useLocale } from "@/i18n/Link";
 
 /**
  * Vendored from world-atlas@2 into `public/geo`. Feature ids are ISO 3166-1
@@ -30,6 +32,8 @@ interface EuropeMapProps {
  * the eye a coastline to read Europe by without competing with the data.
  */
 export function EuropeMap({ countries, selected, onSelect }: EuropeMapProps) {
+  const dict = getDictionary(useLocale());
+  const m = dict.map;
   const [hovered, setHovered] = useState<string | null>(null);
   const [tooltip, setTooltip] = useState<TooltipDatum | null>(null);
   const [pointer, setPointer] = useState({ x: 0, y: 0 });
@@ -53,9 +57,9 @@ export function EuropeMap({ countries, selected, onSelect }: EuropeMapProps) {
           stats.count === 0
             ? []
             : [
-                { label: "Simpatizantes", value: stats.count.toLocaleString("es-ES") },
-                { label: "Por millón hab.", value: formatPerMillion(stats.perMillion) },
-                { label: "Últimos 30 días", value: `+${stats.growth30d.toLocaleString("es-ES")}` },
+                { label: m.supporters, value: stats.count.toLocaleString("es-ES") },
+                { label: m.perMillion, value: formatPerMillion(stats.perMillion) },
+                { label: m.last30, value: `+${stats.growth30d.toLocaleString("es-ES")}` },
               ],
         hint: stats.meta.hasRegionMap ? "Clic para ver el detalle por provincia" : undefined,
       });
@@ -75,7 +79,7 @@ export function EuropeMap({ countries, selected, onSelect }: EuropeMapProps) {
       <MapCanvas
         frame="h-[22rem] sm:h-[27rem] lg:h-[32rem] xl:h-[35rem]"
         scale={scale}
-        unit="Simpatizantes por país"
+        unit={`${m.supporters} · ${dict.map.scopeEurope}`}
         onPointerLeave={clearTooltip}
       >
         {({ zoom, center }) => (

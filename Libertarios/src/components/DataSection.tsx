@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/Link";
 import { Button } from "@/components/ui/button";
 import { MapPin, Users, Calendar, Heart, Globe, ArrowRight } from "lucide-react";
 

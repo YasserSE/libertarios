@@ -7,6 +7,8 @@ import type { RegionStats } from "@/lib/affiliates/types";
 import { createChoroplethScale, type ChoroplethScale } from "@/lib/maps/scale";
 import { MapTooltip, type TooltipDatum } from "./MapTooltip";
 import { MapCanvas } from "./MapCanvas";
+import { getDictionary } from "@/i18n/getDictionary";
+import { useLocale } from "@/i18n/Link";
 
 /**
  * Vendored from es-atlas (`es-atlas@0.6.0/es/provinces.json`) into `public/geo`.
@@ -31,6 +33,8 @@ interface SpainProvinceMapProps {
  * a province means the same colour wherever it is drawn.
  */
 export function SpainProvinceMap({ regions, selected, onSelect }: SpainProvinceMapProps) {
+  const dict = getDictionary(useLocale());
+  const m = dict.map;
   const [hovered, setHovered] = useState<string | null>(null);
   const [tooltip, setTooltip] = useState<TooltipDatum | null>(null);
   const [pointer, setPointer] = useState({ x: 0, y: 0 });
@@ -48,9 +52,9 @@ export function SpainProvinceMap({ regions, selected, onSelect }: SpainProvinceM
         title: stats.meta.name,
         subtitle: stats.meta.parent,
         rows: [
-          { label: "Simpatizantes", value: stats.count.toLocaleString("es-ES") },
-          { label: "Del total nacional", value: `${(stats.share * 100).toFixed(1)}%` },
-          { label: "Últimos 30 días", value: `+${stats.growth30d.toLocaleString("es-ES")}` },
+          { label: m.supporters, value: stats.count.toLocaleString("es-ES") },
+          { label: m.ofNational, value: `${(stats.share * 100).toFixed(1)}%` },
+          { label: m.last30, value: `+${stats.growth30d.toLocaleString("es-ES")}` },
         ],
       });
     },
@@ -152,7 +156,7 @@ export function SpainProvinceMap({ regions, selected, onSelect }: SpainProvinceM
       <MapCanvas
         frame="h-[22rem] sm:h-[27rem] lg:h-[32rem] xl:h-[35rem]"
         scale={scale}
-        unit="Simpatizantes por provincia"
+        unit={`${m.supporters} · ${m.scopeSpain}`}
         onPointerLeave={clearTooltip}
       >
         {({ zoom, center }) => (

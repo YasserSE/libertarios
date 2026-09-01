@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/Link";
 import { ArrowRight } from "lucide-react";
 import { MiniQuadrant } from "@/components/aprende/MiniQuadrant";
 import { ReferenceAvatar } from "@/components/maps/ReferenceAvatar";

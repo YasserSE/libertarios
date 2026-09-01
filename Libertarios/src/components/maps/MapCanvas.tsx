@@ -4,6 +4,8 @@ import { useState, type ReactNode } from "react";
 import { Minus, Plus, Locate } from "lucide-react";
 import { ChoroplethLegend } from "./ChoroplethLegend";
 import type { ChoroplethScale } from "@/lib/maps/scale";
+import { getDictionary } from "@/i18n/getDictionary";
+import { useLocale } from "@/i18n/Link";
 
 interface MapCanvasProps {
   /**
@@ -37,6 +39,7 @@ export function MapCanvas({
   onPointerLeave,
   children,
 }: MapCanvasProps) {
+  const m = getDictionary(useLocale()).map;
   const [zoom, setZoom] = useState(1);
   const [center, setCenter] = useState<[number, number]>(initialCenter);
 
@@ -67,20 +70,20 @@ export function MapCanvas({
 
       <div className="absolute right-4 top-4 flex flex-col gap-1 rounded-xl border border-border bg-background/85 p-1 shadow-soft backdrop-blur">
         <ZoomButton
-          label="Acercar"
+          label={m.zoomIn}
           onClick={() => setZoom((z) => Math.min(z * ZOOM_STEP, MAX_ZOOM))}
           disabled={zoom >= MAX_ZOOM}
         >
           <Plus className="h-4 w-4" />
         </ZoomButton>
         <ZoomButton
-          label="Alejar"
+          label={m.zoomOut}
           onClick={() => setZoom((z) => Math.max(z / ZOOM_STEP, MIN_ZOOM))}
           disabled={zoom <= MIN_ZOOM}
         >
           <Minus className="h-4 w-4" />
         </ZoomButton>
-        <ZoomButton label="Restablecer vista" onClick={reset} disabled={zoom === 1}>
+        <ZoomButton label={m.reset} onClick={reset} disabled={zoom === 1}>
           <Locate className="h-4 w-4" />
         </ZoomButton>
       </div>

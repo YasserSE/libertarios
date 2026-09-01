@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState, useRef } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/Link";
 import { Button } from "@/components/ui/button";
 import { InteractiveQuadrant } from "./InteractiveQuadrant";
 import { mockUsers } from "@/data/mockRegisteredUsers";

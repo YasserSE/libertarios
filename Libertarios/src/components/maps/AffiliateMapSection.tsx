@@ -1,7 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Link from "next/link";
+import { Link, useLocale } from "@/i18n/Link";
+import { getDictionary } from "@/i18n/getDictionary";
+import { LOCALE_META } from "@/i18n/config";
 import { useRouter } from "next/navigation";
 import { ArrowRight, ChevronDown, Map as MapIcon, Play, Table2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -18,6 +20,8 @@ interface AffiliateMapSectionProps {
   europe: AffiliateSnapshot;
   spain: CountrySnapshot;
   scope: MapScope;
+  /** Si el alta está operativa. Gobierna el aviso de cifras de ejemplo. */
+  registrationOpen: boolean;
 }
 
 const nf = (n: number) => n.toLocaleString("es-ES");
@@ -34,8 +38,17 @@ const signed = (n: number) => `${n > 0 ? "+" : ""}${n}`;
  * because they share the selection: clicking a territory on the map has to
  * light up its row in the ranking below, and vice versa.
  */
-export function AffiliateMapSection({ europe, spain, scope }: AffiliateMapSectionProps) {
+export function AffiliateMapSection({
+  europe,
+  spain,
+  scope,
+  registrationOpen,
+}: AffiliateMapSectionProps) {
   const router = useRouter();
+  const locale = useLocale();
+  const dict = getDictionary(locale);
+  const t = dict.hero;
+  const m = dict.map;
   const [selected, setSelected] = useState<string | null>(null);
   const [view, setView] = useState<"map" | "table">("map");
   // Cuarenta y cuatro países en tres columnas empujaban el resto de la home
@@ -164,20 +177,35 @@ export function AffiliateMapSection({ europe, spain, scope }: AffiliateMapSectio
             {/* Headline */}
             <div className="order-1 lg:col-start-1 lg:row-start-1 lg:self-end">
               {/*
-                Mientras el registro no esté abierto, las cifras son de ejemplo
-                y hay que decirlo donde se leen, no en una nota al pie de una
-                sección plegada. Un proyecto cuyo argumento es «comprueba los
-                datos» no puede empezar publicando números inventados sin avisar.
+                El aviso se ata al estado real del alta en lugar de escribirse a
+                mano: mientras nadie pueda registrarse, las cifras son de ejemplo
+                y hay que decirlo donde se leen. En cuanto el registro funcione,
+                desaparece solo — sin que nadie tenga que acordarse de quitarlo,
+                que es como acaban quedándose los avisos falsos.
               */}
-              <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-700 dark:text-amber-400">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-pulse rounded-full bg-amber-500" />
-                </span>
-                Cifras de ejemplo · el registro aún no está abierto
-              </p>
+              {registrationOpen ? (
+                <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="absolute inline-flex h-full w-full animate-pulse rounded-full bg-primary" />
+                  </span>
+                  {t.updatedOn}{" "}
+                  {new Date(europe.updatedAt).toLocaleDateString(LOCALE_META[locale].htmlLang, {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </p>
+              ) : (
+                <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-medium text-amber-700 dark:text-amber-400">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="absolute inline-flex h-full w-full animate-pulse rounded-full bg-amber-500" />
+                  </span>
+                  {t.demoBadge}
+                </p>
+              )}
 
               <h1 className="font-display text-4xl font-bold leading-[1.06] tracking-tight text-foreground sm:text-5xl">
-                <span className="block">Somos más</span>
+                <span className="block">{t.line1}</span>
                 <span
                   className="block bg-clip-text text-transparent"
                   style={{
@@ -185,15 +213,13 @@ export function AffiliateMapSection({ europe, spain, scope }: AffiliateMapSectio
                       "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(190 70% 45%) 50%, hsl(var(--primary)) 100%)",
                   }}
                 >
-                  de los que
+                  {t.line2}
                 </span>
-                <span className="block">parecemos.</span>
+                <span className="block">{t.line3}</span>
               </h1>
 
               <p className="mt-5 text-base leading-relaxed text-muted-foreground lg:text-lg">
-                {isSpain
-                  ? "En España no hay un movimiento libertario organizado: hay personas sueltas que no saben cuántas son. Este mapa las cuenta, provincia a provincia."
-                  : "Ningún país europeo se acerca al Estado mínimo y casi ningún gobierno lo propone. Este mapa cuenta a quienes creen que debería existir esa opción."}
+{isSpain ? t.subtitleSpain : t.subtitleEurope}
               </p>
             </div>
 
@@ -202,14 +228,14 @@ export function AffiliateMapSection({ europe, spain, scope }: AffiliateMapSectio
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button variant="hero" size="lg" className="group" asChild>
                   <Link href="/registro">
-                    Contarme
+                    {t.ctaRegister}
                     <ArrowRight className="transition-transform group-hover:translate-x-1" />
                   </Link>
                 </Button>
                 <Button variant="heroOutline" size="lg" asChild>
                   <Link href="/cuadrante">
                     <Play />
-                    Hacer el test
+                    {t.ctaTest}
                   </Link>
                 </Button>
               </div>
@@ -217,29 +243,28 @@ export function AffiliateMapSection({ europe, spain, scope }: AffiliateMapSectio
               <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-border pt-7">
                 <Figure
                   value={nf(headline.total)}
-                  label="Simpatizantes"
-                  hint={isSpain ? "en España" : "en toda Europa"}
+                  label={t.statSupporters}
+                  hint={isSpain ? t.statSupportersSpain : t.statSupportersEurope}
                 />
                 <Figure
                   value={`+${nf(headline.growth)}`}
-                  label="Últimos 30 días"
-                  hint={`${((headline.growth / headline.total) * 100).toFixed(1)}% más`}
+                  label={t.statGrowth}
+                  hint={`${((headline.growth / headline.total) * 100).toFixed(1)}% ${t.statGrowthHint}`}
                 />
                 <Figure
                   value={nf(territories)}
-                  label={isSpain ? "Provincias" : "Países"}
-                  hint={isSpain ? "de 52 con registros" : "con registros"}
+                  label={isSpain ? t.statProvinces : t.statCountries}
+                  hint={isSpain ? t.statProvincesHint : t.statCountriesHint}
                 />
                 <Figure
                   value={signed(headline.position.economic)}
-                  label="Eje económico"
-                  hint={`Social ${signed(headline.position.social)}`}
+                  label={t.statEconomic}
+                  hint={`${t.statSocial} ${signed(headline.position.social)}`}
                 />
               </dl>
 
               <p className="mt-7 text-xs leading-relaxed text-muted-foreground">
-                No pertenecemos a ningún partido y no pedimos el voto. Sí queremos que esta
-                posición exista en España: lo decimos y lo sostenemos con los datos.
+{t.disclaimer}
               </p>
             </div>
 
@@ -272,9 +297,7 @@ export function AffiliateMapSection({ europe, spain, scope }: AffiliateMapSectio
               )}
 
               <p className="mt-3 text-xs text-muted-foreground">
-                {isSpain
-                  ? "Pasa el cursor por una provincia para ver su ficha, o selecciónala para fijarla."
-                  : "Pasa el cursor por un país para ver su ficha. Haz clic en España para bajar al detalle por provincia."}
+{isSpain ? m.hintSpain : m.hintEurope}
               </p>
 
               {detail && <DetailCard {...detail} onClear={() => setSelected(null)} />}
@@ -289,7 +312,7 @@ export function AffiliateMapSection({ europe, spain, scope }: AffiliateMapSectio
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="max-w-2xl">
               <h2 className="font-display text-xl font-bold tracking-tight text-foreground md:text-2xl">
-                {isSpain ? "El listado, provincia a provincia" : "El listado, país a país"}
+                {isSpain ? m.listTitleSpain : m.listTitleEurope}
               </h2>
               <p className="mt-1.5 text-sm text-muted-foreground">
                 {territories} {isSpain ? "provincias" : "países"} con simpatizantes registrados.
@@ -305,7 +328,7 @@ export function AffiliateMapSection({ europe, spain, scope }: AffiliateMapSectio
                 aria-expanded={rankingOpen}
                 aria-controls="ranking-listado"
               >
-                {rankingOpen ? "Ocultar listado" : "Ver el listado"}
+                {rankingOpen ? m.listHide : m.listShow}
                 <ChevronDown
                   className={`h-4 w-4 transition-transform ${rankingOpen ? "rotate-180" : ""}`}
                 />
@@ -313,7 +336,7 @@ export function AffiliateMapSection({ europe, spain, scope }: AffiliateMapSectio
               {!isSpain && (
                 <Button variant="outline" size="sm" asChild>
                   <Link href="/spain" scroll={false}>
-                    Detalle de España
+                    {m.spainDetail}
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                 </Button>
@@ -360,15 +383,16 @@ function Figure({ value, label, hint }: { value: string; label: string; hint: st
 }
 
 function ScopeSwitch({ scope }: { scope: MapScope }) {
+  const m = getDictionary(useLocale()).map;
   const options: { key: MapScope; label: string; href: string }[] = [
-    { key: "europe", label: "Europa", href: "/" },
-    { key: "ES", label: "🇪🇸 España", href: "/spain" },
+    { key: "europe", label: m.scopeEurope, href: "/" },
+    { key: "ES", label: `🇪🇸 ${m.scopeSpain}`, href: "/spain" },
   ];
 
   return (
     <div
       role="tablist"
-      aria-label="Ámbito del mapa"
+      aria-label={m.scopeLabel}
       className="inline-flex rounded-full border border-border bg-background p-1 shadow-soft"
     >
       {options.map((opt) => {
@@ -401,9 +425,10 @@ function ViewToggle({
   view: "map" | "table";
   onChange: (v: "map" | "table") => void;
 }) {
+  const m = getDictionary(useLocale()).map;
   const options = [
-    { key: "map" as const, label: "Mapa", icon: MapIcon },
-    { key: "table" as const, label: "Tabla", icon: Table2 },
+    { key: "map" as const, label: m.viewMap, icon: MapIcon },
+    { key: "table" as const, label: m.viewTable, icon: Table2 },
   ];
   return (
     <div className="inline-flex rounded-lg border border-border bg-background p-0.5">

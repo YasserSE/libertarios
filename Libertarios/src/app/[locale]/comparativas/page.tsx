@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from "@/i18n/Link";
 import { ArrowRight, ChevronDown, Scale, GripVertical, Plus, X } from "lucide-react";
 import {
   COMPARISON_ASPECTS,
@@ -14,6 +14,7 @@ import {
 } from "@/data/ideologies";
 import { MiniQuadrant, PositionLabel } from "@/components/aprende/MiniQuadrant";
 import { QuadrantFigures } from "@/components/aprende/QuadrantFigures";
+import { CountryPairs } from "@/components/aprende/CountryPairs";
 import { ReferenceAvatar } from "@/components/maps/ReferenceAvatar";
 import { REFERENCE_SETS } from "@/data/quadrantReferences";
 import {
@@ -140,6 +141,7 @@ export default function ComparativasPage() {
   // La tabla es densa y ocupa toda la pantalla: se abre a petición, no de
   // entrada. Quien llega buscando la comparación tiene el enlace arriba.
   const [tableOpen, setTableOpen] = useState(false);
+  const [expanded, setExpanded] = useState<string | null>(null);
 
   // El navegador intenta saltar al ancla antes de que esta página —cliente y con
   // dnd-kit— termine de hidratar, así que la posición se pierde y te deja
@@ -388,32 +390,40 @@ export default function ComparativasPage() {
                 Selecciona al menos una ideología para ver la comparación
               </div>
             ) : (
-              <div className="overflow-x-auto">
-                <table className="w-full max-w-6xl mx-auto">
+              /*
+                La tabla anterior metía una frase larga en cada celda: con cinco
+                aspectos y cuatro columnas eran veinte párrafos, y había que
+                hacer scroll en los dos ejes para leer una comparación. Ahora la
+                rejilla es compacta —barra de intensidad y una etiqueta corta— y
+                la prosa se despliega por filas, solo la que se quiera leer.
+              */
+              <div className="mx-auto max-w-6xl overflow-x-auto">
+                <table className="w-full border-collapse">
+                  <caption className="sr-only">
+                    Comparación del libertarismo con otras ideologías en cinco aspectos, con una
+                    escala de intensidad de 0 a 4.
+                  </caption>
                   <thead>
                     <tr className="border-b border-border">
-                      <th className="text-left py-4 px-4 font-display font-semibold text-foreground">
+                      <th scope="col" className="w-40 py-3 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                         Aspecto
                       </th>
-                      <th className="min-w-[11rem] py-4 px-4 text-left font-display font-semibold text-primary">
-                        <div className="flex items-center gap-2">
-                          <div className="h-3 w-3 rounded-full bg-primary" />
+                      <th scope="col" className="min-w-[7.5rem] px-3 py-3 text-left">
+                        <span className="flex items-center gap-1.5 font-display text-sm font-semibold text-primary">
+                          <span className="h-2.5 w-2.5 shrink-0 rounded-full bg-primary" />
                           Libertarismo
-                        </div>
-                        <span className="mt-0.5 block font-body text-[11px] font-normal tabular-nums text-muted-foreground">
+                        </span>
+                        <span className="mt-0.5 block text-[10px] font-normal tabular-nums text-muted-foreground">
                           E +{LIBERTARIANISM.position.economic} · S +{LIBERTARIANISM.position.social}
                         </span>
                       </th>
                       {selectedIdeologies.map((ideology) => (
-                        <th
-                          key={ideology.id}
-                          className="min-w-[11rem] py-4 px-4 text-left font-display font-semibold text-foreground"
-                        >
-                          <div className="flex items-center gap-2">
-                            <div className={`h-3 w-3 rounded-full ${ideology.color}`} />
+                        <th key={ideology.id} scope="col" className="min-w-[7.5rem] px-3 py-3 text-left">
+                          <span className="flex items-center gap-1.5 font-display text-sm font-semibold text-foreground">
+                            <span className={`h-2.5 w-2.5 shrink-0 rounded-full ${ideology.color}`} />
                             {ideology.name}
-                          </div>
-                          <span className="mt-0.5 block font-body text-[11px] font-normal tabular-nums text-muted-foreground">
+                          </span>
+                          <span className="mt-0.5 block text-[10px] font-normal tabular-nums text-muted-foreground">
                             E {ideology.position.economic > 0 ? "+" : ""}
                             {ideology.position.economic} · S{" "}
                             {ideology.position.social > 0 ? "+" : ""}
@@ -424,35 +434,63 @@ export default function ComparativasPage() {
                     </tr>
                   </thead>
                   <tbody>
-                    {COMPARISON_ASPECTS.map((aspect) => (
-                      <tr
-                        key={aspect.key}
-                        className="border-b border-border/50 hover:bg-accent/30 transition-colors"
-                      >
-                        <td className="py-4 px-4 align-top">
-                          <span className="font-medium text-foreground">{aspect.label}</span>
-                        </td>
-                        <td className="py-4 px-4 align-top">
-                          <RatingBar value={LIBERTARIANISM.ratings[aspect.key]} accent />
-                          <span className="mt-1.5 block text-sm font-medium text-primary">
-                            {LIBERTARIANISM.comparisons[aspect.key]}
-                          </span>
-                        </td>
-                        {selectedIdeologies.map((ideology) => (
-                          <td
-                            key={ideology.id}
-                            className="animate-fade-in py-4 px-4 align-top"
-                          >
-                            <RatingBar value={ideology.ratings[aspect.key]} />
-                            <span className="mt-1.5 block text-sm text-muted-foreground">
-                              {ideology.comparisons[aspect.key]}
-                            </span>
-                          </td>
-                        ))}
-                      </tr>
-                    ))}
+                    {COMPARISON_ASPECTS.map((aspect) => {
+                      const open = expanded === aspect.key;
+                      return (
+                        <Fragment key={aspect.key}>
+                          <tr className="border-b border-border/60">
+                            <th scope="row" className="py-2.5 pr-3 text-left align-middle">
+                              <button
+                                type="button"
+                                onClick={() => setExpanded(open ? null : aspect.key)}
+                                aria-expanded={open}
+                                className="flex items-center gap-1.5 text-left text-sm font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                              >
+                                <ChevronDown
+                                  className={`h-3.5 w-3.5 shrink-0 text-muted-foreground transition-transform ${
+                                    open ? "rotate-180" : ""
+                                  }`}
+                                />
+                                {aspect.label}
+                              </button>
+                            </th>
+                            <td className="px-3 py-2.5 align-middle">
+                              <RatingBar value={LIBERTARIANISM.ratings[aspect.key]} accent />
+                            </td>
+                            {selectedIdeologies.map((ideology) => (
+                              <td key={ideology.id} className="px-3 py-2.5 align-middle">
+                                <RatingBar value={ideology.ratings[aspect.key]} />
+                              </td>
+                            ))}
+                          </tr>
+
+                          {open && (
+                            <tr className="border-b border-border/60 bg-accent/30">
+                              <td className="py-3 pr-3 align-top text-[11px] uppercase tracking-wide text-muted-foreground">
+                                Detalle
+                              </td>
+                              <td className="px-3 py-3 align-top text-xs leading-relaxed text-primary">
+                                {LIBERTARIANISM.comparisons[aspect.key]}
+                              </td>
+                              {selectedIdeologies.map((ideology) => (
+                                <td
+                                  key={ideology.id}
+                                  className="px-3 py-3 align-top text-xs leading-relaxed text-muted-foreground"
+                                >
+                                  {ideology.comparisons[aspect.key]}
+                                </td>
+                              ))}
+                            </tr>
+                          )}
+                        </Fragment>
+                      );
+                    })}
                   </tbody>
                 </table>
+
+                <p className="mt-4 text-xs text-muted-foreground">
+                  Escala de 0 a 4. Toca cualquier aspecto para leer el matiz de cada posición.
+                </p>
               </div>
             )}
             </div>
@@ -503,6 +541,8 @@ export default function ComparativasPage() {
         )}
 
         <QuadrantFigures />
+
+        <CountryPairs />
 
         {/* Disclaimer */}
         <section className="py-16">
