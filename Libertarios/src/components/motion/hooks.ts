@@ -122,3 +122,40 @@ export function useEnterAnimation<T extends Element>() {
 
   return { ref, armed, settled: !armed || inView };
 }
+
+/**
+ * ¿Se puede animar la entrada de esto, ahora mismo?
+ *
+ * Falso en el servidor y en el primer pintado, así que el HTML sale con el
+ * contenido en su estado final y las clases de animación se añaden después, en
+ * un efecto de layout —antes de pintar, sin parpadeo—.
+ *
+ * Esto importa mucho más de lo que parece con `animation-fill-mode: backwards`.
+ * Ese modo aplica el primer fotograma durante el retardo, y si la línea de
+ * tiempo del documento no avanza —la pestaña está en segundo plano o la ventana
+ * tapada— el elemento se queda en ese fotograma indefinidamente. Probándolo, el
+ * cuadrante entero se quedó en blanco: dieciséis puntos en `opacity: 0` y la
+ * animación en «running» sin avanzar un solo milisegundo. Si no vamos a animar,
+ * no se pone la clase, y lo que queda es el gráfico completo.
+ */
+export function useAnimateOnMount(): boolean {
+  const [ok, setOk] = useState(false);
+
+  useIsomorphicLayoutEffect(() => {
+    if (document.visibilityState !== "visible") return;
+    setOk(true);
+
+    // Y si la pestaña se va a segundo plano a media animación, se desarma: el
+    // reloj se congelaría donde esté y volver dejaría los puntos a medio
+    // aparecer. Sin la clase, lo que queda es el estado final. No se reanuda al
+    // volver a propósito —repetir la entrada cada vez que cambias de pestaña
+    // sería peor que no tenerla—.
+    const onHide = () => {
+      if (document.visibilityState !== "visible") setOk(false);
+    };
+    document.addEventListener("visibilitychange", onHide);
+    return () => document.removeEventListener("visibilitychange", onHide);
+  }, []);
+
+  return ok;
+}

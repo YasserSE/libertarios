@@ -5,6 +5,7 @@ import { ArrowRight, ListChecks } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/Link";
 import { ReferenceAvatar } from "@/components/maps/ReferenceAvatar";
+import { useAnimateOnMount } from "@/components/motion/hooks";
 import { REFERENCE_SETS, type ReferencePoint } from "@/data/quadrantReferences";
 
 const ALL = REFERENCE_SETS.flatMap((set) => set.points);
@@ -38,6 +39,7 @@ export function FaceExplorer({ ids, title, intro }: { ids: string[]; title: stri
     .map((id) => ALL.find((p) => p.id === id))
     .filter((p): p is ReferencePoint => Boolean(p));
 
+  const animate = useAnimateOnMount();
   const [selectedId, setSelectedId] = useState(points[0]?.id ?? null);
   const selected = points.find((p) => p.id === selectedId) ?? points[0];
 
@@ -82,6 +84,12 @@ export function FaceExplorer({ ids, title, intro }: { ids: string[]; title: stri
       result.set(point.id, y);
     }
     return result;
+  }, [points]);
+
+  /** El mismo barrido que en el cuadrante grande: entran de izquierda a derecha. */
+  const enterDelay = useMemo(() => {
+    const order = [...points].sort((a, b) => a.economic - b.economic);
+    return new Map(order.map((p, i) => [p.id, i * 45]));
   }, [points]);
 
   return (
@@ -148,7 +156,13 @@ export function FaceExplorer({ ids, title, intro }: { ids: string[]; title: stri
                             setSelectedId(point.id);
                           }
                         }}
-                        className="cursor-pointer focus:outline-none"
+                        className={`cursor-pointer focus:outline-none ${
+                          animate ? "quadrant-point" : ""
+                        }`}
+                        style={{
+                          transformOrigin: `${cx}px ${cy}px`,
+                          animationDelay: animate ? `${enterDelay.get(point.id) ?? 0}ms` : undefined,
+                        }}
                       >
                         <circle cx={cx} cy={cy} r="6" fill="transparent" />
                         <circle
@@ -158,7 +172,7 @@ export function FaceExplorer({ ids, title, intro }: { ids: string[]; title: stri
                           fill={point.color ?? "hsl(var(--foreground))"}
                           stroke={active ? "hsl(var(--foreground))" : "hsl(var(--background))"}
                           strokeWidth={active ? 0.9 : 0.7}
-                          className="transition-all duration-200"
+                          className="transition-all duration-300 ease-out"
                         />
                         <text
                           x={cx}
@@ -166,6 +180,7 @@ export function FaceExplorer({ ids, title, intro }: { ids: string[]; title: stri
                           textAnchor="middle"
                           dominantBaseline="central"
                           fill="#fff"
+                          className="transition-all duration-300 ease-out"
                           style={{ fontSize: r * 0.75, fontWeight: 700 }}
                         >
                           {point.initials ?? point.short.slice(0, 2)}
@@ -207,7 +222,16 @@ export function FaceExplorer({ ids, title, intro }: { ids: string[]; title: stri
 
           {/* Ficha */}
           {selected && (
-            <div className="rounded-3xl border border-border bg-card p-6 lg:p-7">
+            /* La `key` hace que React monte una ficha nueva al cambiar de
+               referente, y con ella se reinicia la animación de entrada. Sin
+               esto el contenido se sustituía de golpe y costaba ver que había
+               cambiado algo. */
+            <div
+              key={selected.id}
+              className={`rounded-3xl border border-border bg-card p-6 lg:p-7 ${
+                animate ? "detail-in" : ""
+              }`}
+            >
               <div className="flex items-start gap-4">
                 <ReferenceAvatar point={selected} size={56} />
                 <div className="min-w-0">

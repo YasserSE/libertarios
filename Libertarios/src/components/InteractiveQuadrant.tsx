@@ -8,6 +8,7 @@ import {
   type ReferencePoint,
 } from "@/data/quadrantReferences";
 import { ReferenceAvatar } from "./maps/ReferenceAvatar";
+import { useAnimateOnMount } from "./motion/hooks";
 
 interface InteractiveQuadrantProps {
   userPosition?: { economic: number; social: number } | null;
@@ -175,6 +176,7 @@ export function InteractiveQuadrant({
   showLayerControls = true,
   focusId = null,
 }: InteractiveQuadrantProps) {
+  const animate = useAnimateOnMount();
   const [activeKinds, setActiveKinds] = useState<ReferenceKind[]>(defaultLayers);
   // Con una capa de referencia activa de salida, la nube estorba más que ayuda.
   const [showUsers, setShowUsers] = useState(showAllUsers && defaultLayers.length === 0);
@@ -218,6 +220,22 @@ export function InteractiveQuadrant({
     }
     return result;
   }, [activeSets, showLabels]);
+
+  /**
+   * Cuándo entra cada punto, escalonado de izquierda a derecha.
+   *
+   * El orden es el del eje económico, no el del array ni el del pintado: la
+   * nube se posa barriendo el cuadrante, que se lee como un gesto, en vez de
+   * parpadear en desorden. Y se calcula aparte del `sort` del pintado —que
+   * cambia al pasar el ratón— para que el retardo no dependa de dónde esté el
+   * cursor.
+   */
+  const enterDelay = useMemo(() => {
+    const points = activeSets.flatMap((set) => set.points);
+    const order = [...points].sort((a, b) => a.economic - b.economic);
+    const step = order.length > 24 ? 12 : 22;
+    return new Map(order.map((p, i) => [p.id, Math.min(i * step, 700)]));
+  }, [activeSets]);
 
   const toggleKind = (kind: ReferenceKind) =>
     setActiveKinds((cur) =>
@@ -306,8 +324,10 @@ export function InteractiveQuadrant({
               <line x1="0" y1={pos} x2="100" y2={pos} className="stroke-border/40" strokeWidth="0.12" />
             </g>
           ))}
-          <line x1="50" y1="0" x2="50" y2="100" className="stroke-border" strokeWidth="0.35" />
-          <line x1="0" y1="50" x2="100" y2="50" className="stroke-border" strokeWidth="0.35" />
+          <g className={animate ? "quadrant-axis" : ""} style={{ transformOrigin: "50px 50px" }}>
+            <line x1="50" y1="0" x2="50" y2="100" className="stroke-border" strokeWidth="0.35" />
+            <line x1="0" y1="50" x2="100" y2="50" className="stroke-border" strokeWidth="0.35" />
+          </g>
 
           <text x="50" y="3.2" textAnchor="middle" className="fill-muted-foreground text-[2.4px] font-medium">
             LIBERTAD SOCIAL
@@ -366,11 +386,23 @@ export function InteractiveQuadrant({
                   tabIndex={0}
                   role="button"
                   aria-label={`${point.label}. Económico ${point.economic}, social ${point.social}. ${point.note}`}
-                  className="cursor-help focus:outline-none"
+                  className={`cursor-help focus:outline-none ${animate ? "quadrant-point" : ""}`}
+                  style={{
+                    transformOrigin: `${cx}px ${cy}px`,
+                    animationDelay: animate ? `${enterDelay.get(point.id) ?? 0}ms` : undefined,
+                  }}
                 >
                   {/* Diana invisible: el distintivo es pequeño, el objetivo no. */}
                   <circle cx={cx} cy={cy} r="3.2" fill="transparent" />
-                  <ReferenceMarker point={point} cx={cx} cy={cy} hovered={isHovered} />
+                  <g
+                    className="quadrant-marker"
+                    style={{
+                      transformOrigin: `${cx}px ${cy}px`,
+                      transform: isHovered ? "scale(1.22)" : "scale(1)",
+                    }}
+                  >
+                    <ReferenceMarker point={point} cx={cx} cy={cy} hovered={isHovered} />
+                  </g>
                   {(showLabels || isHovered) && (
                     <text
                       // Past ~70% of the width the label would run off the
@@ -391,8 +423,21 @@ export function InteractiveQuadrant({
             })}
 
           {userPosition && (
-            <g className="pointer-events-none">
-              <circle cx={toX(userPosition.economic)} cy={toY(userPosition.social)} r="3.6" className="fill-primary/25" />
+            <g
+              className={`pointer-events-none ${animate ? "quadrant-you" : ""}`}
+              style={{
+                transformOrigin: `${toX(userPosition.economic)}px ${toY(userPosition.social)}px`,
+              }}
+            >
+              <circle
+                cx={toX(userPosition.economic)}
+                cy={toY(userPosition.social)}
+                r="3.6"
+                className={`fill-primary/25 ${animate ? "quadrant-you-halo" : ""}`}
+                style={{
+                  transformOrigin: `${toX(userPosition.economic)}px ${toY(userPosition.social)}px`,
+                }}
+              />
               <circle
                 cx={toX(userPosition.economic)}
                 cy={toY(userPosition.social)}
@@ -407,7 +452,10 @@ export function InteractiveQuadrant({
 
         {hovered && (
           <div
-            className="pointer-events-none absolute z-20 w-52 -translate-x-1/2 rounded-xl border border-border bg-popover/95 p-3 shadow-elevated backdrop-blur-md"
+            key={hovered.id}
+            className={`pointer-events-none absolute z-20 w-52 -translate-x-1/2 rounded-xl border border-border bg-popover/95 p-3 shadow-elevated backdrop-blur-md ${
+              animate ? "fade-in" : ""
+            }`}
             style={{
               left: `${Math.min(Math.max(toX(hovered.economic), 16), 84)}%`,
               top: `${toY(hovered.social)}%`,

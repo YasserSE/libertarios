@@ -237,6 +237,12 @@ export default function ComparativasPage() {
               </div>
               
               <DndContext
+                // Sin un `id` fijo, dnd-kit numera sus `aria-describedby` con
+                // un contador global que no coincide entre servidor y cliente.
+                // React avisaba de que no lo iba a corregir, y el atributo se
+                // quedaba apuntando a un elemento que no existe: el lector de
+                // pantalla se queda sin las instrucciones de arrastre.
+                id="comparativa-ideologias"
                 sensors={sensors}
                 collisionDetection={closestCenter}
                 onDragEnd={handleDragEnd}
