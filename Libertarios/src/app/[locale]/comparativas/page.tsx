@@ -376,6 +376,46 @@ export default function ComparativasPage() {
                 </p>
               </div>
             )}
+
+              {selectedIdeologies.length > 0 && (
+                <div className="mt-10 border-t border-border pt-8">
+                  <h3 className="mb-5 font-display text-lg font-semibold text-foreground">
+                    Detalle de las seleccionadas
+                  </h3>
+                  <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                    {selectedIdeologies.map((ideology) => (
+                      <div
+                        key={ideology.id}
+                        className="animate-scale-in rounded-2xl border border-border bg-background p-5"
+                      >
+                        <div className="mb-3 flex items-start gap-3">
+                          <MiniQuadrant position={ideology.position} size={48} />
+                          <div className="min-w-0">
+                            <div className="flex items-center gap-2">
+                              <div className={`h-2.5 w-2.5 shrink-0 rounded-full ${ideology.color}`} />
+                              <h4 className="font-display text-base font-semibold text-foreground">
+                                {ideology.name}
+                              </h4>
+                            </div>
+                            <PositionLabel position={ideology.position} />
+                          </div>
+                        </div>
+                        <p className="mb-3 text-sm leading-relaxed text-muted-foreground">
+                          {ideology.summary}
+                        </p>
+                        <ul className="space-y-1.5">
+                          {ideology.keyPoints.map((point) => (
+                            <li key={point} className="flex items-start gap-2 text-sm">
+                              <div className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-muted-foreground" />
+                              <span className="text-muted-foreground">{point}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
             </div>
           </div>
@@ -421,49 +461,6 @@ export default function ComparativasPage() {
             </div>
           </div>
         </section>
-
-        {/* Ideology detail cards */}
-        {tableOpen && selectedIdeologies.length > 0 && (
-          <section className="py-16 lg:py-24">
-            <div className="container">
-              <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground text-center mb-12">
-                Detalle de las ideologías seleccionadas
-              </h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                {selectedIdeologies.map((ideology) => (
-                  <div
-                    key={ideology.id}
-                    className="bg-card border border-border rounded-2xl p-6 hover:shadow-card transition-all animate-scale-in"
-                  >
-                    <div className="mb-4 flex items-start gap-3">
-                      <MiniQuadrant position={ideology.position} size={56} />
-                      <div className="min-w-0">
-                        <div className="flex items-center gap-2">
-                          <div className={`h-3 w-3 shrink-0 rounded-full ${ideology.color}`} />
-                          <h3 className="font-display text-xl font-semibold text-foreground">
-                            {ideology.name}
-                          </h3>
-                        </div>
-                        <PositionLabel position={ideology.position} />
-                      </div>
-                    </div>
-                    <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                      {ideology.summary}
-                    </p>
-                    <ul className="space-y-2">
-                      {ideology.keyPoints.map((point, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm">
-                          <div className="w-1.5 h-1.5 rounded-full bg-muted-foreground mt-1.5 flex-shrink-0" />
-                          <span className="text-muted-foreground">{point}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
 
         <QuadrantFigures />
 

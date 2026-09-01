@@ -40,7 +40,7 @@ export function HomePage({ scope }: { scope: MapScope }) {
         <FaceExplorer
           ids={FEATURED_FIGURE_IDS}
           title="Y esto, ¿quién lo gobierna?"
-          intro="Quince gobernantes y economistas colocados donde les toca. Toca cualquiera para ver las medidas concretas que sostienen su posición."
+          intro="Diecisiete gobernantes y economistas colocados donde les toca. Toca cualquiera para ver las medidas concretas que sostienen su posición."
         />
         <AboutSection registrationOpen={registrationOpen} />
         <QuadrantSection />

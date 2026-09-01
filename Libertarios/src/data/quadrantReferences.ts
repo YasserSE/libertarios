@@ -183,6 +183,8 @@ const leaders: ReferencePoint[] = [
   { id: "modi", kind: "leader", role: "Primer ministro de India", initials: "NM", color: "#FF9933", label: "Narendra Modi 🇮🇳", short: "Modi", economic: 12, social: -30, note: "Liberalización parcial y digitalización, con nacionalismo hindú y presión sobre la prensa.", policies: ["Reforma del impuesto indirecto con el GST unificado", "Digitalización de pagos y de la identidad con Aadhaar y UPI", "Ley de ciudadanía de 2019, excluyente por religión", "Presión sobre medios y ONG mediante la ley de financiación extranjera"] },
   { id: "feijoo", kind: "leader", role: "Líder del PP, España", initials: "AF", color: "#1D84CE", label: "Alberto Núñez Feijóo 🇪🇸", short: "Feijóo", economic: 8, social: 0, note: "Bajada de impuestos en el programa sin reducción del gasto comprometida.", policies: ["Deflactación del IRPF en las comunidades que gobierna", "Supresión o bonificación del impuesto de patrimonio en varias autonomías", "Compromiso de bajada de impuestos sin recorte de gasto detallado", "Ampliación de conciertos educativos"] },
   { id: "macron", kind: "leader", role: "Presidente de Francia", initials: "EM", color: "#FFEB00", label: "Emmanuel Macron 🇫🇷", short: "Macron", economic: 8, social: 48, note: "Reforma de pensiones y del mercado laboral dentro del Estado más grande de la OCDE.", policies: ["Reforma de las pensiones que eleva la edad a 64 años", "Supresión del impuesto sobre el patrimonio salvo el inmobiliario", "Reforma laboral que flexibiliza la negociación en la empresa", "Bajada del impuesto de sociedades del 33 % al 25 %"] },
+  { id: "espinosa", kind: "leader", role: "Exportavoz de Vox en el Congreso 🇪🇸", initials: "IE", color: "#63BE21", label: "Iván Espinosa de los Monteros 🇪🇸", short: "Espinosa", economic: 45, social: -38, note: "El ala económicamente liberal de un partido que no lo es: defendió la bajada de impuestos y el libre comercio con más consistencia que la línea oficial de Vox, que es proteccionista. Dejó la política en 2023.", policies: ["Simplificación del IRPF a dos tramos y bajada del impuesto de sociedades", "Supresión de organismos autonómicos duplicados", "Fin de las subvenciones públicas a sindicatos, patronal y partidos", "Defensa del libre comercio, en tensión con el proteccionismo agrario de su propio partido"], contested: true },
+  { id: "rivera", kind: "leader", role: "Exlíder de Ciudadanos 🇪🇸", initials: "AR", color: "#EB6109", label: "Albert Rivera 🇪🇸", short: "Rivera", economic: 32, social: 52, note: "Llevó el liberalismo de centro al Congreso y lo dejó sin representación en 2019. Reformista en lo económico y liberal en lo social, con un Estado del bienestar que nunca puso en cuestión.", policies: ["Contrato único indefinido para acabar con la dualidad del mercado laboral", "Complemento salarial garantizado para rentas bajas", "Liberalización del transporte urbano frente al monopolio de licencias", "Supresión de diputaciones provinciales y reducción de aforados"] },
   { id: "meloni", kind: "leader", role: "Primera ministra de Italia", initials: "GM", color: "#1B3D6D", label: "Giorgia Meloni 🇮🇹", short: "Meloni", economic: 5, social: -45, note: "Continuidad fiscal con las reglas europeas y agenda social conservadora.", policies: ["Supresión de la renta de ciudadanía en su forma anterior", "Incentivos fiscales a la natalidad y a la contratación", "Endurecimiento de la política migratoria y acuerdo con Albania", "Continuidad con las reglas fiscales europeas"] },
   { id: "bukele", kind: "leader", role: "Presidente de El Salvador", initials: "NB", color: "#0099DC", label: "Nayib Bukele 🇸🇻", short: "Bukele", economic: 20, social: -72, note: "Apertura a la inversión y bitcoin como moneda legal, junto a un régimen de excepción con detenciones masivas y sin garantías.", policies: ["Bitcoin como moneda de curso legal en 2021", "Régimen de excepción desde 2022, con más de 80.000 detenciones", "Ley de agentes extranjeros y reducción del número de municipios", "Exenciones fiscales para inversión tecnológica extranjera"] },
   { id: "trump", kind: "leader", role: "Presidente de Estados Unidos", initials: "DT", color: "#E81B23", label: "Donald Trump 🇺🇸", short: "Trump", economic: 0, social: -58, note: "Bajada de impuestos y desregulación sectorial, pero aranceles generalizados y sin recorte del gasto: en conjunto no es liberalización económica.", contested: true, policies: ["Bajada del impuesto de sociedades del 35 % al 21 % en 2017", "Aranceles generalizados a las importaciones", "Restricción de la inmigración legal e ilegal", "Desregulación energética y salida del Acuerdo de París"] },
@@ -253,10 +255,10 @@ export const REFERENCE_SETS: ReferenceSet[] = [
   },
   {
     kind: "leader",
-    label: "Líderes actuales",
-    hint: "14 gobernantes y candidatos",
+    label: "Figuras políticas",
+    hint: "16 gobernantes, candidatos y exlíderes",
     basis:
-      "Política impulsada y ejercida, medida con las mismas bandas que el resto: el eje económico mira gasto, aranceles y regulación, no los anuncios. Solo una figura cae en el cuadrante libertario, y eso es un dato, no un sesgo de la selección.",
+      "Política impulsada y ejercida, medida con las mismas bandas que el resto: el eje económico mira gasto, aranceles y regulación, no los anuncios. Incluye exlíderes cuando su posición sigue siendo una referencia reconocible en su país.",
     points: leaders,
   },
   {
@@ -309,6 +311,8 @@ export const FEATURED_FIGURE_IDS = [
   "rallo",
   "milei",
   "bukele",
+  "espinosa",
+  "rivera",
   "modi",
   "feijoo",
   "macron",
