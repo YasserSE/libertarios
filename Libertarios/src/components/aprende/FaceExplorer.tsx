@@ -5,7 +5,7 @@ import { ArrowRight, ListChecks } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/Link";
 import { ReferenceAvatar } from "@/components/maps/ReferenceAvatar";
-import { useAnimateOnMount } from "@/components/motion/hooks";
+import { useAnimateInView } from "@/components/motion/hooks";
 import { REFERENCE_SETS, type ReferencePoint } from "@/data/quadrantReferences";
 
 const ALL = REFERENCE_SETS.flatMap((set) => set.points);
@@ -39,7 +39,7 @@ export function FaceExplorer({ ids, title, intro }: { ids: string[]; title: stri
     .map((id) => ALL.find((p) => p.id === id))
     .filter((p): p is ReferencePoint => Boolean(p));
 
-  const animate = useAnimateOnMount();
+  const { ref: quadrantRef, animate } = useAnimateInView<HTMLDivElement>();
   const [selectedId, setSelectedId] = useState(points[0]?.id ?? null);
   const selected = points.find((p) => p.id === selectedId) ?? points[0];
 
@@ -105,7 +105,7 @@ export function FaceExplorer({ ids, title, intro }: { ids: string[]; title: stri
         <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
           {/* Cuadrante */}
           <div className="rounded-3xl border border-border bg-card p-4 sm:p-6">
-            <div className="relative mx-auto aspect-square w-full max-w-xl">
+            <div ref={quadrantRef} className="relative mx-auto aspect-square w-full max-w-xl">
               <svg viewBox="0 0 100 100" className="h-full w-full" role="img" aria-label={title}>
                 <rect width="100" height="100" className="fill-background" rx="3" />
                 <rect x="50" y="0" width="50" height="50" className="fill-primary/[0.07]" />

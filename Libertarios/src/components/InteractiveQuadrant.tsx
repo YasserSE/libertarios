@@ -8,7 +8,7 @@ import {
   type ReferencePoint,
 } from "@/data/quadrantReferences";
 import { ReferenceAvatar } from "./maps/ReferenceAvatar";
-import { useAnimateOnMount } from "./motion/hooks";
+import { useAnimateInView } from "./motion/hooks";
 
 interface InteractiveQuadrantProps {
   userPosition?: { economic: number; social: number } | null;
@@ -176,7 +176,7 @@ export function InteractiveQuadrant({
   showLayerControls = true,
   focusId = null,
 }: InteractiveQuadrantProps) {
-  const animate = useAnimateOnMount();
+  const { ref: quadrantRef, animate } = useAnimateInView<HTMLDivElement>();
   const [activeKinds, setActiveKinds] = useState<ReferenceKind[]>(defaultLayers);
   // Con una capa de referencia activa de salida, la nube estorba más que ayuda.
   const [showUsers, setShowUsers] = useState(showAllUsers && defaultLayers.length === 0);
@@ -302,7 +302,7 @@ export function InteractiveQuadrant({
         </div>
       )}
 
-      <div className="relative mx-auto aspect-square w-full max-w-2xl">
+      <div ref={quadrantRef} className="relative mx-auto aspect-square w-full max-w-2xl">
         <svg
           viewBox="0 0 100 100"
           className={`h-full w-full ${interactive ? "cursor-crosshair" : ""}`}
