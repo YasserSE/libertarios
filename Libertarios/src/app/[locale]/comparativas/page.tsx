@@ -209,16 +209,33 @@ export default function ComparativasPage() {
           </div>
         </section>
 
-        {/* Interactive selector */}
-        <section className="py-12">
+        {/* Selector y tabla, en un solo bloque */}
+        <section id="tabla" className="scroll-mt-20 border-y border-border bg-card py-12">
           <div className="container">
-            <div className="max-w-6xl mx-auto">
-              <h3 className="font-display text-lg font-semibold text-foreground mb-4">
-                Ideologías seleccionadas para comparar
-              </h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                Arrastra para reordenar • Haz clic en × para quitar • Añade más abajo
-              </p>
+            <div className="mx-auto max-w-6xl">
+              <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
+                <div>
+                  <h2 className="font-display text-xl font-bold text-foreground md:text-2xl">
+                    Compara el libertarismo con lo que quieras
+                  </h2>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Arrastra para reordenar, quita con × y añade más abajo. La tabla se actualiza al
+                    instante.
+                  </p>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setTableOpen((v) => !v)}
+                  aria-expanded={tableOpen}
+                  aria-controls="tabla-comparativa"
+                >
+                  {tableOpen ? "Ocultar tabla" : "Mostrar tabla"}
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform ${tableOpen ? "rotate-180" : ""}`}
+                  />
+                </Button>
+              </div>
               
               <DndContext
                 sensors={sensors}
@@ -249,35 +266,8 @@ export default function ComparativasPage() {
                 <p className="text-sm text-muted-foreground mb-3">Añadir más ideologías:</p>
                 <IdeologySelector available={availableIdeologies} onAdd={handleAdd} />
               </div>
-            </div>
-          </div>
-        </section>
 
-        {/* Dynamic comparison table */}
-        <section id="tabla" className="scroll-mt-20 border-y border-border bg-card py-12">
-          <div className="container">
-            <h2 className="mb-4 text-center font-display text-2xl font-bold text-foreground md:text-3xl">
-              Tabla comparativa
-            </h2>
-            <p className="mx-auto mb-6 max-w-2xl text-center text-muted-foreground">
-              Comparación directa de posiciones en aspectos fundamentales.
-            </p>
-
-            <div className="mb-10 text-center">
-              <Button
-                variant={tableOpen ? "outline" : "cta"}
-                onClick={() => setTableOpen((v) => !v)}
-                aria-expanded={tableOpen}
-                aria-controls="tabla-comparativa"
-              >
-                {tableOpen ? "Ocultar tabla" : "Mostrar tabla comparativa"}
-                <ChevronDown
-                  className={`ml-1.5 h-4 w-4 transition-transform ${tableOpen ? "rotate-180" : ""}`}
-                />
-              </Button>
-            </div>
-
-            <div id="tabla-comparativa" hidden={!tableOpen}>
+              <div id="tabla-comparativa" hidden={!tableOpen}>
             {selectedIdeologies.length === 0 ? (
               <div className="text-center py-12 text-muted-foreground">
                 Selecciona al menos una ideología para ver la comparación
@@ -386,6 +376,7 @@ export default function ComparativasPage() {
                 </p>
               </div>
             )}
+            </div>
             </div>
           </div>
         </section>
