@@ -4,6 +4,7 @@ import { QuadrantSection } from "@/components/QuadrantSection";
 import { DataSection } from "@/components/DataSection";
 import { LibertarianSection } from "@/components/LibertarianSection";
 import { CompareSection } from "@/components/CompareSection";
+import { MeasuresSection } from "@/components/MeasuresSection";
 import { NewsResourcesSection } from "@/components/NewsResourcesSection";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
@@ -46,6 +47,7 @@ export function HomePage({ scope }: { scope: MapScope }) {
         <QuadrantSection />
         <DataSection />
         <LibertarianSection />
+        <MeasuresSection />
         <NewsResourcesSection />
         <CTASection />
       </main>

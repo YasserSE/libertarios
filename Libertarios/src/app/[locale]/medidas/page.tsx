@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/Link";
 import { MEASURES, STRENGTH_LABEL } from "@/data/measures";
+import { MeasureDiagram } from "@/components/medidas/MeasureDiagram";
 
 export const metadata: Metadata = {
   title: "Medidas y efectos — Libertarios.eu",
@@ -60,13 +61,40 @@ export default function MedidasPage() {
           </div>
         </section>
 
-        <section className="pb-8">
+        {/* Índice fijo. Cinco medidas largas seguidas se leen como un muro; con
+            los nombres siempre a la vista se sabe qué hay y se salta a lo que
+            interesa. */}
+        <nav
+          aria-label="Medidas"
+          className="sticky top-16 z-30 border-y border-border bg-background/85 backdrop-blur-md"
+        >
           <div className="container">
-            <div className="mx-auto max-w-4xl space-y-8">
+            <ul className="flex snap-x gap-2 overflow-x-auto py-3">
+              {MEASURES.map((measure) => (
+                <li key={measure.id} className="snap-start">
+                  <a
+                    href={`#${measure.id}`}
+                    className="inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+                  >
+                    <span className="text-[10px] uppercase tracking-wide text-primary">
+                      {measure.area}
+                    </span>
+                    {measure.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </nav>
+
+        <section className="pb-8 pt-10">
+          <div className="container">
+            <div className="mx-auto max-w-5xl space-y-6">
               {MEASURES.map((measure) => (
                 <article
                   key={measure.id}
-                  className="overflow-hidden rounded-3xl border border-border bg-card"
+                  id={measure.id}
+                  className="scroll-mt-32 overflow-hidden rounded-3xl border border-border bg-card"
                 >
                   <div className="border-b border-border p-6 lg:p-7">
                     <div className="flex flex-wrap items-center gap-2">
@@ -84,24 +112,22 @@ export default function MedidasPage() {
                     <h2 className="mt-3 font-display text-2xl font-bold tracking-tight text-foreground">
                       {measure.name}
                     </h2>
+                    <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">
+                      {measure.goal}
+                    </p>
                   </div>
 
-                  <div className="space-y-6 p-6 lg:p-7">
-                    <div>
-                      <p className="mb-2 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                        <Target className="h-3.5 w-3.5" />
-                        Qué busca
-                      </p>
-                      <p className="leading-relaxed text-muted-foreground">{measure.goal}</p>
-                    </div>
-
+                  {/* El mecanismo dibujado va arriba a la derecha, a la altura de
+                      la evidencia que lo sostiene: se puede mirar el esquema y
+                      leer los casos sin desplazarse entre uno y otro. */}
+                  <div className="grid gap-6 p-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,1fr)] lg:gap-8 lg:p-7">
                     <div>
                       <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                         Qué muestra la evidencia
                       </p>
                       <p className="leading-relaxed text-muted-foreground">{measure.evidence}</p>
 
-                      <ul className="mt-4 space-y-3">
+                      <ul className="mt-4 space-y-2.5">
                         {measure.cases.map((c) => (
                           <li
                             key={c.place}
@@ -121,22 +147,27 @@ export default function MedidasPage() {
                       </ul>
                     </div>
 
-                    <div className="rounded-xl border border-amber-500/25 bg-amber-500/[0.07] p-4">
-                      <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-400">
-                        Dónde no vale simplificar
-                      </p>
-                      <p className="text-sm leading-relaxed text-muted-foreground">
-                        {measure.disputed}
-                      </p>
-                    </div>
+                    <div className="space-y-4">
+                      <MeasureDiagram id={measure.id} />
 
-                    <div className="rounded-xl border border-primary/25 bg-primary/5 p-4">
-                      <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-primary">
-                        El mecanismo
-                      </p>
-                      <p className="text-sm leading-relaxed text-muted-foreground">
-                        {measure.principle}
-                      </p>
+                      <div className="rounded-xl border border-primary/25 bg-primary/5 p-4">
+                        <p className="mb-1.5 flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-primary">
+                          <Target className="h-3.5 w-3.5" />
+                          El mecanismo
+                        </p>
+                        <p className="text-sm leading-relaxed text-muted-foreground">
+                          {measure.principle}
+                        </p>
+                      </div>
+
+                      <div className="rounded-xl border border-amber-500/25 bg-amber-500/[0.07] p-4">
+                        <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-400">
+                          Dónde no vale simplificar
+                        </p>
+                        <p className="text-sm leading-relaxed text-muted-foreground">
+                          {measure.disputed}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </article>
