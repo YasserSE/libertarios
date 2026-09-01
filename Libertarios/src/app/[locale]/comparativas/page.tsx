@@ -15,6 +15,7 @@ import {
 import { MiniQuadrant, PositionLabel } from "@/components/aprende/MiniQuadrant";
 import { QuadrantFigures } from "@/components/aprende/QuadrantFigures";
 import { CountryPairs } from "@/components/aprende/CountryPairs";
+import { FaceExplorer } from "@/components/aprende/FaceExplorer";
 import { ReferenceAvatar } from "@/components/maps/ReferenceAvatar";
 import { REFERENCE_SETS } from "@/data/quadrantReferences";
 import {
@@ -43,6 +44,8 @@ import { CSS } from "@dnd-kit/utilities";
  * explica el matiz; hacen falta las dos, y el número queda en el `title` y en
  * el texto accesible para quien no distinga la barra.
  */
+const HOOK_IDS = ["milei", "rallo", "bukele", "trump", "sanchez", "lula"];
+
 function RatingBar({ value, accent = false }: { value: number; accent?: boolean }) {
   const levels = ["Nulo", "Bajo", "Medio", "Alto", "Máximo"];
   return (
@@ -140,7 +143,9 @@ export default function ComparativasPage() {
   const [selectedIds, setSelectedIds] = useState<string[]>(["socialdemocracia", "conservadurismo", "socialismo"]);
   // La tabla es densa y ocupa toda la pantalla: se abre a petición, no de
   // entrada. Quien llega buscando la comparación tiene el enlace arriba.
-  const [tableOpen, setTableOpen] = useState(false);
+  // La tabla ya no es una pared de prosa, así que abrirla de entrada no
+  // sepulta la página y ahorra un clic a quien viene justo a comparar.
+  const [tableOpen, setTableOpen] = useState(true);
   const [expanded, setExpanded] = useState<string | null>(null);
 
   // El navegador intenta saltar al ancla antes de que esta página —cliente y con
@@ -154,14 +159,6 @@ export default function ComparativasPage() {
     });
   }, []);
 
-  // Seis fichas, en orden explícito y cubriendo todo el rango del eje: de +88 a
-  // −62. Una rejilla de tres columnas se completa exacta y el enganche no se
-  // convierte en otro listado largo.
-  const HOOK_IDS = ["milei", "rallo", "bukele", "trump", "sanchez", "lula"];
-  const allPoints = REFERENCE_SETS.flatMap((set) => set.points);
-  const hooks = HOOK_IDS.map((id) => allPoints.find((p) => p.id === id)).filter(
-    (p): p is NonNullable<typeof p> => Boolean(p),
-  );
   
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -210,108 +207,6 @@ export default function ComparativasPage() {
                 Selecciona y arrastra las ideologías que quieras comparar con el libertarismo.
                 La tabla se actualiza instantáneamente.
               </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Acceso directo a la tabla, lo primero tras la cabecera */}
-        <section className="pb-4">
-          <div className="container">
-            <div className="mx-auto flex max-w-3xl flex-col items-center gap-3 sm:flex-row sm:justify-center">
-              <Button
-                variant="cta"
-                onClick={() => {
-                  setTableOpen(true);
-                  requestAnimationFrame(() =>
-                    document.getElementById("tabla")?.scrollIntoView({ behavior: "smooth" }),
-                  );
-                }}
-              >
-                Ver la tabla comparativa
-                <ArrowRight className="ml-1.5 h-4 w-4" />
-              </Button>
-              <Button variant="outline" asChild>
-                <a href="#referentes">Ver los referentes actuales</a>
-              </Button>
-            </div>
-          </div>
-        </section>
-
-        {/* Enganche: caras conocidas antes que conceptos */}
-        <section className="py-12">
-          <div className="container">
-            <div className="mx-auto mb-8 max-w-2xl text-center">
-              <h2 className="font-display text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-                Empieza por las caras
-              </h2>
-              <p className="mt-3 leading-relaxed text-muted-foreground">
-                Las etiquetas se entienden mejor con ejemplos. Toca cualquiera y se abre el
-                cuadrante ya filtrado, con esa ficha señalada.
-              </p>
-            </div>
-
-            <div className="mx-auto grid max-w-4xl gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {hooks.map((point) => (
-                <Link
-                  key={point.id}
-                  href={`/cuadrante?capas=${point.kind}&ref=${point.id}`}
-                  className="group flex gap-3 rounded-2xl border border-border bg-card p-4 transition-colors hover:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-                >
-                  <ReferenceAvatar point={point} size={44} />
-                  <div className="min-w-0">
-                    <p className="font-display font-semibold leading-tight text-foreground">
-                      {point.label}
-                    </p>
-                    <p className="mt-0.5 font-display text-[11px] font-semibold tabular-nums text-primary">
-                      E {point.economic > 0 ? "+" : ""}
-                      {point.economic} · S {point.social > 0 ? "+" : ""}
-                      {point.social}
-                    </p>
-                    <p className="mt-1.5 line-clamp-3 text-xs leading-snug text-muted-foreground">
-                      {point.note}
-                    </p>
-                    <span className="mt-2 inline-flex items-center gap-1 text-[11px] font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
-                      Ver en el cuadrante
-                      <ArrowRight className="h-3 w-3" />
-                    </span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Libertarianism summary */}
-        <section className="py-12 bg-card border-y border-border">
-          <div className="container">
-            <div className="max-w-4xl mx-auto">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center">
-                  <Scale className="w-6 h-6 text-primary-foreground" />
-                </div>
-                <div>
-                  <h2 className="font-display text-2xl font-bold text-foreground">Libertarismo</h2>
-                  <p className="text-muted-foreground">El punto de referencia para las comparaciones</p>
-                </div>
-              </div>
-              <p className="text-muted-foreground leading-relaxed mb-6">
-                El libertarismo es una filosofía política que prioriza la libertad individual, la propiedad privada 
-                y la limitación del poder coercitivo del Estado. Defiende que cada persona tiene derecho a vivir 
-                como desee mientras no agreda los derechos de otros.
-              </p>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {[
-                  "Libertad individual máxima",
-                  "Propiedad privada inviolable",
-                  "Estado mínimo o inexistente",
-                  "No agresión como principio",
-                ].map((point, i) => (
-                  <div key={i} className="bg-background border border-border rounded-lg p-4">
-                    <div className="w-2 h-2 rounded-full bg-primary mb-2" />
-                    <p className="text-sm font-medium text-foreground">{point}</p>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </section>
@@ -493,6 +388,47 @@ export default function ComparativasPage() {
                 </p>
               </div>
             )}
+            </div>
+          </div>
+        </section>
+
+        <FaceExplorer
+          ids={HOOK_IDS}
+          title="Empieza por las caras"
+          intro="Los mismos referentes, colocados donde les toca. Toca cualquiera para ver por qué está ahí: las medidas concretas que sostienen su posición."
+        />
+
+        {/* Libertarianism summary */}
+        <section className="py-12 bg-card border-y border-border">
+          <div className="container">
+            <div className="max-w-4xl mx-auto">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center">
+                  <Scale className="w-6 h-6 text-primary-foreground" />
+                </div>
+                <div>
+                  <h2 className="font-display text-2xl font-bold text-foreground">Libertarismo</h2>
+                  <p className="text-muted-foreground">El punto de referencia para las comparaciones</p>
+                </div>
+              </div>
+              <p className="text-muted-foreground leading-relaxed mb-6">
+                El libertarismo es una filosofía política que prioriza la libertad individual, la propiedad privada 
+                y la limitación del poder coercitivo del Estado. Defiende que cada persona tiene derecho a vivir 
+                como desee mientras no agreda los derechos de otros.
+              </p>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {[
+                  "Libertad individual máxima",
+                  "Propiedad privada inviolable",
+                  "Estado mínimo o inexistente",
+                  "No agresión como principio",
+                ].map((point, i) => (
+                  <div key={i} className="bg-background border border-border rounded-lg p-4">
+                    <div className="w-2 h-2 rounded-full bg-primary mb-2" />
+                    <p className="text-sm font-medium text-foreground">{point}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>

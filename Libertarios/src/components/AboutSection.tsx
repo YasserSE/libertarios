@@ -2,7 +2,6 @@ import { Link } from "@/i18n/Link";
 import { ArrowRight, MapPin, TrendingDown, Vote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getCountrySnapshot } from "@/lib/affiliates/repository";
-import { EUROPE_COUNTRIES } from "@/data/geo/europe-countries";
 import { getReferenceSet } from "@/data/quadrantReferences";
 
 /**
@@ -21,38 +20,46 @@ import { getReferenceSet } from "@/data/quadrantReferences";
 export function AboutSection({ registrationOpen }: { registrationOpen: boolean }) {
   const spain = getCountrySnapshot("ES")!;
 
-  // El país europeo con más libertad económica según nuestra propia escala. Se
-  // cruza con el registro geográfico en lugar de listar exclusiones a mano, así
-  // que añadir un país no europeo al cuadrante no rompe la cifra.
-  const europeanCodes = new Set(EUROPE_COUNTRIES.map((c) => c.code.toLowerCase()));
-  const bestEuropean = getReferenceSet("country")!
-    .points.filter((c) => europeanCodes.has(c.id))
-    .sort((a, b) => b.economic - a.economic)[0];
+  /*
+    Los tres datos, en orden de menos a más específico: cuánto Estado hay en
+    Europa, cuántos partidos ofrecen la alternativa, cuántos escaños tiene en
+    España. Ninguno se escribe a mano: el segundo se calcula del propio modelo,
+    así que si mañana algún partido europeo se mueve al cuadrante libertario, la
+    cifra deja de ser cero sola.
 
-  const leaders = getReferenceSet("leader")!.points;
-  const libertarianLeaders = leaders.filter((l) => l.economic > 50 && l.social > 0);
+    La versión anterior abría con «+35, Suiza es lo más liberal de Europa». Un
+    +35 no significa nada para quien acaba de llegar, y además se apoyaba en
+    nuestra propia escala, que es la base más débil para el primer argumento.
+  */
+  const euParties = getReferenceSet("party-eu")!.points;
+  // Umbral explícito: no basta con caer del lado bueno de los dos ejes, hay que
+  // ofrecer las dos libertades de verdad.
+  const bothFreedoms = euParties.filter((p) => p.economic >= 50 && p.social >= 50);
+  const bestEconomic = [...euParties].sort((a, b) => b.economic - a.economic)[0];
+  const bestSocial = [...euParties]
+    .filter((p) => p.economic > 0)
+    .sort((a, b) => b.social - a.social)[0];
 
   const facts = [
     {
       icon: TrendingDown,
-      value: `+${bestEuropean.economic}`,
-      label: `${bestEuropean.label} es lo más liberal de Europa`,
+      value: "49 %",
+      label: "del PIB europeo lo gasta el Estado",
       detail:
-        "Y aun así su Estado gasta un tercio del PIB. En nuestra escala, +70 sería un Estado del 15 %. Ningún país europeo se acerca.",
+        "Casi la mitad de lo que produce la UE pasa por la administración antes de volver (Eurostat). Suiza, el país más liberal del continente, todavía gasta un tercio del suyo.",
     },
     {
       icon: Vote,
-      value: `${libertarianLeaders.length} de ${leaders.length}`,
-      label: "gobernantes en el cuadrante libertario",
-      detail:
-        "El resto amplía el Estado, restringe libertades civiles, o las dos cosas. Hay hueco porque nadie lo ocupa.",
+      value: `${bothFreedoms.length} de ${euParties.length}`,
+      label: "partidos europeos ofrecen las dos libertades",
+      detail: `Ninguno de los partidos con representación que medimos llega a +50 en los dos ejes a la vez. ${bestEconomic.short} lo consigue en lo económico y se hunde a ${bestEconomic.social} en lo social; ${bestSocial?.short} es liberal en lo personal y se queda en +${bestSocial?.economic} en lo económico. Hay hueco porque nadie lo ocupa.`,
     },
     {
       icon: MapPin,
-      value: "0",
-      label: "escaños libertarios en España",
+      value: "0 de 350",
+      label: "escaños libertarios en el Congreso",
       detail:
-        "El único partido español explícitamente libertario es extraparlamentario. No hay movimiento organizado: hay personas sueltas.",
+        "El único partido español explícitamente libertario nunca ha entrado. No hay movimiento organizado: hay personas sueltas que no saben cuántas son.",
     },
   ];
 
@@ -67,10 +74,10 @@ export function AboutSection({ registrationOpen }: { registrationOpen: boolean }
             En Europa hay un hueco.<br className="hidden sm:block" /> En España, ni eso.
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-            Casi la mitad de los europeos vive bajo Estados que gastan la mitad de lo que produce
-            su país, y ningún gobierno relevante propone en serio revertirlo. En España el vacío es
-            todavía mayor: no existe una alternativa liberal con representación, y quien piensa así
-            no sabe cuánta gente piensa lo mismo.
+            En Europa el Estado gasta casi la mitad de lo que se produce, y ningún gobierno
+            relevante propone en serio revertirlo. En España el vacío es todavía mayor: no existe
+            una alternativa liberal con representación, y quien piensa así no sabe cuánta gente
+            piensa lo mismo.
           </p>
           <p className="mt-5 text-lg font-medium text-foreground">
             Este proyecto empieza por lo primero que falta:{" "}
