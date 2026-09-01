@@ -16,6 +16,8 @@ export const it: DeepPartial<Dictionary> = {
     learnWhatHint: "Le basi, senza etichette",
     learnCompare: "Confronti",
     learnCompareHint: "Rispetto ad altre correnti",
+    learnMeasures: "Misure ed effetti",
+    learnMeasuresHint: "Cosa succede quando si applicano",
     learnResources: "Risorse",
     learnResourcesHint: "Dove leggere in merito",
     project: "Il progetto",

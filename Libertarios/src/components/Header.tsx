@@ -44,6 +44,7 @@ export function Header() {
       children: [
         { label: t.learnWhat, href: "/libertario", description: t.learnWhatHint },
         { label: t.learnCompare, href: "/comparativas", description: t.learnCompareHint },
+        { label: t.learnMeasures, href: "/medidas", description: t.learnMeasuresHint },
         { label: t.learnResources, href: "/noticias", description: t.learnResourcesHint },
       ],
     },
@@ -64,6 +65,7 @@ export function Header() {
       items: [
         { label: t.learnWhat, href: "/libertario" },
         { label: t.learnCompare, href: "/comparativas" },
+        { label: t.learnMeasures, href: "/medidas" },
         { label: t.learnResources, href: "/noticias" },
       ],
     },

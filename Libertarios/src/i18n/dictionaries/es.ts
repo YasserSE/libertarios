@@ -20,6 +20,8 @@ export const es = {
     learnWhatHint: "Ideas base, sin etiquetas",
     learnCompare: "Comparativas",
     learnCompareHint: "Frente a otras corrientes",
+    learnMeasures: "Medidas y efectos",
+    learnMeasuresHint: "Qué pasa cuando se aplican",
     learnResources: "Recursos",
     learnResourcesHint: "Dónde leer sobre esto",
     project: "El proyecto",

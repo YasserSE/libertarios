@@ -1,5 +1,5 @@
 import { Link } from "@/i18n/Link";
-import { ArrowRight, BookOpen, Compass, Scale } from "lucide-react";
+import { ArrowRight, BookOpen, Compass, FlaskConical, Scale } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RESOURCE_SECTIONS } from "@/data/resources";
 
@@ -31,6 +31,14 @@ const ENTRIES = [
     cta: "Comparar",
   },
   {
+    icon: FlaskConical,
+    title: "Medidas y efectos",
+    href: "/medidas",
+    description:
+      "Topes al alquiler, salario mínimo, aranceles: qué buscan y qué han medido los estudios. Con las fuentes y con lo que la evidencia no respalda.",
+    cta: "Ver la evidencia",
+  },
+  {
     icon: BookOpen,
     title: "Recursos",
     href: "/noticias",
@@ -53,7 +61,7 @@ export function NewsResourcesSection() {
           </p>
         </div>
 
-        <div className="mx-auto grid max-w-5xl gap-5 md:grid-cols-3">
+        <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {ENTRIES.map((entry) => (
             <Link
               key={entry.href}
