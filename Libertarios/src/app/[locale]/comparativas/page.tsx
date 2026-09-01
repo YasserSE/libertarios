@@ -46,6 +46,8 @@ import { CSS } from "@dnd-kit/utilities";
  */
 function RatingBar({ value, accent = false }: { value: number; accent?: boolean }) {
   const levels = ["Nulo", "Bajo", "Medio", "Alto", "Máximo"];
+  // Los segmentos se encienden en cascada: el ojo lee la longitud antes que el
+  // número, y verla formarse ayuda a compararla con la de al lado.
   return (
     <span
       className="flex items-center gap-1"
@@ -56,13 +58,10 @@ function RatingBar({ value, accent = false }: { value: number; accent?: boolean 
       {[0, 1, 2, 3].map((i) => (
         <span
           key={i}
-          className={`h-1.5 w-5 rounded-full ${
-            i < value
-              ? accent
-                ? "bg-primary"
-                : "bg-foreground/45"
-              : "bg-muted"
+          className={`h-1.5 w-5 rounded-full transition-colors duration-300 ${
+            i < value ? (accent ? "bg-primary" : "bg-foreground/45") : "bg-muted"
           }`}
+          style={{ transitionDelay: `${i * 60}ms` }}
         />
       ))}
     </span>

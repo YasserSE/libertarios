@@ -3,6 +3,8 @@ import { ArrowRight, MapPin, TrendingDown, Vote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getCountrySnapshot } from "@/lib/affiliates/repository";
 import { getReferenceSet } from "@/data/quadrantReferences";
+import { CountUp } from "@/components/motion/CountUp";
+import { Reveal } from "@/components/motion/Reveal";
 
 /**
  * La tesis del proyecto.
@@ -43,6 +45,8 @@ export function AboutSection({ registrationOpen }: { registrationOpen: boolean }
   const facts = [
     {
       icon: TrendingDown,
+      count: 49,
+      suffix: " %",
       value: "49 %",
       label: "del PIB europeo lo gasta el Estado",
       detail:
@@ -86,22 +90,27 @@ export function AboutSection({ registrationOpen }: { registrationOpen: boolean }
         </div>
 
         <div className="mx-auto grid max-w-5xl gap-5 md:grid-cols-3">
-          {facts.map((fact) => (
-            <div
+          {facts.map((fact, i) => (
+            <Reveal
               key={fact.label}
+              delay={i * 110}
               className="rounded-2xl border border-border bg-background p-6"
             >
               <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-accent">
                 <fact.icon className="h-5 w-5 text-primary" />
               </span>
               <p className="font-display text-3xl font-bold tabular-nums text-foreground">
-                {fact.value}
+                {"count" in fact && typeof fact.count === "number" ? (
+                  <CountUp value={fact.count} suffix={fact.suffix ?? ""} />
+                ) : (
+                  fact.value
+                )}
               </p>
               <p className="mt-1 font-display text-sm font-semibold text-foreground">
                 {fact.label}
               </p>
               <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{fact.detail}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
 

@@ -1,5 +1,7 @@
 "use client";
 
+import { useEnterAnimation } from "@/components/motion/hooks";
+
 export interface RankingRow {
   code: string;
   label: string;
@@ -24,9 +26,12 @@ interface TerritoryRankingProps {
  */
 export function TerritoryRanking({ rows, selected, onSelect, onHover }: TerritoryRankingProps) {
   const max = rows.length > 0 ? rows[0].count : 1;
+  // Las barras crecen una vez, al aparecer. El ancho final está en el DOM desde
+  // el principio para quien tenga el movimiento reducido.
+  const { ref, settled: grown } = useEnterAnimation<HTMLOListElement>();
 
   return (
-    <ol className="space-y-1">
+    <ol ref={ref} className="space-y-1">
       {rows.map((row, i) => {
         const isActive = selected === row.code;
         return (
@@ -57,8 +62,11 @@ export function TerritoryRanking({ rows, selected, onSelect, onHover }: Territor
                 {/* 3px mark, 4px rounded end, anchored to a full-width track. */}
                 <span className="mt-1.5 block h-[3px] w-full overflow-hidden rounded-full bg-muted">
                   <span
-                    className="block h-full rounded-full bg-primary transition-[width] duration-500 ease-out"
-                    style={{ width: `${Math.max((row.count / max) * 100, 1.5)}%` }}
+                    className="block h-full rounded-full bg-primary transition-[width] duration-700 ease-out"
+                    style={{
+                      width: grown ? `${Math.max((row.count / max) * 100, 1.5)}%` : "0%",
+                      transitionDelay: `${Math.min(i * 25, 400)}ms`,
+                    }}
                   />
                 </span>
 

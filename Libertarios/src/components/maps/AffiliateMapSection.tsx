@@ -13,6 +13,8 @@ import { SpainProvinceMap } from "./SpainProvinceMap";
 import { TerritoryRanking, type RankingRow } from "./TerritoryRanking";
 import { AffiliateDataTable, type TableRow } from "./AffiliateDataTable";
 import { formatPerMillion } from "@/lib/affiliates/format";
+import { CountUp } from "@/components/motion/CountUp";
+import { Reveal } from "@/components/motion/Reveal";
 
 export type MapScope = "europe" | "ES";
 
@@ -242,21 +244,30 @@ export function AffiliateMapSection({
 
               <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-border pt-7">
                 <Figure
+                  count={headline.total}
                   value={nf(headline.total)}
                   label={t.statSupporters}
                   hint={isSpain ? t.statSupportersSpain : t.statSupportersEurope}
                 />
                 <Figure
+                  count={headline.growth}
+                  prefix="+"
+                  delay={80}
                   value={`+${nf(headline.growth)}`}
                   label={t.statGrowth}
                   hint={`${((headline.growth / headline.total) * 100).toFixed(1)}% ${t.statGrowthHint}`}
                 />
                 <Figure
+                  count={territories}
+                  delay={160}
                   value={nf(territories)}
                   label={isSpain ? t.statProvinces : t.statCountries}
                   hint={isSpain ? t.statProvincesHint : t.statCountriesHint}
                 />
                 <Figure
+                  count={headline.position.economic}
+                  prefix={headline.position.economic > 0 ? "+" : ""}
+                  delay={240}
                   value={signed(headline.position.economic)}
                   label={t.statEconomic}
                   hint={`${t.statSocial} ${signed(headline.position.social)}`}
@@ -370,15 +381,34 @@ export function AffiliateMapSection({
   );
 }
 
-function Figure({ value, label, hint }: { value: string; label: string; hint: string }) {
+function Figure({
+  value,
+  label,
+  hint,
+  count,
+  prefix = "",
+  delay = 0,
+}: {
+  value: string;
+  label: string;
+  hint: string;
+  /** Cuando se pasa, la cifra sube hasta aquí en lugar de aparecer fija. */
+  count?: number;
+  prefix?: string;
+  delay?: number;
+}) {
   return (
-    <div>
+    <Reveal delay={delay}>
       <dt className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{label}</dt>
       <dd className="mt-0.5 font-display text-2xl font-bold tabular-nums text-foreground lg:text-3xl">
-        {value}
+        {count === undefined ? (
+          value
+        ) : (
+          <CountUp value={count} prefix={prefix} />
+        )}
       </dd>
       <dd className="text-xs text-muted-foreground">{hint}</dd>
-    </div>
+    </Reveal>
   );
 }
 
