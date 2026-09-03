@@ -31,7 +31,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const country = getCountrySnapshotBySlug(slug);
+  const country = await getCountrySnapshotBySlug(slug);
   if (!country) return { title: "País no encontrado — Libertarios.eu" };
   return {
     title: `${country.meta.name} — Libertarios.eu`,
@@ -43,7 +43,7 @@ const nf = (n: number) => n.toLocaleString("es-ES");
 
 export default async function CountryPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const country = getCountrySnapshotBySlug(slug);
+  const country = await getCountrySnapshotBySlug(slug);
   if (!country) notFound();
 
   // Spain has a full province map; send it to the scoped home page instead.
@@ -70,8 +70,8 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
     );
   }
 
-  const europe = getEuropeSnapshot();
-  const ranked = getRankedCountries();
+  const europe = await getEuropeSnapshot();
+  const ranked = await getRankedCountries();
   const share = europe.total > 0 ? country.count / europe.total : 0;
 
   return (

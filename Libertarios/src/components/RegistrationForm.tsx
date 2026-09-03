@@ -245,7 +245,7 @@ export function RegistrationForm({ onComplete, quadrantPosition }: RegistrationF
               Información demográfica
             </h3>
             <p className="text-sm text-muted-foreground">
-              Datos 100% anónimos para estadísticas agregadas
+              Estadísticas siempre agregadas; tu correo solo para escribirte
             </p>
           </div>
 
@@ -429,9 +429,15 @@ export function RegistrationForm({ onComplete, quadrantPosition }: RegistrationF
           </div>
 
           {/*
-            El correo es lo único que permite deduplicar altas y atender una
-            petición de borrado. No se almacena: se guarda su hash con un pepper
-            del servidor, así que ni nosotros podemos recuperarlo.
+            El correo se guarda, y el texto de aquí abajo tiene que decirlo.
+            Antes solo se guardaba su hash y esta ayuda prometía «no lo
+            guardamos»; el proyecto necesita poder escribir a quien se registra,
+            así que la dirección se almacena. Cambiar el código y dejar la
+            promesa vieja no sería un descuido de redacción: sería recoger datos
+            personales bajo una declaración falsa.
+
+            Se conserva además el hash, que es lo que impide el alta doble y lo
+            que permite contar sin leer direcciones.
           */}
           <div className="space-y-2">
             <Label htmlFor="email">Correo electrónico *</Label>
@@ -447,8 +453,9 @@ export function RegistrationForm({ onComplete, quadrantPosition }: RegistrationF
               className="bg-background"
             />
             <p className="text-xs leading-relaxed text-muted-foreground">
-              No lo guardamos. Se convierte en un hash irreversible que solo sirve para no
-              contarte dos veces y para poder borrarte si lo pides. No recibirás correos.
+              Lo guardamos para poder escribirte y para no contarte dos veces. No aparece en
+              ningún dato público: el mapa y las estadísticas solo publican recuentos agregados.
+              No lo cedemos a nadie, y puedes pedir que lo borremos cuando quieras.
             </p>
           </div>
 
@@ -466,8 +473,11 @@ export function RegistrationForm({ onComplete, quadrantPosition }: RegistrationF
             />
             <span id="consent-text" className="text-sm leading-relaxed text-muted-foreground">
               Doy mi consentimiento explícito para que se registre mi posición política y se
-              publique de forma <strong className="text-foreground">agregada y anónima</strong>.
-              Sé que puedo pedir su borrado en cualquier momento escribiendo a{" "}
+              publique de forma <strong className="text-foreground">agregada y anónima</strong>,
+              y para que se guarde mi correo con el fin de que{" "}
+              <strong className="text-foreground">Libertarios.eu pueda escribirme</strong>. Sé
+              que puedo retirar el consentimiento y pedir el borrado de ambos en cualquier
+              momento escribiendo a{" "}
               <span className="text-foreground">contacto@libertarios.es</span>.
             </span>
           </label>

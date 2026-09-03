@@ -84,6 +84,9 @@ export async function registerAffiliate(input: unknown): Promise<RegistrationRes
         p_region: region,
         p_age_range: data.ageRange ?? null,
         p_gender: data.gender ?? null,
+        // La dirección en claro, además del hash. El hash sigue siendo la clave
+        // única; esto es lo que permite escribir a quien se registra.
+        p_email: data.email,
       }),
       cache: "no-store",
     });

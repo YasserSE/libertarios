@@ -121,16 +121,24 @@ CREATE TABLE region_aliases (
 ```sql
 CREATE TABLE affiliates (
   id            uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  email_hash    bytea NOT NULL UNIQUE,       -- SHA-256(email + pepper), nunca el email
+  email_hash    bytea NOT NULL UNIQUE,       -- SHA-256(email + pepper); clave de deduplicación
+  email         text,                        -- dirección en claro, para comunicaciones
   created_at    timestamptz NOT NULL DEFAULT now(),
   confirmed_at  timestamptz,                 -- doble opt-in; sin esto no cuenta
   deleted_at    timestamptz                  -- borrado lógico para el art. 17
 );
 ```
 
-Guardar el hash y no el email permite detectar duplicados sin custodiar
-direcciones. Si hace falta enviar correos, el email vive en un proveedor externo
-(el gestor de newsletter) referenciado por el mismo hash — no aquí.
+El hash es lo que detecta duplicados; la dirección se guarda porque el proyecto
+necesita poder escribir a quien se registra.
+
+Eso cambia la naturaleza de esta tabla: deja de ser un recuento anónimo y pasa a
+ser un fichero de datos personales. Va con dos obligaciones que no son
+opcionales. El formulario y la política de privacidad tienen que declararlo —
+recoger direcciones bajo una promesa de anonimato sería un incumplimiento del
+RGPD, no un desliz de redacción. Y la columna queda fuera de todo lo que se
+publica: las vistas agregadas no la tocan, y las tablas base siguen sin
+políticas RLS, así que la clave anónima devuelve 42501 al intentar leerla.
 
 ### Posición y territorio — la tabla que alimenta los mapas
 

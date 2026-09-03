@@ -8,46 +8,46 @@ import { mockUsers } from "@/data/mockRegisteredUsers";
 import { getCountrySnapshot } from "@/lib/affiliates/repository";
 import { ArrowRight, MapPin, Users, Calendar, Heart, Globe, TrendingUp } from "lucide-react";
 
-// Calculate stats from mock data
-const spain = getCountrySnapshot("ES")!;
-const activeProvinces = spain.regions.filter((r) => r.count > 0);
+export default async function DatosPage() {
+  // Cifras derivadas del agregado de España.
+  const spain = (await getCountrySnapshot("ES"))!;
+  const activeProvinces = spain.regions.filter((r) => r.count > 0);
 
-const calculateStats = () => {
-  const ageGroups: Record<string, number> = {};
-  const genders: Record<string, number> = {};
+  const calculateStats = () => {
+    const ageGroups: Record<string, number> = {};
+    const genders: Record<string, number> = {};
 
-  mockUsers.forEach((user, index) => {
-    // Age groups (simulated from index)
-    const ageGroup = index % 4 === 0 ? "18-30" : index % 4 === 1 ? "31-45" : index % 4 === 2 ? "46-60" : "60+";
-    ageGroups[ageGroup] = (ageGroups[ageGroup] || 0) + 1;
+    mockUsers.forEach((user, index) => {
+      // Age groups (simulated from index)
+      const ageGroup = index % 4 === 0 ? "18-30" : index % 4 === 1 ? "31-45" : index % 4 === 2 ? "46-60" : "60+";
+      ageGroups[ageGroup] = (ageGroups[ageGroup] || 0) + 1;
 
-    // Genders (simulated)
-    const gender = index % 10 < 7 ? "Hombre" : index % 10 < 9 ? "Mujer" : "Otro";
-    genders[gender] = (genders[gender] || 0) + 1;
-  });
+      // Genders (simulated)
+      const gender = index % 10 < 7 ? "Hombre" : index % 10 < 9 ? "Mujer" : "Otro";
+      genders[gender] = (genders[gender] || 0) + 1;
+    });
 
-  return { ageGroups, genders };
-};
+    return { ageGroups, genders };
+  };
 
-const stats = calculateStats();
+  const stats = calculateStats();
 
-const ageData = Object.entries(stats.ageGroups).map(([label, value]) => ({
-  label,
-  value: Math.round((value / mockUsers.length) * 100),
-})).sort((a, b) => b.value - a.value);
+  const ageData = Object.entries(stats.ageGroups).map(([label, value]) => ({
+    label,
+    value: Math.round((value / mockUsers.length) * 100),
+  })).sort((a, b) => b.value - a.value);
 
-const genderData = Object.entries(stats.genders).map(([label, value]) => ({
-  label,
-  value: Math.round((value / mockUsers.length) * 100),
-}));
+  const genderData = Object.entries(stats.genders).map(([label, value]) => ({
+    label,
+    value: Math.round((value / mockUsers.length) * 100),
+  }));
 
-const topProvinces = activeProvinces.slice(0, 10).map((r) => ({
-  name: r.meta.name,
-  count: r.count,
-  percentage: (r.share * 100).toFixed(1),
-}));
+  const topProvinces = activeProvinces.slice(0, 10).map((r) => ({
+    name: r.meta.name,
+    count: r.count,
+    percentage: (r.share * 100).toFixed(1),
+  }));
 
-export default function DatosPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />

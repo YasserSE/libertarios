@@ -19,8 +19,8 @@ import { Reveal } from "@/components/motion/Reveal";
  * mañana cambia la calibración, cambia la tesis; y si la calibración dejara de
  * sostenerla, se vería.
  */
-export function AboutSection({ registrationOpen }: { registrationOpen: boolean }) {
-  const spain = getCountrySnapshot("ES")!;
+export async function AboutSection({ registrationOpen }: { registrationOpen: boolean }) {
+  const spain = (await getCountrySnapshot("ES"))!;
 
   /*
     Los tres datos, en orden de menos a más específico: cuánto Estado hay en

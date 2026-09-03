@@ -368,8 +368,7 @@ export function AffiliateMapSection({
           </div>
 
           <p className="mt-6 text-xs text-muted-foreground">
-            Cifras agregadas y anónimas. Son datos de ejemplo: ninguna persona se ha registrado
-            todavía —{" "}
+            Cifras agregadas y anónimas —{" "}
             <Link href="/proyecto" className="underline underline-offset-4 hover:text-foreground">
               ver metodología
             </Link>

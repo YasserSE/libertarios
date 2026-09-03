@@ -1,10 +1,6 @@
 import { EUROPE_COUNTRIES, getCountryByCode } from "@/data/geo/europe-countries";
 import { SPAIN_PROVINCES } from "@/data/geo/spain-provinces";
-import {
-  COUNTRY_COUNTS,
-  MOCK_UPDATED_AT,
-  SPAIN_PROVINCE_COUNTS,
-} from "@/data/mock/affiliate-counts";
+import { loadAffiliateSource, positionFor, type AffiliateSource } from "./source";
 import type {
   AffiliateSnapshot,
   CountrySnapshot,
@@ -14,46 +10,22 @@ import type {
 } from "./types";
 
 /**
- * Read model for affiliate aggregates.
+ * Modelo de lectura de los agregados.
  *
- * Everything the maps render goes through here. The current implementation is
- * synchronous and mock-backed; the functions are shaped so they can become
- * `async` fetches against the schema in `docs/DATABASE.md` without any caller
- * having to change how it reads the data.
+ * Todo lo que pintan los mapas pasa por aquí. La fuente está detrás de
+ * `loadAffiliateSource`, que lee las vistas agregadas de Supabase y se cae al
+ * fichero de ejemplo si no hay credenciales o la base no responde.
+ *
+ * La regla que sostiene la coherencia del conjunto: **un país que tiene
+ * subdivisiones es la suma de sus partes**. Derivar el total del país por otra
+ * vía es exactamente como el mapa acaba contradiciéndose a sí mismo, y ya pasó
+ * una vez: España mostraba un crecimiento en la portada y otro distinto en su
+ * propia página. Con k-anonimidad importa todavía más, porque las provincias
+ * por debajo del mínimo salen a cero y el total del país tiene que reflejar esa
+ * misma supresión, no esquivarla.
  */
 
-/**
- * Deterministic 32-bit hash. Used to derive stable secondary figures (growth,
- * mean quadrant position) from a code, so server and client render identically
- * and no hydration mismatch is possible. A real backend stores these columns.
- */
-function hash(code: string): number {
-  let h = 2166136261;
-  for (let i = 0; i < code.length; i++) {
-    h ^= code.charCodeAt(i);
-    h = Math.imul(h, 16777619);
-  }
-  return (h >>> 0) / 4294967295;
-}
-
-/** Mean quadrant position, libertarian-leaning with per-territory spread. */
-function derivePosition(code: string): QuadrantPosition {
-  const a = hash(code);
-  const b = hash(`${code}:social`);
-  return {
-    economic: Math.round(34 + a * 38),
-    social: Math.round(22 + b * 42),
-  };
-}
-
-/** Registrations in the trailing 30 days: 3–9% of the standing total. */
-function deriveGrowth(code: string, count: number): number {
-  return Math.max(1, Math.round(count * (0.03 + hash(`${code}:growth`) * 0.06)));
-}
-
-const SPAIN_TOTAL = Object.values(SPAIN_PROVINCE_COUNTS).reduce((a, b) => a + b, 0);
-
-/** Count-weighted mean of a set of quadrant positions. */
+/** Media de posiciones ponderada por número de registros. */
 function meanPosition(rows: { count: number; position: QuadrantPosition }[]): QuadrantPosition {
   const total = rows.reduce((a, r) => a + r.count, 0);
   if (total === 0) return { economic: 0, social: 0 };
@@ -62,40 +34,36 @@ function meanPosition(rows: { count: number; position: QuadrantPosition }[]): Qu
   return { economic: Math.round(economic), social: Math.round(social) };
 }
 
-function buildSpainRegions(): RegionStats[] {
+function buildSpainRegions(source: AffiliateSource): RegionStats[] {
+  const total = Object.values(source.spainRegions).reduce((a, r) => a + r.count, 0);
   return SPAIN_PROVINCES.map((meta) => {
-    const count = SPAIN_PROVINCE_COUNTS[meta.code] ?? 0;
+    const row = source.spainRegions[meta.code];
+    const count = row?.count ?? 0;
     return {
       code: meta.code,
       meta,
       count,
-      growth30d: count > 0 ? deriveGrowth(meta.code, count) : 0,
-      position: derivePosition(`ES-${meta.code}`),
-      share: SPAIN_TOTAL > 0 ? count / SPAIN_TOTAL : 0,
+      growth30d: row?.growth30d ?? 0,
+      position: positionFor(`ES-${meta.code}`, row),
+      share: total > 0 ? count / total : 0,
     };
   }).sort((a, b) => b.count - a.count);
 }
 
-// Regions are built first: a country that has them is the sum of its parts, and
-// deriving its totals any other way is how the mock ends up contradicting
-// itself (and the database, where the aggregate can only ever be the sum).
-const REGIONS_BY_COUNTRY: Record<string, RegionStats[]> = {
-  ES: buildSpainRegions(),
-};
+function buildCountries(source: AffiliateSource, spain: RegionStats[]): CountryStats[] {
+  const regionsByCountry: Record<string, RegionStats[]> = { ES: spain };
 
-function buildCountries(): CountryStats[] {
   return EUROPE_COUNTRIES.map((meta) => {
-    const regions = REGIONS_BY_COUNTRY[meta.code];
+    const regions = regionsByCountry[meta.code];
+    const row = source.countries[meta.code];
 
-    const count = regions
-      ? regions.reduce((a, r) => a + r.count, 0)
-      : (COUNTRY_COUNTS[meta.code] ?? 0);
+    const count = regions ? regions.reduce((a, r) => a + r.count, 0) : (row?.count ?? 0);
     const growth30d = regions
       ? regions.reduce((a, r) => a + r.growth30d, 0)
-      : count > 0
-        ? deriveGrowth(meta.code, count)
-        : 0;
-    const position = regions ? meanPosition(regions) : derivePosition(meta.code);
+      : (row?.growth30d ?? 0);
+    const position = regions
+      ? meanPosition(regions.filter((r) => r.count > 0))
+      : positionFor(meta.code, row);
 
     return {
       code: meta.code,
@@ -103,46 +71,65 @@ function buildCountries(): CountryStats[] {
       count,
       growth30d,
       position,
-      // Kept at one decimal: see formatPerMillion for why integers lie here.
+      // Con un decimal: ver formatPerMillion para por qué el entero miente aquí.
       perMillion: count > 0 ? Math.round((count / meta.populationM) * 10) / 10 : 0,
     };
   }).sort((a, b) => b.count - a.count);
 }
 
-const COUNTRIES = buildCountries();
-const COUNTRY_INDEX = new Map(COUNTRIES.map((c, i) => [c.code, { stats: c, rank: i + 1 }]));
+interface Model {
+  source: AffiliateSource;
+  countries: CountryStats[];
+  index: Map<string, { stats: CountryStats; rank: number }>;
+  regionsByCountry: Record<string, RegionStats[]>;
+}
 
-/** Europe-wide aggregate: every country with at least one affiliate. */
-export function getEuropeSnapshot(): AffiliateSnapshot {
-  const active = COUNTRIES.filter((c) => c.count > 0);
+async function buildModel(): Promise<Model> {
+  const source = await loadAffiliateSource();
+  const spain = buildSpainRegions(source);
+  const countries = buildCountries(source, spain);
   return {
-    updatedAt: MOCK_UPDATED_AT,
+    source,
+    countries,
+    index: new Map(countries.map((c, i) => [c.code, { stats: c, rank: i + 1 }])),
+    regionsByCountry: { ES: spain },
+  };
+}
+
+/** Agregado de toda Europa: cada país con al menos un registro. */
+export async function getEuropeSnapshot(): Promise<AffiliateSnapshot> {
+  const model = await buildModel();
+  const active = model.countries.filter((c) => c.count > 0);
+  return {
+    updatedAt: model.source.updatedAt,
     total: active.reduce((a, c) => a + c.count, 0),
     growth30d: active.reduce((a, c) => a + c.growth30d, 0),
-    countries: COUNTRIES,
+    countries: model.countries,
     position: meanPosition(active),
   };
 }
 
-/** One country plus its subdivisions, or undefined for an unknown code. */
-export function getCountrySnapshot(code: string): CountrySnapshot | undefined {
-  const entry = COUNTRY_INDEX.get(code.toUpperCase());
+/** Un país con sus subdivisiones, o `undefined` si el código no existe. */
+export async function getCountrySnapshot(code: string): Promise<CountrySnapshot | undefined> {
+  const model = await buildModel();
+  const entry = model.index.get(code.toUpperCase());
   if (!entry) return undefined;
   return {
     ...entry.stats,
     rank: entry.rank,
-    regions: REGIONS_BY_COUNTRY[entry.stats.code] ?? [],
+    regions: model.regionsByCountry[entry.stats.code] ?? [],
   };
 }
 
-export function getCountrySnapshotBySlug(slug: string): CountrySnapshot | undefined {
+export async function getCountrySnapshotBySlug(slug: string): Promise<CountrySnapshot | undefined> {
   const meta = EUROPE_COUNTRIES.find((c) => c.slug === slug.toLowerCase());
   return meta ? getCountrySnapshot(meta.code) : undefined;
 }
 
-/** Countries with affiliates, ranked by absolute count. */
-export function getRankedCountries(): CountryStats[] {
-  return COUNTRIES.filter((c) => c.count > 0);
+/** Países con registros, ordenados por número absoluto. */
+export async function getRankedCountries(): Promise<CountryStats[]> {
+  const model = await buildModel();
+  return model.countries.filter((c) => c.count > 0);
 }
 
 export { getCountryByCode };

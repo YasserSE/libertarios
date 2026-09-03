@@ -21,7 +21,7 @@ const values = [
   {
     icon: Lock,
     title: "Privacidad",
-    description: "Los datos individuales nunca se exponen. Solo mostramos estadísticas agregadas y anónimas.",
+    description: "Los datos individuales nunca se publican. Solo mostramos estadísticas agregadas; tu correo se guarda para poder escribirte y no sale de ahí.",
   },
   {
     icon: Database,
@@ -60,11 +60,11 @@ const faqs = [
   },
   {
     question: "¿Mis datos personales son públicos?",
-    answer: "No. Nunca mostramos datos individuales. Toda la información se presenta de forma agregada y anónima, cumpliendo con la normativa RGPD.",
+    answer: "No. Todo lo que se publica son recuentos agregados, con un mínimo de cinco registros por territorio para que nadie sea identificable en un municipio pequeño. Guardamos tu correo, solo para escribirte: no se publica, no se cede y puedes pedir que lo borremos cuando quieras.",
   },
   {
     question: "¿Registrarme implica algún compromiso?",
-    answer: "No. El registro es voluntario y no implica afiliación, militancia ni ningún tipo de compromiso. Puedes participar de forma completamente anónima.",
+    answer: "No. El registro es voluntario y no implica afiliación, militancia ni ningún compromiso. Lo único que pedimos es un correo, para no contarte dos veces y para poder escribirte.",
   },
   {
     question: "¿Cómo se financia este proyecto?",

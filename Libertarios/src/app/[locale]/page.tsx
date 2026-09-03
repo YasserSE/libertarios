@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     "Mapa interactivo de simpatizantes libertarios en Europa. Datos agregados y anónimos, país a país.",
 };
 
-export default function Page() {
-  // Touch the snapshot here so the page is statically prerendered with figures.
-  getEuropeSnapshot();
+export default async function Page() {
+  // Se toca el agregado aquí para que la página se prerrenderice con las cifras.
+  await getEuropeSnapshot();
   return <HomePage scope="europe" />;
 }

@@ -21,9 +21,9 @@ import { isRegistrationConfigured } from "@/lib/registration/register";
  * map pre-filtered to Spain. Keeping it one component means the two URLs can
  * never drift apart — only the map's scope differs.
  */
-export function HomePage({ scope }: { scope: MapScope }) {
-  const europe = getEuropeSnapshot();
-  const spain = getCountrySnapshot("ES")!;
+export async function HomePage({ scope }: { scope: MapScope }) {
+  const europe = await getEuropeSnapshot();
+  const spain = (await getCountrySnapshot("ES"))!;
   const registrationOpen = isRegistrationConfigured();
   return (
     <div className="min-h-screen bg-background">
