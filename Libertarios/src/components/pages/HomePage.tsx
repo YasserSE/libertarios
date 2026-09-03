@@ -1,6 +1,7 @@
 import { Header } from "@/components/Header";
 import { AboutSection } from "@/components/AboutSection";
 import { QuadrantSection } from "@/components/QuadrantSection";
+import { LearnSection } from "@/components/LearnSection";
 import { DataSection } from "@/components/DataSection";
 import { LibertarianSection } from "@/components/LibertarianSection";
 import { CompareSection } from "@/components/CompareSection";
@@ -45,6 +46,7 @@ export async function HomePage({ scope }: { scope: MapScope }) {
         />
         <AboutSection registrationOpen={registrationOpen} />
         <QuadrantSection />
+        <LearnSection />
         <DataSection />
         <LibertarianSection />
         <MeasuresSection />

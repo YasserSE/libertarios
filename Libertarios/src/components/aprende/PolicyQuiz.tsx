@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { ArrowLeft, ArrowRight, BookOpen, Check, Lightbulb, RotateCcw, Target } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/Link";
@@ -45,6 +46,13 @@ function Prose({ text, className = "" }: { text: string; className?: string }) {
   );
 }
 
+/** Un índice de la URL solo se acepta si es un entero dentro de rango. */
+function clampIndex(raw: string | null, limit: number): number | null {
+  if (raw === null) return null;
+  const n = Number(raw);
+  return Number.isInteger(n) && n >= 0 && n < limit ? n : null;
+}
+
 const STRENGTH_STYLE: Record<string, string> = {
   sólida: "border-primary/30 bg-primary/10 text-primary",
   media: "border-border bg-muted text-muted-foreground",
@@ -52,9 +60,24 @@ const STRENGTH_STYLE: Record<string, string> = {
 };
 
 export function PolicyQuiz() {
-  const [step, setStep] = useState(0);
+  /*
+   * La portada enseña la primera pregunta jugable y enlaza aquí con la opción
+   * ya pulsada (`?p=0&r=1`). Sin esto, el primer clic del lector no devolvía
+   * nada: le llevaba a una página donde tenía que volver a elegir lo mismo.
+   */
+  const params = useSearchParams();
+  const initialStep = clampIndex(params.get("p"), LESSONS.length);
+  const initialAnswer = clampIndex(params.get("r"), 2);
+
+  const [step, setStep] = useState(initialStep ?? 0);
   /** Qué contestó el lector en cada pregunta. `null` = aún sin contestar. */
-  const [answers, setAnswers] = useState<(number | null)[]>(() => LESSONS.map(() => null));
+  const [answers, setAnswers] = useState<(number | null)[]>(() =>
+    LESSONS.map((lesson, i) =>
+      i === initialStep && initialAnswer !== null && initialAnswer < lesson.quiz.options.length
+        ? initialAnswer
+        : null,
+    ),
+  );
   const [done, setDone] = useState(false);
   const topRef = useRef<HTMLDivElement>(null);
 
@@ -67,6 +90,19 @@ export function PolicyQuiz() {
     if (revealed) return;
     setAnswers((prev) => prev.map((a, i) => (i === step ? index : a)));
   };
+
+  /*
+   * Al llegar desde la portada con una respuesta ya elegida, se aterriza sobre
+   * ella. Sin esto el navegador conservaba el desplazamiento de la página
+   * anterior y el lector caía en el pie, con su respuesta desplegada tres
+   * pantallas más arriba.
+   */
+  useEffect(() => {
+    if (initialAnswer === null) return;
+    topRef.current?.scrollIntoView({ block: "start" });
+    // Solo al montar: después manda la navegación entre preguntas.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   /** Al cambiar de paso hay que volver arriba: la ficha anterior es larga. */
   const goTo = (next: number) => {

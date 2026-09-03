@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { ArrowRight, GraduationCap } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -50,7 +51,11 @@ export default function AprendePage() {
 
         <section className="pb-8">
           <div className="container">
-            <PolicyQuiz />
+            {/* `useSearchParams` obliga a un límite de Suspense en una ruta
+                estática: sin él, el prerrenderizado falla. */}
+            <Suspense fallback={<div className="mx-auto h-96 max-w-3xl rounded-3xl border border-border bg-card" />}>
+              <PolicyQuiz />
+            </Suspense>
           </div>
         </section>
 

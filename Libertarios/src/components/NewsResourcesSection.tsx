@@ -1,5 +1,5 @@
 import { Link } from "@/i18n/Link";
-import { ArrowRight, BookOpen, Compass, FlaskConical, GraduationCap, Scale } from "lucide-react";
+import { ArrowRight, BookOpen, Compass, FlaskConical, Scale } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RESOURCE_SECTIONS } from "@/data/resources";
 
@@ -60,30 +60,6 @@ export function NewsResourcesSection() {
             a otras posiciones y dónde leer las fuentes originales.
           </p>
         </div>
-
-        {/* El test va aparte y a todo lo ancho: es la puerta de entrada, no una
-            página más del catálogo. */}
-        <Link
-          href="/aprende"
-          className="group mx-auto mb-5 flex max-w-5xl flex-col gap-4 rounded-2xl border border-primary/25 bg-gradient-to-br from-primary/10 to-primary/5 p-6 transition-colors hover:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:flex-row sm:items-center"
-        >
-          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary">
-            <GraduationCap className="h-6 w-6 text-primary-foreground" />
-          </span>
-          <div className="min-w-0 flex-1">
-            <h3 className="font-display text-lg font-semibold text-foreground">
-              Suena justo. ¿Y luego qué pasa?
-            </h3>
-            <p className="mt-1 leading-relaxed text-muted-foreground">
-              Ocho medidas que se proponen para arreglar un daño real. Adivina qué provocan y
-              compruébalo con los estudios. Una de las ocho va contra nosotros.
-            </p>
-          </div>
-          <span className="inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-primary">
-            Empezar
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </span>
-        </Link>
 
         <div className="mx-auto grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {ENTRIES.map((entry) => (
