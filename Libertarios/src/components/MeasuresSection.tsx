@@ -76,12 +76,15 @@ export function MeasuresSection() {
           ))}
         </ul>
 
-        <div className="mt-10 text-center">
-          <Button variant="outline" asChild>
-            <Link href="/medidas">
-              Las cinco, con sus estudios
+        <div className="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+          <Button variant="cta" asChild>
+            <Link href="/aprende">
+              Adivínalo tú primero
               <ArrowRight className="ml-1.5 h-4 w-4" />
             </Link>
+          </Button>
+          <Button variant="outline" asChild>
+            <Link href="/medidas">Las siete, con sus estudios</Link>
           </Button>
         </div>
       </div>

@@ -16,6 +16,8 @@ export const es = {
     mapsDataHint: "Demografía y cuadrante",
     test: "Test ideológico",
     learn: "Aprende",
+    learnQuiz: "Suena justo. ¿Y luego qué?",
+    learnQuizHint: "Adivina qué provoca cada medida",
     learnWhat: "¿Qué es ser libertario?",
     learnWhatHint: "Ideas base, sin etiquetas",
     learnCompare: "Comparativas",

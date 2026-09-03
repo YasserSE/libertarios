@@ -42,6 +42,7 @@ export function Header() {
     {
       label: t.learn,
       children: [
+        { label: t.learnQuiz, href: "/aprende", description: t.learnQuizHint },
         { label: t.learnWhat, href: "/libertario", description: t.learnWhatHint },
         { label: t.learnCompare, href: "/comparativas", description: t.learnCompareHint },
         { label: t.learnMeasures, href: "/medidas", description: t.learnMeasuresHint },
@@ -63,6 +64,7 @@ export function Header() {
     {
       title: t.learn,
       items: [
+        { label: t.learnQuiz, href: "/aprende" },
         { label: t.learnWhat, href: "/libertario" },
         { label: t.learnCompare, href: "/comparativas" },
         { label: t.learnMeasures, href: "/medidas" },

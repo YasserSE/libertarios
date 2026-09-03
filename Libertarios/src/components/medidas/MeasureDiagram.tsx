@@ -311,6 +311,99 @@ function DemandSubsidy() {
   );
 }
 
+function PriceFreeze() {
+  // Mismo mecanismo que el tope al alquiler, y por eso mismo se dibuja igual:
+  // que el lector reconozca la forma es parte de la lección.
+  const cap = 88;
+  return (
+    <Frame xLabel="Producto en el mercado" yLabel="Precio">
+      <rect x={60} y={cap - 3} width={102} height={6} className="fill-primary/15" />
+      <Curve d={DEMAND} />
+      <Curve d={SUPPLY} />
+      <CurveLabel x={PLOT.right - 2} y={21}>
+        Lo que se produce
+      </CurveLabel>
+      <CurveLabel x={PLOT.right - 2} y={110}>
+        Lo que se quiere
+      </CurveLabel>
+      <SetPrice y={cap} label="Precio congelado" />
+      <circle cx={60} cy={cap} r="2.6" className="fill-primary" />
+      <circle cx={162} cy={cap} r="2.6" className="fill-primary" />
+      <Callout x={111} y={cap + 15}>
+        Estanterías vacías
+      </Callout>
+    </Frame>
+  );
+}
+
+function Crowding() {
+  /*
+   * Dos barras apiladas, no curvas: aquí lo que importa es comparar totales, y
+   * una barra lo resuelve mejor que un diagrama de ejes.
+   *
+   * Las alturas dicen lo que dice la literatura y ni un poco más: el total sube
+   * —el desplazamiento medido es parcial, no total— pero sube menos que la
+   * subvención, porque parte del privado se retira. La flecha del hueco marca
+   * exactamente eso, que es el hallazgo.
+   */
+  const base = PLOT.bottom;
+  const bars = [
+    { x: 56, label: "Antes", priv: 54, pub: 0 },
+    { x: 124, label: "Con subvención", priv: 30, pub: 42 },
+  ];
+
+  return (
+    <Frame xLabel="" yLabel="Dinero que recibe">
+      <defs>
+        <marker id="arrow-crowd" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M 0 1 L 7 4 L 0 7 z" className="fill-foreground/55" />
+        </marker>
+      </defs>
+
+      {bars.map((bar) => (
+        <g key={bar.label}>
+          <rect x={bar.x} y={base - bar.priv} width={40} height={bar.priv} className="fill-foreground/35" />
+          {bar.pub > 0 && (
+            <rect
+              x={bar.x}
+              y={base - bar.priv - bar.pub - 2}
+              width={40}
+              height={bar.pub}
+              className="fill-primary"
+            />
+          )}
+          <text
+            x={bar.x + 20}
+            y={base + 11}
+            textAnchor="middle"
+            className="fill-muted-foreground text-[6.5px]"
+          >
+            {bar.label}
+          </text>
+        </g>
+      ))}
+
+      {/* Lo privado que se retira, en el hueco entre las dos barras. */}
+      <path d={`M 108 ${base - 54} L 108 ${base - 32}`} className="stroke-foreground/55" strokeWidth="1.2" markerEnd="url(#arrow-crowd)" />
+      <Callout x={108} y={base - 58}>
+        se retira
+      </Callout>
+
+      {/* Leyenda fuera del área de barras: dentro se escribía encima de ellas. */}
+      <g>
+        <rect x={42} y={132} width={6} height={6} className="fill-primary" />
+        <text x={52} y={137} className="fill-muted-foreground text-[6.5px]">
+          Dinero público
+        </text>
+        <rect x={112} y={132} width={6} height={6} className="fill-foreground/35" />
+        <text x={122} y={137} className="fill-muted-foreground text-[6.5px]">
+          Donaciones y taquilla
+        </text>
+      </g>
+    </Frame>
+  );
+}
+
 const DIAGRAMS: Record<string, { render: () => React.ReactNode; caption: string; alt: string }> = {
   "control-alquileres": {
     render: RentCeiling,
@@ -336,6 +429,18 @@ const DIAGRAMS: Record<string, { render: () => React.ReactNode; caption: string;
       "Restringir quién puede ofrecer el servicio desplaza la oferta y sube el precio. Si además mejorase la calidad podría compensar; en la mayoría de oficios estudiados no se mide esa mejora.",
     alt: "Esquema de oferta y demanda donde la curva de oferta se desplaza a la izquierda al restringir la entrada, elevando el precio.",
   },
+  "control-precios": {
+    render: PriceFreeze,
+    caption:
+      "La forma es la misma que en el alquiler, y esa es la lección: fijado el precio por debajo, se produce menos de lo que se busca. La escasez no desaparece, cambia de forma — cola, calidad o mercado paralelo.",
+    alt: "Esquema de oferta y demanda con un precio congelado por debajo del punto de cruce, que abre un hueco entre lo que se produce y lo que se busca.",
+  },
+  "subvenciones-cultura": {
+    render: Crowding,
+    caption:
+      "El total sí sube: el desplazamiento medido es parcial, no total. Sube menos de lo que sugiere la cifra de la subvención, porque parte de las donaciones y la taquilla se retiran.",
+    alt: "Dos barras apiladas: antes, financiación privada; con subvención, una parte pública y una privada menor, con un total algo mayor.",
+  },
   "subvencion-demanda": {
     render: DemandSubsidy,
     caption:
@@ -350,7 +455,7 @@ export function MeasureDiagram({ id }: { id: string }) {
 
   return (
     <figure className="rounded-2xl border border-border bg-card p-4">
-      <svg viewBox="0 0 210 144" className="w-full" role="img" aria-label={diagram.alt}>
+      <svg viewBox="0 0 210 144" className="mx-auto w-full max-w-[440px]" role="img" aria-label={diagram.alt}>
         {diagram.render()}
       </svg>
       <figcaption className="mt-3 text-xs leading-relaxed text-muted-foreground">
