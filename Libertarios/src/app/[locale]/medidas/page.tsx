@@ -34,13 +34,13 @@ export default function MedidasPage() {
                 Medidas y efectos
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-                Cinco políticas que se proponen a menudo, qué buscan y qué han medido los estudios
+                Ocho políticas que se proponen a menudo, qué buscan y qué han medido los estudios
                 sobre lo que pasa después. Con la fuente al lado, para que no haya que fiarse.
               </p>
 
               {/*
                 Sin esta advertencia la página sería un panfleto. Con ella es un
-                argumento que aguanta que lo comprueben — y una de las cinco
+                argumento que aguanta que lo comprueben — y una de las ocho
                 entradas dice, negro sobre blanco, que aquí nuestro propio bando
                 afirma más de lo que la evidencia sostiene.
               */}
@@ -61,7 +61,7 @@ export default function MedidasPage() {
           </div>
         </section>
 
-        {/* Índice fijo. Cinco medidas largas seguidas se leen como un muro; con
+        {/* Índice fijo. Ocho medidas largas seguidas se leen como un muro; con
             los nombres siempre a la vista se sabe qué hay y se salta a lo que
             interesa. */}
         <nav

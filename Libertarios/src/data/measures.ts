@@ -362,7 +362,54 @@ export const MEASURES: Measure[] = [
       everyday:
         "Imagina una sala pequeña que se mantiene con cien socios que pagan una cuota. Llega una subvención que cubre la mitad del presupuesto. Algunos socios piensan, con toda la lógica del mundo, que ya la están pagando con sus impuestos y dejan de aportar. La sala no ha ganado el doble: ha ganado algo menos y, de paso, ha cambiado de jefe. Antes tenía que convencer a cien vecinos; ahora tiene que convencer a un jurado y volver a convencerlo cada año.\n\nEse cambio de jefe se ve en los números del cine español. En 2025 se exhibieron 727 películas y 282 no llegaron a cien espectadores: no a cien mil, a cien. Cuando el dinero llega antes de que exista el público, encontrarlo deja de ser la condición para hacer la película y pasa a ser un extra. Nadie está engañando a nadie; el sistema premia rellenar bien una convocatoria, y eso es lo que se aprende a hacer.",
       lesson:
-        "Una subvención no solo añade dinero: cambia a quién hay que convencer. Quien vive de la taquilla responde ante su público; quien vive de la convocatoria responde ante quien la firma.\n\nY esta es la más discutible de las siete, así que va con su freno: el desplazamiento medido es parcial, en patrimonio el argumento del mercado es flojo de verdad, y desde 2016 el cine español ha recaudado en el mundo más de lo que recibe en ayudas. Lo que aguanta no es «sobra el dinero público», sino que la subvención no elige cultura, elige qué cultura — y traslada esa decisión del público a un comité.",
+        "Una subvención no solo añade dinero: cambia a quién hay que convencer. Quien vive de la taquilla responde ante su público; quien vive de la convocatoria responde ante quien la firma.\n\nY esta es de las más discutibles de las ocho, así que va con su freno: el desplazamiento medido es parcial, en patrimonio el argumento del mercado es flojo de verdad, y desde 2016 el cine español ha recaudado en el mundo más de lo que recibe en ayudas. Lo que aguanta no es «sobra el dinero público», sino que la subvención no elige cultura, elige qué cultura — y traslada esa decisión del público a un comité.",
+    },
+  },
+  {
+    id: "ayuda-sin-evaluar",
+    name: "Cooperación que no se mide",
+    area: "Cooperación",
+    strength: "media",
+    goal:
+      "Que quien nació en el peor sitio posible tenga una oportunidad. Es la intención más difícil de discutir de toda la lista, y quien la defiende no necesita disculparse por ella: hay intervenciones de cooperación con efectos enormes y bien medidos, y han salvado millones de vidas.",
+    evidence:
+      "Lo que está documentado no es que la cooperación no funcione. Es que, en la mayoría de los casos, no se mide de una forma que permita saberlo. Los exámenes de pares del CAD de la OCDE llevan años señalando lo mismo sobre la cooperación española: el seguimiento y la evaluación quedan por detrás de la planificación y la ejecución.",
+    cases: [
+      {
+        place: "España, exámenes del CAD de la OCDE",
+        finding:
+          "Los exámenes de pares señalan que la evaluación ocupa un lugar secundario frente a planificar y ejecutar, y recomiendan decidir de forma más estratégica qué se evalúa y cómo se aprende de los resultados.",
+        source: "OCDE, exámenes de pares de la cooperación española (2011 y 2022)",
+      },
+      {
+        place: "Cuando sí se mide",
+        finding:
+          "El giro hacia los ensayos aleatorizados mostró que los efectos varían enormemente entre programas parecidos: algunos con muy buena prensa apenas mueven la aguja y otros son extraordinariamente eficaces. Sin medir no hay forma de distinguirlos, y la intuición no basta.",
+        source: "Banerjee, Duflo y Kremer, Premio Nobel de Economía 2019",
+      },
+      {
+        place: "«Mujeres, Café y Clima», Etiopía",
+        finding:
+          "Circuló que el Gobierno español gastaba más de un millón de euros en café con perspectiva de género. La cifra real: la Unión Europea aportó 1.000.000 € y la AECID 118.000 €, y no salía del plan de igualdad. La crítica viral era engañosa — y, mientras se discutía el titular, nadie preguntó si el proyecto había funcionado.",
+        source: "BOE-A-2021-20031 y verificación de Maldita.es, 2022",
+      },
+    ],
+    disputed:
+      "Esta es la que más fácil sería exagerar, así que conviene decirlo claro: «no se mide» no es «no funciona». Hay intervenciones con efectos grandes y bien establecidos —tratamientos antiparasitarios, mosquiteras, transferencias directas de dinero— y negarlo sería tan poco riguroso como lo contrario. Evaluar con rigor cuesta dinero y no siempre es proporcionado para una subvención pequeña. Lo que no se sostiene es opinar con seguridad, en cualquiera de las dos direcciones, sobre programas de los que no hay datos.",
+    principle:
+      "Cuando quien paga no es quien recibe el servicio, se rompe el circuito que en cualquier otra actividad avisa de que algo no va: el cliente que no vuelve. El contribuyente no puede dejar de pagar y el beneficiario no eligió el programa. Sin ese aviso automático, comprobar si el dinero llegó deja de ser una necesidad y pasa a ser una virtud opcional.",
+    quiz: {
+      question:
+        "Sobre los proyectos de cooperación al desarrollo que financia España, ¿qué es lo que mejor describe la situación?",
+      options: [
+        "Se evalúa su impacto y los resultados se publican",
+        "En la mayoría de los casos no se mide de forma que permita saber si funcionaron",
+      ],
+      correct: 1,
+      everyday:
+        "En 2022 circuló que el Gobierno se gastaba más de un millón de euros en producir café «con perspectiva de género» en Etiopía. El dato correcto era otro: la Unión Europea puso 1.000.000 € y la AECID 118.000 €. La crítica era engañosa, y la desmintió un verificador.\n\nPero fíjate en lo que no pasó en toda esa discusión. Se habló del titular, de la cifra y de si sonaba ridículo o no. Nadie preguntó lo único que importaba: ¿mejoró la vida de alguien? Ese dato no estaba en el debate porque, sencillamente, no suele estar.",
+      lesson:
+        "La afirmación honesta no es «la cooperación no sirve» — hay programas con efectos enormes y bien medidos. Es que, sin medir, opinar es gratis en las dos direcciones, y por eso el debate se queda siempre en la anécdota más llamativa.\n\nEl mecanismo es el mismo que en la cultura y explica por qué no es mala fe de nadie: cuando quien paga no es quien recibe el servicio, falta el aviso que en cualquier otra actividad llega solo — el cliente que no vuelve. Sin ese aviso, comprobar si el dinero llegó deja de ser una necesidad y pasa a ser opcional.",
     },
   },
 ];

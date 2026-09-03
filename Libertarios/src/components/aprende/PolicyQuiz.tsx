@@ -15,7 +15,7 @@ import { MEASURES, STRENGTH_LABEL, type Measure } from "@/data/measures";
  * cara: reconocer la forma repetida es media lección.
  *
  * El salario mínimo va en el cuarto puesto, justo en el centro, y es
- * deliberado. Es la única de las siete donde quien se equivoca es nuestro
+ * deliberado. Es la única de las ocho donde quien se equivoca es nuestro
  * propio bando, y si estuviera al final —donde ya casi nadie llega— esto sería
  * un embudo de propaganda con una coartada. En medio no se puede saltar.
  */
@@ -27,6 +27,7 @@ const ORDER = [
   "aranceles",
   "licencias",
   "subvenciones-cultura",
+  "ayuda-sin-evaluar",
 ];
 
 const LESSONS: Measure[] = ORDER.map((id) => MEASURES.find((m) => m.id === id)!).filter(Boolean);
@@ -93,13 +94,13 @@ export function PolicyQuiz() {
             miles de personas que no salen en el debate.
           </p>
           <p className="mt-4 leading-relaxed text-muted-foreground">
-            Y una de las siete iba en la dirección contraria a propósito. Si el salario mínimo te
+            Y una de las ocho iba en la dirección contraria a propósito. Si el salario mínimo te
             pilló, ahí quien afirma de más es nuestro propio bando.
           </p>
           <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
             <Button variant="cta" asChild>
               <Link href="/medidas">
-                Las siete, con sus estudios
+                Las ocho, con sus estudios
                 <ArrowRight className="ml-1.5 h-4 w-4" />
               </Link>
             </Button>

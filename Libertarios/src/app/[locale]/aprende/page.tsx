@@ -9,7 +9,7 @@ import { PolicyQuiz } from "@/components/aprende/PolicyQuiz";
 export const metadata: Metadata = {
   title: "Aprende — Libertarios.eu",
   description:
-    "Siete políticas que suenan justas. Adivina qué provocan de verdad y compruébalo con los estudios. Incluida una en la que quien se equivoca somos nosotros.",
+    "Ocho políticas que suenan justas. Adivina qué provocan de verdad y compruébalo con los estudios. Incluida una en la que quien se equivoca somos nosotros.",
 };
 
 export default function AprendePage() {
@@ -27,7 +27,7 @@ export default function AprendePage() {
                 Suena justo. ¿Y luego qué pasa?
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-                Siete medidas que se proponen para arreglar un daño real. Adivina qué provocan y
+                Ocho medidas que se proponen para arreglar un daño real. Adivina qué provocan y
                 compruébalo. No hay trampa en la pregunta: la respuesta que da casi todo el mundo es
                 la razonable, y por eso merece una explicación y no una burla.
               </p>
@@ -37,10 +37,10 @@ export default function AprendePage() {
                 propaganda, y va delante de la primera pregunta, no escondida al
                 final: si el lector no puede fiarse de que alguna respuesta nos
                 deje mal a nosotros, no tiene motivo para fiarse de las otras
-                seis.
+                siete.
               */}
               <p className="mx-auto mt-6 max-w-xl rounded-2xl border border-border bg-card p-4 text-sm leading-relaxed text-muted-foreground">
-                Una de las siete va contra nosotros. En el salario mínimo, quien afirma de más es el
+                Una de las ocho va contra nosotros. En el salario mínimo, quien afirma de más es el
                 bando que defiende el mercado, y la respuesta lo dice con esas palabras. Va la
                 cuarta, en medio, donde no se puede saltar.
               </p>

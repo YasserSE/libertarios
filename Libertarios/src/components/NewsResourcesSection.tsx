@@ -75,8 +75,8 @@ export function NewsResourcesSection() {
               Suena justo. ¿Y luego qué pasa?
             </h3>
             <p className="mt-1 leading-relaxed text-muted-foreground">
-              Siete medidas que se proponen para arreglar un daño real. Adivina qué provocan y
-              compruébalo con los estudios. Una de las siete va contra nosotros.
+              Ocho medidas que se proponen para arreglar un daño real. Adivina qué provocan y
+              compruébalo con los estudios. Una de las ocho va contra nosotros.
             </p>
           </div>
           <span className="inline-flex shrink-0 items-center gap-1.5 text-sm font-medium text-primary">

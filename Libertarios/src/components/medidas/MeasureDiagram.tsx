@@ -404,6 +404,81 @@ function Crowding() {
   );
 }
 
+function FeedbackLoop() {
+  /*
+   * Ni curvas ni barras: aquí lo que hay que enseñar es un circuito que se
+   * cierra y otro que no. Y sin cifras inventadas en los ejes, porque el
+   * argumento no es cuantitativo — es que falta el aviso de vuelta.
+   */
+  const box = (x: number, y: number, w: number, label: string, accent = false) => (
+    <g key={label}>
+      <rect
+        x={x}
+        y={y}
+        width={w}
+        height={18}
+        rx="3"
+        className={accent ? "fill-primary/15 stroke-primary/50" : "fill-muted stroke-border"}
+        strokeWidth="0.8"
+      />
+      <text
+        x={x + w / 2}
+        y={y + 11.5}
+        textAnchor="middle"
+        className="fill-foreground text-[6.5px] font-medium"
+      >
+        {label}
+      </text>
+    </g>
+  );
+
+  return (
+    <>
+      <defs>
+        <marker id="fb-arrow" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M 0 1 L 7 4 L 0 7 z" className="fill-foreground/60" />
+        </marker>
+        <marker id="fb-arrow-back" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+          <path d="M 0 1 L 7 4 L 0 7 z" className="fill-primary" />
+        </marker>
+      </defs>
+
+      {/* Un mercado cualquiera: el aviso vuelve solo. */}
+      <text x={8} y={14} className="fill-muted-foreground text-[6.5px] font-semibold">
+        UN NEGOCIO CUALQUIERA
+      </text>
+      {box(10, 20, 62, "Quien paga")}
+      {box(120, 20, 62, "Quien sirve")}
+      <path d="M 74 26 L 117 26" className="stroke-foreground/60" strokeWidth="1" markerEnd="url(#fb-arrow)" />
+      <path d="M 118 34 L 75 34" className="stroke-primary" strokeWidth="1" markerEnd="url(#fb-arrow-back)" />
+      <text x={96} y={48} textAnchor="middle" className="fill-primary text-[6px] font-semibold">
+        vuelve, o no vuelve
+      </text>
+
+      {/* Cooperación: el dinero avanza, el aviso no existe. */}
+      <text x={8} y={68} className="fill-muted-foreground text-[6.5px] font-semibold">
+        CUANDO LO PAGA UN TERCERO
+      </text>
+      {box(6, 74, 54, "Contribuyente")}
+      {box(72, 74, 48, "Agencia")}
+      {box(132, 74, 54, "Beneficiario", true)}
+      <path d="M 62 83 L 69 83" className="stroke-foreground/60" strokeWidth="1" markerEnd="url(#fb-arrow)" />
+      <path d="M 122 83 L 129 83" className="stroke-foreground/60" strokeWidth="1" markerEnd="url(#fb-arrow)" />
+      {/* El camino de vuelta, dibujado por su ausencia. */}
+      <path
+        d="M 159 96 L 159 106 L 33 106 L 33 96"
+        fill="none"
+        strokeDasharray="3 3"
+        className="stroke-muted-foreground/50"
+        strokeWidth="1"
+      />
+      <text x={96} y={118} textAnchor="middle" className="fill-muted-foreground text-[6px] font-semibold">
+        no hay camino de vuelta
+      </text>
+    </>
+  );
+}
+
 const DIAGRAMS: Record<string, { render: () => React.ReactNode; caption: string; alt: string }> = {
   "control-alquileres": {
     render: RentCeiling,
@@ -434,6 +509,12 @@ const DIAGRAMS: Record<string, { render: () => React.ReactNode; caption: string;
     caption:
       "La forma es la misma que en el alquiler, y esa es la lección: fijado el precio por debajo, se produce menos de lo que se busca. La escasez no desaparece, cambia de forma — cola, calidad o mercado paralelo.",
     alt: "Esquema de oferta y demanda con un precio congelado por debajo del punto de cruce, que abre un hueco entre lo que se produce y lo que se busca.",
+  },
+  "ayuda-sin-evaluar": {
+    render: FeedbackLoop,
+    caption:
+      "En cualquier negocio el aviso vuelve solo: el cliente repite o desaparece. Cuando paga un tercero, el dinero avanza y no vuelve nada — ni el contribuyente puede dejar de pagar, ni el beneficiario eligió el programa. Por eso comprobar si funcionó deja de ser una necesidad.",
+    alt: "Dos esquemas: en un negocio, quien paga y quien sirve están unidos por una flecha de ida y otra de vuelta; en la cooperación, contribuyente, agencia y beneficiario están unidos solo por flechas de ida, y el camino de vuelta aparece a trazos.",
   },
   "subvenciones-cultura": {
     render: Crowding,

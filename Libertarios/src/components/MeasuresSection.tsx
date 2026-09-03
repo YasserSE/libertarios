@@ -34,7 +34,7 @@ export function MeasuresSection() {
             Qué pasa cuando se aplica
           </h2>
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
-            Cinco políticas que se proponen a menudo y qué han medido los estudios sobre lo que
+            Ocho políticas que se proponen a menudo y qué han medido los estudios sobre lo que
             ocurre después. Con la fuente al lado y con lo que la evidencia no respalda, incluidas
             las veces que quien defiende el mercado afirma de más.
           </p>
@@ -84,7 +84,7 @@ export function MeasuresSection() {
             </Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link href="/medidas">Las siete, con sus estudios</Link>
+            <Link href="/medidas">Las ocho, con sus estudios</Link>
           </Button>
         </div>
       </div>
