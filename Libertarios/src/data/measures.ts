@@ -320,7 +320,7 @@ export const MEASURES: Measure[] = [
     goal:
       "Que la creación no dependa solo de lo que se vende. Hay obras que importan y nunca van a llenar una sala, y una sociedad que solo produce lo rentable pierde algo real. La intención es de las más defendibles de esta lista.",
     evidence:
-      "Lo que la literatura encuentra con más frecuencia no es que la cultura reciba menos dinero, sino que una parte del dinero público sustituye al privado en vez de sumarse: al aumentar la subvención bajan las donaciones y el patrocinio. Es el efecto llamado desplazamiento, y en las artes se mide de forma parcial, no total.",
+      "Lo que la literatura encuentra con más frecuencia no es que la cultura reciba menos dinero, sino que una parte del dinero público sustituye al privado en vez de sumarse: al aumentar la subvención bajan las donaciones y el patrocinio. Es el efecto llamado desplazamiento, y en las artes se mide de forma parcial, no total. Junto a eso hay un dato español que conviene mirar sin dramatismo y sin taparlo: la mayoría de las películas que se estrenan no encuentran público.",
     cases: [
       {
         place: "Orquestas sinfónicas de Estados Unidos",
@@ -334,9 +334,21 @@ export const MEASURES: Measure[] = [
           "Cuando la aportación obligatoria a un bien común sube, la voluntaria baja, aunque no llega a compensarse del todo. El desplazamiento es real y es parcial.",
         source: "James Andreoni, American Economic Review, 1993",
       },
+      {
+        place: "Cine español, 2025",
+        finding:
+          "De las 727 películas españolas exhibidas, 282 —el 39,5 %— no llegaron a 100 espectadores y 530 no llegaron a 1.000. Las diez más vistas se llevaron el 54,8 % de todos los espectadores, y solo una superó el millón. La cifra la publica el propio ICAA y cualquiera puede comprobarla.",
+        source: "ICAA, Recaudación y espectadores del cine español en 2025",
+      },
+      {
+        place: "España, presupuesto frente a taquilla",
+        finding:
+          "En 2023 las ayudas a la cinematografía del Ministerio de Cultura fueron de 116,9 millones de euros. Las películas españolas recaudaron 81,5 millones en las salas del país, y 147,4 contando el resto del mundo.",
+        source: "Ministerio de Cultura e ICAA, datos de 2023",
+      },
     ],
     disputed:
-      "Aquí conviene no pasarse de frenada. El desplazamiento medido es parcial: el dinero público sí aumenta el total, solo que menos de lo que su cifra sugiere. Y hay una parte —conservar patrimonio, archivos, restauración— donde el argumento del mercado es débil de verdad, porque el beneficiario aún no ha nacido y no puede pagar. Lo que sí queda en pie es la pregunta de quién decide: la subvención no elige «cultura», elige qué cultura, y la elige un jurado.",
+      "Aquí hay tres cosas que no cuadran con la versión fuerte, y las tres importan. El desplazamiento medido es parcial: el dinero público sí aumenta el total, solo que menos de lo que su cifra sugiere. Hay una parte —patrimonio, archivos, restauración— donde el argumento del mercado es débil de verdad, porque el beneficiario aún no ha nacido y no puede pagar. Y con el cine, el titular fácil se cae al mirar los años seguidos: desde 2016, salvo la pandemia, la recaudación mundial del cine español ha superado el total de las subvenciones que recibe. Añádase que «películas exhibidas» incluye estrenos testimoniales y que no todas están subvencionadas. Lo que sí queda en pie es la pregunta de quién decide.",
     principle:
       "Una subvención no solo añade dinero: cambia a quién hay que convencer. Quien vive de la taquilla responde ante su público; quien vive de la convocatoria responde ante quien la firma. Ninguno de los dos incentivos es neutral, pero solo uno de ellos se suele presentar como si lo fuera.",
     quiz: {
@@ -348,9 +360,9 @@ export const MEASURES: Measure[] = [
       ],
       correct: 1,
       everyday:
-        "Imagina una sala pequeña que se mantiene con cien socios que pagan una cuota. Llega una subvención que cubre la mitad del presupuesto. Algunos socios piensan, con toda la lógica del mundo, que ya la están pagando con sus impuestos y dejan de aportar. La sala no ha ganado el doble: ha ganado algo menos y, de paso, ha cambiado de jefe. Antes tenía que convencer a cien vecinos; ahora tiene que convencer a un jurado y volver a convencerlo cada año.",
+        "Imagina una sala pequeña que se mantiene con cien socios que pagan una cuota. Llega una subvención que cubre la mitad del presupuesto. Algunos socios piensan, con toda la lógica del mundo, que ya la están pagando con sus impuestos y dejan de aportar. La sala no ha ganado el doble: ha ganado algo menos y, de paso, ha cambiado de jefe. Antes tenía que convencer a cien vecinos; ahora tiene que convencer a un jurado y volver a convencerlo cada año.\n\nEse cambio de jefe se ve en los números del cine español. En 2025 se exhibieron 727 películas y 282 no llegaron a cien espectadores: no a cien mil, a cien. Cuando el dinero llega antes de que exista el público, encontrarlo deja de ser la condición para hacer la película y pasa a ser un extra. Nadie está engañando a nadie; el sistema premia rellenar bien una convocatoria, y eso es lo que se aprende a hacer.",
       lesson:
-        "Esta es la más discutible de las siete y se marca como tal: el desplazamiento medido es parcial, y en patrimonio o archivos el argumento del mercado es flojo de verdad. Lo que aguanta no es «sobra el dinero público», sino que la subvención no elige cultura, elige qué cultura — y desplaza el juicio del público al de un comité.",
+        "Una subvención no solo añade dinero: cambia a quién hay que convencer. Quien vive de la taquilla responde ante su público; quien vive de la convocatoria responde ante quien la firma.\n\nY esta es la más discutible de las siete, así que va con su freno: el desplazamiento medido es parcial, en patrimonio el argumento del mercado es flojo de verdad, y desde 2016 el cine español ha recaudado en el mundo más de lo que recibe en ayudas. Lo que aguanta no es «sobra el dinero público», sino que la subvención no elige cultura, elige qué cultura — y traslada esa decisión del público a un comité.",
     },
   },
 ];

@@ -31,6 +31,19 @@ const ORDER = [
 
 const LESSONS: Measure[] = ORDER.map((id) => MEASURES.find((m) => m.id === id)!).filter(Boolean);
 
+/** Un texto largo se parte por líneas en blanco; un párrafo de doce líneas no lo lee nadie. */
+function Prose({ text, className = "" }: { text: string; className?: string }) {
+  return (
+    <>
+      {text.split("\n\n").map((paragraph, i) => (
+        <p key={i} className={`leading-relaxed text-muted-foreground ${i > 0 ? "mt-3" : ""} ${className}`}>
+          {paragraph}
+        </p>
+      ))}
+    </>
+  );
+}
+
 const STRENGTH_STYLE: Record<string, string> = {
   sólida: "border-primary/30 bg-primary/10 text-primary",
   media: "border-border bg-muted text-muted-foreground",
@@ -215,7 +228,7 @@ export function PolicyQuiz() {
               <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                 Qué pasa en realidad
               </p>
-              <p className="leading-relaxed text-muted-foreground">{lesson.quiz.everyday}</p>
+              <Prose text={lesson.quiz.everyday} />
             </div>
 
             <div className="rounded-2xl border border-primary/25 bg-primary/5 p-5">
@@ -223,7 +236,7 @@ export function PolicyQuiz() {
                 <Lightbulb className="h-3.5 w-3.5" />
                 La lección
               </p>
-              <p className="leading-relaxed text-muted-foreground">{lesson.quiz.lesson}</p>
+              <Prose text={lesson.quiz.lesson} />
             </div>
 
             {/* Cada afirmación con su fuerza y su fuente. Sin esto sería un
