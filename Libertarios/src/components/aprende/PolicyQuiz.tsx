@@ -53,6 +53,34 @@ function clampIndex(raw: string | null, limit: number): number | null {
   return Number.isInteger(n) && n >= 0 && n < limit ? n : null;
 }
 
+/**
+ * Las respuestas, un carácter por lección: `0`, `1` o `-` si aún no ha contestado.
+ *
+ * Van en la URL porque el estado en memoria se pierde al salir de la página, y
+ * de esta página se sale constantemente: cada lección enlaza a su ficha
+ * completa. Sin esto, volver atrás devolvía al lector a la pregunta uno con el
+ * marcador a cero, después de haber contestado seis.
+ */
+function encodeAnswers(answers: (number | null)[]): string {
+  return answers.map((a) => (a === null ? "-" : String(a))).join("");
+}
+
+function decodeAnswers(raw: string | null): (number | null)[] | null {
+  if (!raw || raw.length !== LESSONS.length) return null;
+  const out: (number | null)[] = [];
+  for (let i = 0; i < raw.length; i++) {
+    const c = raw[i];
+    if (c === "-") {
+      out.push(null);
+      continue;
+    }
+    const n = Number(c);
+    if (!Number.isInteger(n) || n < 0 || n >= LESSONS[i].quiz.options.length) return null;
+    out.push(n);
+  }
+  return out;
+}
+
 const STRENGTH_STYLE: Record<string, string> = {
   sólida: "border-primary/30 bg-primary/10 text-primary",
   media: "border-border bg-muted text-muted-foreground",
@@ -67,18 +95,23 @@ export function PolicyQuiz() {
    */
   const params = useSearchParams();
   const initialStep = clampIndex(params.get("p"), LESSONS.length);
+  // `a` lleva la partida entera; `r` es la entrada desde la portada, con una
+  // sola respuesta ya pulsada.
+  const restored = decodeAnswers(params.get("a"));
   const initialAnswer = clampIndex(params.get("r"), 2);
 
   const [step, setStep] = useState(initialStep ?? 0);
   /** Qué contestó el lector en cada pregunta. `null` = aún sin contestar. */
-  const [answers, setAnswers] = useState<(number | null)[]>(() =>
-    LESSONS.map((lesson, i) =>
-      i === initialStep && initialAnswer !== null && initialAnswer < lesson.quiz.options.length
-        ? initialAnswer
-        : null,
-    ),
+  const [answers, setAnswers] = useState<(number | null)[]>(
+    () =>
+      restored ??
+      LESSONS.map((lesson, i) =>
+        i === initialStep && initialAnswer !== null && initialAnswer < lesson.quiz.options.length
+          ? initialAnswer
+          : null,
+      ),
   );
-  const [done, setDone] = useState(false);
+  const [done, setDone] = useState(params.get("fin") === "1");
   const topRef = useRef<HTMLDivElement>(null);
 
   const lesson = LESSONS[step];
@@ -90,6 +123,24 @@ export function PolicyQuiz() {
     if (revealed) return;
     setAnswers((prev) => prev.map((a, i) => (i === step ? index : a)));
   };
+
+  /*
+   * La URL sigue al test paso a paso.
+   *
+   * Se usa `history.replaceState` y no el router de Next a propósito: sustituye
+   * la entrada actual del historial en vez de añadir una, así que «atrás» desde
+   * la ficha de una medida devuelve al lector exactamente a la pregunta que
+   * estaba leyendo, con sus respuestas, y no le obliga a deshacer paso a paso
+   * las ocho preguntas. Tampoco provoca un renderizado de la ruta.
+   */
+  useEffect(() => {
+    const query = done
+      ? `?fin=1&a=${encodeAnswers(answers)}`
+      : `?p=${step}&a=${encodeAnswers(answers)}`;
+    if (window.location.search !== query) {
+      window.history.replaceState(null, "", window.location.pathname + query);
+    }
+  }, [step, answers, done]);
 
   /*
    * Al llegar desde la portada con una respuesta ya elegida, se aterriza sobre
