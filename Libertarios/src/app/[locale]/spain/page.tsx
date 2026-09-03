@@ -1,20 +1,17 @@
-import type { Metadata } from "next";
-import { HomePage } from "@/components/pages/HomePage";
-
-export const metadata: Metadata = {
-  title: "Libertarios.eu — El mapa libertario de España",
-  description:
-    "Mapa interactivo de simpatizantes libertarios en España, provincia a provincia. Datos agregados y anónimos.",
-  alternates: { canonical: "/spain" },
-};
+import { redirect } from "next/navigation";
 
 /**
- * The home page pre-filtered to Spain.
+ * `/spain` era la portada prefiltrada a España; ahora España es la portada.
  *
- * Same component as `/`, only the map scope differs — so this URL is a
- * shareable deep link into the Spanish view rather than a separate page to
- * keep in sync.
+ * La ruta se conserva como redirección permanente en vez de borrarla: estuvo
+ * publicada, y romper una URL que alguien pudo compartir o enlazar no cuesta
+ * nada evitarlo.
  */
-export default function SpainPage() {
-  return <HomePage scope="ES" />;
+export default async function SpainPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  redirect(`/${locale}`);
 }

@@ -5,7 +5,7 @@ import { Link, useLocale } from "@/i18n/Link";
 import { getDictionary } from "@/i18n/getDictionary";
 import { LOCALE_META } from "@/i18n/config";
 import { useRouter } from "next/navigation";
-import { ArrowRight, ChevronDown, Map as MapIcon, Play, Table2 } from "lucide-react";
+import { ArrowRight, ChevronDown, GraduationCap, Map as MapIcon, Play, Table2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { AffiliateSnapshot, CountrySnapshot } from "@/lib/affiliates/types";
 import { EuropeMap } from "./EuropeMap";
@@ -32,7 +32,7 @@ const signed = (n: number) => `${n > 0 ? "+" : ""}${n}`;
 /**
  * The map, as the page's hero.
  *
- * One component, two scopes: `/` shows Europe, `/spain` shows the identical
+ * One component, two scopes: `/` shows Spain, `/europa` shows the identical
  * page with the map pre-filtered to Spain's provinces. The scope lives in the
  * URL so any view is shareable, and switching it is a client-side navigation.
  *
@@ -147,7 +147,7 @@ export function AffiliateMapSection({
   const toggle = (code: string) => setSelected((cur) => (cur === code ? null : code));
   const handleCountrySelect = (code: string) => {
     if (code === "ES") {
-      router.push("/spain", { scroll: false });
+      router.push("/", { scroll: false });
       return;
     }
     toggle(code);
@@ -227,19 +227,34 @@ export function AffiliateMapSection({
 
             {/* Actions and headline figures */}
             <div className="order-3 lg:col-start-1 lg:row-start-2 lg:self-start">
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <Button variant="hero" size="lg" className="group" asChild>
+              {/*
+                Tres llamadas, en dos filas y no en una.
+                Puestas en fila, «Contarme» dejaba de ser la principal y las
+                tres se leían como una lista de opciones equivalentes. Arriba va
+                sola la que pide el compromiso; debajo, las dos que no piden
+                nada y sirven para decidir si merece la pena.
+              */}
+              <div className="flex flex-col gap-3">
+                <Button variant="hero" size="lg" className="group sm:self-start" asChild>
                   <Link href="/registro">
                     {t.ctaRegister}
                     <ArrowRight className="transition-transform group-hover:translate-x-1" />
                   </Link>
                 </Button>
-                <Button variant="heroOutline" size="lg" asChild>
-                  <Link href="/cuadrante">
-                    <Play />
-                    {t.ctaTest}
-                  </Link>
-                </Button>
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <Button variant="heroOutline" size="lg" asChild>
+                    <Link href="/aprende">
+                      <GraduationCap />
+                      {t.ctaLearn}
+                    </Link>
+                  </Button>
+                  <Button variant="heroOutline" size="lg" asChild>
+                    <Link href="/cuadrante">
+                      <Play />
+                      {t.ctaTest}
+                    </Link>
+                  </Button>
+                </div>
               </div>
 
               <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-border pt-7">
@@ -346,7 +361,7 @@ export function AffiliateMapSection({
               </Button>
               {!isSpain && (
                 <Button variant="outline" size="sm" asChild>
-                  <Link href="/spain" scroll={false}>
+                  <Link href="/" scroll={false}>
                     {m.spainDetail}
                     <ArrowRight className="h-4 w-4" />
                   </Link>
@@ -414,8 +429,8 @@ function Figure({
 function ScopeSwitch({ scope }: { scope: MapScope }) {
   const m = getDictionary(useLocale()).map;
   const options: { key: MapScope; label: string; href: string }[] = [
-    { key: "europe", label: m.scopeEurope, href: "/" },
-    { key: "ES", label: `🇪🇸 ${m.scopeSpain}`, href: "/spain" },
+    { key: "ES", label: `🇪🇸 ${m.scopeSpain}`, href: "/" },
+    { key: "europe", label: m.scopeEurope, href: "/europa" },
   ];
 
   return (

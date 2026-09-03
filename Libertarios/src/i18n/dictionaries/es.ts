@@ -48,6 +48,7 @@ export const es = {
       "En España no hay un movimiento libertario organizado: hay personas sueltas que no saben cuántas son. Este mapa las cuenta, provincia a provincia.",
     ctaRegister: "Contarme",
     ctaTest: "Hacer el test",
+    ctaLearn: "Desafía tus creencias",
     disclaimer:
       "No pertenecemos a ningún partido y no pedimos el voto. Sí queremos que esta posición exista en España: lo decimos y lo sostenemos con los datos.",
     statSupporters: "Simpatizantes",

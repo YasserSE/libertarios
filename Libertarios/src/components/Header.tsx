@@ -33,8 +33,8 @@ export function Header() {
     {
       label: t.maps,
       children: [
-        { label: t.mapsEurope, href: "/", description: t.mapsEuropeHint },
-        { label: t.mapsSpain, href: "/spain", description: t.mapsSpainHint },
+        { label: t.mapsSpain, href: "/", description: t.mapsSpainHint },
+        { label: t.mapsEurope, href: "/europa", description: t.mapsEuropeHint },
         { label: t.mapsData, href: "/datos", description: t.mapsDataHint },
       ],
     },
@@ -56,8 +56,8 @@ export function Header() {
     {
       title: t.maps,
       items: [
-        { label: t.mapsEurope, href: "/" },
-        { label: t.mapsSpain, href: "/spain" },
+        { label: t.mapsSpain, href: "/" },
+        { label: t.mapsEurope, href: "/europa" },
         { label: t.mapsData, href: "/datos" },
       ],
     },

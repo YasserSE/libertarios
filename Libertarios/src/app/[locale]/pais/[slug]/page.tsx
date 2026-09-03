@@ -18,7 +18,7 @@ import { formatPerMillion } from "@/lib/affiliates/format";
  *
  * Countries without a subdivision map get this compact card instead of a
  * choropleth; when one gains regional data, point its slug at the scoped home
- * page the way `/spain` does.
+ * page the way `/` does for Spain.
  */
 
 export function generateStaticParams() {
@@ -59,7 +59,7 @@ export default async function CountryPage({ params }: { params: Promise<{ slug: 
             {country.meta.name} tiene mapa propio por provincias.
           </p>
           <Button variant="cta" asChild>
-            <Link href="/spain">
+            <Link href="/">
               Ver el mapa de {country.meta.name}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>

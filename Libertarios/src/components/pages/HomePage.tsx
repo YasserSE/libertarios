@@ -18,8 +18,8 @@ import { isRegistrationConfigured } from "@/lib/registration/register";
 /**
  * The home page, rendered at one of two scopes.
  *
- * `/` shows the whole of Europe; `/spain` renders the identical page with the
- * map pre-filtered to Spain. Keeping it one component means the two URLs can
+ * `/` shows Spain; `/europa` renders the identical page with the map opened
+ * out to the whole continent. Keeping it one component means the two URLs can
  * never drift apart — only the map's scope differs.
  */
 export async function HomePage({ scope }: { scope: MapScope }) {
