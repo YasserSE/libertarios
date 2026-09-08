@@ -31,5 +31,9 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   // Se excluyen assets y rutas internas: redirigir /geo/*.json rompería los mapas.
-  matcher: ["/((?!_next|api|geo|favicon|robots|sitemap|.*\\.).*)"],
+  // `opengraph-image` y `twitter-image` no llevan extensión, así que sin
+  // excluirlas el middleware las manda a `/es/opengraph-image` y el rastreador
+  // recibe una redirección en vez de la imagen: el enlace compartido sale sin
+  // vista previa.
+  matcher: ["/((?!_next|api|geo|favicon|robots|sitemap|opengraph-image|twitter-image|.*\\.).*)"],
 };

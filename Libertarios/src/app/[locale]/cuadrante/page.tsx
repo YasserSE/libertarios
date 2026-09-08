@@ -1,11 +1,12 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { QuadrantTest } from "@/components/QuadrantTest";
 import { QuadrantResults } from "@/components/QuadrantResults";
+import { ResultsGate } from "@/components/ResultsGate";
 import { InteractiveQuadrant } from "@/components/InteractiveQuadrant";
 import { Button } from "@/components/ui/button";
 import { Play, MousePointer, Info } from "lucide-react";
@@ -38,10 +39,59 @@ function QuadrantPageContent() {
     .map((k) => k.trim())
     .filter((k): k is Kind => (REFERENCE_KINDS as readonly string[]).includes(k));
   const focusId = searchParams.get("ref");
+
+  /**
+   * Una posición compartida (`?e=85&s=75`).
+   *
+   * Es lo que hace que el enlace de «compartir» valga para algo: quien lo abre
+   * ve el cuadrante con esa posición pintada en vez de un test vacío. Se valida
+   * antes de usarse: son números que llegan de una URL cualquiera.
+   */
+  const sharedPosition = (() => {
+    const parse = (raw: string | null) => {
+      if (raw === null) return null;
+      const n = Number(raw);
+      return Number.isInteger(n) && n >= -100 && n <= 100 ? n : null;
+    };
+    const economic = parse(searchParams.get("e"));
+    const social = parse(searchParams.get("s"));
+    return economic !== null && social !== null ? { economic, social } : null;
+  })();
   const initialLayers: Kind[] = layers.length > 0 ? layers : ["country"];
 
-  const [mode, setMode] = useState<Mode>('intro');
-  const [userPosition, setUserPosition] = useState<{ economic: number; social: number } | null>(null);
+  const [mode, setMode] = useState<Mode>(sharedPosition ? 'results' : 'intro');
+  const [userPosition, setUserPosition] = useState<{ economic: number; social: number } | null>(
+    sharedPosition,
+  );
+  /*
+   * El resultado se enseña al registrarse. Se recuerda en el navegador para que
+   * volver a la página no vuelva a pedir el correo a quien ya lo dio: el muro
+   * está para contarse una vez, no para cobrar peaje en cada visita.
+   */
+  const [unlocked, setUnlocked] = useState(sharedPosition !== null);
+
+  /*
+   * Se lee en un efecto y no al construir el estado: `localStorage` no existe
+   * en el servidor, y leerlo durante el render daría un HTML distinto al del
+   * cliente. Puede fallar —ventana privada, cookies bloqueadas—, y si falla
+   * simplemente se vuelve a pedir el correo.
+   */
+  useEffect(() => {
+    try {
+      if (window.localStorage.getItem("libertarios:registrado") === "1") setUnlocked(true);
+    } catch {
+      // Sin almacenamiento, el muro aparece otra vez. No es grave.
+    }
+  }, []);
+
+  const unlock = () => {
+    setUnlocked(true);
+    try {
+      window.localStorage.setItem("libertarios:registrado", "1");
+    } catch {
+      // Da igual: la sesión actual ya está desbloqueada.
+    }
+  };
 
   const handleTestComplete = (economic: number, social: number) => {
     setUserPosition({ economic, social });
@@ -207,11 +257,19 @@ function QuadrantPageContent() {
 
           {mode === 'results' && userPosition && (
             <div className="max-w-4xl mx-auto">
-              <QuadrantResults 
-                economic={userPosition.economic}
-                social={userPosition.social}
-                onReset={handleReset}
-              />
+              {unlocked ? (
+                <QuadrantResults
+                  economic={userPosition.economic}
+                  social={userPosition.social}
+                  onReset={handleReset}
+                />
+              ) : (
+                <ResultsGate
+                  economic={userPosition.economic}
+                  social={userPosition.social}
+                  onUnlock={unlock}
+                />
+              )}
             </div>
           )}
         </div>

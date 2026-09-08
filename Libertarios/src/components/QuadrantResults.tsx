@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState, useRef } from "react";
-import { Link } from "@/i18n/Link";
+import { Link, useLocale } from "@/i18n/Link";
 import { Button } from "@/components/ui/button";
 import { InteractiveQuadrant } from "./InteractiveQuadrant";
 import { mockUsers } from "@/data/mockRegisteredUsers";
@@ -69,7 +69,20 @@ export function QuadrantResults({ economic, social, onReset }: QuadrantResultsPr
 
   const shareText = `${analysis.emoji} Mi resultado en el test ideológico: ${analysis.quadrant}\n\n📊 Libertad económica: ${economic > 0 ? '+' : ''}${economic}\n🗽 Libertad social: ${social > 0 ? '+' : ''}${social}\n\n¿Dónde te sitúas tú? Haz el test:`;
   
-  const shareUrl = typeof window !== 'undefined' ? `${window.location.origin}/cuadrante` : '';
+  /*
+   * El enlace que se comparte lleva la posición y el idioma.
+   *
+   * Antes apuntaba a `/cuadrante` a secas: sin idioma —así que el visitante se
+   * comía una redirección— y sobre todo sin el resultado, de modo que «mira
+   * dónde he caído» llevaba a un test en blanco. Con `?e` y `?s` el enlace abre
+   * el cuadrante con esa posición ya pintada, que es lo que se prometía al
+   * pulsar «compartir».
+   */
+  const locale = useLocale();
+  const shareUrl =
+    typeof window !== "undefined"
+      ? `${window.location.origin}/${locale}/cuadrante?e=${economic}&s=${social}`
+      : "";
 
   const handleCopyLink = async () => {
     try {
