@@ -123,6 +123,8 @@ CREATE TABLE affiliates (
   id            uuid PRIMARY KEY DEFAULT gen_random_uuid(),
   email_hash    bytea NOT NULL UNIQUE,       -- SHA-256(email + pepper); clave de deduplicación
   email         text,                        -- dirección en claro, para comunicaciones
+  result_token  uuid NOT NULL UNIQUE         -- capacidad para volver a ver el propio resultado
+                DEFAULT gen_random_uuid(),
   created_at    timestamptz NOT NULL DEFAULT now(),
   confirmed_at  timestamptz,                 -- doble opt-in; sin esto no cuenta
   deleted_at    timestamptz                  -- borrado lógico para el art. 17
@@ -139,6 +141,25 @@ recoger direcciones bajo una promesa de anonimato sería un incumplimiento del
 RGPD, no un desliz de redacción. Y la columna queda fuera de todo lo que se
 publica: las vistas agregadas no la tocan, y las tablas base siguen sin
 políticas RLS, así que la clave anónima devuelve 42501 al intentar leerla.
+
+#### Volver a ver el propio resultado
+
+`result_token` es lo que permite que alguien recupere su posición desde otro
+dispositivo. Es una **capacidad**, no una credencial: quien tiene el token ve un
+resultado, y nada más — `result_by_token(uuid)` devuelve la posición y no el
+correo, ni su hash, ni el `id`.
+
+Lo que no se hace, y conviene que siga sin hacerse mientras no haya envío de
+correo: un formulario de «recupera tu resultado escribiendo tu email». La
+posición política es categoría especial del art. 9, y una consulta por dirección
+sin verificar convierte el sitio en un buscador donde cualquiera teclea el correo
+de un conocido y lee su ideología. Cuando haya proveedor de correo, la vía buena
+es un enlace mágico: se envía el token a la dirección en vez de devolverlo a
+quien lo pida.
+
+El token es aleatorio —no derivado del correo, así que no se puede ir de uno al
+otro—, único y revocable con un `update`. Y se conserva entre altas repetidas:
+un enlace guardado hace meses sigue funcionando después de repetir el test.
 
 ### Posición y territorio — la tabla que alimenta los mapas
 
@@ -228,8 +249,10 @@ GRANT SELECT ON country_stats, region_stats, countries, regions TO anon;
 ```
 
 El alta se hace con una función `SECURITY DEFINER` (`register_affiliate(...)`)
-que inserta y no devuelve nada consultable. Así el cliente puede escribir sin
-poder leer jamás lo escrito.
+que inserta y devuelve una sola cosa: el `result_token` de quien acaba de
+registrarse. Así el cliente puede escribir sin poder leer nada de nadie más.
+La otra excepción de lectura es `result_by_token(uuid)`, que devuelve una
+posición a cambio de un token que solo tiene su dueño.
 
 ---
 
@@ -293,7 +316,7 @@ España: generalizarlo es parametrizar la URL del TopoJSON, la proyección y el
 | Obligación | Implementación |
 |---|---|
 | Consentimiento explícito (art. 9) | `confirmed_at` — sin doble opt-in la fila no entra en ningún agregado |
-| Derecho de acceso (art. 15) | Consulta por `email_hash`, devuelve el perfil |
+| Derecho de acceso (art. 15) | Consulta por `email_hash`, devuelve el perfil; la persona ve lo suyo con `result_by_token` |
 | Derecho de supresión (art. 17) | `deleted_at`; el borrado físico va en un job nocturno |
 | Minimización | Año de nacimiento en lugar de fecha; nunca dirección ni IP junto al perfil |
 | Limitación del plazo | Cuentas sin confirmar se purgan a los 30 días |

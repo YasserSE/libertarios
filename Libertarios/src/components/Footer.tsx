@@ -15,6 +15,9 @@ const footerLinks = {
     { label: "¿Qué es ser libertario?", href: "/libertario" },
     { label: "Comparativas", href: "/comparativas" },
     { label: "Glosario", href: "/libertario" },
+    // Quien ya hizo el test necesita una puerta de vuelta desde cualquier
+    // página; sin esto solo se llegaba con el enlace personal a mano.
+    { label: "Ver mi resultado", href: "/mi-resultado" },
   ],
 };
 

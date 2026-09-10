@@ -15,6 +15,7 @@ import { ArrowRight, Check, MapPin, User, Calendar, Heart, Globe } from "lucide-
 import { toast } from "sonner";
 import { submitRegistration } from "@/app/[locale]/registro/actions";
 import { resolveProvince } from "@/data/geo/spain-provinces";
+import { storeResult } from "@/lib/results/storage";
 import { Checkbox } from "@/components/ui/checkbox";
 
 const provinces = [
@@ -116,6 +117,14 @@ export function RegistrationForm({ onComplete, quadrantPosition }: RegistrationF
       toast.error(result.error);
       return;
     }
+
+    // Quien se registra por el formulario largo tiene el mismo derecho a
+    // volver a ver su resultado que quien pasa por el muro del test.
+    storeResult({
+      economic: quadrantPosition.economic,
+      social: quadrantPosition.social,
+      token: result.token,
+    });
 
     const registrationData: RegistrationData = {
       ...formData,

@@ -7,6 +7,7 @@ import { RegistrationForm, RegistrationData } from "@/components/RegistrationFor
 import { InteractiveQuadrant } from "@/components/InteractiveQuadrant";
 import { QuadrantTest } from "@/components/QuadrantTest";
 import { Button } from "@/components/ui/button";
+import { Link } from "@/i18n/Link";
 import { Play, MousePointer, CheckCircle, ArrowLeft, Shield, Lock } from "lucide-react";
 import { quadrantQuestions } from "@/data/quadrantQuestions";
 
@@ -248,7 +249,12 @@ export function RegistroClient({ configured }: { configured: boolean }) {
                   Tus datos se muestran de forma anónima y agregada.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button variant="cta" onClick={() => window.location.href = '/datos'}>
+                  {/* Lo primero que quiere ver quien acaba de registrarse es lo
+                      suyo, y desde aquí ya se puede recuperar cuando vuelva. */}
+                  <Button variant="cta" asChild>
+                    <Link href="/mi-resultado">Ver mi resultado</Link>
+                  </Button>
+                  <Button variant="outline" onClick={() => window.location.href = '/datos'}>
                     Ver los datos
                   </Button>
                   <Button variant="outline" onClick={() => window.location.href = '/cuadrante'}>

@@ -32,7 +32,12 @@ export function ResultsGate({
 }: {
   economic: number;
   social: number;
-  onUnlock: () => void;
+  /**
+   * Recibe el token con el que la persona podrá recuperar su resultado más
+   * adelante. Llega vacío si la base no lo devuelve, y entonces el resultado
+   * solo se recuerda en este navegador.
+   */
+  onUnlock: (token: string | null) => void;
 }) {
   const [email, setEmail] = useState("");
   const [country, setCountry] = useState("ES");
@@ -56,7 +61,7 @@ export function ResultsGate({
     });
     setSending(false);
     if (result.ok) {
-      onUnlock();
+      onUnlock(result.token);
     } else {
       setError(result.error);
     }
@@ -72,8 +77,15 @@ export function ResultsGate({
         Ya está. ¿Quieres ver dónde has caído?
       </h2>
       <p className="mt-3 text-center leading-relaxed text-muted-foreground">
-        Déjanos tu correo y te enseñamos el resultado. Sirve para dos cosas: que no te contemos dos
-        veces, y que tu posición pase a formar parte del mapa que ve todo el mundo.
+        Déjanos tu correo y te enseñamos el resultado. Sirve para tres cosas: que no te contemos dos
+        veces, que tu posición pase a formar parte del mapa que ve todo el mundo, y que puedas
+        volver a ver tu resultado más adelante sin repetir el test.
+      </p>
+      {/* Quien ya se registró antes de que existiera el enlace de recuperación
+          pasa por aquí una vez más. Conviene decirle que no está duplicándose. */}
+      <p className="mt-2 text-center text-sm leading-relaxed text-muted-foreground">
+        ¿Ya te habías registrado? Pon el mismo correo: actualizamos tu ficha en vez de crear otra, y
+        recuperas tu enlace.
       </p>
 
       <form onSubmit={submit} className="mt-6 space-y-4">

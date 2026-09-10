@@ -9,8 +9,9 @@ import { QuadrantResults } from "@/components/QuadrantResults";
 import { ResultsGate } from "@/components/ResultsGate";
 import { InteractiveQuadrant } from "@/components/InteractiveQuadrant";
 import { Button } from "@/components/ui/button";
-import { Play, MousePointer, Info } from "lucide-react";
+import { Play, MousePointer, Info, History } from "lucide-react";
 import { quadrantQuestions } from "@/data/quadrantQuestions";
+import { readStoredResult, storeResult, type StoredResult } from "@/lib/results/storage";
 
 type Mode = 'intro' | 'test' | 'manual' | 'results';
 
@@ -67,8 +68,24 @@ function QuadrantPageContent() {
    * El resultado se enseña al registrarse. Se recuerda en el navegador para que
    * volver a la página no vuelva a pedir el correo a quien ya lo dio: el muro
    * está para contarse una vez, no para cobrar peaje en cada visita.
+   *
+   * Lo que abre el muro es tener un resultado guardado, no la marca de la
+   * primera versión (`libertarios:registrado`), que decía «ya se registró» y
+   * nada más. Respetar esa marca dejaba a quien se registró antes de esto en un
+   * callejón sin salida: nunca volvía a ver el muro, así que nunca pedía un
+   * token, así que nunca tenía enlace de recuperación. Ahora esas personas ven
+   * el muro una vez más; al reintroducir el mismo correo su fila se actualiza
+   * —el `email_hash` sigue siendo la clave, no se duplica nada— y reciben el
+   * token que ya tenían en la base.
    */
   const [unlocked, setUnlocked] = useState(sharedPosition !== null);
+  /**
+   * El resultado que este navegador recuerda de una visita anterior. Antes solo
+   * se guardaba «ya se registró», así que volver a la página enseñaba el test
+   * en blanco: la posición estaba en la base y no había forma de pedirla.
+   */
+  const [saved, setSaved] = useState<StoredResult | null>(null);
+  const [token, setToken] = useState<string | null>(null);
 
   /*
    * Se lee en un efecto y no al construir el estado: `localStorage` no existe
@@ -77,25 +94,31 @@ function QuadrantPageContent() {
    * simplemente se vuelve a pedir el correo.
    */
   useEffect(() => {
-    try {
-      if (window.localStorage.getItem("libertarios:registrado") === "1") setUnlocked(true);
-    } catch {
-      // Sin almacenamiento, el muro aparece otra vez. No es grave.
-    }
+    const stored = readStoredResult();
+    if (!stored) return;
+    setSaved(stored);
+    setUnlocked(true);
+    if (stored.token) setToken(stored.token);
   }, []);
 
-  const unlock = () => {
+  const unlock = (newToken: string | null) => {
     setUnlocked(true);
-    try {
-      window.localStorage.setItem("libertarios:registrado", "1");
-    } catch {
-      // Da igual: la sesión actual ya está desbloqueada.
-    }
+    setToken(newToken);
+    if (userPosition) storeResult({ ...userPosition, token: newToken });
+  };
+
+  /** Volver a ver, sin repetir las veinte preguntas. */
+  const showSaved = (stored: StoredResult) => {
+    setUserPosition({ economic: stored.economic, social: stored.social });
+    setMode("results");
   };
 
   const handleTestComplete = (economic: number, social: number) => {
     setUserPosition({ economic, social });
     setMode('results');
+    // Quien ya pasó el muro no lo vuelve a ver, así que este es el único sitio
+    // donde se puede recordar su nueva posición.
+    if (unlocked) storeResult({ economic, social, token });
   };
 
   const handleManualPosition = (economic: number, social: number) => {
@@ -183,6 +206,38 @@ function QuadrantPageContent() {
                 </div>
               </div>
 
+              {/* Resultado guardado de una visita anterior */}
+              {saved && (
+                <div className="mb-8 rounded-2xl border border-primary/25 bg-primary/5 p-6">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="flex items-start gap-3">
+                      <History className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                      <div>
+                        <p className="font-display font-semibold text-foreground">
+                          Ya hiciste el test
+                        </p>
+                        <p className="mt-1 text-sm text-muted-foreground">
+                          Tu posición fue{" "}
+                          <strong className="text-foreground">
+                            {saved.economic > 0 ? "+" : ""}
+                            {saved.economic} económico
+                          </strong>{" "}
+                          y{" "}
+                          <strong className="text-foreground">
+                            {saved.social > 0 ? "+" : ""}
+                            {saved.social} social
+                          </strong>
+                          . Puedes verla otra vez o repetir el test.
+                        </p>
+                      </div>
+                    </div>
+                    <Button variant="cta" className="shrink-0" onClick={() => showSaved(saved)}>
+                      Ver mi resultado
+                    </Button>
+                  </div>
+                </div>
+              )}
+
               {/* Preview quadrant */}
               <div className="bg-card border border-border rounded-2xl p-6 shadow-soft">
                 <h3 className="font-display text-lg font-semibold text-foreground mb-4 text-center">
@@ -261,6 +316,7 @@ function QuadrantPageContent() {
                 <QuadrantResults
                   economic={userPosition.economic}
                   social={userPosition.social}
+                  recoveryToken={sharedPosition ? null : token}
                   onReset={handleReset}
                 />
               ) : (

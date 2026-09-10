@@ -32,4 +32,25 @@ export const registrationSchema = z.object({
 });
 
 export type RegistrationInput = z.input<typeof registrationSchema>;
-export type RegistrationResult = { ok: true } | { ok: false; error: string };
+
+/**
+ * Resultado del alta.
+ *
+ * `token` es la llave con la que la persona puede volver a ver su resultado
+ * desde cualquier dispositivo. Puede venir vacío —una base sin la migración
+ * 0007 aplicada devuelve el alta sin token—, y en ese caso el sitio se limita a
+ * no ofrecer el enlace de recuperación: el registro sí se ha guardado.
+ */
+export type RegistrationResult =
+  | { ok: true; token: string | null }
+  | { ok: false; error: string };
+
+/** Posición guardada que se devuelve al abrir un enlace de recuperación. */
+export type SavedResult = {
+  economic: number;
+  social: number;
+  country: string;
+  region: string | null;
+  method: "test" | "manual";
+  updatedAt: string;
+};

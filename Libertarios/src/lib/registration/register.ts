@@ -36,6 +36,9 @@ export function isRegistrationConfigured(): boolean {
   return readConfig() !== null;
 }
 
+/** Los tokens son UUID v4 generados por Postgres. */
+export const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 const hashEmail = (email: string, pepper: string) =>
   createHash("sha256").update(`${pepper}:${email}`, "utf8").digest("hex");
 
@@ -101,5 +104,16 @@ export async function registerAffiliate(input: unknown): Promise<RegistrationRes
     return { ok: false, error: "No hemos podido completar el registro. Inténtalo de nuevo." };
   }
 
-  return { ok: true };
+  /*
+   * La función devuelve el token con el que la persona podrá volver a ver su
+   * resultado. Si no llega —base sin la migración 0007, que devolvía `void`—
+   * el alta se da por buena igualmente: lo que se ha guardado se ha guardado, y
+   * la única consecuencia es que no se ofrece el enlace de recuperación.
+   */
+  const token = await response
+    .json()
+    .then((body: unknown) => (typeof body === "string" && UUID.test(body) ? body : null))
+    .catch(() => null);
+
+  return { ok: true, token };
 }

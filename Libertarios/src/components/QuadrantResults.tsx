@@ -7,7 +7,7 @@ import { InteractiveQuadrant } from "./InteractiveQuadrant";
 import { mockUsers } from "@/data/mockRegisteredUsers";
 import { REFERENCE_SETS, nearestReferences } from "@/data/quadrantReferences";
 import { ReferenceAvatar } from "./maps/ReferenceAvatar";
-import { RotateCcw, Share2, Users, ArrowRight, UserPlus, Twitter, Facebook, Link2, Check, Download } from "lucide-react";
+import { RotateCcw, Share2, Users, ArrowRight, UserPlus, Twitter, Facebook, Link2, Check, Bookmark } from "lucide-react";
 import { toast } from "sonner";
 import {
   DropdownMenu,
@@ -20,10 +20,22 @@ interface QuadrantResultsProps {
   economic: number;
   social: number;
   onReset: () => void;
+  /**
+   * Token personal de recuperación, si el registro lo devolvió. Con él se
+   * ofrece el enlace privado para volver a ver el resultado desde otro
+   * dispositivo; sin él, esa tarjeta simplemente no aparece.
+   */
+  recoveryToken?: string | null;
 }
 
-export function QuadrantResults({ economic, social, onReset }: QuadrantResultsProps) {
+export function QuadrantResults({
+  economic,
+  social,
+  onReset,
+  recoveryToken,
+}: QuadrantResultsProps) {
   const [copied, setCopied] = useState(false);
+  const [recoveryCopied, setRecoveryCopied] = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
   
   const analysis = useMemo(() => {
@@ -83,6 +95,28 @@ export function QuadrantResults({ economic, social, onReset }: QuadrantResultsPr
     typeof window !== "undefined"
       ? `${window.location.origin}/${locale}/cuadrante?e=${economic}&s=${social}`
       : "";
+
+  /*
+   * El enlace privado. Distinto del de compartir en lo que importa: aquel lleva
+   * la posición en la URL para que la vea cualquiera, y este lleva un token que
+   * solo debería tener su dueño. De ahí que se pidan cosas opuestas —uno se
+   * publica, el otro se guarda— y que no se puedan mezclar en un único botón.
+   */
+  const recoveryUrl =
+    recoveryToken && typeof window !== "undefined"
+      ? `${window.location.origin}/${locale}/mi-resultado?t=${recoveryToken}`
+      : "";
+
+  const handleCopyRecovery = async () => {
+    try {
+      await navigator.clipboard.writeText(recoveryUrl);
+      setRecoveryCopied(true);
+      toast.success("Enlace privado copiado. Guárdalo donde no lo pierdas.");
+      setTimeout(() => setRecoveryCopied(false), 2000);
+    } catch {
+      toast.error("No se pudo copiar el enlace");
+    }
+  };
 
   const handleCopyLink = async () => {
     try {
@@ -351,6 +385,46 @@ export function QuadrantResults({ economic, social, onReset }: QuadrantResultsPr
           )}
         </div>
       </div>
+
+      {/* Enlace privado de recuperación. El de compartir está hecho para
+          publicarse; este es lo contrario, y el texto tiene que dejarlo claro. */}
+      {recoveryUrl && (
+        <div className="rounded-2xl border border-border bg-card p-6 shadow-card">
+          <div className="mb-4 flex items-center gap-3">
+            <Bookmark className="h-5 w-5 text-primary" />
+            <h3 className="font-display font-semibold text-foreground">
+              Vuelve a ver este resultado cuando quieras
+            </h3>
+          </div>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            Este navegador ya lo recuerda: si vuelves, te lo enseñamos sin repetir el test. Y con
+            este enlace privado puedes abrirlo también desde el móvil o desde otro ordenador.
+          </p>
+
+          <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+            <input
+              readOnly
+              value={recoveryUrl}
+              onFocus={(e) => e.currentTarget.select()}
+              aria-label="Tu enlace privado"
+              className="h-12 flex-1 rounded-md border border-input bg-background px-3 font-mono text-xs text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            />
+            <Button variant="secondary" className="h-12 sm:w-44" onClick={handleCopyRecovery}>
+              {recoveryCopied ? (
+                <Check className="mr-2 h-4 w-4" />
+              ) : (
+                <Link2 className="mr-2 h-4 w-4" />
+              )}
+              {recoveryCopied ? "¡Copiado!" : "Copiar enlace"}
+            </Button>
+          </div>
+
+          <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+            No lo publiques: quien lo tenga verá tu posición política. No lleva tu correo ni tu
+            nombre, y puedes pedirnos que lo anulemos cuando quieras.
+          </p>
+        </div>
+      )}
 
       {/* Registration CTA */}
       <div className="bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 rounded-2xl p-8 text-center">
