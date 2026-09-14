@@ -16,3 +16,13 @@ export function formatPerMillion(value: number): string {
   if (value < 10) return value.toLocaleString("es-ES", { maximumFractionDigits: 1 });
   return Math.round(value).toLocaleString("es-ES");
 }
+
+/**
+ * Un recuento tal y como sale de las vistas públicas.
+ *
+ * Las vistas aplican k-anonimato: un territorio con menos de cinco registros
+ * llega como cero, y ese cero es indistinguible de «nadie». Imprimirlo como
+ * «0» decía a quien acababa de registrarse en Soria que su provincia estaba
+ * vacía. «<5» es lo único que se sabe con certeza de ese territorio.
+ */
+export const formatPublishedCount = (n: number) => (n > 0 ? formatCount(n) : "<5");

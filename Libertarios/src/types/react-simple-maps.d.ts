@@ -3,7 +3,7 @@
  * @types package for v3. This covers the surface the app actually uses.
  */
 declare module "react-simple-maps" {
-  import type { ComponentType, ReactNode, SVGProps } from "react";
+  import type { CSSProperties, ComponentType, ReactNode, SVGProps } from "react";
 
   export interface GeographyFeature {
     rsmKey: string;
@@ -26,6 +26,8 @@ declare module "react-simple-maps" {
     width?: number;
     height?: number;
     className?: string;
+    /** El resto de props se pasan al `<svg>`; `style` es el que usamos. */
+    style?: CSSProperties;
     children?: ReactNode;
   }>;
 
@@ -35,6 +37,12 @@ declare module "react-simple-maps" {
     minZoom?: number;
     maxZoom?: number;
     translateExtent?: [[number, number], [number, number]];
+    /**
+     * Decide qué eventos inician un gesto de zoom o arrastre. Recibe el evento
+     * nativo de d3-zoom (rueda, ratón o táctil); si no se pasa, cualquier
+     * gesto vale, incluida la rueda sin modificador.
+     */
+    filterZoomEvent?: (event: WheelEvent | MouseEvent | TouchEvent) => boolean;
     onMoveEnd?: (position: { coordinates: [number, number]; zoom: number }) => void;
     children?: ReactNode;
   }>;

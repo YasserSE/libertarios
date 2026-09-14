@@ -1,5 +1,7 @@
 "use client";
 
+import { formatPublishedCount } from "@/lib/affiliates/format";
+
 export interface TableRow {
   code: string;
   territory: string;
@@ -49,14 +51,17 @@ export function AffiliateDataTable({ rows, groupLabel }: { rows: TableRow[]; gro
                 {row.territory}
               </th>
               <td className="hidden px-4 py-2.5 text-muted-foreground sm:table-cell">{row.group}</td>
+              {/* Un cero aquí es un territorio por debajo del mínimo publicable,
+                  y su cuota y su crecimiento no existen: se dejan en blanco en
+                  vez de fingir un 0,0 %. */}
               <td className="px-4 py-2.5 text-right tabular-nums text-foreground">
-                {row.count.toLocaleString("es-ES")}
+                {formatPublishedCount(row.count)}
               </td>
               <td className="px-4 py-2.5 text-right tabular-nums text-muted-foreground">
-                {(row.share * 100).toFixed(1)}%
+                {row.count > 0 ? `${(row.share * 100).toFixed(1)}%` : "—"}
               </td>
               <td className="hidden px-4 py-2.5 text-right tabular-nums text-muted-foreground md:table-cell">
-                +{row.growth30d.toLocaleString("es-ES")}
+                {row.count > 0 ? `+${row.growth30d.toLocaleString("es-ES")}` : "—"}
               </td>
             </tr>
           ))}

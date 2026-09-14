@@ -4,10 +4,21 @@ import { useMemo, useState, useRef } from "react";
 import { Link, useLocale } from "@/i18n/Link";
 import { Button } from "@/components/ui/button";
 import { InteractiveQuadrant } from "./InteractiveQuadrant";
-import { mockUsers } from "@/data/mockRegisteredUsers";
 import { REFERENCE_SETS, nearestReferences } from "@/data/quadrantReferences";
 import { ReferenceAvatar } from "./maps/ReferenceAvatar";
-import { RotateCcw, Share2, Users, ArrowRight, UserPlus, Twitter, Facebook, Link2, Check, Bookmark } from "lucide-react";
+import {
+  RotateCcw,
+  Share2,
+  ArrowRight,
+  UserPlus,
+  Twitter,
+  Facebook,
+  Link2,
+  Check,
+  Bookmark,
+  Compass,
+  CheckCircle2,
+} from "lucide-react";
 import { toast } from "sonner";
 import {
   DropdownMenu,
@@ -38,48 +49,73 @@ export function QuadrantResults({
   const [recoveryCopied, setRecoveryCopied] = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
   
+  /*
+   * Solo el cuadrante y su descripción. Aquí había además un «percentil» y una
+   * «cercanía a la media del grupo» calculados sobre `mockUsers`: quinientas
+   * personas generadas con un PRNG, todas dentro de los subcuadrantes
+   * libertarios. Quien acababa de dar su correo para «formar parte del mapa»
+   * leía a continuación que estaba «cerca de la media» de un grupo que no
+   * existe. Los datos individuales reales no están disponibles —la base solo
+   * publica agregados con k-anonimato—, así que no hay con qué sustituirlo, y
+   * lo honesto es no enseñar nada antes que enseñar algo inventado.
+   *
+   * Tampoco hay ya un emoji distinto por cuadrante. Poner la Estatua de la
+   * Libertad al libertario y un círculo rojo o azul a los demás era juzgar el
+   * resultado en un sitio que dice que los datos no tienen posición.
+   */
   const analysis = useMemo(() => {
-    // Determine quadrant
-    let quadrant = "";
-    let description = "";
-    let emoji = "";
-    
     if (economic >= 0 && social >= 0) {
-      quadrant = "Libertario";
-      emoji = "🗽";
-      description = "Apoyas tanto la libertad económica como la libertad social. Crees en la autonomía individual, la responsabilidad personal y la mínima intervención del Estado en todos los aspectos de la vida.";
-    } else if (economic < 0 && social >= 0) {
-      quadrant = "Liberal social";
-      emoji = "🌈";
-      description = "Apoyas la libertad social pero prefieres cierta intervención económica del Estado. Valoras los derechos individuales en lo personal mientras favoreces políticas redistributivas.";
-    } else if (economic < 0 && social < 0) {
-      quadrant = "Autoritario de izquierda";
-      emoji = "🔴";
-      description = "Favoreces tanto la intervención económica como el control social por parte del Estado. Priorizas la igualdad colectiva sobre las libertades individuales.";
-    } else {
-      quadrant = "Autoritario de derecha";
-      emoji = "🔵";
-      description = "Apoyas el libre mercado pero con controles sociales más estrictos. Combinas libertad económica con valores tradicionales y orden social.";
+      return {
+        quadrant: "Libertario",
+        description:
+          "Apoyas tanto la libertad económica como la libertad social. Crees en la autonomía individual, la responsabilidad personal y la mínima intervención del Estado en todos los aspectos de la vida.",
+      };
     }
-    
-    // Calculate percentile
-    const similarUsers = mockUsers.filter(u => {
-      const dist = Math.sqrt(Math.pow(u.economic - economic, 2) + Math.pow(u.social - social, 2));
-      return dist < 30;
-    });
-    const percentile = Math.round((similarUsers.length / mockUsers.length) * 100);
-    
-    // Calculate average distance from user
-    const avgDistance = mockUsers.reduce((sum, u) => {
-      return sum + Math.sqrt(Math.pow(u.economic - economic, 2) + Math.pow(u.social - social, 2));
-    }, 0) / mockUsers.length;
-    
-    const closeness = avgDistance < 40 ? "cercana" : avgDistance < 60 ? "moderada" : "diferente";
-    
-    return { quadrant, description, percentile, similarUsers: similarUsers.length, closeness, emoji };
+    if (economic < 0 && social >= 0) {
+      return {
+        quadrant: "Liberal social",
+        description:
+          "Apoyas la libertad social pero prefieres cierta intervención económica del Estado. Valoras los derechos individuales en lo personal mientras favoreces políticas redistributivas.",
+      };
+    }
+    if (economic < 0 && social < 0) {
+      return {
+        quadrant: "Autoritario de izquierda",
+        description:
+          "Favoreces tanto la intervención económica como el control social por parte del Estado. Priorizas la igualdad colectiva sobre las libertades individuales.",
+      };
+    }
+    return {
+      quadrant: "Autoritario de derecha",
+      description:
+        "Apoyas el libre mercado pero con controles sociales más estrictos. Combinas libertad económica con valores tradicionales y orden social.",
+    };
   }, [economic, social]);
 
-  const shareText = `${analysis.emoji} Mi resultado en el test ideológico: ${analysis.quadrant}\n\n📊 Libertad económica: ${economic > 0 ? '+' : ''}${economic}\n🗽 Libertad social: ${social > 0 ? '+' : ''}${social}\n\n¿Dónde te sitúas tú? Haz el test:`;
+  /*
+   * Las etiquetas de cada eje usan las mismas palabras que los rótulos del
+   * cuadrante («libre mercado / intervención», «libertad social / control
+   * social»). La versión anterior decía «conservador» en el eje social, que no
+   * es lo que el eje mide y confundía a quien comparaba con el gráfico.
+   */
+  const economicLabel =
+    economic >= 50
+      ? "Libre mercado, con claridad"
+      : economic >= 0
+        ? "Libre mercado, con matices"
+        : economic >= -50
+          ? "Intervención, con matices"
+          : "Intervención, con claridad";
+  const socialLabel =
+    social >= 50
+      ? "Libertad social, con claridad"
+      : social >= 0
+        ? "Libertad social, con matices"
+        : social >= -50
+          ? "Control social, con matices"
+          : "Control social, con claridad";
+
+  const shareText = `🧭 Mi resultado en el test ideológico: ${analysis.quadrant}\n\n📊 Libertad económica: ${economic > 0 ? '+' : ''}${economic}\n📊 Libertad social: ${social > 0 ? '+' : ''}${social}\n\n¿Dónde te sitúas tú? Haz el test:`;
   
   /*
    * El enlace que se comparte lleva la posición y el idioma.
@@ -173,7 +209,7 @@ export function QuadrantResults({
       {/* Results header */}
       <div className="text-center">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full gradient-primary text-primary-foreground font-display font-semibold mb-4">
-          <span className="text-xl">{analysis.emoji}</span>
+          <Compass className="h-5 w-5" aria-hidden />
           {analysis.quadrant}
         </div>
         <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">
@@ -184,35 +220,29 @@ export function QuadrantResults({
         </p>
       </div>
       
-      {/* Score cards */}
+      {/* Las dos cifras, en el mismo color sea cual sea el signo. Pintar el
+          positivo en el color de marca y el negativo en gris era decir con el
+          color que un lado del eje es el bueno. */}
       <div className="grid sm:grid-cols-2 gap-4 max-w-md mx-auto">
         <div className="bg-card border border-border rounded-xl p-6 text-center">
-          <div className="text-sm text-muted-foreground mb-1">Libertad económica</div>
-          <div className={`font-display text-3xl font-bold ${economic >= 0 ? 'text-primary' : 'text-muted-foreground'}`}>
+          <div className="text-sm text-muted-foreground mb-1">Eje económico</div>
+          <div className="font-display text-3xl font-bold tabular-nums text-foreground">
             {economic > 0 ? '+' : ''}{economic}
           </div>
-          <div className="text-xs text-muted-foreground mt-1">
-            {economic >= 50 ? 'Muy libre' : economic >= 0 ? 'Moderadamente libre' : economic >= -50 ? 'Moderadamente intervencionista' : 'Muy intervencionista'}
-          </div>
+          <div className="text-xs text-muted-foreground mt-1">{economicLabel}</div>
         </div>
         <div className="bg-card border border-border rounded-xl p-6 text-center">
-          <div className="text-sm text-muted-foreground mb-1">Libertad social</div>
-          <div className={`font-display text-3xl font-bold ${social >= 0 ? 'text-primary' : 'text-muted-foreground'}`}>
+          <div className="text-sm text-muted-foreground mb-1">Eje social</div>
+          <div className="font-display text-3xl font-bold tabular-nums text-foreground">
             {social > 0 ? '+' : ''}{social}
           </div>
-          <div className="text-xs text-muted-foreground mt-1">
-            {social >= 50 ? 'Muy liberal' : social >= 0 ? 'Moderadamente liberal' : social >= -50 ? 'Moderadamente conservador' : 'Muy conservador'}
-          </div>
+          <div className="text-xs text-muted-foreground mt-1">{socialLabel}</div>
         </div>
       </div>
       
       {/* Quadrant visualization */}
       <div className="bg-card border border-border rounded-2xl p-6 shadow-card">
-        <InteractiveQuadrant
-          userPosition={{ economic, social }}
-          showAllUsers={true}
-          defaultLayers={["country"]}
-        />
+        <InteractiveQuadrant userPosition={{ economic, social }} defaultLayers={["country"]} />
       </div>
 
       {/* Reference points nearest to the result. A coordinate means little on
@@ -267,30 +297,6 @@ export function QuadrantResults({
         </p>
       </div>
       
-      {/* Comparison stats */}
-      <div className="bg-accent/50 border border-border rounded-xl p-6">
-        <div className="flex items-center gap-3 mb-4">
-          <Users className="w-5 h-5 text-primary" />
-          <h3 className="font-display font-semibold text-foreground">
-            Comparación con otros simpatizantes
-          </h3>
-        </div>
-        <div className="grid sm:grid-cols-3 gap-4 text-center">
-          <div>
-            <div className="font-display text-2xl font-bold text-primary">{analysis.similarUsers}</div>
-            <div className="text-sm text-muted-foreground">personas con posición similar</div>
-          </div>
-          <div>
-            <div className="font-display text-2xl font-bold text-foreground">{analysis.percentile}%</div>
-            <div className="text-sm text-muted-foreground">de coincidencia cercana</div>
-          </div>
-          <div>
-            <div className="font-display text-2xl font-bold text-foreground capitalize">{analysis.closeness}</div>
-            <div className="text-sm text-muted-foreground">a la media del grupo</div>
-          </div>
-        </div>
-      </div>
-
       {/* Share card */}
       <div className="bg-card border border-border rounded-2xl p-6 shadow-card">
         <div className="flex items-center gap-3 mb-4">
@@ -303,19 +309,27 @@ export function QuadrantResults({
         {/* Preview card */}
         <div className="bg-gradient-to-br from-primary/5 to-accent/30 border border-primary/20 rounded-xl p-5 mb-6">
           <div className="flex items-start gap-4">
-            <div className="w-16 h-16 rounded-xl gradient-primary flex items-center justify-center text-2xl flex-shrink-0">
-              {analysis.emoji}
+            <div className="w-16 h-16 rounded-xl gradient-primary flex items-center justify-center flex-shrink-0">
+              <Compass className="h-7 w-7 text-primary-foreground" aria-hidden />
             </div>
             <div className="flex-1 min-w-0">
               <p className="font-display font-semibold text-foreground mb-1">
                 Mi resultado: {analysis.quadrant}
               </p>
-              <div className="flex flex-wrap gap-3 text-sm">
-                <span className="text-muted-foreground">
-                  💰 Económica: <span className={economic >= 0 ? 'text-primary font-medium' : 'text-muted-foreground'}>{economic > 0 ? '+' : ''}{economic}</span>
+              <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
+                <span>
+                  Económico:{" "}
+                  <span className="font-medium tabular-nums text-foreground">
+                    {economic > 0 ? "+" : ""}
+                    {economic}
+                  </span>
                 </span>
-                <span className="text-muted-foreground">
-                  🗽 Social: <span className={social >= 0 ? 'text-primary font-medium' : 'text-muted-foreground'}>{social > 0 ? '+' : ''}{social}</span>
+                <span>
+                  Social:{" "}
+                  <span className="font-medium tabular-nums text-foreground">
+                    {social > 0 ? "+" : ""}
+                    {social}
+                  </span>
                 </span>
               </div>
             </div>
@@ -426,22 +440,45 @@ export function QuadrantResults({
         </div>
       )}
 
-      {/* Registration CTA */}
-      <div className="bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 rounded-2xl p-8 text-center">
-        <UserPlus className="w-10 h-10 text-primary mx-auto mb-4" />
-        <h3 className="font-display text-xl font-semibold text-foreground mb-2">
-          ¿Quieres formar parte de los datos?
-        </h3>
-        <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-          Regístrate como simpatizante y tu posición se sumará de forma anónima al mapa de libertarios en España.
-        </p>
-        <Button variant="hero" size="lg" asChild>
-          <Link href="/registro">
-            Registrarme como simpatizante
-            <ArrowRight className="ml-2" />
-          </Link>
-        </Button>
-      </div>
+      {/*
+        Quien tiene token de recuperación acaba de pasar por el muro o ha abierto
+        su enlace privado: ya está registrado. Pedirle otra vez que «se registre
+        como simpatizante» era la primera tarjeta que veía después de dar su
+        correo y su consentimiento, y se leía como que algo había fallado. A esa
+        persona se le confirma que ya cuenta y se le ofrece, sin insistir, el
+        formulario largo para quien quiera añadir edad y género. La llamada a
+        registrarse queda para quien llega por un enlace compartido (`?e&s`) o
+        sin haber pasado el muro.
+      */}
+      {recoveryToken ? (
+        <div className="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/10 to-primary/5 p-6 text-center sm:p-8">
+          <CheckCircle2 className="mx-auto mb-3 h-9 w-9 text-primary" aria-hidden />
+          <h3 className="font-display text-xl font-semibold text-foreground">Ya estás contado</h3>
+          <p className="mx-auto mt-2 max-w-md text-muted-foreground">
+            Tu posición se suma, agregada y anónima, al mapa. Si quieres, puedes añadir edad y
+            género: ayuda a que la demografía se pueda publicar cuando haya suficientes registros.
+          </p>
+          <Button variant="outline" className="mt-5" asChild>
+            <Link href="/registro">Completar mi ficha</Link>
+          </Button>
+        </div>
+      ) : (
+        <div className="bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 rounded-2xl p-8 text-center">
+          <UserPlus className="w-10 h-10 text-primary mx-auto mb-4" />
+          <h3 className="font-display text-xl font-semibold text-foreground mb-2">
+            ¿Quieres formar parte de los datos?
+          </h3>
+          <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+            Regístrate como simpatizante y tu posición se sumará de forma anónima al mapa de libertarios en España.
+          </p>
+          <Button variant="hero" size="lg" asChild>
+            <Link href="/registro">
+              Registrarme como simpatizante
+              <ArrowRight className="ml-2" />
+            </Link>
+          </Button>
+        </div>
+      )}
       
       {/* Actions */}
       <div className="flex items-center justify-center">

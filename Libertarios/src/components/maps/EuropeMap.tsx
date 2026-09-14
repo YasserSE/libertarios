@@ -5,9 +5,11 @@ import { ComposableMap, Geographies, Geography, ZoomableGroup } from "react-simp
 import { resolveCountry } from "@/data/geo/europe-countries";
 import type { CountryStats } from "@/lib/affiliates/types";
 import { createChoroplethScale } from "@/lib/maps/scale";
-import { formatPerMillion } from "@/lib/affiliates/format";
+import { formatPerMillion, formatPublishedCount } from "@/lib/affiliates/format";
 import { MapTooltip, type TooltipDatum } from "./MapTooltip";
 import { MapCanvas } from "./MapCanvas";
+import { useGeoJson } from "./useGeoJson";
+import { cooperativeZoom } from "./cooperativeZoom";
 import { getDictionary } from "@/i18n/getDictionary";
 import { useLocale } from "@/i18n/Link";
 
@@ -37,6 +39,7 @@ export function EuropeMap({ countries, selected, onSelect }: EuropeMapProps) {
   const [hovered, setHovered] = useState<string | null>(null);
   const [tooltip, setTooltip] = useState<TooltipDatum | null>(null);
   const [pointer, setPointer] = useState({ x: 0, y: 0 });
+  const geo = useGeoJson(WORLD_GEO_URL);
 
   const byCode = useMemo(
     () => new Map(countries.map((c) => [c.code, c])),
@@ -52,7 +55,8 @@ export function EuropeMap({ countries, selected, onSelect }: EuropeMapProps) {
       setPointer({ x: event.clientX, y: event.clientY });
       setTooltip({
         title: `${stats.meta.flag} ${stats.meta.name}`,
-        subtitle: stats.count === 0 ? "Aún sin simpatizantes registrados" : undefined,
+        // Un cero de las vistas es «menos de cinco», no «nadie»: ver source.ts.
+        subtitle: stats.count === 0 ? m.belowMinimum : undefined,
         rows:
           stats.count === 0
             ? []
@@ -61,10 +65,10 @@ export function EuropeMap({ countries, selected, onSelect }: EuropeMapProps) {
                 { label: m.perMillion, value: formatPerMillion(stats.perMillion) },
                 { label: m.last30, value: `+${stats.growth30d.toLocaleString("es-ES")}` },
               ],
-        hint: stats.meta.hasRegionMap ? "Clic para ver el detalle por provincia" : undefined,
+        hint: stats.meta.hasRegionMap ? m.countryDetailHint : undefined,
       });
     },
-    [],
+    [m],
   );
 
   const clearTooltip = useCallback(() => {
@@ -81,6 +85,10 @@ export function EuropeMap({ countries, selected, onSelect }: EuropeMapProps) {
         scale={scale}
         unit={`${m.supporters} · ${dict.map.scopeEurope}`}
         onPointerLeave={clearTooltip}
+        status={geo.status}
+        empty={
+          scale.breaks.length === 0 ? { title: m.emptyTitle, body: m.emptyBodyEurope } : null
+        }
       >
         {({ zoom, center }) => (
           <ComposableMap
@@ -92,19 +100,23 @@ export function EuropeMap({ countries, selected, onSelect }: EuropeMapProps) {
             width={800}
             height={700}
             className="h-full w-full"
+            // Un dedo baja la página; el pellizco lo recibe d3 (ver cooperativeZoom).
+            style={{ touchAction: "pan-y" }}
           >
             <ZoomableGroup
               center={center}
               zoom={zoom}
               minZoom={1}
               maxZoom={6}
+              filterZoomEvent={cooperativeZoom}
               translateExtent={[
                 [-400, -350],
                 [1200, 1050],
               ]}
             >
-              <Geographies geography={WORLD_GEO_URL}>
-                {({ geographies }: { geographies: any[] }) =>
+              {geo.data && (
+              <Geographies geography={geo.data}>
+                {({ geographies }) =>
                   geographies.map((geo) => {
                     const meta = resolveCountry(geo);
                     const stats = meta ? byCode.get(meta.code) : undefined;
@@ -132,19 +144,18 @@ export function EuropeMap({ countries, selected, onSelect }: EuropeMapProps) {
 
                     const isActive = hovered === meta.code || selected === meta.code;
                     const fill = scale.fillOf(stats.count);
+                    // Con menos de cinco no hay ficha que abrir, pero sí hay
+                    // algo que decir; por eso se puede enfocar aunque no se
+                    // pueda seleccionar.
                     const interactive = stats.count > 0;
 
                     return (
                       <Geography
                         key={geo.rsmKey}
                         geography={geo}
-                        tabIndex={interactive ? 0 : -1}
+                        tabIndex={0}
                         role={interactive ? "button" : undefined}
-                        aria-label={
-                          interactive
-                            ? `${meta.name}: ${stats.count.toLocaleString("es-ES")} simpatizantes`
-                            : undefined
-                        }
+                        aria-label={`${meta.name}: ${formatPublishedCount(stats.count)} ${m.supporters.toLowerCase()}`}
                         onMouseEnter={(e: React.MouseEvent) => {
                           setHovered(meta.code);
                           showTooltip(stats, e);
@@ -154,7 +165,6 @@ export function EuropeMap({ countries, selected, onSelect }: EuropeMapProps) {
                         }
                         onMouseLeave={clearTooltip}
                         onFocus={(e: React.FocusEvent<SVGPathElement>) => {
-                          if (!interactive) return;
                           const r = e.currentTarget.getBoundingClientRect();
                           setHovered(meta.code);
                           showTooltip(stats, {
@@ -194,6 +204,7 @@ export function EuropeMap({ countries, selected, onSelect }: EuropeMapProps) {
                   })
                 }
               </Geographies>
+              )}
             </ZoomableGroup>
           </ComposableMap>
         )}

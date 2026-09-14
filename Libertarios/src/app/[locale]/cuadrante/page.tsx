@@ -9,7 +9,7 @@ import { QuadrantResults } from "@/components/QuadrantResults";
 import { ResultsGate } from "@/components/ResultsGate";
 import { InteractiveQuadrant } from "@/components/InteractiveQuadrant";
 import { Button } from "@/components/ui/button";
-import { Play, MousePointer, Info, History } from "lucide-react";
+import { Play, MousePointer, Info, History, Mail } from "lucide-react";
 import { quadrantQuestions } from "@/data/quadrantQuestions";
 import { readStoredResult, storeResult, type StoredResult } from "@/lib/results/storage";
 
@@ -21,12 +21,41 @@ type Kind = (typeof REFERENCE_KINDS)[number];
 /**
  * `useSearchParams` obliga a un límite de Suspense en una ruta estática; sin él
  * el build falla.
+ *
+ * La cabecera, el título y el pie quedan fuera del límite a propósito. Con la
+ * página entera dentro y `fallback={null}`, quien abría un enlace compartido
+ * veía una pantalla en blanco hasta que el cliente hidrataba, y no había forma
+ * de saber si el sitio funcionaba. Ahora lo primero que se pinta es la página
+ * con su nombre, y solo el contenido que depende de la URL espera.
  */
 export default function QuadrantPage() {
   return (
-    <Suspense fallback={null}>
-      <QuadrantPageContent />
-    </Suspense>
+    <div className="min-h-screen bg-background">
+      <Header />
+      <main className="pt-24 pb-16">
+        <div className="container">
+          <div className="text-center mb-12">
+            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+              Cuadrante Ideológico
+            </h1>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Descubre tu posición en el espectro político y compárala con países, partidos y
+              pensadores.
+            </p>
+          </div>
+          <Suspense
+            fallback={
+              <p className="py-16 text-center text-sm text-muted-foreground" role="status">
+                Cargando el cuadrante…
+              </p>
+            }
+          >
+            <QuadrantPageContent />
+          </Suspense>
+        </div>
+      </main>
+      <Footer />
+    </div>
   );
 }
 
@@ -130,21 +159,24 @@ function QuadrantPageContent() {
     setMode('intro');
   };
 
-  return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <main className="pt-24 pb-16">
-        <div className="container">
-          {/* Header */}
-          <div className="text-center mb-12">
-            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-              Cuadrante Ideológico
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Descubre tu posición en el espectro político y compárala con otros simpatizantes de la libertad.
-            </p>
-          </div>
+  /*
+   * El muro pide un correo antes de enseñar el resultado, y hay que decirlo
+   * antes de empezar: descubrirlo tras veinte preguntas se vive como un peaje
+   * escondido aunque la intención sea buena. Quien ya lo pasó no necesita el
+   * aviso, así que solo se muestra mientras `unlocked` es falso.
+   */
+  const gateNotice = !unlocked && (
+    <p className="mt-4 flex items-start gap-2 text-sm text-muted-foreground">
+      <Mail className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden />
+      <span>
+        Al final te pediremos un correo para enseñarte el resultado y contarte en el mapa. Nada
+        más: ni nombre, ni militancia.
+      </span>
+    </p>
+  );
 
+  return (
+    <>
           {/* Content based on mode */}
           {mode === 'intro' && (
             <div className="max-w-4xl mx-auto">
@@ -163,6 +195,7 @@ function QuadrantPageContent() {
                       <strong> libertad económica</strong> (horizontal) y <strong>libertad social</strong> (vertical). 
                       Puedes descubrir tu posición realizando el test o seleccionándola manualmente.
                     </p>
+                    {gateNotice}
                   </div>
                 </div>
 
@@ -197,7 +230,8 @@ function QuadrantPageContent() {
                       Posición manual
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      Si ya conoces tus ideas, haz clic directamente en el cuadrante para posicionarte.
+                      Si ya conoces tus ideas, sitúate directamente en el cuadrante, con el puntero o
+                      con los deslizadores.
                     </p>
                     <span className="inline-block mt-4 text-sm font-medium text-primary">
                       Inmediato →
@@ -243,11 +277,7 @@ function QuadrantPageContent() {
                 <h3 className="font-display text-lg font-semibold text-foreground mb-4 text-center">
                   Vista previa del cuadrante
                 </h3>
-                <InteractiveQuadrant
-                  showAllUsers={true}
-                  defaultLayers={initialLayers}
-                  focusId={focusId}
-                />
+                <InteractiveQuadrant defaultLayers={initialLayers} focusId={focusId} />
               </div>
             </div>
           )}
@@ -262,6 +292,7 @@ function QuadrantPageContent() {
                 ← Volver
               </Button>
               <QuadrantTest onComplete={handleTestComplete} />
+              {gateNotice}
             </div>
           )}
 
@@ -278,16 +309,16 @@ function QuadrantPageContent() {
               <div className="bg-card border border-border rounded-2xl p-8 shadow-card">
                 <div className="text-center mb-6">
                   <h2 className="font-display text-xl font-semibold text-foreground mb-2">
-                    Haz clic en el cuadrante para posicionarte
+                    Sitúate en el cuadrante
                   </h2>
                   <p className="text-muted-foreground">
-                    Tu posición aparecerá como un punto destacado en el cuadrante.
+                    Pulsa donde te veas, o ajusta cada eje con los deslizadores. Tu posición
+                    aparecerá como un punto destacado.
                   </p>
                 </div>
 
                 <InteractiveQuadrant 
                   userPosition={userPosition}
-                  showAllUsers={true}
                   interactive={true}
                   onPositionChange={handleManualPosition}
                 />
@@ -301,9 +332,16 @@ function QuadrantPageContent() {
                         Social: {userPosition.social > 0 ? '+' : ''}{userPosition.social}
                       </p>
                     </div>
+                    {/*
+                      En modo manual el usuario ya está viendo su posición, así
+                      que «Ver análisis completo» prometía algo y entregaba un
+                      formulario. El botón dice lo que va a pasar: si aún no ha
+                      pasado el muro, lo que sigue es contarse con esa posición.
+                    */}
                     <Button variant="cta" onClick={() => setMode('results')}>
-                      Ver análisis completo
+                      {unlocked ? "Ver análisis completo" : "Contarme con esta posición"}
                     </Button>
+                    {gateNotice}
                   </div>
                 )}
               </div>
@@ -328,9 +366,6 @@ function QuadrantPageContent() {
               )}
             </div>
           )}
-        </div>
-      </main>
-      <Footer />
-    </div>
+    </>
   );
 }

@@ -142,10 +142,22 @@ export async function AboutSection({ registrationOpen }: { registrationOpen: boo
 
         <p className="mx-auto mt-8 max-w-3xl text-center text-sm text-muted-foreground">
           {registrationOpen ? (
-            <>
-              Ahora mismo somos {spain.count.toLocaleString("es-ES")} personas contadas en España.
-              Nadie te pide el voto, ni militancia, ni que salgas en ninguna lista.
-            </>
+            /* Con k-anonimato, el recuento publicable arranca en cero: «somos 0
+               personas contadas» invita a marcharse justo a quien haría falta
+               para que deje de ser cero. Mientras no haya nada publicable se
+               dice lo que sí es verdad. */
+            spain.count > 0 ? (
+              <>
+                Ahora mismo somos {spain.count.toLocaleString("es-ES")} personas contadas en España.
+                Nadie te pide el voto, ni militancia, ni que salgas en ninguna lista.
+              </>
+            ) : (
+              <>
+                El recuento empieza a publicarse cuando una provincia reúne cinco registros, así que
+                de momento no hay cifras que enseñar. Nadie te pide el voto, ni militancia, ni que
+                salgas en ninguna lista.
+              </>
+            )
           ) : (
             <>
               El registro todavía no está abierto: las {spain.count.toLocaleString("es-ES")}{" "}

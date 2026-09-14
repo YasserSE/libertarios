@@ -22,6 +22,20 @@ export function QuadrantTest({ onComplete }: QuadrantTestProps) {
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [stage, setStage] = useState<Stage>("answering");
 
+  /*
+   * El foco va al enunciado cada vez que cambia la pregunta.
+   *
+   * Las cinco opciones son los mismos nodos del DOM para todas las preguntas,
+   * así que al avanzar solo el foco se quedaba en «opción 3» de la pregunta
+   * siguiente y un lector de pantalla no leía el enunciado nuevo: se podían
+   * contestar veinte preguntas sin saber cuál. Mover el foco al `h3` hace que
+   * se anuncie y, de paso, que el tabulador empiece por la primera opción.
+   */
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  useEffect(() => {
+    if (stage === "answering") headingRef.current?.focus({ preventScroll: true });
+  }, [index, stage]);
+
   const question = quadrantQuestions[index];
   const answeredCount = Object.keys(answers).length;
   const progress = (answeredCount / TOTAL) * 100;
@@ -118,9 +132,16 @@ export function QuadrantTest({ onComplete }: QuadrantTestProps) {
           </span>
           <span className="tabular-nums text-muted-foreground">{answeredCount} respondidas</span>
         </div>
-        <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
+        <div
+          role="progressbar"
+          aria-label="Preguntas respondidas"
+          aria-valuemin={0}
+          aria-valuemax={TOTAL}
+          aria-valuenow={answeredCount}
+          className="h-1.5 w-full overflow-hidden rounded-full bg-muted"
+        >
           <div
-            className="h-full rounded-full bg-primary transition-[width] duration-300"
+            className="h-full rounded-full bg-primary transition-[width] duration-300 motion-reduce:transition-none"
             style={{ width: `${progress}%` }}
           />
         </div>
@@ -129,19 +150,28 @@ export function QuadrantTest({ onComplete }: QuadrantTestProps) {
       <p className="mb-1 text-xs font-medium uppercase tracking-wide text-primary">
         {question.topic}
       </p>
-      <h3 className="mb-7 font-display text-xl font-semibold leading-snug text-foreground sm:text-2xl">
+      <h3
+        ref={headingRef}
+        tabIndex={-1}
+        id="pregunta-actual"
+        className="mb-7 font-display text-xl font-semibold leading-snug text-foreground outline-none sm:text-2xl"
+      >
         {question.text}
       </h3>
 
-      <div role="radiogroup" aria-label="Tu respuesta" className="space-y-2">
+      {/*
+        Botones con `aria-pressed`, no un `radiogroup`. El rol de radio promete
+        que las flechas mueven la selección, y aquí las flechas cambian de
+        pregunta: prometer un contrato y cumplir otro es peor que no prometerlo.
+      */}
+      <div role="group" aria-labelledby="pregunta-actual" className="space-y-2">
         {answerOptions.map((option, i) => {
           const selected = currentAnswer === option.value;
           return (
             <button
               key={option.value}
               type="button"
-              role="radio"
-              aria-checked={selected}
+              aria-pressed={selected}
               onClick={() => answer(option.value)}
               className={`flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                 selected

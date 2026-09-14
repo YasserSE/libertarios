@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { Minus, Plus, Locate } from "lucide-react";
+import { Loader2, Minus, Plus, Locate, MapPinOff } from "lucide-react";
 import { ChoroplethLegend } from "./ChoroplethLegend";
 import type { ChoroplethScale } from "@/lib/maps/scale";
 import { getDictionary } from "@/i18n/getDictionary";
 import { useLocale } from "@/i18n/Link";
+import type { GeoStatus } from "./useGeoJson";
 
 interface MapCanvasProps {
   /**
@@ -18,6 +19,14 @@ interface MapCanvasProps {
   unit: string;
   initialCenter?: [number, number];
   onPointerLeave?: () => void;
+  /** Estado de la descarga del TopoJSON; gobierna el aviso sobre el mapa. */
+  status?: GeoStatus;
+  /**
+   * Mensaje cuando no hay ningún territorio publicable. Va sobre el mapa —no
+   * debajo— porque es la explicación de por qué todo está gris, y tiene que
+   * verse en el mismo sitio donde se mira el gris.
+   */
+  empty?: { title: string; body: string } | null;
   children: (state: { zoom: number; center: [number, number] }) => ReactNode;
 }
 
@@ -37,6 +46,8 @@ export function MapCanvas({
   unit,
   initialCenter = [0, 0],
   onPointerLeave,
+  status = "ready",
+  empty = null,
   children,
 }: MapCanvasProps) {
   const m = getDictionary(useLocale()).map;
@@ -66,6 +77,40 @@ export function MapCanvas({
 
       <div className={`relative ${frame}`} onMouseLeave={onPointerLeave}>
         {children({ zoom, center })}
+
+        {/*
+          Los tres avisos comparten sitio y estilo porque son la misma cosa
+          para quien mira: «el mapa no enseña datos, y esta es la razón». El
+          de carga y el de error son transitorios; el de vacío se queda, y por
+          eso deja pasar el puntero: el mapa gris sigue siendo explorable.
+        */}
+        {status === "loading" && (
+          <div
+            role="status"
+            className="absolute inset-0 flex items-center justify-center bg-card/60 backdrop-blur-[2px]"
+          >
+            <p className="inline-flex items-center gap-2 rounded-full border border-border bg-background/90 px-4 py-2 text-sm text-muted-foreground shadow-soft">
+              <Loader2 className="h-4 w-4 animate-spin motion-reduce:animate-none" aria-hidden />
+              {m.loading}
+            </p>
+          </div>
+        )}
+        {status === "error" && (
+          <div role="alert" className="absolute inset-0 flex items-center justify-center p-6">
+            <p className="max-w-xs rounded-2xl border border-border bg-background/95 px-5 py-4 text-center text-sm text-foreground shadow-card">
+              {m.loadError}
+            </p>
+          </div>
+        )}
+        {status === "ready" && empty && (
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center p-6">
+            <div className="max-w-sm rounded-2xl border border-border bg-background/95 px-5 py-4 text-center shadow-card">
+              <MapPinOff className="mx-auto mb-2 h-5 w-5 text-muted-foreground" aria-hidden />
+              <p className="font-display text-sm font-semibold text-foreground">{empty.title}</p>
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{empty.body}</p>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="absolute right-4 top-4 flex flex-col gap-1 rounded-xl border border-border bg-background/85 p-1 shadow-soft backdrop-blur">

@@ -40,11 +40,15 @@ export function MapTooltip({ datum, x, y }: MapTooltipProps) {
   const flipX = typeof window !== "undefined" && x + OFFSET + size.w > window.innerWidth - 8;
   const flipY = typeof window !== "undefined" && y + OFFSET + size.h > window.innerHeight - 8;
 
+  /*
+   * Sin `aria-live`. Cada territorio enfocable ya lleva su `aria-label` con la
+   * cifra, así que anunciar además el globo hacía que un lector de pantalla
+   * recitara cada país por el que pasaba el puntero de otra persona.
+   */
   return (
     <div
       ref={ref}
-      role="status"
-      aria-live="polite"
+      aria-hidden
       className="pointer-events-none fixed z-50 min-w-[11rem] max-w-[16rem] rounded-xl border border-border/80 bg-popover/95 p-3 shadow-elevated backdrop-blur-md"
       style={{
         left: flipX ? x - OFFSET - size.w : x + OFFSET,

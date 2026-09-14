@@ -159,7 +159,6 @@ export function RegistroClient({ configured }: { configured: boolean }) {
 
                 <InteractiveQuadrant 
                   userPosition={quadrantPosition}
-                  showAllUsers={true}
                   interactive={true}
                   onPositionChange={handleManualPosition}
                 />
@@ -214,7 +213,6 @@ export function RegistroClient({ configured }: { configured: boolean }) {
                   <div className="bg-card border border-border rounded-2xl p-6 shadow-soft sticky top-24">
                     <InteractiveQuadrant 
                       userPosition={quadrantPosition}
-                      showAllUsers={true}
                       interactive={false}
                     />
                     {quadrantPosition && (

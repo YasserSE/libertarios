@@ -5,8 +5,11 @@ import { ComposableMap, Geographies, Geography, ZoomableGroup } from "react-simp
 import { resolveProvince } from "@/data/geo/spain-provinces";
 import type { RegionStats } from "@/lib/affiliates/types";
 import { createChoroplethScale, type ChoroplethScale } from "@/lib/maps/scale";
+import { formatPublishedCount } from "@/lib/affiliates/format";
 import { MapTooltip, type TooltipDatum } from "./MapTooltip";
 import { MapCanvas } from "./MapCanvas";
+import { useGeoJson } from "./useGeoJson";
+import { cooperativeZoom } from "./cooperativeZoom";
 import { getDictionary } from "@/i18n/getDictionary";
 import { useLocale } from "@/i18n/Link";
 
@@ -38,6 +41,7 @@ export function SpainProvinceMap({ regions, selected, onSelect }: SpainProvinceM
   const [hovered, setHovered] = useState<string | null>(null);
   const [tooltip, setTooltip] = useState<TooltipDatum | null>(null);
   const [pointer, setPointer] = useState({ x: 0, y: 0 });
+  const geo = useGeoJson(SPAIN_GEO_URL);
 
   const byCode = useMemo(() => new Map(regions.map((r) => [r.code, r])), [regions]);
   const scale = useMemo(
@@ -48,17 +52,23 @@ export function SpainProvinceMap({ regions, selected, onSelect }: SpainProvinceM
   const showTooltip = useCallback(
     (stats: RegionStats, event: { clientX: number; clientY: number }) => {
       setPointer({ x: event.clientX, y: event.clientY });
+      // Un cero de las vistas es «menos de cinco», no «nadie» (ver source.ts):
+      // enseñar «0 · 0,0 % · +0» decía a quien acababa de registrarse que su
+      // provincia estaba vacía.
       setTooltip({
         title: stats.meta.name,
-        subtitle: stats.meta.parent,
-        rows: [
-          { label: m.supporters, value: stats.count.toLocaleString("es-ES") },
-          { label: m.ofNational, value: `${(stats.share * 100).toFixed(1)}%` },
-          { label: m.last30, value: `+${stats.growth30d.toLocaleString("es-ES")}` },
-        ],
+        subtitle: stats.count === 0 ? m.belowMinimum : stats.meta.parent,
+        rows:
+          stats.count === 0
+            ? []
+            : [
+                { label: m.supporters, value: stats.count.toLocaleString("es-ES") },
+                { label: m.ofNational, value: `${(stats.share * 100).toFixed(1)}%` },
+                { label: m.last30, value: `+${stats.growth30d.toLocaleString("es-ES")}` },
+              ],
       });
     },
-    [],
+    [m],
   );
 
   const clearTooltip = useCallback(() => {
@@ -66,9 +76,9 @@ export function SpainProvinceMap({ regions, selected, onSelect }: SpainProvinceM
     setTooltip(null);
   }, []);
 
-  const provinces = (
-    <Geographies geography={SPAIN_GEO_URL}>
-      {({ geographies }: { geographies: any[] }) =>
+  const provinces = geo.data && (
+    <Geographies geography={geo.data}>
+      {({ geographies }) =>
         geographies.map((geo) => {
           const meta = resolveProvince(geo);
           const stats = meta ? byCode.get(meta.code) : undefined;
@@ -102,7 +112,7 @@ export function SpainProvinceMap({ regions, selected, onSelect }: SpainProvinceM
               geography={geo}
               tabIndex={0}
               role="button"
-              aria-label={`${meta.name}: ${stats.count.toLocaleString("es-ES")} simpatizantes`}
+              aria-label={`${meta.name}: ${formatPublishedCount(stats.count)} ${m.supporters.toLowerCase()}`}
               onMouseEnter={(e: React.MouseEvent) => {
                 setHovered(meta.code);
                 showTooltip(stats, e);
@@ -158,6 +168,10 @@ export function SpainProvinceMap({ regions, selected, onSelect }: SpainProvinceM
         scale={scale}
         unit={`${m.supporters} · ${m.scopeSpain}`}
         onPointerLeave={clearTooltip}
+        status={geo.status}
+        empty={
+          scale.breaks.length === 0 ? { title: m.emptyTitle, body: m.emptyBodySpain } : null
+        }
       >
         {({ zoom, center }) => (
           <>
@@ -169,12 +183,15 @@ export function SpainProvinceMap({ regions, selected, onSelect }: SpainProvinceM
                 width={800}
                 height={640}
                 className="h-full w-full"
+                // Un dedo baja la página; el pellizco lo recibe d3 (ver cooperativeZoom).
+                style={{ touchAction: "pan-y" }}
               >
                 <ZoomableGroup
                   center={center}
                   zoom={zoom}
                   minZoom={1}
                   maxZoom={6}
+                  filterZoomEvent={cooperativeZoom}
                   translateExtent={[
                     [-400, -320],
                     [1200, 960],

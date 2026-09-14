@@ -1,20 +1,29 @@
 import { Link } from "@/i18n/Link";
 
+/*
+ * Cada enlace del pie tiene que llevar a algo que exista.
+ *
+ * Había seis apuntando a `/proyecto` sin ancla —«Metodología», «Equipo»,
+ * «Privacidad», «Aviso legal», «Cookies», «Glosario»— y la página no tenía ni
+ * un `id`, así que los seis dejaban al visitante en la misma cabecera. En un
+ * sitio que recoge correos con consentimiento del art. 9 del RGPD, un enlace de
+ * privacidad que no lleva a ninguna parte no es un despiste de maquetación.
+ *
+ * Los que ahora tienen destino van con ancla; los que no tenían contenido
+ * detrás («Aviso legal», «Equipo», «Glosario») salen del pie hasta que exista.
+ */
 const footerLinks = {
   proyecto: [
     { label: "Sobre el proyecto", href: "/proyecto" },
-    { label: "Metodología de datos", href: "/proyecto" },
-    { label: "Equipo", href: "/proyecto" },
+    { label: "Metodología de datos", href: "/proyecto#metodologia" },
   ],
   legal: [
-    { label: "Privacidad y protección de datos", href: "/proyecto" },
-    { label: "Aviso legal", href: "/proyecto" },
-    { label: "Cookies", href: "/proyecto" },
+    { label: "Privacidad y protección de datos", href: "/proyecto#privacidad" },
+    { label: "Cookies", href: "/proyecto#privacidad" },
   ],
   recursos: [
     { label: "¿Qué es ser libertario?", href: "/libertario" },
     { label: "Comparativas", href: "/comparativas" },
-    { label: "Glosario", href: "/libertario" },
     // Quien ya hizo el test necesita una puerta de vuelta desde cualquier
     // página; sin esto solo se llegaba con el enlace personal a mano.
     { label: "Ver mi resultado", href: "/mi-resultado" },

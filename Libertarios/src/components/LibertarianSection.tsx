@@ -35,7 +35,7 @@ export function LibertarianSection() {
             {topics.map((topic, index) => (
               <div
                 key={index}
-                className="bg-card border border-border rounded-xl p-6 hover:shadow-card transition-all duration-300 hover:-translate-y-1"
+                className="bg-card border border-border rounded-xl p-6 hover:shadow-card transition-all duration-300 motion-safe:hover:-translate-y-1 motion-reduce:transition-none"
               >
                 <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center mb-4">
                   <topic.icon className="w-5 h-5 text-primary" />

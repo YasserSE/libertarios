@@ -181,7 +181,10 @@ export function ResultsGate({
         <p className="text-center text-xs leading-relaxed text-muted-foreground">
           Nada de spam ni de cederlo a nadie. Escribimos poco y solo sobre esto, y te das de baja
           cuando quieras.{" "}
-          <Link href="/proyecto" className="underline underline-offset-4 hover:text-foreground">
+          <Link
+            href="/proyecto#privacidad"
+            className="underline underline-offset-4 hover:text-foreground"
+          >
             Qué hacemos con tus datos
           </Link>
         </p>

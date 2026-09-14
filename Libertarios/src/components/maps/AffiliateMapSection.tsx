@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useLocale } from "@/i18n/Link";
 import { getDictionary } from "@/i18n/getDictionary";
 import { LOCALE_META } from "@/i18n/config";
@@ -145,6 +145,25 @@ export function AffiliateMapSection({
   }, [selected, isSpain, spain.regions, europe.countries, activeCountries]);
 
   const toggle = (code: string) => setSelected((cur) => (cur === code ? null : code));
+
+  /*
+   * En móvil, la ficha del territorio se pinta debajo del mapa y del texto de
+   * ayuda: con el marco del mapa ocupando 22 rem, tocar una provincia parecía
+   * no hacer nada porque el resultado quedaba fuera de pantalla. Se acerca sola
+   * la primera vez que aparece, y solo en pantallas estrechas —en escritorio ya
+   * está a la vista, en la columna de al lado, y un salto ahí sería molesto—.
+   */
+  const detailRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!selected) return;
+    if (window.matchMedia("(min-width: 1024px)").matches) return;
+    detailRef.current?.scrollIntoView({
+      block: "nearest",
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+    });
+  }, [selected]);
   const handleCountrySelect = (code: string) => {
     if (code === "ES") {
       router.push("/", { scroll: false });
@@ -270,7 +289,14 @@ export function AffiliateMapSection({
                   delay={80}
                   value={`+${nf(headline.growth)}`}
                   label={t.statGrowth}
-                  hint={`${((headline.growth / headline.total) * 100).toFixed(1)}% ${t.statGrowthHint}`}
+                  /* Sin registros publicables, `growth/total` es 0/0: el hint
+                     decía «NaN% más que el mes pasado». Un porcentaje de nada
+                     no existe, así que no se enseña. */
+                  hint={
+                    headline.total > 0
+                      ? `${((headline.growth / headline.total) * 100).toFixed(1)}% ${t.statGrowthHint}`
+                      : t.statGrowthHint
+                  }
                 />
                 <Figure
                   count={territories}
@@ -326,7 +352,9 @@ export function AffiliateMapSection({
 {isSpain ? m.hintSpain : m.hintEurope}
               </p>
 
-              {detail && <DetailCard {...detail} onClear={() => setSelected(null)} />}
+              <div ref={detailRef}>
+                {detail && <DetailCard {...detail} onClear={() => setSelected(null)} />}
+              </div>
             </div>
           </div>
         </div>
@@ -340,9 +368,13 @@ export function AffiliateMapSection({
               <h2 className="font-display text-xl font-bold tracking-tight text-foreground md:text-2xl">
                 {isSpain ? m.listTitleSpain : m.listTitleEurope}
               </h2>
+              {/* Con k-anonimato, «0 provincias con simpatizantes registrados»
+                  es lo que se lee el día del lanzamiento, y es falso: significa
+                  que ninguna llega todavía al mínimo publicable. */}
               <p className="mt-1.5 text-sm text-muted-foreground">
-                {territories} {isSpain ? "provincias" : "países"} con simpatizantes registrados.
-                Selecciona cualquiera para resaltarlo en el mapa.
+                {territories > 0
+                  ? `${territories} ${isSpain ? m.listIntroSpain : m.listIntroEurope}`
+                  : m.listEmpty}
               </p>
             </div>
 
@@ -384,7 +416,10 @@ export function AffiliateMapSection({
 
           <p className="mt-6 text-xs text-muted-foreground">
             Cifras agregadas y anónimas —{" "}
-            <Link href="/proyecto" className="underline underline-offset-4 hover:text-foreground">
+            <Link
+              href="/proyecto#privacidad"
+              className="underline underline-offset-4 hover:text-foreground"
+            >
               ver metodología
             </Link>
             .
@@ -433,9 +468,16 @@ function ScopeSwitch({ scope }: { scope: MapScope }) {
     { key: "europe", label: m.scopeEurope, href: "/europa" },
   ];
 
+  /*
+   * Navegación, no pestañas. `role="tablist"` promete que las flechas mueven
+   * entre pestañas y que cada una controla un panel con `aria-controls`; esto
+   * son dos enlaces que cambian de URL. Prometer el contrato de las pestañas y
+   * no cumplirlo desorienta a quien navega con lector de pantalla más que no
+   * prometer nada, así que se anuncia como lo que es y el activo lleva
+   * `aria-current="page"`.
+   */
   return (
-    <div
-      role="tablist"
+    <nav
       aria-label={m.scopeLabel}
       className="inline-flex rounded-full border border-border bg-background p-1 shadow-soft"
     >
@@ -446,8 +488,7 @@ function ScopeSwitch({ scope }: { scope: MapScope }) {
             key={opt.key}
             href={opt.href}
             scroll={false}
-            role="tab"
-            aria-selected={active}
+            aria-current={active ? "page" : undefined}
             className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
               active
                 ? "bg-primary text-primary-foreground shadow-soft"
@@ -458,7 +499,7 @@ function ScopeSwitch({ scope }: { scope: MapScope }) {
           </Link>
         );
       })}
-    </div>
+    </nav>
   );
 }
 

@@ -157,7 +157,7 @@ function Content() {
                   <Link href="/cuadrante">Hacer el test</Link>
                 </Button>
                 <Button variant="outline" asChild>
-                  <Link href="/proyecto">Qué guardamos y por qué</Link>
+                  <Link href="/proyecto#privacidad">Qué guardamos y por qué</Link>
                 </Button>
               </div>
             </div>

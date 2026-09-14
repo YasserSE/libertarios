@@ -1,46 +1,16 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { SpainProvinceMap } from "@/components/maps/SpainProvinceMap";
-import { QuadrantDistribution } from "@/components/QuadrantDistribution";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/Link";
-import { mockUsers } from "@/data/mockRegisteredUsers";
 import { getCountrySnapshot } from "@/lib/affiliates/repository";
-import { ArrowRight, MapPin, Users, Calendar, Heart, Globe, TrendingUp } from "lucide-react";
+import { ArrowRight, MapPin, Users, Heart, Globe, TrendingUp } from "lucide-react";
+import { formatPublishedCount } from "@/lib/affiliates/format";
 
 export default async function DatosPage() {
   // Cifras derivadas del agregado de España.
   const spain = (await getCountrySnapshot("ES"))!;
   const activeProvinces = spain.regions.filter((r) => r.count > 0);
-
-  const calculateStats = () => {
-    const ageGroups: Record<string, number> = {};
-    const genders: Record<string, number> = {};
-
-    mockUsers.forEach((user, index) => {
-      // Age groups (simulated from index)
-      const ageGroup = index % 4 === 0 ? "18-30" : index % 4 === 1 ? "31-45" : index % 4 === 2 ? "46-60" : "60+";
-      ageGroups[ageGroup] = (ageGroups[ageGroup] || 0) + 1;
-
-      // Genders (simulated)
-      const gender = index % 10 < 7 ? "Hombre" : index % 10 < 9 ? "Mujer" : "Otro";
-      genders[gender] = (genders[gender] || 0) + 1;
-    });
-
-    return { ageGroups, genders };
-  };
-
-  const stats = calculateStats();
-
-  const ageData = Object.entries(stats.ageGroups).map(([label, value]) => ({
-    label,
-    value: Math.round((value / mockUsers.length) * 100),
-  })).sort((a, b) => b.value - a.value);
-
-  const genderData = Object.entries(stats.genders).map(([label, value]) => ({
-    label,
-    value: Math.round((value / mockUsers.length) * 100),
-  }));
 
   const topProvinces = activeProvinces.slice(0, 10).map((r) => ({
     name: r.meta.name,
@@ -70,13 +40,29 @@ export default async function DatosPage() {
         {/* Summary stats */}
         <section className="py-8">
           <div className="container">
-            <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 max-w-5xl mx-auto">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
+              {/* Solo cifras que salen del agregado. «Edad media 34 años»,
+                  «Nacionalidades 15+» y «Este mes +127» estaban escritas a
+                  mano: tres de las cinco tarjetas de una página de datos eran
+                  inventadas, y las dos verdaderas quedaban contaminadas por
+                  compañía. El eje medio sí sale de la base, y dice algo. */}
               {[
-                { icon: Users, label: "Total registrados", value: spain.count.toLocaleString("es-ES") },
-                { icon: MapPin, label: "Provincias", value: `${activeProvinces.length} / 52` },
-                { icon: Calendar, label: "Edad media", value: "34 años" },
-                { icon: Globe, label: "Nacionalidades", value: "15+" },
-                { icon: TrendingUp, label: "Este mes", value: "+127" },
+                {
+                  icon: Users,
+                  label: "Personas contadas",
+                  value: formatPublishedCount(spain.count),
+                },
+                { icon: MapPin, label: "Provincias publicables", value: `${activeProvinces.length} / 52` },
+                {
+                  icon: TrendingUp,
+                  label: "Últimos 30 días",
+                  value: `+${spain.growth30d.toLocaleString("es-ES")}`,
+                },
+                {
+                  icon: Globe,
+                  label: "Cuadrante medio",
+                  value: `${spain.position.economic > 0 ? "+" : ""}${spain.position.economic} / ${spain.position.social > 0 ? "+" : ""}${spain.position.social}`,
+                },
               ].map((stat, i) => (
                 <div key={i} className="bg-card border border-border rounded-xl p-6 text-center">
                   <stat.icon className="w-6 h-6 text-primary mx-auto mb-2" />
@@ -125,90 +111,39 @@ export default async function DatosPage() {
           </div>
         </section>
 
-        {/* Quadrant Distribution */}
-        <section className="py-16 lg:py-24">
-          <div className="container">
-            <div className="max-w-6xl mx-auto">
-              <QuadrantDistribution />
-            </div>
-          </div>
-        </section>
+        {/*
+          Aquí había dos bloques que no medían nada.
 
-        {/* Demographics */}
+          La «distribución por cuadrantes» y los «datos demográficos» se
+          calculaban sobre `mockUsers`: quinientas personas generadas con un
+          PRNG, y la edad y el género salían de `index % 4` e `index % 10`. Es
+          decir, los porcentajes eran una propiedad de la posición en un array.
+          En una página titulada «Datos y mapas», y bajo el reclamo de que no
+          hace falta creernos, era lo más caro que había en el sitio: un lector
+          que lo descubre deja de creerse también lo que sí es verdad.
+
+          La base guarda la franja de edad y el género de quien los da, pero
+          ninguna vista pública los agrega todavía, y con k-anonimato no se
+          pueden publicar hasta que haya suficientes registros por tramo. Hasta
+          entonces se dice eso mismo. Los componentes siguen en el repositorio.
+        */}
         <section className="py-16 lg:py-24 bg-card border-y border-border">
           <div className="container">
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground text-center mb-12">
-              Datos demográficos
-            </h2>
-
-            <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-              {/* Age distribution */}
-              <div className="bg-card border border-border rounded-2xl p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <Calendar className="w-5 h-5 text-primary" />
-                  <h3 className="font-display text-xl font-semibold text-foreground">
-                    Distribución por edad
-                  </h3>
-                </div>
-                <div className="space-y-4">
-                  {ageData.map((item, i) => (
-                    <div key={i}>
-                      <div className="flex justify-between text-sm mb-1">
-                        <span className="text-muted-foreground">{item.label} años</span>
-                        <span className="font-medium text-foreground">{item.value}%</span>
-                      </div>
-                      <div className="h-3 bg-muted rounded-full overflow-hidden">
-                        <div 
-                          className="h-full bg-primary rounded-full transition-all duration-1000"
-                          style={{ width: `${item.value}%` }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Gender distribution */}
-              <div className="bg-card border border-border rounded-2xl p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <Users className="w-5 h-5 text-primary" />
-                  <h3 className="font-display text-xl font-semibold text-foreground">
-                    Distribución por género
-                  </h3>
-                </div>
-                <div className="grid grid-cols-3 gap-4">
-                  {genderData.map((item, i) => (
-                    <div key={i} className="text-center">
-                      <div className="relative w-24 h-24 mx-auto mb-3">
-                        <svg viewBox="0 0 36 36" className="w-full h-full -rotate-90">
-                          <circle
-                            cx="18"
-                            cy="18"
-                            r="16"
-                            fill="none"
-                            className="stroke-muted"
-                            strokeWidth="3"
-                          />
-                          <circle
-                            cx="18"
-                            cy="18"
-                            r="16"
-                            fill="none"
-                            className="stroke-primary"
-                            strokeWidth="3"
-                            strokeDasharray={`${item.value} ${100 - item.value}`}
-                            strokeLinecap="round"
-                          />
-                        </svg>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="font-display text-lg font-bold text-foreground">{item.value}%</span>
-                        </div>
-                      </div>
-                      <span className="text-sm text-muted-foreground">{item.label}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+            <div className="mx-auto max-w-2xl text-center">
+              <Users className="mx-auto mb-4 h-10 w-10 text-primary" />
+              <h2 className="font-display text-2xl font-bold text-foreground">
+                Lo que todavía no publicamos
+              </h2>
+              <p className="mt-3 leading-relaxed text-muted-foreground">
+                Quien se registra puede decir su franja de edad y su género, y la idea es publicar
+                esa demografía. No está aquí todavía porque publicarla exige un mínimo de registros
+                por tramo: con cuatro personas en una franja, un porcentaje señala a una persona.
+                Aparecerá cuando los haya, y no antes.
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                Lo mismo vale para la distribución por cuadrantes: lo que se publica son medias por
+                territorio, que es lo que el mapa de arriba enseña.
+              </p>
             </div>
           </div>
         </section>

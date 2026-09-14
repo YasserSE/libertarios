@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { mockUsers } from "@/data/mockRegisteredUsers";
 import {
   REFERENCE_SETS,
   type ReferenceKind,
@@ -10,9 +9,18 @@ import {
 import { ReferenceAvatar } from "./maps/ReferenceAvatar";
 import { useAnimateInView } from "./motion/hooks";
 
+/*
+ * Aquí había una capa «Simpatizantes»: una nube de quinientos puntos salidos de
+ * `mockRegisteredUsers`, generados con un PRNG y colocados todos en los
+ * subcuadrantes libertarios. Se dibujaba sin ningún aviso, en el mismo gráfico
+ * donde el usuario ve su posición real, y en el modo manual venía activada de
+ * serie. No hay una vista agregada del cuadrante con la que sustituirla —la
+ * base publica medias por territorio, no puntos—, así que la capa se retira en
+ * vez de disfrazarse de «ejemplo». Cuando exista el agregado, este es el sitio
+ * donde volver a pintarlo.
+ */
 interface InteractiveQuadrantProps {
   userPosition?: { economic: number; social: number } | null;
-  showAllUsers?: boolean;
   interactive?: boolean;
   onPositionChange?: (economic: number, social: number) => void;
   /** Capas de referencia activas al montar. */
@@ -167,9 +175,52 @@ function readableInk(hex: string): string {
 const toX = (economic: number) => ((economic + 100) / 200) * 100;
 const toY = (social: number) => 100 - ((social + 100) / 200) * 100;
 
+function AxisSlider({
+  id,
+  label,
+  low,
+  high,
+  value,
+  onChange,
+}: {
+  id: string;
+  label: string;
+  low: string;
+  high: string;
+  value: number;
+  onChange: (value: number) => void;
+}) {
+  return (
+    <div>
+      <div className="mb-1 flex items-baseline justify-between">
+        <label htmlFor={id} className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+          {label}
+        </label>
+        <output htmlFor={id} className="font-display text-sm font-semibold tabular-nums text-foreground">
+          {value > 0 ? "+" : ""}
+          {value}
+        </output>
+      </div>
+      <input
+        id={id}
+        type="range"
+        min={-100}
+        max={100}
+        step={1}
+        value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+        className="w-full accent-[hsl(var(--primary))]"
+      />
+      <div className="mt-0.5 flex justify-between text-[10px] text-muted-foreground">
+        <span>{low}</span>
+        <span>{high}</span>
+      </div>
+    </div>
+  );
+}
+
 export function InteractiveQuadrant({
   userPosition,
-  showAllUsers = true,
   interactive = false,
   onPositionChange,
   defaultLayers = [],
@@ -178,8 +229,6 @@ export function InteractiveQuadrant({
 }: InteractiveQuadrantProps) {
   const { ref: quadrantRef, entering, animate } = useAnimateInView<HTMLDivElement>();
   const [activeKinds, setActiveKinds] = useState<ReferenceKind[]>(defaultLayers);
-  // Con una capa de referencia activa de salida, la nube estorba más que ayuda.
-  const [showUsers, setShowUsers] = useState(showAllUsers && defaultLayers.length === 0);
   const [hovered, setHovered] = useState<ReferencePoint | null>(
     () =>
       REFERENCE_SETS.flatMap((set) => set.points).find((p) => p.id === focusId) ?? null,
@@ -242,14 +291,28 @@ export function InteractiveQuadrant({
       cur.includes(kind) ? cur.filter((k) => k !== kind) : [...cur, kind],
     );
 
+  const clamp = (n: number) => Math.round(Math.max(-100, Math.min(100, n)));
+
   const handleClick = (e: React.MouseEvent<SVGSVGElement>) => {
     if (!interactive || !onPositionChange) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 200 - 100;
     const y = 100 - ((e.clientY - rect.top) / rect.height) * 200;
+    onPositionChange(clamp(x), clamp(y));
+  };
+
+  /*
+   * Los deslizadores existen porque el clic sobre el SVG era la única forma de
+   * fijar la posición: sin puntero no había modo de usar la «posición manual»,
+   * y con el dedo, un punto de 3 mm sobre un cuadrante de 300 no se afina. Son
+   * la misma posición vista desde dos controles; mover uno mueve el otro.
+   */
+  const setAxis = (axis: "economic" | "social", value: number) => {
+    if (!onPositionChange) return;
+    const current = userPosition ?? { economic: 0, social: 0 };
     onPositionChange(
-      Math.round(Math.max(-100, Math.min(100, x))),
-      Math.round(Math.max(-100, Math.min(100, y))),
+      axis === "economic" ? clamp(value) : current.economic,
+      axis === "social" ? clamp(value) : current.social,
     );
   };
 
@@ -285,20 +348,6 @@ export function InteractiveQuadrant({
               </button>
             );
           })}
-
-          <button
-            type="button"
-            onClick={() => setShowUsers((v) => !v)}
-            aria-pressed={showUsers}
-            className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-              showUsers
-                ? "border-primary/40 bg-primary/10 text-primary"
-                : "border-border bg-background text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            <span className="h-2 w-2 rounded-full bg-primary/50" />
-            Simpatizantes
-          </button>
         </div>
       )}
 
@@ -353,19 +402,6 @@ export function InteractiveQuadrant({
               {q.label}
             </text>
           ))}
-
-          {showUsers &&
-            mockUsers.map((user) => (
-              <circle
-                key={user.id}
-                cx={toX(user.economic)}
-                cy={toY(user.social)}
-                r={activeSets.length > 0 ? 0.4 : 0.5}
-                // The cloud is the subject when nothing else is plotted, and
-                // context the moment a reference layer goes on top of it.
-                className={activeSets.length > 0 ? "fill-primary/[0.12]" : "fill-primary/25"}
-              />
-            ))}
 
           {/* El punto señalado se dibuja el último para quedar por encima de los
               que lo rodean; con distintivos de tamaño real el solape importa. */}
@@ -453,6 +489,7 @@ export function InteractiveQuadrant({
         {hovered && (
           <div
             key={hovered.id}
+            role="tooltip"
             className={`pointer-events-none absolute z-20 w-52 -translate-x-1/2 rounded-xl border border-border bg-popover/95 p-3 shadow-elevated backdrop-blur-md ${
               animate ? "fade-in" : ""
             }`}
@@ -480,6 +517,27 @@ export function InteractiveQuadrant({
           </div>
         )}
       </div>
+
+      {interactive && onPositionChange && (
+        <div className="mx-auto mt-5 grid max-w-2xl gap-4 sm:grid-cols-2">
+          <AxisSlider
+            id="eje-economico"
+            label="Eje económico"
+            low="Intervención"
+            high="Libre mercado"
+            value={userPosition?.economic ?? 0}
+            onChange={(v) => setAxis("economic", v)}
+          />
+          <AxisSlider
+            id="eje-social"
+            label="Eje social"
+            low="Control social"
+            high="Libertad social"
+            value={userPosition?.social ?? 0}
+            onChange={(v) => setAxis("social", v)}
+          />
+        </div>
+      )}
 
       {activeSets.map((set) => (
         <div key={set.kind} className="mx-auto mt-6 max-w-2xl">

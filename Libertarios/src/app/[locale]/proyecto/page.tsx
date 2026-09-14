@@ -153,7 +153,7 @@ export default function ProyectoPage() {
         </section>
 
         {/* Methodology */}
-        <section className="py-16 lg:py-24 bg-card border-y border-border">
+        <section id="metodologia" className="scroll-mt-24 py-16 lg:py-24 bg-card border-y border-border">
           <div className="container">
             <div className="flex items-center justify-center gap-3 mb-4">
               <BarChart3 className="w-6 h-6 text-primary" />
@@ -187,6 +187,112 @@ export default function ProyectoPage() {
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/*
+          Qué se guarda y por qué.
+          
+          El pie enlazaba aquí tres veces —«Privacidad», «Aviso legal»,
+          «Cookies»— y aquí no había nada: la página no tenía ni un solo `id`,
+          así que los tres clics caían en la cabecera. Con correos recogidos y
+          consentimiento del art. 9 de por medio, esa información no es un
+          extra: el consentimiento informado exige que exista y se pueda
+          encontrar. Lo que sigue describe lo que el código hace de verdad; si
+          cambia el código, cambia este texto.
+        */}
+        <section id="privacidad" className="scroll-mt-24 py-16 lg:py-24">
+          <div className="container">
+            <div className="mx-auto max-w-3xl">
+              <div className="mb-8 flex items-center gap-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary">
+                  <Lock className="h-6 w-6 text-primary-foreground" />
+                </div>
+                <h2 className="font-display text-2xl font-bold text-foreground md:text-3xl">
+                  Qué hacemos con tus datos
+                </h2>
+              </div>
+
+              <div className="space-y-6 text-muted-foreground">
+                <div>
+                  <h3 className="font-display font-semibold text-foreground">Qué se guarda</h3>
+                  <p className="mt-2 leading-relaxed">
+                    Tu correo, tu posición en los dos ejes, el país y —si lo dices— la provincia. La
+                    edad por tramos y el género son opcionales y solo se piden en el formulario
+                    largo. No se guarda tu nombre, ni tu IP junto al perfil, ni la orientación
+                    sexual que el formulario llegó a preguntar en una versión anterior.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-display font-semibold text-foreground">Para qué</h3>
+                  <p className="mt-2 leading-relaxed">
+                    Para publicar recuentos agregados —nunca tu ficha—, para no contarte dos veces y
+                    para poder escribirte. Guardamos el correo precisamente para eso: escribimos
+                    poco, solo sobre el proyecto, y te das de baja cuando quieras.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-display font-semibold text-foreground">
+                    Por qué tu posición no aparece nunca sola
+                  </h3>
+                  <p className="mt-2 leading-relaxed">
+                    Lo que se publica son medias por territorio, y solo a partir de cinco registros.
+                    Por debajo de ese mínimo el territorio no se publica: con dos o tres personas en
+                    una provincia pequeña, una media es casi una ficha personal. Por eso verás
+                    «menos de 5» en vez de una cifra en muchos sitios del mapa.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-display font-semibold text-foreground">
+                    Tu posición política es un dato especial
+                  </h3>
+                  <p className="mt-2 leading-relaxed">
+                    La opinión política es categoría especial del artículo 9 del RGPD, así que la
+                    base legal es tu consentimiento explícito: la casilla que marcas antes de
+                    registrarte. Puedes retirarlo cuando quieras y podemos demostrar cuándo se dio.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-display font-semibold text-foreground">
+                    El enlace para volver a ver tu resultado
+                  </h3>
+                  <p className="mt-2 leading-relaxed">
+                    Al registrarte te damos un enlace privado con un identificador aleatorio. No
+                    lleva tu correo ni tu nombre, y quien lo abre ve una posición y nada más. No lo
+                    publiques, y si lo pierdes o crees que se ha filtrado, escríbenos y lo anulamos.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-display font-semibold text-foreground">Tus derechos</h3>
+                  <p className="mt-2 leading-relaxed">
+                    Puedes pedir acceso a lo tuyo, su corrección o su borrado escribiendo a{" "}
+                    <a
+                      href="mailto:contacto@libertarios.es"
+                      className="underline underline-offset-4 hover:text-foreground"
+                    >
+                      contacto@libertarios.es
+                    </a>
+                    . El borrado se aplica también a los agregados en el siguiente recálculo. Si
+                    crees que no lo hemos hecho bien, puedes reclamar ante la Agencia Española de
+                    Protección de Datos.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-display font-semibold text-foreground">Cookies</h3>
+                  <p className="mt-2 leading-relaxed">
+                    No usamos cookies de seguimiento ni analítica de terceros. El sitio recuerda dos
+                    cosas en tu propio navegador —el idioma que elegiste y tu último resultado, para
+                    no volver a pedirte el correo— y ninguna de las dos sale de tu dispositivo.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
