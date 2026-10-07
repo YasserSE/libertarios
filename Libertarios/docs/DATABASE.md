@@ -320,3 +320,368 @@ España: generalizarlo es parametrizar la URL del TopoJSON, la proyección y el
 | Derecho de supresión (art. 17) | `deleted_at`; el borrado físico va en un job nocturno |
 | Minimización | Año de nacimiento en lugar de fecha; nunca dirección ni IP junto al perfil |
 | Limitación del plazo | Cuentas sin confirmar se purgan a los 30 días |
+
+---
+
+## 8. «¿A quién votar?» — respuestas anónimas y avisos (`0008_afinidad.sql`)
+
+Módulo aparte del registro de simpatizantes, y así debe seguir: quien hace el
+test no se registra como nada, y el módulo promete no afiliación. **No usar
+`register_affiliate` ni las tablas `affiliates*` para nada de esto.**
+
+> Migración escrita, **no aplicada** en ningún proyecto remoto.
+
+### Tablas
+
+| Tabla | Qué guarda | Qué **no** guarda |
+|---|---|---|
+| `afinidad_responses` | `dataset_version`, `answers smallint[]` (−2, −1, 1, 2 o `NULL` = saltada, por posición de `Question.order`), `important boolean[]`, `region` (INE 01–19, opcional), `usual_vote` (id de partido, opcional), `created_day` (fecha truncada a día, hora de Madrid) | correo, IP, user agent, hora, ningún id de sesión |
+| `afinidad_notify` | `email` (en minúsculas, único), `consent_at`, `locale` (es/ca/gl/eu), `dataset_version`, `unsubscribe_token`, `unsubscribed_at` | ninguna respuesta del test ni enlace a ellas |
+
+Las respuestas van por posición y con versión del dataset: un cambio de
+cuestionario cambia la versión, así que nunca se mezclan respuestas cuyo
+significado ha cambiado. La server action descarta además los enlaces de una
+versión distinta de la actual.
+
+### Acceso
+
+- RLS activo y **sin políticas** en las dos tablas; `revoke all` a `anon` y
+  `authenticated`.
+- Escritura pública solo por dos funciones `SECURITY DEFINER` concedidas a
+  `anon`, que validan la entrada aunque la server action ya lo haga (cualquiera
+  con la clave pública puede llamarlas sin pasar por la web):
+  - `record_afinidad_response(p_dataset_version, p_answers, p_important, p_region, p_usual_vote)`
+    → `void`. Exige escala válida, misma longitud, ninguna «importante» saltada
+    y al menos 8 respondidas (`MIN_ANSWERS`). No devuelve el id.
+  - `subscribe_afinidad(p_email, p_consent, p_locale, p_dataset_version)` →
+    `void`, igual si el correo era nuevo o ya estaba (no permite averiguar
+    quién está suscrito). Resuscribirse renueva `consent_at` y anula la baja.
+- Lectura **interna**: `afinidad_aggregates(p_question, p_usual_vote, p_dataset_version)`
+  devuelve recuentos por valor e importancia y omite toda celda con menos de
+  **20** personas (k = 20, más estricto que el k = 5 del mapa porque aquí el
+  dato es opinión sobre un asunto concreto). Revocada para `anon` y
+  `authenticated`: solo `service_role`.
+
+### Publicar agregados
+
+Antes de publicar o difundir cualquier cifra (página, imagen OG, JSON abierto,
+redes):
+
+1. `isPublicationEmbargoed()` (`src/lib/afinidad/aggregate-rules.ts`) debe ser
+   `false`. Devuelve `true` del 24-nov-2026 00:00 al 29-nov-2026 20:00 (hora de
+   Madrid), veda de sondeos del art. 69.7 LOREG.
+2. Solo celdas con k ≥ 20 (`K_ANONYMITY`), y avisando de que quien hace el test
+   no es una muestra representativa.
+
+### Código
+
+```
+src/app/[locale]/a-quien-votar/actions.ts   recordAfinidadResponse, subscribeAfinidad
+src/lib/afinidad/aggregate.ts               fetch a las RPC con la clave anónima (server-only)
+src/lib/afinidad/aggregate-rules.ts         validación pura, veda, k
+```
+
+La petición a Supabase sale del servidor: Supabase ve la IP de Vercel, nunca la
+de la persona.
+
+### Cambios de la revisión de seguridad (2026-10-06)
+
+Aplicados en `0008` (que no está aplicada en ningún proyecto remoto, así que se
+editó en el sitio). Detalle y razones en `docs/AFINIDAD-SEGURIDAD.md`.
+
+- Techo global de escrituras por minuto (`afinidad_rate_buckets` +
+  `afinidad_rate_take`, internos): 600 respuestas/min y 60 suscripciones/min.
+  Por encima se descarta en silencio.
+- `revoke all` también en las secuencias de las columnas identity.
+- `search_path` de las funciones SECURITY DEFINER fijado a `public, pg_temp`.
+- `afinidad_notify.confirmed_at` (doble opt-in) y re-suscribirse tras una baja
+  exige reconfirmar: `subscribe_afinidad` es pública y cualquiera puede
+  escribir un correo ajeno.
+
+### Pendiente
+
+- ~~Envío de correos y página de baja~~ **Sustituido por el boletín (§10,
+  `0011_newsletter.sql`).** `afinidad_notify` queda congelada: la app ya no la
+  escribe y `0011` retira a `anon` el permiso sobre `subscribe_afinidad`. Sus
+  filas (si las hubiera) **no** se copian al boletín: su casilla decía «solo
+  para este aviso». **No enviar nada a filas con `confirmed_at IS NULL`.**
+- Antes de publicar titulares, revisar `rate_peaks` en el panel y filtrar días
+  con picos anómalos.
+
+---
+
+## 9. «¿A quién votar?» — registro de uso y panel interno (`0009_afinidad_events.sql`)
+
+> Migración escrita y probada en local (PGlite, Postgres 17 en WASM, con los
+> roles de Supabase simulados), **no aplicada** en ningún proyecto remoto.
+
+### Eventos de uso: `afinidad_events`
+
+Decisión del dueño: en vez de un proveedor externo de analítica, los eventos se
+guardan en la propia base y se miran en `/admin/afinidad`.
+
+| Columna | Qué |
+|---|---|
+| `event` | uno de 13 nombres fijos (CHECK): `afinidad_start`, `_complete`, `_open_shared`, `_context_declared`, `_source_open`, `_share_{whatsapp,x,telegram,copy,native}`, `_explore_{cuadrante,aprende,medidas}` |
+| `props` | `jsonb` ≤ 64 bytes, solo `anon` (bool, en compartir), `from` (`resultado`/`pie`/`portada`, en explorar) o `step` (`region`/`vote`, en contexto declarado: **que** se declaró, no **qué**) |
+| `locale`, `dataset_version` | idioma de la página y versión de los datos |
+| `created_at` | **hora en punto** (UTC), con CHECK |
+
+**No** guarda: respuestas, importancia, comunidad, voto habitual, partidos,
+resultado, URL, referer, IP, user agent, correo, cookies ni ningún id de
+persona o de sesión. Son registros de uso, no de opinión: meter cualquier dato
+de opinión los convertiría en categoría especial (art. 9 RGPD) y, al ir con
+hora e idioma, en algo más fácil de reidentificar que `afinidad_responses`.
+
+**Sin id de sesión, a propósito.** Un id aleatorio por pestaña daría el embudo
+por persona, pero encadenaría todos los eventos de una visita (secuencia +
+hora + idioma ≈ huella). El embudo agregado (terminados / empezados) basta.
+
+**Sin consentimiento previo**, porque no se guarda ni se lee nada en el
+dispositivo (no hay cookies ni `localStorage` para esto: art. 5.3 ePrivacy no
+aplica) y los datos no identifican a nadie. Aun así, con Global Privacy
+Control o Do Not Track activos, `track()` no envía nada. La metodología lo
+explica («Qué registramos del uso»).
+
+Escritura: `record_afinidad_event(p_event, p_props, p_locale, p_dataset_version)`
+y `record_afinidad_events(p_locale, p_dataset_version, p_events jsonb)` (lote
+≤ 20, ≤ 4 KB, todo o nada), SECURITY DEFINER, concedidas a `anon`. Validan
+nombre, propiedades por evento, tipos y valores, y aplican un techo global de
+3000 eventos/min.
+
+Cadena: `track()` (`src/lib/afinidad/track.ts`, cola + `sendBeacon`/`fetch
+keepalive`, nunca bloquea) → `POST /api/afinidad/event` (mismo origen, 30
+envíos/min por IP en memoria, ≤ 4 KB, zod) → `record_afinidad_events` con la
+clave anónima. En desarrollo la ruta no escribe salvo `AFINIDAD_EVENTS_DEV=1`.
+
+**Por qué Postgres no limita por IP:** a través de PostgREST la base ve la IP
+del servidor de Vercel; `x-forwarded-for` llega como cabecera que cualquiera
+que llame directamente a la API puede inventarse. El límite por cliente vive en
+la ruta (con la IP que fija el borde de Vercel, solo en memoria y un minuto) y
+la base solo pone un techo global que acota el crecimiento.
+
+### Panel interno: `/admin/afinidad`
+
+Sin clave de servicio en la app. La autorización vive en la base:
+
+| Objeto | Para qué | Quién |
+|---|---|---|
+| `afinidad_admin_tokens` | tokens largos (`afa_` + 64 hex, 244 bits), guardados como SHA-256, con `expires_at` (≤ 366 días), `revoked_at`, `last_used_at` | nadie con la clave pública |
+| `afinidad_admin_sessions` | sesiones de 30 min (`afs_…`), también como hash | nadie con la clave pública |
+| `afinidad_admin_login(p_token)` → `text` | canjea token por sesión; `NULL` si no vale | `anon` |
+| `afinidad_admin_stats(p_session, p_from, p_to)` → `jsonb` | todas las cifras del panel; `NULL` sin sesión válida | `anon` |
+| `afinidad_admin_logout(p_session)` | cierra la sesión | `anon` |
+| `afinidad_admin_issue_token(p_label, p_valid_for)` | emite un token y lo devuelve en claro **una vez** | solo rol de servicio |
+| `afinidad_admin_revoke_token(p_label)` | revoca y borra sus sesiones | solo rol de servicio |
+
+Bloqueo: más de 20 intentos fallidos (login o sesión) en 15 minutos cierran el
+acceso **a todo el mundo** hasta que baja el contador (ámbito `admin_fail` de
+`afinidad_rate_buckets`). Con 244 bits la fuerza bruta es inviable; el bloqueo
+corta el ruido y deja rastro. Contrapartida: alguien con la clave anónima
+podría mantener al dueño fuera; se arregla vaciando el contador (abajo).
+
+Qué devuelve `afinidad_admin_stats`: eventos por día, idioma, versión y
+propiedad dentro del rango (≤ 366 días); respuestas totales, por día y por
+versión; voto habitual, comunidad y su cruce **solo con k ≥ 20 y siempre sobre
+todo el histórico** (no sobre el rango, para que restar dos rangos no aísle a
+nadie; los «no declara» no salen como celda); y el máximo por minuto de cada
+techo global por día.
+
+Flujo en la app: formulario → server action (`src/app/admin/afinidad/actions.ts`)
+→ `afinidad_admin_login` → cookie `__Host-afinidad_admin` (httpOnly, Secure,
+SameSite=Strict, Path=/, 30 min) con la **sesión**, no el token → la página
+(Server Component, sin componentes cliente) llama a `afinidad_admin_stats`.
+`/admin` queda fuera de la redirección de idioma y lleva `X-Robots-Tag:
+noindex`, `Cache-Control: no-store`, `Referrer-Policy: no-referrer` y
+`X-Frame-Options: DENY` (`src/middleware.ts`).
+
+#### Crear, revocar y desbloquear (editor SQL de Supabase)
+
+```sql
+-- Crear un token para un dispositivo (válido 30 días; máx. 366). Se muestra
+-- UNA vez: cópialo a un gestor de contraseñas. La base guarda solo su hash.
+select public.afinidad_admin_issue_token('yasser-portatil', interval '30 days');
+
+-- Ver qué tokens hay (sin secretos).
+select label, created_at, expires_at, revoked_at, last_used_at
+from public.afinidad_admin_tokens order by created_at desc;
+
+-- Revocar (corta también las sesiones abiertas con él).
+select public.afinidad_admin_revoke_token('yasser-portatil');
+
+-- Rotar: revocar y emitir otro con una etiqueta nueva.
+select public.afinidad_admin_revoke_token('yasser-portatil');
+select public.afinidad_admin_issue_token('yasser-portatil-2', interval '30 days');
+
+-- Desbloquear tras un bloqueo por intentos fallidos.
+delete from public.afinidad_rate_buckets where scope = 'admin_fail';
+```
+
+### Retención
+
+`afinidad_purge(p_event_days default 180, p_response_days default 730)`, solo
+rol de servicio, programada con pg_cron cada noche (`afinidad-purge`, 03:17
+UTC):
+
+| Datos | Plazo |
+|---|---|
+| `afinidad_events` | 180 días |
+| `afinidad_responses` | 730 días — **propuesta pendiente de confirmar por el dueño**; `select public.afinidad_purge(180, null)` la desactiva |
+| `afinidad_rate_buckets` | 2 días |
+| sesiones de admin caducadas | al momento |
+| tokens de admin caducados o revocados | 30 días después |
+| `afinidad_notify` dadas de baja | 30 días después de la baja (tabla congelada desde `0011`) |
+
+```sql
+select public.afinidad_purge();            -- a mano, con los plazos por defecto
+select * from cron.job where jobname = 'afinidad-purge';
+```
+
+### Código
+
+```
+src/lib/afinidad/events.ts          lista blanca y limpieza de propiedades (cliente y servidor)
+src/lib/afinidad/event-schema.ts    zod del lote (servidor)
+src/lib/afinidad/track.ts           cola, beacon, GPC/DNT
+src/lib/afinidad/rate-limit.ts      límite por cliente en memoria
+src/lib/afinidad/events-server.ts   escritura (server-only)
+src/lib/afinidad/rpc.ts             fetch a las RPC con la clave anónima (server-only)
+src/lib/afinidad/admin.ts           login / stats / logout (server-only)
+src/lib/afinidad/admin-rules.ts     cookie, formatos, lectura del JSON, resumen
+src/app/api/afinidad/event/route.ts
+src/app/admin/afinidad/{page,actions}.ts(x)
+```
+
+---
+
+## 10. «Novedades de Libertarios.eu» — boletín (`0011_newsletter.sql`)
+
+> Migración escrita y probada en local (PGlite, Postgres 17 en WASM, con los
+> roles y privilegios por defecto de Supabase simulados: 61 comprobaciones),
+> **no aplicada** en ningún proyecto remoto.
+
+Decisión del dueño (2026-10-07): un único boletín, enviado con **Brevo**, que se
+ofrece *después* del resultado del test, en el formulario de registro y en el
+pie. Se reaprovechan los correos de los simpatizantes ya registrados, siempre
+con un correo de re-permiso primero.
+
+### Tabla `newsletter_subscribers`
+
+| Columna | Qué es |
+|---|---|
+| `email` | en minúsculas, único |
+| `consent_at` | cuándo marcó la casilla (importados: cuándo se registraron) |
+| `consent_text_version` | versión del texto aceptado: `NEWSLETTER_CONSENT_VERSION` (`nl-2026-10-07`) o, en importados, `LEGACY_CONSENT_VERSION` (`registro-2026-10`) — `src/lib/newsletter/schema.ts` |
+| `source` | `test` \| `registro` \| `footer` \| `legacy_affiliate` |
+| `locale` | idioma de la página (es, ca, gl, eu, pt, fr, it, de); plantilla en es/ca/gl/eu, el resto cae a es |
+| `confirmed_at` | doble opt-in. **Solo se escribe a filas con `confirmed_at` y sin `unsubscribed_at`** |
+| `unsubscribe_token` | UUID del enlace de baja; solo viaja en los correos |
+| `unsubscribed_at` | baja; la fila se conserva como lista de supresión |
+| `confirm_token_hash`, `confirm_sent_at`, `confirm_expires_at` | operativas del doble opt-in: SHA-256 del token del enlace (el token en claro solo está en el correo), cuándo se envió y hasta cuándo vale (7 días; importados 30) |
+
+**Qué no guarda, a propósito:** respuestas, resultado, voto habitual,
+comunidad/provincia, posición, ni ningún id que la cruce con `affiliates*` o
+`afinidad_*` (no hay ninguna clave ajena). No se segmenta por ideología.
+
+### Clave de servidor (`newsletter_config`)
+
+La función de alta devuelve el token de confirmación al servidor para meterlo
+en el correo. La clave anónima es pública: si bastara con ella, cualquiera
+podría pedir el token de una dirección ajena y confirmarla, y el doble opt-in
+no valdría nada. Por eso las tres funciones públicas exigen además
+`p_server_key`, que la app lee de `NEWSLETTER_SERVER_KEY` y de la que la base
+guarda solo el SHA-256 (una fila en `newsletter_config`).
+
+```sql
+-- Rol de servicio (editor SQL de Supabase). Devuelve la clave UNA vez.
+select public.newsletter_issue_server_key();   -- → nlk_… a Vercel: NEWSLETTER_SERVER_KEY
+-- Volver a ejecutarla rota la clave (la anterior deja de valer al momento).
+```
+
+### Funciones
+
+| Función | Quién | Devuelve | Notas |
+|---|---|---|---|
+| `subscribe_newsletter(p_server_key, p_email, p_consent, p_source, p_locale, p_consent_text_version)` | `anon` + clave de servidor | `(confirm_token, unsubscribe_token)` o ninguna fila | solo `test`/`registro`/`footer`; fila confirmada → nada (no se altera); ≤ 1 correo de confirmación cada 10 min por dirección; techo 60/min (`afinidad_rate_take('newsletter')`) |
+| `confirm_newsletter(p_server_key, p_token)` | `anon` + clave | `(email, locale)` o nada | token de un solo uso; caduca; techo 300/min |
+| `unsubscribe_newsletter(p_server_key, p_token uuid)` | `anon` + clave | correo o `NULL` | idempotente; anula también un token de confirmación pendiente |
+| `newsletter_export()` | **solo servicio** | `(email, locale, source, confirmed_at)` confirmados y sin baja | para volcar o resincronizar la lista de Brevo |
+| `newsletter_legacy_counts()` | **solo servicio** | JSON de recuentos | modo prueba de la importación |
+| `newsletter_import_legacy_affiliates(p_consent_text_version)` | **solo servicio** | nº importados | correos de `affiliates` no borrados y no sintéticos (`seed_batch is null`); `on conflict do nothing` |
+| `newsletter_issue_legacy_tokens(p_limit)` | **solo servicio** | lote de tokens en claro | para el script; 1–200 |
+| `newsletter_release_legacy_token(p_email)` | **solo servicio** | — | devuelve a pendiente si el envío falló |
+| `newsletter_purge()` | **solo servicio** / pg_cron (`newsletter-purge`, 03:27 UTC) | recuentos | ver retención |
+| `newsletter_issue_server_key()` | **solo servicio** | clave en claro | |
+| `newsletter_key_ok`, `newsletter_new_confirm_token` | nadie (internas) | | |
+
+Todas `SECURITY DEFINER` con `search_path = public, pg_temp` (o
+`pg_catalog, pg_temp`). RLS activo sin políticas y `revoke all` a `anon` y
+`authenticated` en las dos tablas y en la secuencia.
+
+### Retención
+
+| Datos | Plazo |
+|---|---|
+| altas web sin confirmar | se borran 30 días después del último intento |
+| importados que no confirman (token de 30 días caducado) | pasan a baja (`unsubscribed_at`), no se borran: así una reimportación no les vuelve a escribir |
+| bajas | se conservan (correo y fecha) como lista de supresión, mientras exista el boletín |
+| confirmados | mientras no se den de baja |
+
+### Simpatizantes ya registrados
+
+Su casilla de registro decía «se guarde mi correo con el fin de que
+Libertarios.eu pueda escribirme… Escribimos poco y solo sobre esto, y te das de
+baja cuando quieras». El primer contacto es **siempre** un correo de re-permiso
+y quedan sin confirmar hasta que pulsen. Nada se envía solo:
+
+```bash
+# Prueba (por defecto): solo recuentos, no escribe ni envía.
+SUPABASE_SERVICE_ROLE_KEY=… npm run newsletter:import-affiliates
+# Copia los correos como legacy_affiliate, sin confirmar. No envía.
+SUPABASE_SERVICE_ROLE_KEY=… npm run newsletter:import-affiliates -- --import
+# Copia y envía el re-permiso por lotes (por defecto 25 por lote, 400 ms entre
+# correos y 300 por ejecución; --batch= --delay-ms= --limit=).
+SUPABASE_SERVICE_ROLE_KEY=… BREVO_API_KEY=… BREVO_SENDER_EMAIL=… \
+  npm run newsletter:import-affiliates -- --send
+```
+
+`SUPABASE_URL` (y `NEXT_PUBLIC_SITE_URL` para los enlaces) se leen de
+`.env.local` si existe. La clave de servicio solo se pasa en la orden: no va a
+Vercel ni a `.env.local`. El script no imprime ninguna dirección. Si fallan 5
+envíos seguidos se para y devuelve esos correos a pendiente. Solo admite la
+clave de servicio vía PostgREST (no `SUPABASE_DB_URL`: no hay cliente `pg` en
+el proyecto).
+
+### Brevo
+
+`src/lib/newsletter/brevo-core.ts` (fetch a `https://api.brevo.com/v3`, sin
+estado) y `brevo.ts` (`server-only`, lee el entorno). Correo transaccional para
+la confirmación (`POST /smtp/email`, con `List-Unsubscribe` y
+`List-Unsubscribe-Post: List-Unsubscribe=One-Click`), y al confirmar se añade el
+contacto a la lista `BREVO_LIST_ID` (`POST /contacts`, solo el correo, ningún
+atributo); al darse de baja se quita (`/contacts/lists/{id}/contacts/remove`).
+Sin `BREVO_API_KEY`/`BREVO_SENDER_EMAIL`: aviso en el log, la fila queda sin
+confirmar, no se envía nada y no se lanza ningún error.
+
+Las bajas hechas desde un enlace de baja *de Brevo* (en campañas) quedan en
+Brevo, no en la base: antes de cada exportación o envío, cruzar con la lista
+de bajas de Brevo.
+
+### Código
+
+```
+supabase/migrations/0011_newsletter.sql
+src/lib/newsletter/schema.ts           zod, versiones del texto, formato de tokens (puro)
+src/lib/newsletter/subscribers.ts      RPC con la clave anónima + NEWSLETTER_SERVER_KEY (server-only)
+src/lib/newsletter/brevo-core.ts       cliente Brevo sin estado
+src/lib/newsletter/brevo.ts            Brevo desde Next (server-only)
+src/lib/newsletter/email.ts            correo de confirmación / re-permiso (es, ca, gl, eu)
+src/lib/newsletter/legacy-import.ts    lógica de la importación (pura)
+scripts/newsletter-import-affiliates.ts
+src/i18n/newsletter.ts                 textos (es, ca, gl, eu; el resto cae a es)
+src/app/[locale]/novedades/actions.ts  subscribeNewsletter, confirmNewsletter, unsubscribeNewsletter
+src/app/[locale]/novedades/{confirmar,baja}/page.tsx   noindex, no-referrer; confirmar/baja con botón (POST)
+src/app/api/newsletter/unsubscribe/route.ts            baja de un clic (RFC 8058)
+src/components/newsletter/NewsletterForm.tsx           resultado del test, pie (FooterNewsletter)
+src/components/RegistrationForm.tsx                    casilla aparte en el paso 4
+```
