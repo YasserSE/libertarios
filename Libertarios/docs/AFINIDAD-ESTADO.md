@@ -6,7 +6,7 @@ Foto tras la integración final y la QA. El plan está en `AFINIDAD-PLAN.md`; la
 
 - **Motor** (`src/lib/afinidad/score.ts`):
   - Programa y Votos se puntúan como dos lentes separadas.
-  - El acuerdo es direccional: mismo signo, `1 − |u − p| / 8`; signo contrario, 0; partido en 0, 0,5.
+  - El acuerdo es direccional (desde 2026.10.2): `(1 − |u − p| / 4) × lado`, con lado 1 mismo signo, ½ partido en 0 y 0 signo contrario. +1 frente a +2 = 0,75; partido en 0 = 0,375 frente a ±1 y 0,25 frente a ±2.
   - «Esto me importa» pesa ×2. Hacen falta al menos 8 respuestas para dar resultado.
   - **Desde el 2026-10-07, una lente enseña cifra cuando el partido tiene dato en al menos `MIN_LENS_ITEMS` = 5 de las preguntas respondidas.** Sustituye al umbral del 70 %. Cada barra (programa y votos) dice «basado en X de Y respuestas». Por debajo de 5 dice «datos insuficientes», nunca 0.
   - **La cifra se encoge hacia el neutro**: `(Σ peso × acuerdo + K × 0,5) / (Σ peso + K)` con `SHRINK_K` = 3. 5 de 5 coincidencias dan un 81 %; 15 de 15, un 92 %. Se enseña la cifra corregida, y la metodología lo explica con un ejemplo que importa las constantes.

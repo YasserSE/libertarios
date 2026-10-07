@@ -1,11 +1,16 @@
 import { describe, it, expect } from "vitest";
 import type { Answers, Dataset, Party, Position, Question, Stance, UserPosition, VoteEvidence } from "@/data/afinidad/types";
+import { USER_POSITIONS } from "@/data/afinidad/types";
 import {
   MIN_LENS_ITEMS,
   SHRINK_K,
   shrunkMean,
   IMPORTANT_WEIGHT,
   MIN_ANSWERS,
+  NEUTRAL_PARTY_FACTOR,
+  OPPOSITE_SIDE_FACTOR,
+  PARTY_POSITIONS,
+  SAME_SIDE_FACTOR,
   agreement,
   coherence,
   computeAffinity,
@@ -118,14 +123,51 @@ describe("afinidad: esquema y fixture", () => {
 });
 
 describe("afinidad: métrica direccional", () => {
-  it("mismo signo puntúa 0,75–1; signo contrario 0; partido en 0 da 0,5", () => {
-    expect(agreement(2, 2)).toBe(1);
-    expect(agreement(1, 2)).toBe(0.875);
-    expect(agreement(-1, -2)).toBe(0.875);
-    expect(agreement(1, -1)).toBe(0);
-    expect(agreement(-2, 2)).toBe(0);
-    expect(agreement(2, 0)).toBe(0.5);
-    expect(agreement(-1, 0)).toBe(0.5);
+  it("tabla exacta: (1 − |u − p| / 4) × lado (1 mismo lado, ½ partido en 0, 0 contrario)", () => {
+    // Filas: respuesta −2, −1, +1, +2; columnas: partido −2, −1, 0, +1, +2.
+    const table = USER_POSITIONS.map((u) => PARTY_POSITIONS.map((p) => agreement(u, p)));
+    expect(table).toEqual([
+      [1, 0.75, 0.25, 0, 0],
+      [0.75, 1, 0.375, 0, 0],
+      [0, 0, 0.375, 1, 0.75],
+      [0, 0, 0.25, 0.75, 1],
+    ]);
+    // Posiciones no enteras (media de `contested`): misma regla.
+    expect(agreement(2, 1.5)).toBe(0.875);
+    expect(agreement(1, -0.5)).toBe(0);
+    expect(SAME_SIDE_FACTOR).toBe(1);
+    expect(NEUTRAL_PARTY_FACTOR).toBe(0.5);
+    expect(OPPOSITE_SIDE_FACTOR).toBe(0);
+  });
+
+  it("simétrica al cambiar de signo, y el centro nunca supera al mismo lado", () => {
+    for (const u of USER_POSITIONS)
+      for (const p of PARTY_POSITIONS) {
+        expect(agreement(-u, -p)).toBe(agreement(u, p));
+        if (p !== 0 && Math.sign(p) === Math.sign(u)) expect(agreement(u, p)).toBeGreaterThan(agreement(u, 0));
+        if (p !== 0 && Math.sign(p) !== Math.sign(u)) expect(agreement(u, p)).toBeLessThan(agreement(u, 0));
+      }
+  });
+
+  it("la intensidad cuenta: ±1 frente a ±2 cambia la cifra de forma visible", () => {
+    // Entre «a favor» y «muy a favor» hay al menos 20 puntos de acuerdo (antes, 12,5).
+    expect(agreement(2, 2) - agreement(2, 1)).toBeGreaterThanOrEqual(0.2);
+    // Y una abstención vale menos para quien opina con fuerza.
+    expect(agreement(1, 0) - agreement(2, 0)).toBeGreaterThanOrEqual(0.1);
+    // Partido «muy a favor» de todo: quien responde «muy a favor» a 15 preguntas
+    // le da ≥ 15 puntos más que quien responde «a favor» a las mismas.
+    const d = makeDataset(15, [
+      { id: "fuerte", name: "Aaa", positions: Array(15).fill(2) },
+      { id: "suave", name: "Zzz", positions: Array(15).fill(1) },
+    ]);
+    const all = (v: UserPosition): Answers => Object.fromEntries(d.questions.map((q) => [q.id, a(v)]));
+    const strong = computeAffinity(all(2), d, "programme");
+    const mild = computeAffinity(all(1), d, "programme");
+    const score = (r: typeof strong, id: string) => r.ranking.find((e) => e.partyId === id)!.score!;
+    expect(score(strong, "fuerte") - score(mild, "fuerte")).toBeGreaterThanOrEqual(0.15);
+    // Y el orden se invierte: con ±2 va delante el partido ±2; con ±1, el ±1.
+    expect(strong.ranking[0].partyId).toBe("fuerte");
+    expect(mild.ranking[0].partyId).toBe("suave");
   });
 
   it("exporta las constantes que cita la metodología", () => {
@@ -185,8 +227,8 @@ describe("afinidad: tests 1–4 (neutralidad del motor)", () => {
     const d = makeDataset(15, [
       // 3 celdas, todas iguales a la respuesta: 100 % sobre el 20 % de cobertura.
       { id: "pocas", name: "Aaa", positions: [2, 2, 2, ...Array(12).fill(null)] },
-      // 15 celdas: 3 × (+2) y 12 × (+1) → (3 + 12·0,875)/15 = 0,9.
-      { id: "muchas", name: "Zzz", positions: [2, 2, 2, ...Array(12).fill(1)] },
+      // 15 celdas: 9 × (+2) y 6 × (+1) → (9 + 6·0,75)/15 = 0,9.
+      { id: "muchas", name: "Zzz", positions: [...Array(9).fill(2), ...Array(6).fill(1)] },
     ]);
     const answers: Answers = Object.fromEntries(d.questions.map((q) => [q.id, a(2)]));
     const r = computeAffinity(answers, d, "programme");
@@ -206,7 +248,8 @@ describe("afinidad: mínimo de respuestas con dato por lente (MIN_LENS_ITEMS)", 
   const d = makeDataset(15, [
     { id: "cuatro", name: "Aaa", positions: fifteen([2, 2, 2, 2]) },
     { id: "cinco", name: "Bbb", positions: fifteen([2, 2, 2, 2, 1]) },
-    { id: "quince", name: "Zzz", positions: [2, 2, 2, ...Array(12).fill(1)] },
+    // 9 × (+2) y 6 × (+1): (9 + 6·0,75)/15 = 0,9 sin encoger.
+    { id: "quince", name: "Zzz", positions: [...Array(9).fill(2), ...Array(6).fill(1)] },
   ]);
   const answers: Answers = Object.fromEntries(d.questions.map((q) => [q.id, a(2)]));
 
@@ -225,11 +268,11 @@ describe("afinidad: mínimo de respuestas con dato por lente (MIN_LENS_ITEMS)", 
 
   it("con el encogimiento, 5 de 5 coincidencias no llegan al 100 % ni ganan a 15 al 90 %", () => {
     const r = computeAffinity(answers, d, "combined");
-    // cinco: (4 + 0,875)/5 sin encoger; quince: 0,9. Encogidas, quince va delante.
+    // cinco: (4 + 0,75)/5 = 0,95 sin encoger; quince: 0,9. Encogidas, quince va delante.
     expect(r.ranking.filter((e) => e.usable).map((e) => e.partyId)).toEqual(["quince", "cinco"]);
     const pair = makeDataset(15, [
       { id: "pocos", name: "Aaa", positions: fifteen([2, 2, 2, 2, 2]) },
-      { id: "muchos", name: "Zzz", positions: [2, 2, 2, ...Array(12).fill(1)] },
+      { id: "muchos", name: "Zzz", positions: [...Array(9).fill(2), ...Array(6).fill(1)] },
     ]);
     const rp = computeAffinity(answers, pair, "combined");
     const pocos = rp.ranking.find((e) => e.partyId === "pocos")!;
@@ -244,7 +287,7 @@ describe("afinidad: mínimo de respuestas con dato por lente (MIN_LENS_ITEMS)", 
     expect(shrunkMean(15, 15)).toBeCloseTo((15 + 1.5) / 18);
     expect(shrunkMean(0, 5)).toBeCloseTo(1.5 / 8);
     const r = computeAffinity(answers, d, "programme", { shrinkK: 0 });
-    expect(r.ranking.find((e) => e.partyId === "cinco")!.score).toBeCloseTo(4.875 / 5);
+    expect(r.ranking.find((e) => e.partyId === "cinco")!.score).toBeCloseTo(4.75 / 5);
   });
 });
 

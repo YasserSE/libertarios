@@ -22,7 +22,7 @@ Toda posición de partido va de −2 a +2 **respecto al enunciado de la pregunta
 | −1 | En contra con condiciones, matices o de forma parcial. |
 | −2 | En contra sin reservas. |
 
-La persona usuaria responde en 4 puntos (−2, −1, +1, +2) más «No sé». El 0 solo existe para partidos, y el motor lo trata como medio acuerdo (0,5) con cualquier respuesta.
+La persona usuaria responde en 4 puntos (−2, −1, +1, +2) más «No sé». El 0 solo existe para partidos. El motor calcula `acuerdo = (1 − |u − p| / 4) × lado`: lado 1 si respuesta y posición tienen el mismo signo, ½ si el partido está en 0 y 0 si están en lados contrarios. Un 0 vale, por tanto, 0,375 frente a ±1 y 0,25 frente a ±2 (desde 2026.10.2; antes, 0,5 con cualquier respuesta). Por eso un +1 y un +2 no son intercambiables al codificar: entre ellos hay 25 puntos de acuerdo.
 
 ## 2. Programa (`ProgrammeStance`, WP3)
 
@@ -142,6 +142,7 @@ Un compromiso público y lo que el partido hizo después. **No puntúa nunca.** 
 - `pendiente` con `note`; `pendiente` y `sin-posicion` no influyen en el resultado.
 - Ids únicos, referencias existentes, una sola celda por partido×pregunta.
 - Equilibrio: en cada pregunta ≥ 2 partidos a cada lado; ningún partido con todas sus posiciones del mismo signo; cobertura por bloque a ±20 % de la media.
+- Acuerdo por pregunta (2026.10.2): `(1 − |u − p| / 4) × lado` (1 mismo lado, ½ partido en 0, 0 lado contrario); tabla completa en la metodología, generada con `agreement()`. La intensidad cuenta: «a favor» frente a «muy a favor» son 25 puntos.
 - Cálculo (2026-10-07): una lente enseña cifra con al menos `MIN_LENS_ITEMS` (5) respuestas con dato, y la cifra se **encoge hacia el neutro**: `(Σ w·acuerdo + K·0,5) / (Σ w + K)` con `SHRINK_K` = 3 (5 de 5 coincidencias = 81 %, 15 de 15 = 92 %). Por eso el votante perfecto ya no da el 100 %: se exige que salga 1.º con al menos `PERFECT_VOTER_MIN_SCORE` (75 %).
 - Neutralidad del motor: votante perfecto, votante opuesto, simetría al invertir signos, estilo de respuesta, y dominancia (ningún partido **comparable** gana a más del 35 % ni a menos del 2 % de 10 000 usuarios aleatorios y 10 000 moderados), con los 32 partidos juntos y, sobre todo, **por comunidad** (estatales + los de cada comunidad, que es lo que enseña la UI). «Comparable» = con dato en al menos `MIN_LENS_ITEMS` (5) preguntas en alguna lente, la misma regla con la que el motor enseña una cifra; los que no llegan salen «datos insuficientes» para todo el mundo y no compiten: su hueco lo mide la cobertura por bloque. Los umbrales son constantes exportadas de `checks.ts` (`DOMINANCE_MAX_SHARE`, `DOMINANCE_MIN_SHARE`, `DOMINANCE_USERS`, `BLOC_COVERAGE_TOLERANCE`, `RESPONSE_STYLE_MAX_GAP`, `ITEM_MIN_PER_SIDE`) y la metodología las importa.
 - Todos los ficheros de `stances/programme`, `stances/record`, `hemeroteca` y `dichos-hechos` están registrados en su `index.ts` (un fichero sin registrar no se validaría).

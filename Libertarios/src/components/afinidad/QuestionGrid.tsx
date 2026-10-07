@@ -11,13 +11,17 @@ import { SourcePopover, questionText } from "./SourcePopover";
 
 export type CellState = "match" | "near" | "opposite" | "none" | "skipped";
 
+/** Entre el mínimo del mismo lado (0,625) y el máximo de un partido en 0 (0,375). */
+const MATCH_MIN = 0.6;
+
 /**
  * Estado de una celda partido × pregunta respecto a TU respuesta.
  *
  * Se usa la misma función de acuerdo que el motor (`agreement`), con la media
- * de las lentes que tengan dato: mismo lado → «coincide» (≥ 0,75), partido en
- * 0 o lentes en sentidos distintos → «a medias», lado contrario → «opuesta».
- * Así el punto dice lo mismo que la cifra del ranking, no otra cosa.
+ * de las lentes que tengan dato: mismo lado → «coincide» (≥ 0,625 siempre),
+ * partido en 0 (≤ 0,375) o lentes en sentidos distintos → «a medias», lado
+ * contrario → «opuesta». Así el punto dice lo mismo que la cifra del ranking,
+ * no otra cosa.
  */
 export function cellState(dataset: Dataset, partyId: string, questionId: string, answer: UserPosition | null): CellState {
   if (answer === null) return "skipped";
@@ -26,7 +30,7 @@ export function cellState(dataset: Dataset, partyId: string, questionId: string,
     .filter((p): p is number => p !== null);
   if (positions.length === 0) return "none";
   const a = positions.reduce((s, p) => s + agreement(answer, p), 0) / positions.length;
-  if (a >= 0.75) return "match";
+  if (a >= MATCH_MIN) return "match";
   if (a > 0) return "near";
   return "opposite";
 }

@@ -11,13 +11,56 @@ Reglas del registro:
 
 ## Versiones
 
+### 2026.10.2 — 2026-10-07: la intensidad de la respuesta cuenta
+
+Queja recibida: «muy en desacuerdo / muy a favor no se toma en cuenta correctamente». Era cierto. Con la fórmula de 2026.10.0–1 (mismo signo `1 − |u − p| / 8`; signo contrario 0; partido en 0 → 0,5 siempre), «a favor» frente a «muy a favor» costaba solo 12,5 puntos y una abstención valía lo mismo para quien está «muy a favor» que para quien está «a favor». No cambia ninguna celda; cambia el cálculo, y por eso sube la versión: un enlace compartido con 2026.10.1 enseña el aviso de recálculo.
+
+Método nuevo (`agreement` en `src/lib/afinidad/score.ts`):
+
+- `acuerdo = (1 − |u − p| / 4) × lado`, con lado = 1 si respuesta y posición tienen el mismo signo (`SAME_SIDE_FACTOR`), ½ si el partido está en 0 (`NEUTRAL_PARTY_FACTOR`) y 0 si están en lados contrarios (`OPPOSITE_SIDE_FACTOR`).
+- Tabla (filas: tu respuesta; columnas: partido):
+
+| | −2 | −1 | 0 | +1 | +2 |
+|---|---|---|---|---|---|
+| −2 | 1 | 0,75 | 0,25 | 0 | 0 |
+| −1 | 0,75 | 1 | 0,375 | 0 | 0 |
+| +1 | 0 | 0 | 0,375 | 1 | 0,75 |
+| +2 | 0 | 0 | 0,25 | 0,75 | 1 |
+
+- Antes: +1/+2 frente a +2/+1 = 0,875; partido en 0 = 0,5 con cualquier respuesta. Sin cambios: «Esto me importa» ×2, `SHRINK_K` = 3, `MIN_LENS_ITEMS` = 5, mínimo de 8 respuestas.
+- La metodología genera la tabla con la misma función (cuatro lenguas) y el punto del detalle por pregunta pasa a «coincide» desde 0,6 (mismo lado ≥ 0,625; partido en 0 ≤ 0,375).
+
+Candidatas simuladas sobre el dataset real (2.000 usuarios por perfil y comunidad, 10.000 en la vista estatal; mismos generadores que `checks.ts`). «Ficticio 0»: un partido inventado con todo a 0 añadido a la vista estatal (prueba de sesgo de centro). «±1 → ±2»: 2.000 personas con los mismos lados que responden todo a ±1 y luego todo a ±2.
+
+| Candidata | Comunidades (máx / mín) | Ficticio 0 (unif. / mod.) | Votante perfecto / opuesto | ±1 → ±2: cambia el 1.º / Δ cifra media |
+|---|---|---|---|---|
+| Anterior (`/8`, 0 → 0,5) | 23,4 / 3,4 % | 3,0 / 3,9 % | pasa / pasa | 24 % / 2,8 pts |
+| A: mismo lado `/4`; contrario graduado (0,25 para ±1 frente a ∓1); 0 → 0,5 − 0,125·(\|u\| − 1) | 30,4 / 2,6 % | 0,0 / 0,2 % | pasa / **falla** (PP, Podemos, Més) | 45 % / 3,4 pts |
+| B: A + peso por intensidad (±2 × 1,5) | 27,6 / 3,6 % | 0,0 / 0,1 % | pasa / **falla** (4) | 45 % / 4,0 pts |
+| C: distancia + 1 punto si no es tu lado, sobre 4 | 32,2 / **2,0 %** | 0,0 / 0,3 % | pasa / **falla** (11) | 48 % / 4,3 pts |
+| E: mismo lado `/4`; contrario 0; 0 → 0,5 / 0,375 | 25,0 / 2,9 % | 1,4 / **7,7 %** | pasa / pasa | 43 % / 5,2 pts |
+| E con 0 → 0,5 fijo | 24,7 / 2,8 % | **9,6 / 15,1 %** | pasa / pasa | 43 % / 5,5 pts |
+| **Elegida**: mismo lado `/4`; contrario 0; 0 → ½ de la cercanía (0,375 / 0,25) | 26,2 / 2,9 % | **0,0 / 0,0 %** | pasa / pasa | 44 % / 5,2 pts |
+
+Por qué esta:
+
+- Es la más simple que pasa todo: una sola fórmula (cercanía × lado), sin pesos nuevos.
+- Sin sesgo de centro, y mejor que antes: el partido ficticio «todo 0» pasa de ganar al 3–4 % de los usuarios sintéticos a ninguno. Quitar 25 puntos al mismo lado sin rebajar el 0 (fila «E con 0 → 0,5 fijo») le daba el 15 % de los moderados: por eso el 0 tiene que depender de la intensidad.
+- Graduar el desacuerdo (A, B, C) suena intuitivo (−1 frente a +1 «menos malo» que −2 frente a +2), pero rompía el votante opuesto (test 2) y casi triplicaba las victorias de un partido ficticio «±1 del lado mayoritario en todo» entre los moderados (19 % → 52 % con A). Con la elegida sube a 29 %, y es lo esperado: si la intensidad cuenta, quien responde casi siempre ±1 se parece más a un partido que dice ±1; sigue lejos del 35 %. Lo que separa a dos personas en lados contrarios es el lado.
+- Peso por intensidad (B y D = C + peso): no aporta más que la tabla y añade una regla que explicar. Descartado.
+- La intensidad se nota: con las mismas respuestas en lado, pasar de ±1 a ±2 cambia el primer partido al 44 % de las personas (antes, 24 %), el trío de cabeza al 81 % (antes, 59 %) y mueve la cifra 5,2 puntos de media (antes, 2,8).
+
+Comprobaciones (`STRICT=1 npx vitest run src/test/afinidad-dataset.test.ts`): dominancia por comunidad, votante perfecto (1.º y ≥ 75 %), votante opuesto, simetría y exclusión de pendientes pasan, igual que antes. Siguen fallando, igual que antes y por los datos (no por la fórmula): partidos indistinguibles en test 1 (Sumar = Compromís en programa; Sumar = Frente Amplio y ERC = Compromís en hechos), tests 5–7, y la vista con los 32 partidos juntos (que no existe en la UI): antes ERC, Compromís, Vox y Sumar por debajo del 2 %; ahora ERC, Compromís, Vox, EH Bildu y PNV (1,6–1,9 %). Vista estatal de 10.000 usuarios, antes → ahora (uniforme): SALF 24,6 → 26,9; Podemos 14,7 → 14,4; Frente Amplio 13,8 → 14,1; PP 12,3 → 13,0; PSOE 16,1 → 12,0; Sumar 10,1 → 11,6; Vox 8,4 → 8,1. Test nuevo: el partido ficticio «todo 0» gana a menos del 2 % (falla siempre, no solo con `STRICT=1`).
+
+JSON abierto: `public/afinidad/datos-2026.10.2.json` (mismo contenido que 2026.10.1 salvo la versión); se conservan los anteriores.
+
 ### 2026.10.0 — 2026-10-06 (sin publicar)
 
 Método:
 
 - Elección de referencia: generales del 29-N-2026 (Real Decreto 806/2026, BOE del 6 de octubre).
 - Escala de respuesta de 4 puntos más «No sé» (sin punto medio). Los partidos conservan el 0 para abstención o ambivalencia expresa.
-- Métrica de **acuerdo direccional** (mismo signo → `1 − |u − p| / 8`; signo contrario → 0; partido en 0 → 0,5). Sustituye a `1 − |u − p| / 4`, que en simulación daba al centro el 72 % de las victorias.
+- Métrica de **acuerdo direccional** (mismo signo → `1 − |u − p| / 8`; signo contrario → 0; partido en 0 → 0,5). Sustituye a `1 − |u − p| / 4`, que en simulación daba al centro el 72 % de las victorias. (Sustituida en 2026.10.2 por `(1 − |u − p| / 4) × lado`; ver arriba.)
 - Cobertura mínima del 70 % de las respuestas (sustituida el 2026-10-07 por un mínimo de 5 respuestas con dato por lente; ver abajo) y mínimo de 8 respuestas para dar resultado; «Esto me importa» pesa ×2.
 - Criterio de inclusión de partidos publicado: escaño en el Congreso XV, coaliciones registradas para el 29-N que los integren, y extraparlamentarios con escaño en el Parlamento Europeo o en un parlamento autonómico o ≥ 1 % en las generales de 2023. El P-LIB se somete a la misma regla.
 - Programas de 2023 como fuente provisional hasta que se publiquen los de 2026, con etiqueta visible.

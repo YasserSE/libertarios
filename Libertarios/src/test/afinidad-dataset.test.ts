@@ -7,10 +7,11 @@ import { recordStanceFiles } from "@/data/afinidad/stances/record";
 import { quoteFiles } from "@/data/afinidad/hemeroteca";
 import { saidVsDidFiles } from "@/data/afinidad/dichos-hechos";
 import { dvhSearchLog } from "@/data/afinidad/dichos-hechos/busqueda";
-import type { Answers, Lens, Stance } from "@/data/afinidad/types";
+import type { Answers, Dataset, Lens, Stance } from "@/data/afinidad/types";
 import { validateDataset, voteUrlMatches } from "@/lib/afinidad/schema";
 import { visiblePartyIds } from "@/lib/afinidad/select";
 import {
+  DOMINANCE_MIN_SHARE,
   checkBlocCoverage,
   checkDominance,
   checkItemBalance,
@@ -195,6 +196,39 @@ describe.skipIf(EMPTY)("dataset real de afinidad · neutralidad y equilibrio", (
       soft("dominancia por comunidad", { ok: problems.length === 0, problems });
     },
     300_000,
+  );
+
+  it(
+    "sin sesgo de centro: un partido ficticio con todo a 0 no gana a nadie (o casi) en la vista estatal",
+    () => {
+      // Lo que hundió a la fórmula 1 − |u − p| / 4 (el centro ganaba al 72 %).
+      // Con el 0 a 0,375 / 0,25 según tu intensidad, un partido que se abstiene
+      // en todo no puede ganar a quien sí se moja. Falla siempre: depende del
+      // motor, no de que el dataset esté completo.
+      const fakeId = "zz-ficticio-todo-cero";
+      const cell = { position: 0 as const, status: "verificado" as const, confidence: "alta" as const };
+      const fake: Dataset = {
+        ...dataset,
+        parties: [...dataset.parties, { ...dataset.parties[0], id: fakeId, name: "zz", short: "zz", regions: undefined }],
+        stances: [
+          ...dataset.stances,
+          ...dataset.questions.map(
+            (q) =>
+              ({
+                partyId: fakeId,
+                questionId: q.id,
+                programme: { ...cell, quote: "-", source: { url: "-", title: "-" } },
+                record: { ...cell, evidence: [], note: "-" },
+              }) as unknown as Stance,
+          ),
+        ],
+      };
+      const r = checkDominance(fake, { partyIds: [...visiblePartyIds(dataset.parties, null), fakeId], n: 2000 });
+      console.info(`[afinidad] partido ficticio todo 0: uniforme ${r.shares.uniform[fakeId]}, moderado ${r.shares.moderate[fakeId]}`);
+      expect(r.shares.uniform[fakeId]).toBeLessThan(DOMINANCE_MIN_SHARE);
+      expect(r.shares.moderate[fakeId]).toBeLessThan(DOMINANCE_MIN_SHARE);
+    },
+    120_000,
   );
 });
 

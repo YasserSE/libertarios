@@ -56,6 +56,9 @@ export interface MethodologyStrings {
     same: string;
     opposite: string;
     neutral: string;
+    tableTitle: string;
+    tableCorner: string;
+    intensity: string;
     weighted: string;
     exampleTitle: string;
     thAnswer: string;
@@ -181,10 +184,14 @@ const es: MethodologyStrings = {
     h: "Cómo se calcula tu afinidad",
     answers:
       "Respondes a cada afirmación en cuatro puntos (muy en contra −2, en contra −1, a favor +1, muy a favor +2) o la saltas con «No sé». No hay punto medio: así un salto no puede confundirse con una respuesta tibia. Las preguntas saltadas no cuentan.",
-    perQuestion: "Para cada pregunta, el acuerdo con un partido va de 0 a 1:",
-    same: "si tu respuesta y la posición del partido tienen **el mismo signo**: acuerdo = 1 − |tu respuesta − posición| / {den} (entre {min} y 1);",
-    opposite: "si tienen **signo contrario**: acuerdo = {value};",
-    neutral: "si el partido tiene un 0 expreso (abstención o ambivalencia): acuerdo = {value}.",
+    perQuestion: "Para cada pregunta, el acuerdo con un partido va de 0 a 1. Se parte de la cercanía en la escala, 1 − |tu respuesta − posición| / {max}, y se multiplica por el lado:",
+    same: "si tu respuesta y la posición del partido tienen **el mismo signo**, cuenta toda la cercanía: 1 si coincidís, {near} entre «a favor» y «muy a favor»;",
+    opposite: "si tienen **signo contrario**: acuerdo = {value}, sea cual sea la intensidad;",
+    neutral: "si el partido tiene un 0 expreso (abstención o ambivalencia), cuenta **la mitad** de la cercanía, porque no está de tu lado aunque tampoco enfrente: {mild} si respondiste ±1 y {strong} si respondiste ±2.",
+    tableTitle: "Tabla completa del acuerdo (calculada con la misma función que el resultado)",
+    tableCorner: "Tu respuesta ↓ · partido →",
+    intensity:
+      "**La intensidad cuenta.** Si respondes «muy a favor», un partido «muy a favor» te da {full} y uno solo «a favor», {near}: {gap} puntos menos. Y un partido que se abstiene te da {strong}, frente a {mild} si tú solo estás «a favor». Responder ±2 en lugar de ±1 puede cambiar quién queda primero.",
     weighted:
       "La afinidad es la media de esos acuerdos, ponderada: las preguntas que marcas con «Esto me importa» pesan **×{weight}**, el resto ×1.",
     exampleTitle: "Ejemplo con un partido ficticio",
@@ -355,10 +362,14 @@ const ca: MethodologyStrings = {
     h: "Com es calcula la teva afinitat",
     answers:
       "Respons cada afirmació en quatre punts (molt en contra −2, en contra −1, a favor +1, molt a favor +2) o la saltes amb «No ho sé». No hi ha punt mitjà: així un salt no es pot confondre amb una resposta tèbia. Les preguntes saltades no compten.",
-    perQuestion: "Per a cada pregunta, l'acord amb un partit va de 0 a 1:",
-    same: "si la teva resposta i la posició del partit tenen **el mateix signe**: acord = 1 − |la teva resposta − posició| / {den} (entre {min} i 1);",
-    opposite: "si tenen **signe contrari**: acord = {value};",
-    neutral: "si el partit té un 0 exprés (abstenció o ambivalència): acord = {value}.",
+    perQuestion: "Per a cada pregunta, l'acord amb un partit va de 0 a 1. Es parteix de la proximitat a l'escala, 1 − |la teva resposta − posició| / {max}, i es multiplica pel costat:",
+    same: "si la teva resposta i la posició del partit tenen **el mateix signe**, compta tota la proximitat: 1 si coincidiu, {near} entre «a favor» i «molt a favor»;",
+    opposite: "si tenen **signe contrari**: acord = {value}, sigui quina sigui la intensitat;",
+    neutral: "si el partit té un 0 exprés (abstenció o ambivalència), compta **la meitat** de la proximitat, perquè no és del teu costat encara que tampoc no sigui al davant: {mild} si vas respondre ±1 i {strong} si vas respondre ±2.",
+    tableTitle: "Taula completa de l'acord (calculada amb la mateixa funció que el resultat)",
+    tableCorner: "La teva resposta ↓ · partit →",
+    intensity:
+      "**La intensitat compta.** Si respons «molt a favor», un partit «molt a favor» et dona {full} i un de només «a favor», {near}: {gap} punts menys. I un partit que s'absté et dona {strong}, davant de {mild} si tu només estàs «a favor». Respondre ±2 en lloc de ±1 pot canviar qui queda primer.",
     weighted:
       "L'afinitat és la mitjana d'aquests acords, ponderada: les preguntes que marques amb «Això m'importa» pesen **×{weight}**, la resta ×1.",
     exampleTitle: "Exemple amb un partit fictici",
@@ -528,10 +539,14 @@ const gl: MethodologyStrings = {
     h: "Como se calcula a túa afinidade",
     answers:
       "Respondes a cada afirmación en catro puntos (moi en contra −2, en contra −1, a favor +1, moi a favor +2) ou sáltala con «Non sei». Non hai punto medio: así un salto non se pode confundir cunha resposta morna. As preguntas saltadas non contan.",
-    perQuestion: "Para cada pregunta, o acordo cun partido vai de 0 a 1:",
-    same: "se a túa resposta e a posición do partido teñen **o mesmo signo**: acordo = 1 − |a túa resposta − posición| / {den} (entre {min} e 1);",
-    opposite: "se teñen **signo contrario**: acordo = {value};",
-    neutral: "se o partido ten un 0 expreso (abstención ou ambivalencia): acordo = {value}.",
+    perQuestion: "Para cada pregunta, o acordo cun partido vai de 0 a 1. Pártese da proximidade na escala, 1 − |a túa resposta − posición| / {max}, e multiplícase polo lado:",
+    same: "se a túa resposta e a posición do partido teñen **o mesmo signo**, conta toda a proximidade: 1 se coincidides, {near} entre «a favor» e «moi a favor»;",
+    opposite: "se teñen **signo contrario**: acordo = {value}, sexa cal sexa a intensidade;",
+    neutral: "se o partido ten un 0 expreso (abstención ou ambivalencia), conta **a metade** da proximidade, porque non está do teu lado aínda que tampouco enfronte: {mild} se respondiches ±1 e {strong} se respondiches ±2.",
+    tableTitle: "Táboa completa do acordo (calculada coa mesma función ca o resultado)",
+    tableCorner: "A túa resposta ↓ · partido →",
+    intensity:
+      "**A intensidade conta.** Se respondes «moi a favor», un partido «moi a favor» dáche {full} e un só «a favor», {near}: {gap} puntos menos. E un partido que se abstén dáche {strong}, fronte a {mild} se ti só estás «a favor». Responder ±2 en lugar de ±1 pode cambiar quen queda primeiro.",
     weighted:
       "A afinidade é a media deses acordos, ponderada: as preguntas que marcas con «Isto impórtame» pesan **×{weight}**, o resto ×1.",
     exampleTitle: "Exemplo cun partido ficticio",
@@ -702,10 +717,14 @@ const eu: MethodologyStrings = {
     h: "Nola kalkulatzen den zure afinitatea",
     answers:
       "Baieztapen bakoitzari lau mailatan erantzuten diozu (erabat aurka −2, aurka −1, alde +1, erabat alde +2) edo «Ez dakit» aukerarekin saltatzen duzu. Ez dago erdiko mailarik: horrela, saltatze bat ezin da erantzun epel batekin nahastu. Saltatutako galderak ez dira zenbatzen.",
-    perQuestion: "Galdera bakoitzean, alderdi batekiko adostasuna 0tik 1era doa:",
-    same: "zure erantzunak eta alderdiaren jarrerak **zeinu bera** badute: adostasuna = 1 − |zure erantzuna − jarrera| / {den} ({min} eta 1 artean);",
-    opposite: "**kontrako zeinua** badute: adostasuna = {value};",
-    neutral: "alderdiak 0 adierazia badu (abstentzioa edo anbibalentzia): adostasuna = {value}.",
+    perQuestion: "Galdera bakoitzean, alderdi batekiko adostasuna 0tik 1era doa. Eskalako hurbiltasunetik abiatzen da, 1 − |zure erantzuna − jarrera| / {max}, eta aldeaz biderkatzen da:",
+    same: "zure erantzunak eta alderdiaren jarrerak **zeinu bera** badute, hurbiltasun osoa zenbatzen da: 1 erabat bat bazatozte, eta {near} «alde» eta «oso alde» artean;",
+    opposite: "**kontrako zeinua** badute: adostasuna = {value}, intentsitatea edozein dela ere;",
+    neutral: "alderdiak 0 adierazia badu (abstentzioa edo anbibalentzia), hurbiltasunaren **erdia** zenbatzen da, ez baitago zure aldean, ezta aurrean ere: {mild} ±1 erantzun bazenuen, eta {strong} ±2 erantzun bazenuen.",
+    tableTitle: "Adostasunaren taula osoa (emaitzaren funtzio berarekin kalkulatua)",
+    tableCorner: "Zure erantzuna ↓ · alderdia →",
+    intensity:
+      "**Intentsitateak axola du.** «Oso alde» erantzuten baduzu, «oso alde» dagoen alderdi batek {full} ematen dizu, eta «alde» besterik ez dagoenak {near}: {gap} puntu gutxiago. Abstenitzen den alderdi batek, berriz, {strong} ematen dizu, eta {mild} zu «alde» besterik ez bazaude. ±1 beharrean ±2 erantzuteak alda dezake nor geratzen den lehena.",
     weighted:
       "Afinitatea adostasun horien batez besteko haztatua da: «Hau garrantzitsua da niretzat» markatzen dituzun galderek **×{weight}** pisatzen dute, gainerakoek ×1.",
     exampleTitle: "Adibidea alderdi fikziozko batekin",

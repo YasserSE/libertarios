@@ -69,8 +69,17 @@ export const MIN_ANSWERS = 8;
 export const IMPORTANT_WEIGHT = 2;
 /** Distancia máxima entre dos posiciones de −2 a +2. */
 export const MAX_DISTANCE = 4;
-/** Acuerdo cuando el partido tiene un 0 explícito (abstención, ambivalencia). */
-export const NEUTRAL_PARTY_AGREEMENT = 0.5;
+/**
+ * Factor de lado del acuerdo (ver `agreement`). Mismo lado: cuenta toda la
+ * cercanía en la escala. Partido en 0 explícito (abstención, ambivalencia):
+ * la mitad, porque no está de tu lado aunque tampoco enfrente. Lado contrario:
+ * nada, sea cual sea la intensidad.
+ */
+export const SAME_SIDE_FACTOR = 1;
+export const NEUTRAL_PARTY_FACTOR = 0.5;
+export const OPPOSITE_SIDE_FACTOR = 0;
+/** Posiciones de partido de la tabla de acuerdo (la metodología la genera con ellas). */
+export const PARTY_POSITIONS = [-2, -1, 0, 1, 2] as const;
 /**
  * Distancia mínima para hablar de «tu partido te contradice». Con 1 punto
  * (de acuerdo frente a muy de acuerdo) no hay contradicción, hay matiz.
@@ -144,18 +153,43 @@ export function getStance(dataset: Dataset, partyId: string, questionId: string)
 }
 
 /**
- * Acuerdo direccional de 0 a 1 entre una respuesta y una posición.
+ * Acuerdo direccional de 0 a 1 entre una respuesta y una posición:
  *
- * Sustituye a `1 − |a − s| / 4`, que en simulación daba al centro el 72 % de
- * las victorias: un partido con todo a 0 quedaba a media distancia de
- * cualquiera y ganaba a los que sí se mojaban. Aquí lo que cuenta primero es
- * el lado: mismo signo → `1 − |u − p| / 8` (entre 0,75 y 1); signo contrario
- * → 0; partido en 0 → 0,5.
+ *   acuerdo = (1 − |u − p| / 4) × factor de lado
+ *
+ * con factor 1 si están del mismo lado, ½ si el partido está en 0 y 0 si están
+ * en lados contrarios. Tabla (filas: respuesta; columnas: partido −2…+2):
+ *
+ *   u = +1 → 0 · 0 · 0,375 · 1 · 0,75
+ *   u = +2 → 0 · 0 · 0,25 · 0,75 · 1
+ *
+ * Historia (AFINIDAD-CAMBIOS.md):
+ * - `1 − |u − p| / 4` a secas daba al centro el 72 % de las victorias: un
+ *   partido con todo a 0 quedaba a media distancia de cualquiera.
+ * - La versión 2026.10.0–1 (mismo signo `1 − |u − p| / 8`, contrario 0, partido
+ *   en 0 → 0,5 siempre) arregló eso, pero dejó la intensidad casi sin efecto:
+ *   «a favor» frente a «muy a favor» costaba 12,5 puntos y una abstención
+ *   valía lo mismo para quien está «muy a favor» que para quien está «a favor».
+ *   Aquí cuesta 25 puntos, y la abstención vale 0,375 frente a ±1 y 0,25 frente
+ *   a ±2. Que el 0 dependa de la intensidad es además lo que impide que un
+ *   partido que no se moja gane a los usuarios moderados (simulación en
+ *   AFINIDAD-CAMBIOS.md, versión 2026.10.2).
+ * - Lado contrario = 0 también frente a ±1: graduarlo (p. ej. 0,25 para +1
+ *   frente a −1) hacía que el votante opuesto de un partido moderado tuviera a
+ *   otro partido por detrás y daba más victorias a un partido ficticio «±1 en
+ *   todo»; se simuló y se descartó.
+ *
+ * Simétrica al cambiar de signo respuesta y posición. Admite posiciones no
+ * enteras (medias de `contested`).
  */
 export function agreement(answer: number, position: number): number {
-  if (Math.abs(position) < EPS) return NEUTRAL_PARTY_AGREEMENT;
-  if (Math.sign(answer) !== Math.sign(position)) return 0;
-  return 1 - Math.abs(answer - position) / (2 * MAX_DISTANCE);
+  const side =
+    Math.abs(position) < EPS
+      ? NEUTRAL_PARTY_FACTOR
+      : Math.sign(answer) === Math.sign(position)
+        ? SAME_SIDE_FACTOR
+        : OPPOSITE_SIDE_FACTOR;
+  return Math.max(0, 1 - Math.abs(answer - position) / MAX_DISTANCE) * side;
 }
 
 // Solo valores de la escala de 4 puntos; cualquier otro (un 0 de un formato

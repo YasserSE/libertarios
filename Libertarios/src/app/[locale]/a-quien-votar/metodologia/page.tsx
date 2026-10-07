@@ -14,9 +14,10 @@ import {
   IMPORTANT_WEIGHT,
   MAX_DISTANCE,
   MIN_ANSWERS,
-  NEUTRAL_PARTY_AGREEMENT,
+  PARTY_POSITIONS,
   agreement,
 } from "@/lib/afinidad/score";
+import { USER_POSITIONS } from "@/data/afinidad/types";
 import { MAX_HEMEROTECA_WORDS, MAX_QUOTE_WORDS } from "@/lib/afinidad/schema";
 import {
   BLOC_COVERAGE_TOLERANCE,
@@ -113,6 +114,8 @@ const CONTRAST: number[][] = [
 const asRows = (ps: number[]): Row[] => ps.map((p, i) => ({ n: i + 1, u: MODERATE[i], important: false, p }));
 
 const pct = formatPct;
+/** Porcentaje con un decimal si lo tiene (37,5 %), para la tabla de acuerdo. */
+const pct1 = (x: number) => `${(x * 100).toLocaleString("es-ES", { maximumFractionDigits: 1 })} %`;
 const num = (x: number) => x.toLocaleString("es-ES", { maximumFractionDigits: 3 });
 
 /** El P-LIB se busca por sus identificadores habituales; no tiene trato propio. */
@@ -338,12 +341,54 @@ export default async function MetodologiaPage({ params }: { params: Promise<{ lo
         <section aria-labelledby="calculo" className="space-y-3">
           <H2 id="calculo">{m.calc.h}</H2>
           <p>{m.calc.answers}</p>
-          <p>{m.calc.perQuestion}</p>
+          <p>{rich(m.calc.perQuestion, { max: MAX_DISTANCE })}</p>
           <ul className="list-disc space-y-1 pl-5">
-            <li>{rich(m.calc.same, { den: 2 * MAX_DISTANCE, min: num(agreement(2, 1)) })}</li>
+            <li>{rich(m.calc.same, { near: num(agreement(2, 1)) })}</li>
             <li>{rich(m.calc.opposite, { value: num(agreement(2, -2)) })}</li>
-            <li>{rich(m.calc.neutral, { value: num(NEUTRAL_PARTY_AGREEMENT) })}</li>
+            <li>{rich(m.calc.neutral, { mild: num(agreement(1, 0)), strong: num(agreement(2, 0)) })}</li>
           </ul>
+
+          {/* La tabla sale de agreement(): si cambia la función, cambia la tabla. */}
+          <div className="rounded-2xl border border-border bg-card p-4">
+            <p className="font-semibold text-foreground">{m.calc.tableTitle}</p>
+            <div className="mt-2 overflow-x-auto">
+              <table className="w-full min-w-[22rem] border-collapse text-left text-sm" data-testid="agreement-table">
+                <thead>
+                  <tr className="border-b border-border text-foreground">
+                    <th className="py-2 pr-3 text-xs font-normal text-muted-foreground">{m.calc.tableCorner}</th>
+                    {PARTY_POSITIONS.map((p) => (
+                      <th key={p} className="py-2 pr-3 font-mono">
+                        {formatPosition(p)}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {USER_POSITIONS.map((u) => (
+                    <tr key={u} className="border-b border-border last:border-0">
+                      <th scope="row" className="py-2 pr-3 font-mono text-foreground">
+                        {formatPosition(u)}
+                      </th>
+                      {PARTY_POSITIONS.map((p) => (
+                        <td key={p} className="py-2 pr-3 font-mono" data-testid={`agreement-${u}-${p}`}>
+                          {num(agreement(u, p))}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <p>
+            {rich(m.calc.intensity, {
+              full: pct1(agreement(2, 2)),
+              near: pct1(agreement(2, 1)),
+              gap: <strong data-testid="intensity-gap">{num((agreement(2, 2) - agreement(2, 1)) * 100)}</strong>,
+              strong: pct1(agreement(2, 0)),
+              mild: pct1(agreement(1, 0)),
+            })}
+          </p>
           <p>{rich(m.calc.weighted, { weight: IMPORTANT_WEIGHT })}</p>
 
           <div className="rounded-2xl border border-border bg-card p-4">

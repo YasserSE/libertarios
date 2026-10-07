@@ -1,7 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, cleanup } from "@testing-library/react";
 import type { Dataset } from "@/data/afinidad/types";
-import { IMPORTANT_WEIGHT, MIN_LENS_ITEMS, SHRINK_K, MIN_ANSWERS, agreement } from "@/lib/afinidad/score";
+import { IMPORTANT_WEIGHT, MIN_LENS_ITEMS, SHRINK_K, MIN_ANSWERS, PARTY_POSITIONS, agreement } from "@/lib/afinidad/score";
+import { USER_POSITIONS } from "@/data/afinidad/types";
 import { validateDataset } from "@/lib/afinidad/schema";
 import { getMethodologyStrings } from "@/i18n/afinidad/methodology";
 import { getTransparencyStrings } from "@/i18n/afinidad/transparency";
@@ -58,6 +59,15 @@ describe("afinidad · metodología", () => {
     expect(screen.getByTestId("shrink-five")).toHaveTextContent(pct((MIN_LENS_ITEMS + SHRINK_K * 0.5) / (MIN_LENS_ITEMS + SHRINK_K)));
     expect(screen.getByTestId("shrink-five").textContent).not.toMatch(/^100/);
     expect(screen.getAllByTestId("worked-agreement")).toHaveLength(3);
+  });
+
+  it("la tabla de acuerdo se genera con agreement() (4 respuestas × 5 posiciones)", async () => {
+    render(await MetodologiaPage(params({ locale: "es" })));
+    const num = (x: number) => x.toLocaleString("es-ES", { maximumFractionDigits: 3 });
+    for (const u of USER_POSITIONS)
+      for (const p of PARTY_POSITIONS)
+        expect(screen.getByTestId(`agreement-${u}-${p}`)).toHaveTextContent(num(agreement(u, p)));
+    expect(screen.getByTestId("intensity-gap")).toHaveTextContent(num((agreement(2, 2) - agreement(2, 1)) * 100));
   });
 
   it("declara quién lo hace y que el P-LIB sigue la misma regla, sin datos inventados", async () => {
