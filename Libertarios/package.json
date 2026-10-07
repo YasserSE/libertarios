@@ -11,7 +11,11 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "seed:gen": "esbuild scripts/gen-seed.ts --bundle --platform=node --format=esm --alias:@=./src --log-level=error --outfile=.seed.mjs && node .seed.mjs > supabase/migrations/0002_seed_geo_catalogue.sql && rm .seed.mjs",
-    "seed:mock": "esbuild scripts/gen-mock-affiliates.ts --bundle --platform=node --format=esm --alias:@=./src --log-level=error --outfile=.seed.mjs && node .seed.mjs > supabase/migrations/0004_seed_mock_affiliates.sql && rm .seed.mjs"
+    "seed:mock": "esbuild scripts/gen-mock-affiliates.ts --bundle --platform=node --format=esm --alias:@=./src --log-level=error --outfile=.seed.mjs && node .seed.mjs > supabase/migrations/0004_seed_mock_affiliates.sql && rm .seed.mjs",
+    "afinidad:verify": "esbuild scripts/verify-afinidad-sources.ts --bundle --platform=node --format=esm --alias:@=./src --log-level=error | node --input-type=module -",
+    "afinidad:json": "esbuild scripts/gen-afinidad-json.ts --bundle --platform=node --format=esm --alias:@=./src --log-level=error | node --input-type=module -",
+    "afinidad:vote": "esbuild scripts/fetch-congreso-vote.ts --bundle --platform=node --format=esm --alias:@=./src --log-level=error | node --input-type=module -",
+    "newsletter:import-affiliates": "esbuild scripts/newsletter-import-affiliates.ts --bundle --platform=node --format=esm --alias:@=./src --log-level=error | node --env-file-if-exists=.env.local --input-type=module -"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.1.0",
