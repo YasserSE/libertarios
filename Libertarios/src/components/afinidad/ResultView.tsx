@@ -37,6 +37,7 @@ import { Disclosure, SectionCard } from "./ui";
 import { NewsletterForm } from "@/components/newsletter/NewsletterForm";
 import { isNewsletterEnabled } from "@/lib/newsletter/enabled";
 import { KeepExploring } from "./KeepExploring";
+import { QuadrantInvite } from "./QuadrantInvite";
 import type { BarState } from "./PartyBar";
 
 /** Ruta del módulo; el idioma se antepone al construir enlaces absolutos. */
@@ -357,7 +358,10 @@ export function ResultView({ dataset, decoded, lang, origin: originProp }: Resul
       {/* 9. Sigue explorando: otros tests de Libertarios.eu. El último bloque a
           propósito (plan, actualización §7): nunca por encima del ranking ni
           del detalle, para que el resultado neutral se lea entero antes de
-          cualquier invitación del sitio que hace el test. */}
+          cualquier invitación del sitio que hace el test. La invitación al
+          cuadrante va delante y se personaliza solo con las respuestas de
+          impuestos de la persona (nunca con partidos); no se guarda. */}
+      <QuadrantInvite answers={decoded.answers} questions={dataset.questions} lang={lang} />
       <KeepExploring lang={lang} />
     </div>
   );

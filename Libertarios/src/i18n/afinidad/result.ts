@@ -197,6 +197,17 @@ const es = {
   exploreMeasuresBody:
     "Qué buscan las medidas más debatidas y qué ha medido la evidencia después, con las fuentes.",
   exploreMeasuresShort: "Medidas y efectos",
+  // Invitación al cuadrante (`QuadrantInvite`): se elige con las respuestas
+  // de la persona a las preguntas de impuestos (`lib/afinidad/lean.ts`), nunca
+  // con partidos. {n} = respuestas que han contado.
+  inviteLibertadTitle: "Tus respuestas apuntan a más libertad económica.",
+  inviteLibertadBody: "¿Y en lo personal? Descubre si tu perfil es libertario.",
+  inviteIntervencionTitle: "Tus respuestas apuntan a más intervención económica.",
+  inviteIntervencionBody: "¿Dónde estás en libertad personal?",
+  inviteMixtoTitle: "¿Dónde estás en libertad económica y personal?",
+  inviteMixtoBody: "Descúbrelo en 3 minutos.",
+  inviteCta: "Hacer el test del cuadrante",
+  inviteFootnote: "Calculado solo con tus {n} respuestas sobre impuestos; no se guarda.",
 };
 
 export type ResultStrings = typeof es;
@@ -361,6 +372,14 @@ const ca: ResultStrings = {
   exploreMeasuresBody:
     "Què busquen les mesures més debatudes i què n'ha mesurat l'evidència després, amb les fonts.",
   exploreMeasuresShort: "Mesures i efectes",
+  inviteLibertadTitle: "Les teves respostes apunten a més llibertat econòmica.",
+  inviteLibertadBody: "I en l'àmbit personal? Descobreix si el teu perfil és llibertari.",
+  inviteIntervencionTitle: "Les teves respostes apunten a més intervenció econòmica.",
+  inviteIntervencionBody: "On et situes en llibertat personal?",
+  inviteMixtoTitle: "On et situes en llibertat econòmica i personal?",
+  inviteMixtoBody: "Descobreix-ho en 3 minuts.",
+  inviteCta: "Fer el test del quadrant",
+  inviteFootnote: "Calculat només amb les teves {n} respostes sobre impostos; no es desa.",
 };
 
 // Traducción automática pendiente de revisión nativa (docs/AFINIDAD-CAMBIOS.md).
@@ -523,6 +542,14 @@ const gl: ResultStrings = {
   exploreMeasuresBody:
     "Que buscan as medidas máis debatidas e que mediu a evidencia despois, coas fontes.",
   exploreMeasuresShort: "Medidas e efectos",
+  inviteLibertadTitle: "As túas respostas apuntan a máis liberdade económica.",
+  inviteLibertadBody: "E no persoal? Descobre se o teu perfil é libertario.",
+  inviteIntervencionTitle: "As túas respostas apuntan a máis intervención económica.",
+  inviteIntervencionBody: "Onde estás en liberdade persoal?",
+  inviteMixtoTitle: "Onde estás en liberdade económica e persoal?",
+  inviteMixtoBody: "Descóbreo en 3 minutos.",
+  inviteCta: "Facer o test do cadrante",
+  inviteFootnote: "Calculado só coas túas {n} respostas sobre impostos; non se garda.",
 };
 
 // Traducción automática pendiente de revisión nativa (docs/AFINIDAD-CAMBIOS.md).
@@ -685,6 +712,14 @@ const eu: ResultStrings = {
   exploreMeasuresBody:
     "Zer bilatzen duten neurri eztabaidatuenek eta zer neurtu duen ebidentziak gero, iturriekin.",
   exploreMeasuresShort: "Neurriak eta ondorioak",
+  inviteLibertadTitle: "Zure erantzunek askatasun ekonomiko handiagoa adierazten dute.",
+  inviteLibertadBody: "Eta alderdi pertsonalean? Jakin zure profila libertarioa den.",
+  inviteIntervencionTitle: "Zure erantzunek esku-hartze ekonomiko handiagoa adierazten dute.",
+  inviteIntervencionBody: "Non zaude askatasun pertsonalean?",
+  inviteMixtoTitle: "Non zaude askatasun ekonomikoan eta pertsonalean?",
+  inviteMixtoBody: "Jakin ezazu 3 minututan.",
+  inviteCta: "Egin koadrantearen testa",
+  inviteFootnote: "Zergei buruzko zure {n} erantzunekin bakarrik kalkulatua; ez da gordetzen.",
 };
 
 const DICTS: Record<ResultLang, ResultStrings> = { es, ca, gl, eu };
