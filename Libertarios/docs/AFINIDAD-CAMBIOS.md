@@ -38,6 +38,44 @@ Datos:
   - Método (decisión del dueño, 2026-10-07): **encogimiento hacia el neutro**. La afinidad de cada lente es `(Σ peso × acuerdo + K × 0,5) / (Σ peso + K)` con `SHRINK_K` = 3: 5 de 5 coincidencias dan un 81 %, no un 100 %; 15 de 15, un 92 %. Motivo: con el mínimo de 5 respuestas, los partidos con pocas celdas (SALF, Més per Menorca) ganaban a más usuarios sintéticos solo por varianza. Se probó K = 2, 3, 4 y 5: con todos, la dominancia por comunidad pasa y el votante perfecto sale 1.º; con los 32 partidos juntos (vista que no existe en la UI) Compromís y ERC siguen por debajo del 2 % con cualquier K, porque Compromís copia el programa de Sumar y vota como ERC. Se elige K = 3. El votante perfecto se exige 1.º y con al menos un 75 %.
   - Método: la dominancia y el votante perfecto se aplican solo a partidos comparables (≥ 5 preguntas con dato en alguna lente, la misma regla del motor); los demás no compiten y su hueco lo mide la cobertura. Umbrales exportados como constantes y citados desde la metodología.
 
+### «Dijeron vs. hicieron» — independencia de la fuente (2026-10-07)
+
+Petición del dueño: ser más críticos con quien gobierna «en base a datos reales, no publicidad del Gobierno». Se aplica como regla neutral a todos los partidos que han gobernado (PSOE, PP 2011–2018, Unidas Podemos y Sumar por lo que firmaron). No puntúa: no cambia ningún resultado del test.
+
+Método:
+
+- Todo `dato-oficial` lleva ahora `sourceType` (obligatorio): `independiente` (AIReF, Tribunal de Cuentas, Banco de España, Eurostat, OCDE, Comisión o Consejo de la UE, FMI, tribunales), `estadistica-oficial` (INE, IGAE, Seguridad Social, series estadísticas de ministerios, BOE consolidado, créditos de una ley de presupuestos) o `gobierno` (notas de prensa, webs de ministerios, preámbulos, La Moncloa, autoevaluaciones). La UI lo enseña con una insignia por dato («Fuente independiente», «Estadística oficial», «Dato del propio Gobierno»).
+- Regla (esquema + test): un «cumple» no puede apoyarse solo en datos `gobierno`; si solo hay cifras del propio Gobierno, la etiqueta máxima es «parcial» y la nota dice «solo hay datos del propio Gobierno». Texto en `AFINIDAD-DATOS.md` §5 bis y en la metodología (cuatro lenguas).
+- Los 21 datos oficiales que había se clasificaron: 6 `gobierno`, 12 `estadistica-oficial`, 3 `independiente`.
+
+Etiquetas que cambian:
+
+| Entrada | Antes | Ahora | Motivo y fuente independiente |
+|---|---|---|---|
+| `psoe-smi-60-2020` | cumple | parcial | El «60 %» solo lo daba el preámbulo del RD 99/2023 (medida neta del propio Gobierno). Eurostat (earn_mw_avgr2): 49,1 % del salario bruto medio en 2023; OCDE: 44,0 %; INE (EAES 2023): 53,9 % con cálculo propio. |
+
+Etiquetas que se mantienen con fuente nueva:
+
+- `psoe-deficit-2023` (cumple): Eurostat gov_10dd_edpt1 (3,3 → 3,2 → 2,4 % del PIB) y Consejo de la UE (gasto neto de 2025 por encima del máximo recomendado, dentro de la flexibilidad por defensa); la nota añade que el déficit de 2024 en euros y la deuda en euros subieron.
+- `psoe-vivienda-183000-2023` (parcial): serie de viviendas protegidas terminadas del Ministerio (32.444 en España desde 2024) e informe 1.640 del Tribunal de Cuentas (ninguna actuación del Plan fiscalizada estaba terminada).
+- `psoe-avales-ico-50000-2023` y `sumar-avales-ico-50000-2023` (parcial): serie de actividad del ICO (10.454 operaciones a diciembre de 2025).
+- `psoe-presupuesto-vivienda-2019` y `podemos-presupuesto-vivienda-2019` (cumple): liquidación de la IGAE (gasto ejecutado de 411,5 a 2.487,9 millones entre 2019 y 2023, con ejecución que cae al 49,4 % en 2023) e informe 1.673 del Tribunal de Cuentas.
+- `pp-deficit-2012` (parcial): se apoya ahora en Eurostat (déficit y tabla de ayudas al sector financiero), no en la nota de Hacienda, que queda etiquetada como dato del propio Gobierno.
+
+Entradas nuevas (PSOE 7, PP 2):
+
+| Entrada | Etiqueta | Fuente del hecho |
+|---|---|---|
+| `psoe-imv-850000-hogares-2020` | parcial | AIReF, opiniones sobre el IMV (484.792 hogares a 31-12-2025 frente a 850.000 anunciados; 52 % de no solicitud) |
+| `psoe-corrupcion-mocion-censura-2018` | parcial | Tribunal Supremo, STS 418/2026 (condena de Ábalos y Koldo García; firmeza no indicada), BOCG, suplicatorio |
+| `psoe-comision-investigacion-koldo-2025` | parcial | Ficha 156/000011 del Congreso (sin llegar al Pleno), votación XV-33-14, Senado |
+| `psoe-sahara-autodeterminacion-2019` | contradice | Diario de Sesiones (carta), declaración conjunta de 7-4-2022, votación XIV-171-1 (GS 118 no) |
+| `psoe-aduanas-ceuta-melilla-2022` | parcial | BOE-A-2023-7502 y declaraciones del Gobierno: solo hay datos del propio Gobierno |
+| `pp-verdad-barcenas-kitchen-2013` | contradice | Votaciones XIV-47-11 y XIV-149-26 (GP no), Audiencia Nacional (juicio oral de Kitchen) |
+| `pp-plan-regeneracion-democratica-2013` | cumple | BOE: LO 3/2015, Ley 3/2015, LO 1/2015, Ley 41/2015, Ley 9/2017 |
+
+`psoe-ingreso-minimo-vital-2019` se queda en «cumple» (contrasta la creación de la prestación, con BOE) y remite a la entrada nueva para la cobertura. Lo descartado (Plan de Recuperación, Ceuta 2021, Gürtel, pistas solo de prensa) está en `busqueda.ts`.
+
 ## Correcciones recibidas
 
 | Fecha | Partido | Pregunta | Qué se pedía | Decisión | Motivo / fuente |
@@ -66,6 +104,6 @@ Desde el 2026-10-07 el módulo está completo en las cuatro lenguas: ninguna cla
 | `src/i18n/afinidad/transparency.ts` | Datos abiertos y fichas de partido; abreviaturas «leg./ses./núm.», «lex./ses./n.º», «leg./bilk./zk.». Las notas técnicas de cada celda (`programme.note`, `record.note`, 362) se dejan en castellano a propósito y se rotulan «Nota tècnica (en castellà)» / «Nota técnica (en castelán)» / «Ohar teknikoa (gaztelaniaz)». | Pendiente | — |
 | `src/i18n/afinidad/dvh.ts` | «Dijeron vs. hicieron»: criterios, filtros, recuentos; rótulo corto de la franja (`modulePill`, eu «Esanak eta eginak»). | Pendiente | — |
 | `src/data/afinidad/parties.ts` (`i18n`) | `inclusionReason` y `recordNote` de los 32 partidos. eu: nombres de grupo («Euskal Taldea (EAJ-PNV)», «SUMAR Talde Plurinazionala», «Talde Popularra»). | Pendiente | — |
-| `src/data/afinidad/dichos-hechos/*.ts` (`i18n`) | Tema, resumen del hecho, nota y cargo de las 86 entradas. **Las citas (`said.text`) no se traducen.** Términos: «per crida / por chamamento / deialdi bidezko bozketa», «arrelament / arraigamento / errotzea», «txostengintza» (ponencia), «23-J» sin adaptar en gl/eu. | Pendiente | — |
+| `src/data/afinidad/dichos-hechos/*.ts` (`i18n`) | Tema, resumen del hecho, nota y cargo de las 93 entradas. **Las citas (`said.text`) no se traducen.** Términos: «per crida / por chamamento / deialdi bidezko bozketa», «arrelament / arraigamento / errotzea», «txostengintza» (ponencia), «23-J» sin adaptar en gl/eu. | Pendiente | — |
 | `src/data/afinidad/dichos-hechos/busqueda-i18n/{ca,gl,eu}.ts` | Registro «Qué buscamos y por qué no entró». Las frases citadas entre «» siguen en su lengua original. eu: «aingura-bozketa», «ez-betetzeak» (método de búsqueda, no veredicto). | Pendiente | — |
 | `src/data/afinidad/hemeroteca/*.ts` (`i18n.role`) | Cargo de quien habla en las 127 citas (no la cita). gl «voceiro/voceira» según la persona; eu sufijos sobre siglas («SUMARreko»). | Pendiente | — |

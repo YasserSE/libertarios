@@ -71,6 +71,17 @@ const es = {
   details: "Ver detalle",
   showEntries: "Ver las {n} más recientes",
   officialData: "Dato oficial",
+  sourceType_independiente: "Fuente independiente",
+  "sourceType_estadistica-oficial": "Estadística oficial",
+  sourceType_gobierno: "Dato del propio Gobierno",
+  sourceTypeHelp_independiente:
+    "Lo mide un organismo que no depende del Gobierno evaluado: AIReF, Tribunal de Cuentas, Banco de España, Eurostat, OCDE, Comisión Europea, FMI o un tribunal.",
+  "sourceTypeHelp_estadistica-oficial":
+    "Serie estadística o registro oficial con metodología publicada: INE, IGAE, Seguridad Social, estadísticas de un ministerio (no sus notas de prensa), BOE o ley de presupuestos.",
+  sourceTypeHelp_gobierno:
+    "Lo dice el propio Gobierno (nota de prensa, web de un ministerio, preámbulo, informe de La Moncloa). Se enseña, pero no basta para un «cumple».",
+  criteria8:
+    "Independencia de la fuente, igual para todos los partidos que han gobernado: cada dato oficial dice quién lo mide (fuente independiente, estadística oficial o dato del propio Gobierno). Un «cumple» no puede apoyarse solo en datos del propio Gobierno; si no hay otros, la etiqueta máxima es «parcial» y la nota lo dice: «solo hay datos del propio Gobierno».",
   showSearchLog: "Ver qué se buscó",
   showCriteria: "Ver los criterios",
   criteriaTitle: "Cómo se eligen las entradas",
@@ -184,6 +195,17 @@ const ca: DvhStrings = {
   details: "Veure el detall",
   showEntries: "Veure les {n} més recents",
   officialData: "Dada oficial",
+  sourceType_independiente: "Font independent",
+  "sourceType_estadistica-oficial": "Estadística oficial",
+  sourceType_gobierno: "Dada del mateix Govern",
+  sourceTypeHelp_independiente:
+    "La mesura un organisme que no depèn del Govern avaluat: AIReF, Tribunal de Comptes, Banc d'Espanya, Eurostat, OCDE, Comissió Europea, FMI o un tribunal.",
+  "sourceTypeHelp_estadistica-oficial":
+    "Sèrie estadística o registre oficial amb metodologia publicada: INE, IGAE, Seguretat Social, estadístiques d'un ministeri (no les seves notes de premsa), BOE o llei de pressupostos.",
+  sourceTypeHelp_gobierno:
+    "Ho diu el mateix Govern (nota de premsa, web d'un ministeri, preàmbul, informe de la Moncloa). Es mostra, però no n'hi ha prou per a un «compleix».",
+  criteria8:
+    "Independència de la font, igual per a tots els partits que han governat: cada dada oficial diu qui la mesura (font independent, estadística oficial o dada del mateix Govern). Un «compleix» no es pot basar només en dades del mateix Govern; si no n'hi ha d'altres, l'etiqueta màxima és «parcial» i la nota ho diu: «només hi ha dades del mateix Govern».",
   showSearchLog: "Veure què es va buscar",
   showCriteria: "Veure els criteris",
   criteriaTitle: "Com es trien les entrades",
@@ -288,6 +310,17 @@ const gl: DvhStrings = {
   details: "Ver detalle",
   showEntries: "Ver as {n} máis recentes",
   officialData: "Dato oficial",
+  sourceType_independiente: "Fonte independente",
+  "sourceType_estadistica-oficial": "Estatística oficial",
+  sourceType_gobierno: "Dato do propio Goberno",
+  sourceTypeHelp_independiente:
+    "Mídeo un organismo que non depende do Goberno avaliado: AIReF, Tribunal de Contas, Banco de España, Eurostat, OCDE, Comisión Europea, FMI ou un tribunal.",
+  "sourceTypeHelp_estadistica-oficial":
+    "Serie estatística ou rexistro oficial con metodoloxía publicada: INE, IGAE, Seguridade Social, estatísticas dun ministerio (non as súas notas de prensa), BOE ou lei de orzamentos.",
+  sourceTypeHelp_gobierno:
+    "Dio o propio Goberno (nota de prensa, web dun ministerio, preámbulo, informe da Moncloa). Amósase, pero non abonda para un «cumpre».",
+  criteria8:
+    "Independencia da fonte, igual para todos os partidos que gobernaron: cada dato oficial di quen o mide (fonte independente, estatística oficial ou dato do propio Goberno). Un «cumpre» non pode apoiarse só en datos do propio Goberno; se non hai outros, a etiqueta máxima é «parcial» e a nota dio: «só hai datos do propio Goberno».",
   showSearchLog: "Ver que se buscou",
   showCriteria: "Ver os criterios",
   criteriaTitle: "Como se escollen as entradas",
@@ -392,6 +425,17 @@ const eu: DvhStrings = {
   details: "Xehetasuna ikusi",
   showEntries: "Ikusi azken {n} sarrerak",
   officialData: "Datu ofiziala",
+  sourceType_independiente: "Iturri independentea",
+  "sourceType_estadistica-oficial": "Estatistika ofiziala",
+  sourceType_gobierno: "Gobernuaren beraren datua",
+  sourceTypeHelp_independiente:
+    "Ebaluatutako Gobernuaren menpe ez dagoen erakunde batek neurtzen du: AIReF, Kontuen Auzitegia, Espainiako Bankua, Eurostat, OCDE, Europako Batzordea, NDF edo auzitegi bat.",
+  "sourceTypeHelp_estadistica-oficial":
+    "Metodologia argitaratua duen serie estatistikoa edo erregistro ofiziala: INE, IGAE, Gizarte Segurantza, ministerio baten estatistikak (ez haren prentsa-oharrak), BOE edo aurrekontu-legea.",
+  sourceTypeHelp_gobierno:
+    "Gobernuak berak dio (prentsa-oharra, ministerio baten webgunea, hitzaurrea, Moncloaren txostena). Erakusten da, baina ez da nahikoa «betetzen du» baterako.",
+  criteria8:
+    "Iturriaren independentzia, berdina gobernatu duten alderdi guztientzat: datu ofizial bakoitzak dio nork neurtzen duen (iturri independentea, estatistika ofiziala edo Gobernuaren beraren datua). «Betetzen du» bat ezin da Gobernuaren beraren datuetan soilik oinarritu; beste daturik ez badago, etiketa gorena «partziala» da, eta oharrak hala dio: «Gobernuaren beraren datuak baino ez daude».",
   showSearchLog: "Ikusi zer bilatu zen",
   showCriteria: "Ikusi irizpideak",
   criteriaTitle: "Nola aukeratzen dira sarrerak",

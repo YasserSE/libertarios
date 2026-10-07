@@ -33,6 +33,7 @@ export const searchLogCa: DvhSearchLogTranslation = {
         "Discurs d'investidura de 2020 (Diari de Sessions), acords de coalició de 2019 i 2023, i declaracions i entrevistes del president amb transcripció oficial de La Moncloa.",
         "Cada compromís, contrastat amb el BOE i amb les votacions del Congrés (XIV i XV).",
         "Segona passada (2026-10-07), amb la regla de ≈ 2 entrades per any de govern de l'Estat (PSOE: des de juny de 2018, ≈ 8 anys, objectiu ≈ 16): discursos d'investidura de 2020 i 2023 i acords de coalició de 2019 i 2023 llegits sencers, més transcripcions de La Moncloa, contrastats amb la IGAE (dèficit), l'informe del Fons de Reserva de la Seguretat Social, el BOE (textos consolidats) i la relació de projectes de llei de la XV a les dades obertes del Congrés.",
+        "Tercera passada (2026-10-07), regla d'independència de la font: cada dada oficial classificada (independent, estadística oficial o del mateix Govern) i contrastada amb l'AIReF (ingrés mínim vital), Eurostat i l'OCDE (salari mínim, dèficit i deute), l'INE, el Consell de la UE, el Tribunal de Comptes (habitatge i Pla de Recuperació), la liquidació del pressupost de la IGAE, la sèrie d'habitatge protegit del Ministeri i les dades obertes de l'ICO. S'hi van afegir corrupció (Tribunal Suprem, Congrés i Senat), Sàhara Occidental i duanes de Ceuta i Melilla.",
       ],
       excluded: [
         { what: "Rehabilitar 500.000 habitatges per a l'eficiència energètica (acord PSOE-SUMAR de 2023, p. 29).", why: "L'acord no fixa termini, i no s'ha localitzat una sèrie oficial estatal que compti habitatges rehabilitats acabats amb un criteri únic: les ajudes les gestionen les comunitats autònomes amb programes diferents (Pla de Recuperació i Pla Estatal) i no se sumen en una xifra comparable." },
@@ -43,11 +44,17 @@ export const searchLogCa: DvhSearchLogTranslation = {
         { what: "Temporalitat de l'ocupació i deute públic.", why: "No s'ha trobat a les investidures ni als acords un compromís amb xifra o objectiu comprovable; la temporalitat queda coberta per l'entrada de la reforma laboral." },
         { what: "Fites i desemborsaments del Pla de Recuperació.", why: "Són compromisos del Govern amb la Comissió Europea avaluats per ella a cada sol·licitud de pagament, no frases del partit; queden fora excepte quan una promesa pròpia els cita (habitatge)." },
         { what: "«Impulsaremos un nuevo modelo de financiación autonómica» (investidura i acord de 2023).", why: "No va com a entrada a part: és el mateix compromís que el de 2020 («psoe-financiacion-autonomica-2020») i es recull a la seva nota." },
-        { what: "Canvi de posició sobre el Sàhara (2022).", why: "Va ser una carta al Govern del Marroc, no un acte publicat al BOE, i el programa no era explícit." },
         { what: "«No pactaré con Bildu».", why: "Massa vague per comprovar-ho amb un fet concret." },
         { what: "«Traeré a Puigdemont».", why: "No hi ha un acte del partit o del Govern que es pugui citar com a fet." },
         { what: "Limitar els aforaments (acord de coalició de 2019, punt 2.11.7).", why: "No es va remetre mai a les Corts: no hi ha fitxa d'iniciativa a congreso.es que serveixi de prova primària d'un «no ho van fer»." },
         { what: "Estatut del becari (acords de 2019 i 2023).", why: "El Govern va remetre el projecte el març de 2026 i va caducar sense majoria: no està clar que depengués del partit." },
+        { what: "Reforma de la fiscalitat del gasoil (fita 388 del Pla de Recuperació): la Comissió Europea va reduir definitivament 197.971.828 euros del suport a Espanya perquè la considera no complerta (Decisió C(2026) 5646).", why: "És un compromís del Govern amb la Comissió Europea; no s'ha localitzat cap cita del partit, d'una investidura o d'un acord de coalició amb què contrastar-lo." },
+        { what: "Habitatges de lloguer social del Pla de Recuperació: el Consell de la UE va rebaixar l'objectiu de 20.000 a 17.365 (gener del 2026) i la Comissió va proposar 15.718 (agost del 2026), adduint la inflació.", why: "El mateix motiu que la fita anterior d'habitatge: és un compromís amb la Comissió, els seus habitatges ja compten a «psoe-vivienda-183000-2023», i l'avaluació de l'objectiu final encara no s'ha publicat." },
+        { what: "Intervenció socialista en el debat de la proposició sobre el Sàhara (6-4-2022): «el Grupo Socialista está de acuerdo con lo que se pide»; l'endemà hi va votar en contra.", why: SAME_DEBATE },
+        { what: "Crisi de Ceuta del maig del 2021 i retorn de menors de l'agost del 2021, declarat il·legal pel Tribunal Suprem (ECLI:ES:TS:2024:114); frase del ministre de l'Interior «Nosotros aplicamos la ley en todo momento» (25-6-2021).", why: "La frase descriu fets passats (els retorns de maig), no és un compromís, i la sentència jutja els d'agost: no hi ha cap «el que van dir» amb què comparar." },
+        { what: "Suspensió de militància i petició de l'acta a Ábalos (2024), data de la renúncia a l'escó, data de la dimissió de Santos Cerdán i auditoria externa anunciada el 16-6-2025.", why: "Només consten a la premsa, o no s'ha trobat cap document primari del partit, del Congrés o del Poder Judicial que els provi." },
+        { what: "Compromisos contra la corrupció en la investidura del 2023 i «tolerància zero».", why: "El discurs del 2023 (DSCD-15-PL-7) no conté cap compromís explícit contra la corrupció, i «tolerancia cero» no apareix a la moció de censura del 2018 ni en aquella investidura." },
+        { what: "Comunicat del Gabinet Reial del Marroc (18-3-2022) que va publicar la carta del president.", why: "No es va poder obrir en una font oficial; s'utilitza la lectura de la carta pel mateix president al Diari de Sessions (DSCD-14-PL-174, p. 18)." },
       ],
     },
     {
@@ -56,6 +63,7 @@ export const searchLogCa: DvhSearchLogTranslation = {
         "Discurs d'investidura de Mariano Rajoy (19-12-2011) i programa de 2011, contrastats amb el que va publicar el BOE durant els seus governs (2011-2018).",
         "Investidura d'Alberto Núñez Feijóo (2023) i pacte de govern a Extremadura (2023).",
         "Segona passada (2026-10-07), amb la regla de ≈ 2 entrades per any de govern de l'Estat: investidures de Rajoy de 2011 i de 2016 (30-8 i 26-10), programa de 2011 i transcripcions de La Moncloa, contrastats amb dades oficials de resultat (Eurostat, Ministeri d'Hisenda, Banc d'Espanya) i amb el BOE i el BOCG.",
+        "Tercera passada (2026-10-07), regla d'independència de la font: el dèficit del 2012 es basa ara en Eurostat (sèrie de dèficit i taula d'ajudes al sector financer), no en la nota d'Hisenda. S'hi va afegir corrupció amb el Diari de Sessions de la compareixença de Rajoy de l'1-8-2013, votacions del Congrés, el BOE i notes del Poder Judicial; i es van buscar compromisos sobre Ceuta, el Marroc i el Sàhara.",
       ],
       excluded: [
         { what: "«20 millones de personas trabajando en la España de 2020» (investidura del 30-8-2016).", why: "El termini (2020) venç després que el PP deixés el Govern (juny de 2018): no es pot contrastar amb el que va fer." },
@@ -65,6 +73,9 @@ export const searchLogCa: DvhSearchLogTranslation = {
         { what: "Luis de Guindos (juny de 2012): el préstec europeu a la banca «no tendrá coste para los ciudadanos».", why: "Només consta a la premsa; es va fer servir la frase equivalent de la vicepresidenta del Govern amb transcripció oficial de La Moncloa («pp-rescate-bancario-coste»)." },
         { what: "Taxes judicials (Llei 10/2012).", why: "No hi ha un compromís previ sobre taxes judicials a la investidura ni al programa de 2011 amb què contrastar-les." },
         { what: "«No habrá referéndum» a Catalunya (2017).", why: "Si l'1-O va ser o no un referèndum està discutit; l'etiqueta seria una interpretació." },
+        { what: "Sentència de la Gürtel (SAN 20/2018, confirmada per la STS 507/2020): el PP, condemnat com a partícip a títol lucratiu; i obres de la seu de Génova pagades en B (STS 1033/2024), amb el PP com a responsable civil subsidiari.", why: "Els fets (1999–2008) són anteriors als compromisos del 2011 i el 2013 i no són actes del partit posteriors al que va dir; a més, el Suprem recorda que la condemna a títol lucratiu «presupone» la innocència." },
+        { what: "Sentència del judici de la Kitchen.", why: "No s'ha trobat en una font primària; l'entrada «pp-verdad-barcenas-kitchen-2013» utilitza la situació processal de l'acte d'obertura de judici oral (acusats)." },
+        { what: "Compromisos sobre Ceuta, el Marroc o el Sàhara Occidental (2011–2018).", why: "No es va trobar cap compromís explícit del PP amb un resultat documentat en font primària." },
       ],
     },
     {
@@ -87,6 +98,7 @@ export const searchLogCa: DvhSearchLogTranslation = {
         "Acord de coalició PSOE-SUMAR (24-10-2023), programa de 2023 i Diari de Sessions, contrastats amb el BOE i les votacions de la XV.",
         "Incompliments per manca d'acte: només entren com a «no ho van fer» si hi ha prova primària (fitxa d'iniciativa, dissolució al BOE); així va entrar la «llei mordassa».",
         "Regla de profunditat (2026-10-07): ≈ 2 entrades per any de govern de l'Estat, mínim 4. Sumar governa en coalició des de novembre de 2023 (≈ 3 anys): objectiu ≈ 6. Ja en té 10, de manera que a la segona passada no se n'hi va afegir cap.",
+        "Regla d'independència de la font (2026-10-07): les dades oficials de les seves entrades (línia d'avals de l'ICO) es van contrastar amb la sèrie estadística d'activitat de l'ICO; cap etiqueta no canvia.",
       ],
       excluded: [
         { what: "Rehabilitació de 500.000 habitatges, Bono Alquiler Joven per a «toda la población joven» i parc públic del 20 % (acord PSOE-SUMAR de 2023, pp. 29-30).", why: "Els mateixos motius que en el PSOE, que va signar el mateix acord: sense termini o «a medio y largo plazo», o sense una dada oficial estatal comparable (les ajudes les gestionen les comunitats autònomes)." },
@@ -102,6 +114,7 @@ export const searchLogCa: DvhSearchLogTranslation = {
       searched: [
         "Programa de les generals del 10-N-2019, acord de coalició de 2019 i Diari de Sessions, contrastats amb el BOE i les votacions de la XIV (grup GCUP-EC-GC) i la XV (vot per diputat).",
         "Regla de profunditat (2026-10-07): ≈ 2 entrades per any de govern de l'Estat, mínim 4. Unidas Podemos va governar en coalició de gener de 2020 a novembre de 2023 (≈ 4 anys): objectiu ≈ 8. Ja en té 8, de manera que a la segona passada no se n'hi va afegir cap.",
+        "Regla d'independència de la font (2026-10-07): el pressupost d'habitatge es va contrastar amb la liquidació del pressupost de la IGAE (despesa executada) i amb el Tribunal de Comptes; l'etiqueta no canvia.",
       ],
       excluded: [
         { what: "Nou Estatut dels Treballadors (acord de coalició de 2019, punt 1.2), que no es va fer a la XIV.", why: "Ja hi és com a entrada del PSOE amb la mateixa prova, i la cartera de Treball la portava Yolanda Díaz, de la quota d'Unidas Podemos però avui a Sumar: atribuir-ho a Podemos seria discutible." },

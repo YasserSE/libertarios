@@ -238,7 +238,6 @@ export const saidVsDid: SaidVsDid[] = [
   {
     id: "junts-funcionarios-prisiones-agentes-autoridad",
     partyId: "junts",
-    questionId: "prisiones-agentes-autoridad",
     topic: "Funcionarios de prisiones como agentes de la autoridad",
     said: {
       speaker: SPEAKER,

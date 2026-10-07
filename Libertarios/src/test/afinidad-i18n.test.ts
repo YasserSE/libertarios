@@ -98,6 +98,7 @@ const SAME_OK: Record<Lang, readonly string[]> = {
     "dvh.share", // Compartir
     "dvh.filterVerdict", // Etiqueta
     "dvh.filterTopic", // Tema
+    "dvh.sourceType_estadistica-oficial", // Estadística oficial
     "methodology.schema", // esquema
     "methodology.layers.programmeTitle", // 1. Programa
     "methodology.layers.hemerotecaTitle", // 3. Hemeroteca

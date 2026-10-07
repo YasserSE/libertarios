@@ -1,5 +1,6 @@
-import { ArrowLeftRight, Check, CircleDashed, Contrast } from "lucide-react";
+import { ArrowLeftRight, ChartColumn, Check, CircleDashed, Contrast, Landmark, ShieldCheck } from "lucide-react";
 import type { DvhVerdict } from "@/lib/afinidad/dvh";
+import type { OfficialSourceType } from "@/data/afinidad/types";
 
 /* Icono y tono de cada etiqueta de «Dijeron vs. hicieron», compartidos por la
  * página propia, el resultado, la ficha y la portada. */
@@ -39,4 +40,15 @@ export const VERDICT_ICON_COLOR: Record<DvhVerdict, string> = {
   parcial: "text-amber-600 dark:text-amber-400",
   contradice: "text-red-600 dark:text-red-400",
   "no-hecho": "text-violet-600 dark:text-violet-400",
+};
+
+/**
+ * Quién mide un dato oficial (regla de independencia de la fuente): un icono
+ * distinto para cada clase y el mismo estilo neutro para las tres, porque la
+ * insignia informa de la fuente, no juzga el dato.
+ */
+export const SOURCE_TYPE_ICON: Record<OfficialSourceType, typeof Check> = {
+  independiente: ShieldCheck,
+  "estadistica-oficial": ChartColumn,
+  gobierno: Landmark,
 };

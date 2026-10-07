@@ -33,6 +33,7 @@ export const searchLogEu: DvhSearchLogTranslation = {
         "2020ko inbestidura-hitzaldia (Bilkuren Egunkaria), 2019ko eta 2023ko koalizio-akordioak, eta presidentearen adierazpenak eta elkarrizketak, La Moncloaren transkripzio ofizialarekin.",
         "Konpromiso bakoitza, BOErekin eta Kongresuko bozketekin kontrastatuta (XIV eta XV).",
         "Bigarren pasada (2026-10-07), Estatuko gobernu-urte bakoitzeko ≈ 2 sarreraren arauarekin (PSOE: 2018ko ekainetik, ≈ 8 urte, helburua ≈ 16): 2020ko eta 2023ko inbestidura-hitzaldiak eta 2019ko eta 2023ko koalizio-akordioak osorik irakurrita, gehi La Moncloaren transkripzioak, IGAErekin (defizita), Gizarte Segurantzaren Erreserba Funtsaren txostenarekin, BOErekin (testu bateginak) eta Kongresuaren datu irekietako XV. legealdiko lege-proiektuen zerrendarekin kontrastatuta.",
+        "Hirugarren pasaldia (2026-10-07), iturriaren independentziaren araua: datu ofizial bakoitza sailkatu da (independentea, estatistika ofiziala edo Gobernuarena berarena) eta alderatu da AIReFekin (bizitzeko gutxieneko diru-sarrera), Eurostat eta ELGArekin (gutxieneko soldata, defizita eta zorra), INErekin, EBko Kontseiluarekin, Kontuen Auzitegiarekin (etxebizitza eta Suspertze Plana), IGAEren aurrekontu-likidazioarekin, Ministerioaren babes ofizialeko etxebizitzen seriearekin eta ICOren datu irekiekin. Ustelkeria (Auzitegi Gorena, Kongresua eta Senatua), Mendebaldeko Sahara eta Ceutako eta Melillako aduanak gehitu ziren.",
       ],
       excluded: [
         { what: "500.000 etxebizitza birgaitzea energia-eraginkortasunerako (2023ko PSOE-SUMAR akordioa, 29. or.).", why: "Akordioak ez du eperik finkatzen, eta ez da aurkitu amaitutako etxebizitza birgaituak irizpide bakarrarekin zenbatzen dituen Estatuko serie ofizialik: laguntzak autonomia-erkidegoek kudeatzen dituzte programa desberdinekin (Suspertze Plana eta Estatuko Plana), eta ez dira zifra konparagarri batean batzen." },
@@ -43,11 +44,17 @@ export const searchLogEu: DvhSearchLogTranslation = {
         { what: "Enpleguaren behin-behinekotasuna eta zor publikoa.", why: "Ez da aurkitu inbestiduretan ez akordioetan zifra edo helburu egiaztagarria duen konpromisorik; behin-behinekotasuna lan-erreformaren sarrerak hartzen du." },
         { what: "Suspertze Planaren mugarriak eta ordainketak.", why: "Gobernuak Europako Batzordearekin hartutako konpromisoak dira, Batzordeak berak ordainketa-eskaera bakoitzean ebaluatuak, ez alderdiaren esaldiak; kanpoan geratzen dira, alderdiaren beraren promesa batek aipatzen dituenean izan ezik (etxebizitza)." },
         { what: "«Impulsaremos un nuevo modelo de financiación autonómica» (2023ko inbestidura eta akordioa).", why: "Ez doa sarrera bereizi gisa: 2020koaren konpromiso bera da («psoe-financiacion-autonomica-2020») eta haren oharrean jasotzen da." },
-        { what: "Saharari buruzko jarrera-aldaketa (2022).", why: "Marokoko Gobernuari bidalitako gutun bat izan zen, ez BOEn argitaratutako egintza bat, eta hauteskunde-programa ez zen esplizitua." },
         { what: "«No pactaré con Bildu».", why: "Lausoegia egitate zehatz batekin egiaztatzeko." },
         { what: "«Traeré a Puigdemont».", why: "Ez dago egitate gisa aipa daitekeen alderdiaren edo Gobernuaren egintzarik." },
         { what: "Aforamenduak mugatzea (2019ko koalizio-akordioa, 2.11.7 puntua).", why: "Ez zen inoiz Gorteetara bidali: ez dago congreso.es-en ekimen-fitxarik «ez zuten egin» baten lehen mailako froga izan daitekeenik." },
         { what: "Bekadunaren estatutua (2019ko eta 2023ko akordioak).", why: "Gobernuak 2026ko martxoan bidali zuen proiektua, eta gehiengorik gabe iraungi zen: ez dago argi alderdiaren menpe zegoen." },
+        { what: "Gasolioaren zergen erreforma (Suspertze Planeko 388. mugarria): Europako Batzordeak behin betiko murriztu zizkion Espainiari 197.971.828 euro, bete gabetzat jotzeagatik (C(2026) 5646 Erabakia).", why: "Gobernuak Europako Batzordearekin hartutako konpromisoa da; ez da aurkitu alderdiaren, inbestidura baten edo koalizio-akordio baten aipurik harekin alderatzeko." },
+        { what: "Suspertze Planeko alokairu sozialeko etxebizitzak: EBko Kontseiluak helburua 20.000tik 17.365era jaitsi zuen (2026ko urtarrila), eta Batzordeak 15.718 proposatu zituen (2026ko abuztua), inflazioa argudiatuta.", why: "Aurreko etxebizitza-mugarriaren arrazoi bera: Batzordearekiko konpromisoa da, haren etxebizitzak «psoe-vivienda-183000-2023» sarreran zenbatzen dira jada, eta azken helburuaren ebaluazioa ez dago oraindik argitaratuta." },
+        { what: "Saharari buruzko proposamenaren eztabaidan egindako esku-hartze sozialista (2022-04-06): «el Grupo Socialista está de acuerdo con lo que se pide»; hurrengo egunean aurka bozkatu zuen.", why: SAME_DEBATE },
+        { what: "2021eko maiatzeko Ceutako krisia eta 2021eko abuztuko adingabeen itzulketa, Auzitegi Gorenak legez kanpokotzat jotakoa (ECLI:ES:TS:2024:114); Barne ministroaren esaldia: «Nosotros aplicamos la ley en todo momento» (2021-06-25).", why: "Esaldiak iraganeko gertaerak deskribatzen ditu (maiatzeko itzulketak), ez da konpromisoa, eta epaiak abuztukoak epaitzen ditu: ez dago alderatzeko «esan zutena»." },
+        { what: "Ábalosen militantzia etetea eta akta eskatzea (2024), eserlekuari uko egin zion data, Santos Cerdánen dimisioaren data eta 2025-06-16an iragarritako kanpo-auditoria.", why: "Prentsan baino ez daude, edo ez da aurkitu horiek frogatzen dituen alderdiaren, Kongresuaren edo Botere Judizialaren lehen mailako agiririk." },
+        { what: "Ustelkeriaren aurkako konpromisoak 2023ko inbestiduran eta «tolerancia cero».", why: "2023ko hitzaldiak (DSCD-15-PL-7) ez du ustelkeriaren aurkako konpromiso espliziturik, eta «tolerancia cero» ez da agertzen 2018ko zentsura-mozioan ezta inbestidura horretan ere." },
+        { what: "Marokoko Errege Kabinetearen komunikatua (2022-03-18), presidentearen gutuna argitaratu zuena.", why: "Ezin izan zen iturri ofizial batean ireki; presidenteak berak Bilkuren Egunkarian egindako gutunaren irakurketa erabiltzen da (DSCD-14-PL-174, 18. or.)." },
       ],
     },
     {
@@ -56,6 +63,7 @@ export const searchLogEu: DvhSearchLogTranslation = {
         "Mariano Rajoyren inbestidura-hitzaldia (2011-12-19) eta 2011ko hauteskunde-programa, haren gobernuetan (2011-2018) BOEk argitaratutakoarekin kontrastatuta.",
         "Alberto Núñez Feijóoren inbestidura (2023) eta Extremadurako gobernu-ituna (2023).",
         "Bigarren pasada (2026-10-07), Estatuko gobernu-urte bakoitzeko ≈ 2 sarreraren arauarekin: Rajoyren 2011ko eta 2016ko inbestidurak (8-30 eta 10-26), 2011ko hauteskunde-programa eta La Moncloaren transkripzioak, emaitzei buruzko datu ofizialekin (Eurostat, Ogasun Ministerioa, Espainiako Bankua) eta BOErekin eta BOCGrekin kontrastatuta.",
+        "Hirugarren pasaldia (2026-10-07), iturriaren independentziaren araua: 2012ko defizita Eurostaten oinarritzen da orain (defizit-seriea eta finantza-sektoreari emandako laguntzen taula), ez Ogasunaren oharrean. Ustelkeria gehitu zen, Rajoyk 2013-08-01ean egindako agerraldiaren Bilkuren Egunkariarekin, Kongresuko bozketekin, BOErekin eta Botere Judizialaren oharrekin; eta Ceutari, Marokori eta Saharari buruzko konpromisoak bilatu ziren.",
       ],
       excluded: [
         { what: "«20 millones de personas trabajando en la España de 2020» (2016-8-30eko inbestidura).", why: "Epea (2020) PPk Gobernua utzi ondoren (2018ko ekaina) amaitzen da: ezin da egin zuenarekin kontrastatu." },
@@ -65,6 +73,9 @@ export const searchLogEu: DvhSearchLogTranslation = {
         { what: "Luis de Guindos (2012ko ekaina): bankuentzako Europako maileguak «no tendrá coste para los ciudadanos».", why: "Prentsan baino ez dago jasota; Gobernuko presidenteordearen esaldi baliokidea erabili zen, La Moncloaren transkripzio ofizialarekin («pp-rescate-bancario-coste»)." },
         { what: "Tasa judizialak (10/2012 Legea).", why: "Ez dago tasa judizialei buruzko aurretiko konpromisorik 2011ko inbestiduran ez hauteskunde-programan, haiekin kontrastatzeko." },
         { what: "«No habrá referéndum» Katalunian (2017).", why: "Urriaren 1ekoa erreferenduma izan zen ala ez eztabaidagai dago; etiketa interpretazio bat litzateke." },
+        { what: "Gürtel epaia (SAN 20/2018, STS 507/2020k berretsia): PP irabazizko partaide gisa kondenatua; eta Génovako egoitzako obrak B kontuan ordainduak (STS 1033/2024), PP erantzule zibil subsidiario gisa.", why: "Gertaerak (1999–2008) 2011ko eta 2013ko konpromisoak baino lehenagokoak dira, eta ez dira alderdiak esandakoaren ondorengo egintzak; gainera, Gorenak gogorarazten du irabazizko kondena horrek errugabetasuna «presupone»." },
+        { what: "Kitchen epaiketaren epaia.", why: "Ez da aurkitu lehen mailako iturri batean; «pp-verdad-barcenas-kitchen-2013» sarrerak ahozko epaiketa irekitzeko autoaren egoera prozesala erabiltzen du (akusatuak)." },
+        { what: "Ceutari, Marokori edo Mendebaldeko Saharari buruzko konpromisoak (2011–2018).", why: "Ez zen aurkitu PPren konpromiso espliziturik, lehen mailako iturrian dokumentatutako emaitzarekin." },
       ],
     },
     {
@@ -87,6 +98,7 @@ export const searchLogEu: DvhSearchLogTranslation = {
         "PSOE-SUMAR koalizio-akordioa (2023-10-24), 2023ko hauteskunde-programa eta Bilkuren Egunkaria, BOErekin eta XV. legealdiko bozketekin kontrastatuta.",
         "Egintzarik ezagatiko ez-betetzeak: lehen mailako frogarik badago bakarrik sartzen dira «ez zuten egin» gisa (ekimen-fitxa, disoluzioa BOEn); horrela sartu zen «mozal-legea».",
         "Sakontasun-araua (2026-10-07): Estatuko gobernu-urte bakoitzeko ≈ 2 sarrera, gutxienez 4. Sumarrek koalizioan gobernatzen du 2023ko azarotik (≈ 3 urte): helburua ≈ 6. Dagoeneko 10 ditu; beraz, bigarren pasadan ez zen bat ere gehitu.",
+        "Iturriaren independentziaren araua (2026-10-07): bere sarreretako datu ofizialak (ICOren abal-lerroa) ICOren jarduera-serie estatistikoarekin alderatu ziren; ez da etiketarik aldatzen.",
       ],
       excluded: [
         { what: "500.000 etxebizitza birgaitzea, Bono Alquiler Joven «toda la población joven»entzat eta % 20ko parke publikoa (2023ko PSOE-SUMAR akordioa, 29-30. or.).", why: "PSOEren arrazoi berberak, akordio bera sinatu baitzuen: eperik gabe edo «a medio y largo plazo», edo Estatuko datu ofizial konparagarririk gabe (laguntzak autonomia-erkidegoek kudeatzen dituzte)." },
@@ -102,6 +114,7 @@ export const searchLogEu: DvhSearchLogTranslation = {
       searched: [
         "2019ko azaroaren 10eko hauteskunde orokorretako hauteskunde-programa, 2019ko koalizio-akordioa eta Bilkuren Egunkaria, BOErekin eta XIV. (GCUP-EC-GC taldea) eta XV. (diputatuz diputatuko botoa) legealdietako bozketekin kontrastatuta.",
         "Sakontasun-araua (2026-10-07): Estatuko gobernu-urte bakoitzeko ≈ 2 sarrera, gutxienez 4. Unidas Podemosek koalizioan gobernatu zuen 2020ko urtarriletik 2023ko azarora (≈ 4 urte): helburua ≈ 8. Dagoeneko 8 ditu; beraz, bigarren pasadan ez zen bat ere gehitu.",
+        "Iturriaren independentziaren araua (2026-10-07): etxebizitza-aurrekontua IGAEren aurrekontu-likidazioarekin (gauzatutako gastua) eta Kontuen Auzitegiarekin alderatu zen; etiketa ez da aldatzen.",
       ],
       excluded: [
         { what: "Langileen Estatutu berria (2019ko koalizio-akordioa, 1.2 puntua), XIV. legealdian egin ez zena.", why: "PSOEren sarrera gisa dago dagoeneko froga berarekin, eta Lan Ministerioa Yolanda Díazek zeraman, Unidas Podemosen kuotakoa baina gaur egun Sumarren: Podemosi egoztea eztabaidagarria litzateke." },

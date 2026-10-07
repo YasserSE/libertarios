@@ -1,8 +1,9 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
-import type { Answers, Dataset, SaidVsDid } from "@/data/afinidad/types";
+import type { Answers, Dataset, OfficialSourceType, SaidVsDid } from "@/data/afinidad/types";
 import type { DecodedResult } from "@/lib/afinidad/encode";
-import { recordStanceSchema, validateDataset } from "@/lib/afinidad/schema";
+import { ONLY_GOVERNMENT_DATA_NOTE, recordStanceSchema, validateDataset } from "@/lib/afinidad/schema";
+import { dataset } from "@/data/afinidad";
 import { countVerdicts, filterEntries, sortByDate, topicsOf } from "@/lib/afinidad/dvh";
 import { getDvhStrings } from "@/i18n/afinidad/dvh";
 import { TRACK_EVENT } from "@/lib/afinidad/track";
@@ -131,10 +132,11 @@ describe("dijeron vs. hicieron · esquema", () => {
       date: "2025-06-30",
       publisher: "INE",
       value: "12.345 viviendas",
+      sourceType: "estadistica-oficial" as const,
     };
     const ok = variant((e) => ({ ...e, did: { ...e.did, evidence: [...e.did.evidence, dato] } }));
     expect(errorsOf(ok)).toEqual([]);
-    for (const k of ["publisher", "value", "url", "date"] as const) {
+    for (const k of ["publisher", "value", "url", "date", "sourceType"] as const) {
       const bad = variant((e) => ({ ...e, did: { ...e.did, evidence: [{ ...dato, [k]: "" }] } }));
       expect(errorsOf(bad).length, k).toBeGreaterThan(0);
     }
@@ -146,13 +148,49 @@ describe("dijeron vs. hicieron · esquema", () => {
   it("la entrada enseña el dato oficial con organismo, fecha, valor y enlace", () => {
     const e = structuredClone(sampleSaidVsDid[0]);
     e.did.evidence = [
-      { kind: "dato-oficial", title: "Serie ficticia", url: "https://example.org/serie", date: "2025-06-30", publisher: "INE", value: "12.345 viviendas" },
+      {
+        kind: "dato-oficial",
+        title: "Serie ficticia",
+        url: "https://example.org/serie",
+        date: "2025-06-30",
+        publisher: "INE",
+        value: "12.345 viviendas",
+        sourceType: "estadistica-oficial",
+      },
     ];
     render(<SaidVsDidItem entry={e} t={t} lang="es" />);
     expect(screen.getByTestId("dvh-official-value")).toHaveTextContent("12.345 viviendas");
+    expect(screen.getByTestId("dvh-source-type")).toHaveTextContent(t["sourceType_estadistica-oficial"]);
     expect(document.body.textContent).toContain("dato oficial de INE");
     expect(document.body.textContent).toMatch(/2025/);
     expect(screen.getByRole("link", { name: t.source })).toHaveAttribute("href", "https://example.org/serie");
+  });
+
+  it("independencia de la fuente: un «cumple» no se apoya solo en datos del propio Gobierno; un «parcial» lo dice", () => {
+    const gov = {
+      kind: "dato-oficial" as const,
+      title: "Nota de prensa ficticia",
+      url: "https://example.org/nota",
+      date: "2025-06-30",
+      publisher: "Ministerio ficticio",
+      value: "100 %",
+      sourceType: "gobierno" as OfficialSourceType,
+    };
+    const withEv = (ev: (typeof gov)[], verdict: "cumple" | "parcial", note?: string) =>
+      variant((e) => ({ ...e, verdict, note, did: { ...e.did, evidence: [...e.did.evidence, ...ev] } }));
+    expect(errorsOf(withEv([gov], "cumple")).join()).toMatch(/solo en datos del propio Gobierno/);
+    expect(errorsOf(withEv([gov], "parcial", "Matiz.")).join()).toMatch(/solo hay datos del propio Gobierno/);
+    expect(errorsOf(withEv([gov], "parcial", `Matiz: ${ONLY_GOVERNMENT_DATA_NOTE}.`))).toEqual([]);
+    for (const sourceType of ["independiente", "estadistica-oficial"] as const)
+      expect(errorsOf(withEv([gov, { ...gov, sourceType }], "cumple")), sourceType).toEqual([]);
+  });
+
+  it("el dataset real cumple la regla: ningún «cumple» con solo datos del propio Gobierno", () => {
+    const bad = (dataset.saidVsDid ?? []).filter((e) => {
+      const d = e.did.evidence.filter((x) => x.kind === "dato-oficial");
+      return e.verdict === "cumple" && d.length > 0 && d.every((x) => x.sourceType === "gobierno");
+    });
+    expect(bad.map((e) => e.id)).toEqual([]);
   });
 
   it("«parcial» exige nota; ids únicos; partido y pregunta existentes", () => {

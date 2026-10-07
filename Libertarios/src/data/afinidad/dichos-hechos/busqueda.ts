@@ -63,6 +63,7 @@ export const dvhSearchLog: readonly DvhSearchLog[] = [
       "Discurso de investidura de 2020 (Diario de Sesiones), acuerdos de coalición de 2019 y 2023, y declaraciones y entrevistas del presidente con transcripción oficial de La Moncloa.",
       "Cada compromiso, contrastado con el BOE y con las votaciones del Congreso (XIV y XV).",
       "Segunda pasada (2026-10-07), con la regla de ≈ 2 entradas por año de gobierno del Estado (PSOE: desde junio de 2018, ≈ 8 años, objetivo ≈ 16): discursos de investidura de 2020 y 2023 y acuerdos de coalición de 2019 y 2023 leídos enteros, más transcripciones de La Moncloa, contrastados con la IGAE (déficit), el informe del Fondo de Reserva de la Seguridad Social, el BOE (textos consolidados) y la relación de proyectos de ley de la XV en los datos abiertos del Congreso.",
+      "Tercera pasada (2026-10-07), regla de independencia de la fuente: cada dato oficial clasificado (independiente, estadística oficial o del propio Gobierno) y contrastado con AIReF (ingreso mínimo vital), Eurostat y OCDE (salario mínimo, déficit y deuda), INE, Consejo de la UE, Tribunal de Cuentas (vivienda y Plan de Recuperación), liquidación del presupuesto de la IGAE, serie de vivienda protegida del Ministerio y datos abiertos del ICO. Se añadieron corrupción (Tribunal Supremo, Congreso y Senado), Sáhara Occidental y aduanas de Ceuta y Melilla.",
     ],
     excluded: [
       { what: "Rehabilitar 500.000 viviendas para la eficiencia energética (acuerdo PSOE-SUMAR de 2023, p. 29).", why: "El acuerdo no fija plazo, y no se ha localizado una serie oficial estatal que cuente viviendas rehabilitadas terminadas con un criterio único: las ayudas las gestionan las comunidades autónomas con programas distintos (Plan de Recuperación y Plan Estatal) y no se suman en una cifra comparable." },
@@ -73,11 +74,17 @@ export const dvhSearchLog: readonly DvhSearchLog[] = [
       { what: "Temporalidad del empleo y deuda pública.", why: "No se ha encontrado en las investiduras ni en los acuerdos un compromiso con cifra u objetivo comprobable; la temporalidad está cubierta por la entrada de la reforma laboral." },
       { what: "Hitos y desembolsos del Plan de Recuperación.", why: "Son compromisos del Gobierno con la Comisión Europea evaluados por ella en cada solicitud de pago, no frases del partido; quedan fuera salvo cuando una promesa propia los cita (vivienda)." },
       { what: "«Impulsaremos un nuevo modelo de financiación autonómica» (investidura y acuerdo de 2023).", why: "No va como entrada aparte: es el mismo compromiso que la de 2020 («psoe-financiacion-autonomica-2020») y se recoge en su nota." },
-      { what: "Cambio de posición sobre el Sáhara (2022).", why: "Fue una carta al Gobierno de Marruecos, no un acto publicado en el BOE, y el programa no era explícito." },
       { what: "«No pactaré con Bildu».", why: "Demasiado vago para comprobarlo contra un hecho concreto." },
       { what: "«Traeré a Puigdemont».", why: "No hay un acto del partido o del Gobierno que citar como hecho." },
       { what: "Limitar los aforamientos (acuerdo de coalición de 2019, punto 2.11.7).", why: "Nunca se remitió a las Cortes: no hay ficha de iniciativa en congreso.es que sirva de prueba primaria de un «no lo hicieron»." },
       { what: "Estatuto del becario (acuerdos de 2019 y 2023).", why: "El Gobierno remitió el proyecto en marzo de 2026 y caducó sin mayoría: no está claro que dependiera del partido." },
+      { what: "Reforma de la fiscalidad del gasóleo (hito 388 del Plan de Recuperación): la Comisión Europea redujo definitivamente 197.971.828 euros del apoyo a España por considerarlo no cumplido (Decisión C(2026) 5646).", why: "Es un compromiso del Gobierno con la Comisión Europea; no se ha localizado una cita del partido, de una investidura o de un acuerdo de coalición con la que contrastarlo." },
+      { what: "Viviendas de alquiler social del Plan de Recuperación: el Consejo de la UE rebajó el objetivo de 20.000 a 17.365 (enero de 2026) y la Comisión propuso 15.718 (agosto de 2026), alegando la inflación.", why: "Mismo motivo que el hito anterior de vivienda: es un compromiso con la Comisión, sus viviendas ya cuentan en «psoe-vivienda-183000-2023», y la evaluación del objetivo final aún no está publicada." },
+      { what: "Intervención socialista en el debate de la proposición sobre el Sáhara (6-4-2022): «el Grupo Socialista está de acuerdo con lo que se pide»; al día siguiente votó en contra.", why: SAME_DEBATE },
+      { what: "Crisis de Ceuta de mayo de 2021 y devolución de menores de agosto de 2021, declarada ilegal por el Tribunal Supremo (ECLI:ES:TS:2024:114); frase del ministro del Interior «Nosotros aplicamos la ley en todo momento» (25-6-2021).", why: "La frase describe hechos pasados (las devoluciones de mayo), no es un compromiso, y la sentencia juzga las de agosto: no hay «lo que dijeron» con el que comparar." },
+      { what: "Suspensión de militancia y petición del acta a Ábalos (2024), fecha de la renuncia a su escaño, fecha de la dimisión de Santos Cerdán y auditoría externa anunciada el 16-6-2025.", why: "Solo constan en prensa, o no se ha encontrado un documento primario del partido, del Congreso o del Poder Judicial que los pruebe." },
+      { what: "Compromisos contra la corrupción en la investidura de 2023 y «tolerancia cero».", why: "El discurso de 2023 (DSCD-15-PL-7) no contiene un compromiso explícito contra la corrupción, y «tolerancia cero» no aparece en la moción de censura de 2018 ni en esa investidura." },
+      { what: "Comunicado del Gabinete Real de Marruecos (18-3-2022) que publicó la carta del presidente.", why: "No se pudo abrir en una fuente oficial; se usa la lectura de la carta por el propio presidente en el Diario de Sesiones (DSCD-14-PL-174, p. 18)." },
     ],
   },
   {
@@ -86,6 +93,7 @@ export const dvhSearchLog: readonly DvhSearchLog[] = [
       "Discurso de investidura de Mariano Rajoy (19-12-2011) y programa de 2011, contrastados con lo que publicó el BOE durante sus gobiernos (2011-2018).",
       "Investidura de Alberto Núñez Feijóo (2023) y pacto de gobierno en Extremadura (2023).",
       "Segunda pasada (2026-10-07), con la regla de ≈ 2 entradas por año de gobierno del Estado: investiduras de Rajoy de 2011 y de 2016 (30-8 y 26-10), programa de 2011 y transcripciones de La Moncloa, contrastados con datos oficiales de resultado (Eurostat, Ministerio de Hacienda, Banco de España) y con el BOE y el BOCG.",
+      "Tercera pasada (2026-10-07), regla de independencia de la fuente: el déficit de 2012 se apoya ahora en Eurostat (serie de déficit y tabla de ayudas al sector financiero), no en la nota de Hacienda. Se añadió corrupción con el Diario de Sesiones de la comparecencia de Rajoy del 1-8-2013, votaciones del Congreso, el BOE y notas del Poder Judicial; y se buscaron compromisos sobre Ceuta, Marruecos y el Sáhara.",
     ],
     excluded: [
       { what: "«20 millones de personas trabajando en la España de 2020» (investidura del 30-8-2016).", why: "El plazo (2020) vence después de que el PP dejara el Gobierno (junio de 2018): no se puede contrastar con lo que hizo." },
@@ -95,6 +103,9 @@ export const dvhSearchLog: readonly DvhSearchLog[] = [
       { what: "Luis de Guindos (junio de 2012): el préstamo europeo a la banca «no tendrá coste para los ciudadanos».", why: "Solo consta en prensa; se usó la frase equivalente de la vicepresidenta del Gobierno con transcripción oficial de La Moncloa («pp-rescate-bancario-coste»)." },
       { what: "Tasas judiciales (Ley 10/2012).", why: "No hay un compromiso previo sobre tasas judiciales en la investidura ni en el programa de 2011 con el que contrastarlas." },
       { what: "«No habrá referéndum» en Cataluña (2017).", why: "Si el 1-O fue o no un referéndum está discutido; la etiqueta sería una interpretación." },
+      { what: "Sentencia de Gürtel (SAN 20/2018, confirmada por la STS 507/2020): el PP, condenado como partícipe a título lucrativo; y obras de la sede de Génova pagadas en B (STS 1033/2024), con el PP como responsable civil subsidiario.", why: "Los hechos (1999–2008) son anteriores a los compromisos de 2011 y 2013 y no son actos del partido posteriores a lo que dijo; además, el Supremo recuerda que la condena a título lucrativo «presupone» la inocencia." },
+      { what: "Sentencia del juicio de Kitchen.", why: "No se ha encontrado en una fuente primaria; la entrada «pp-verdad-barcenas-kitchen-2013» usa la situación procesal del auto de apertura de juicio oral (acusados)." },
+      { what: "Compromisos sobre Ceuta, Marruecos o el Sáhara Occidental (2011–2018).", why: "No se encontró un compromiso explícito del PP con un resultado documentado en fuente primaria." },
     ],
   },
   {
@@ -117,6 +128,7 @@ export const dvhSearchLog: readonly DvhSearchLog[] = [
       "Acuerdo de coalición PSOE-SUMAR (24-10-2023), programa de 2023 y Diario de Sesiones, contrastados con el BOE y las votaciones de la XV.",
       "Incumplimientos por falta de acto: solo entran como «no lo hicieron» si hay prueba primaria (ficha de iniciativa, disolución en el BOE); así entró la «ley mordaza».",
       "Regla de profundidad (2026-10-07): ≈ 2 entradas por año de gobierno del Estado, mínimo 4. Sumar gobierna en coalición desde noviembre de 2023 (≈ 3 años): objetivo ≈ 6. Ya tiene 10, así que en la segunda pasada no se añadió ninguna.",
+      "Regla de independencia de la fuente (2026-10-07): los datos oficiales de sus entradas (línea de avales del ICO) se contrastaron con la serie estadística de actividad del ICO; ninguna etiqueta cambia.",
     ],
     excluded: [
       { what: "Rehabilitación de 500.000 viviendas, Bono Alquiler Joven para «toda la población joven» y parque público del 20 % (acuerdo PSOE-SUMAR de 2023, pp. 29-30).", why: "Mismos motivos que en el PSOE, que firmó el mismo acuerdo: sin plazo o «a medio y largo plazo», o sin un dato oficial estatal comparable (las ayudas las gestionan las comunidades autónomas)." },
@@ -132,6 +144,7 @@ export const dvhSearchLog: readonly DvhSearchLog[] = [
     searched: [
       "Programa de las generales del 10-N-2019, acuerdo de coalición de 2019 y Diario de Sesiones, contrastados con el BOE y las votaciones de la XIV (grupo GCUP-EC-GC) y la XV (voto por diputado).",
       "Regla de profundidad (2026-10-07): ≈ 2 entradas por año de gobierno del Estado, mínimo 4. Unidas Podemos gobernó en coalición de enero de 2020 a noviembre de 2023 (≈ 4 años): objetivo ≈ 8. Ya tiene 8, así que en la segunda pasada no se añadió ninguna.",
+      "Regla de independencia de la fuente (2026-10-07): el presupuesto de vivienda se contrastó con la liquidación del presupuesto de la IGAE (gasto ejecutado) y con el Tribunal de Cuentas; la etiqueta no cambia.",
     ],
     excluded: [
       { what: "Nuevo Estatuto de los Trabajadores (acuerdo de coalición de 2019, punto 1.2), que no se hizo en la XIV.", why: "Ya está como entrada del PSOE con la misma prueba, y la cartera de Trabajo la llevaba Yolanda Díaz, de la cuota de Unidas Podemos pero hoy en Sumar: atribuírselo a Podemos sería discutible." },

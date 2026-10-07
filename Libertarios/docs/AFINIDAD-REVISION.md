@@ -135,3 +135,34 @@ Además, en Adelante Andalucía algunas citas llevan los acentos «normalizados�
 ### Validación
 
 `programmeStanceSchema` en las 350 celdas (0 errores; 79 con revisor), `validateDataset` sobre el dataset actual más los ficheros revisados que aún no están en el índice (ERC, Junts, EH Bildu, PNV, BNG, CC, UPN) — válido, sin problemas de ensamblaje — y `npx tsc --noEmit -p .` sin errores. No se ha tocado ningún índice.
+
+## Revisión 3 — independencia de la fuente en «Dijeron vs. hicieron» (2026-10-07)
+
+Encargo del dueño: «más críticos con el PSOE en base a datos reales, no publicidad del Gobierno», aplicado como regla neutral a todo partido que haya gobernado (PSOE, PP 2011–2018, Unidas Podemos y Sumar). Regla en `AFINIDAD-DATOS.md` §5 bis; detalle de cambios en `AFINIDAD-CAMBIOS.md`.
+
+### Auditoría de los datos oficiales existentes (21)
+
+| Entrada | Datos (antes) | Clasificación | Fuente independiente añadida | Etiqueta |
+|---|---|---|---|---|
+| `psoe-smi-60-2020` | preámbulo del RD 99/2023 (BOE) | gobierno (afirmación del preámbulo) | Eurostat earn_mw_avgr2, OCDE MIN2AVE, INE EAES 2023 | **cumple → parcial** |
+| `psoe-vivienda-183000-2023` | web y nota del Ministerio | gobierno ×2 | serie VDP007 del Ministerio (estadística), Tribunal de Cuentas informe 1.640 | parcial (sin cambio) |
+| `psoe-avales-ico-50000-2023` | adenda del convenio (BOE) | gobierno | serie de actividad del ICO (estadística) | parcial (sin cambio) |
+| `psoe-presupuesto-vivienda-2019` | PGE, tomo VII ×4 | estadística oficial | liquidación IGAE 2019 y 2023; Tribunal de Cuentas informe 1.673 | cumple (sin cambio) |
+| `psoe-financiacion-autonomica-2020`, `psoe-estatuto-trabajadores-2023` | BOE consolidado | estadística oficial | — (no-hecho; no aplica) | sin cambio |
+| `psoe-fondo-reserva-5000-2023` | informe del FRSS a las Cortes | estadística oficial | — (cifras confirmadas en el informe) | parcial (sin cambio) |
+| `psoe-deficit-2023` | IGAE ×2 | estadística oficial | Eurostat gov_10dd_edpt1, Consejo de la UE (ST 11121/26) | cumple (sin cambio) |
+| `pp-deficit-2012` | nota de Hacienda + Eurostat | gobierno + independiente | tabla suplementaria de Eurostat de ayudas al sector financiero | parcial (sin cambio; ahora apoyada en Eurostat) |
+| `pp-rescate-bancario-coste` | Banco de España | independiente | — | no-hecho (sin cambio) |
+| `pp-senda-deficit-2017` | Eurostat | independiente | — | cumple (sin cambio) |
+| `podemos-presupuesto-vivienda-2019` | PGE ×4 | estadística oficial | igual que el PSOE (mismo compromiso firmado) | cumple (sin cambio) |
+| `sumar-avales-ico-50000-2023` | adenda (BOE) | gobierno | serie del ICO | parcial (sin cambio) |
+
+Las demás entradas de gobierno se apoyan en votaciones, BOE o fichas de iniciativa (hechos jurídicos, no cifras del Gobierno) y no cambian. La única que apoyaba la etiqueta en una cifra declarada por el propio Gobierno dentro de un BOE era la del salario mínimo.
+
+### Entradas nuevas
+
+PSOE: `psoe-imv-850000-hogares-2020` (AIReF), `psoe-corrupcion-mocion-censura-2018` y `psoe-comision-investigacion-koldo-2025` (Tribunal Supremo, Congreso, Senado), `psoe-sahara-autodeterminacion-2019`, `psoe-aduanas-ceuta-melilla-2022`. PP: `pp-verdad-barcenas-kitchen-2013`, `pp-plan-regeneracion-democratica-2013`. Presunción de inocencia: la situación procesal se copia del documento judicial (condenado por STS 418/2026 sin constancia de firmeza; investigado en libertad provisional; acusados en Kitchen).
+
+### Validación
+
+`npx vitest run`, `npx tsc --noEmit -p .`, eslint de los ficheros tocados, `npx next build` y `npm run afinidad:json`.

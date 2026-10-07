@@ -497,7 +497,7 @@ export const saidVsDid: SaidVsDid[] = [
     did: {
       date: "2022-12-24",
       summary:
-        "El programa 261N («Promoción, administración y ayudas para rehabilitación y acceso a vivienda») pasó de 450,7 millones de euros en el presupuesto prorrogado de 2019 a 570,8 en los PGE de 2021, 771,5 en los de 2022 y 959,5 en los de 2023 (créditos iniciales). Además, desde 2021 los PGE incluyen programas de vivienda financiados por el Mecanismo de Recuperación y Resiliencia.",
+        "El programa 261N («Promoción, administración y ayudas para rehabilitación y acceso a vivienda») pasó de 450,7 millones de euros en el presupuesto prorrogado de 2019 a 570,8 en los PGE de 2021, 771,5 en los de 2022 y 959,5 en los de 2023 (créditos iniciales). Además, desde 2021 los PGE incluyen programas de vivienda financiados por el Mecanismo de Recuperación y Resiliencia. Según la liquidación del presupuesto de la IGAE, el gasto realmente reconocido en la política de vivienda subió de 411,5 millones de euros en 2019 a 2.487,9 millones en 2023, aunque ese año solo se ejecutó el 49,4 % de los créditos definitivos.",
       evidence: [
         {
           kind: "dato-oficial",
@@ -506,6 +506,7 @@ export const saidVsDid: SaidVsDid[] = [
           date: "2019-01-01",
           publisher: "Ministerio de Hacienda (Secretaría de Estado de Presupuestos y Gastos)",
           value: "Programa 261N: 450.652,67 miles de euros (p. 77 del PDF)",
+          sourceType: "estadistica-oficial",
         },
         {
           kind: "dato-oficial",
@@ -514,6 +515,7 @@ export const saidVsDid: SaidVsDid[] = [
           date: "2021-01-01",
           publisher: "Ministerio de Hacienda (Secretaría de Estado de Presupuestos y Gastos)",
           value: "Programa 261N: 570.768,27 miles de euros; programa 260A (Mecanismo de Recuperación y Resiliencia): 1.651.000,00 miles de euros (p. 91 del PDF)",
+          sourceType: "estadistica-oficial",
         },
         {
           kind: "dato-oficial",
@@ -522,6 +524,7 @@ export const saidVsDid: SaidVsDid[] = [
           date: "2022-01-01",
           publisher: "Ministerio de Hacienda (Secretaría de Estado de Presupuestos y Gastos)",
           value: "Programa 261N: 771.485,51 miles de euros; 26BA (C02.I01): 1.389.000,00; 26BB (C02.I02): 500.000,00 (p. 112 del PDF)",
+          sourceType: "estadistica-oficial",
         },
         {
           kind: "dato-oficial",
@@ -530,6 +533,34 @@ export const saidVsDid: SaidVsDid[] = [
           date: "2023-01-01",
           publisher: "Ministerio de Hacienda (Secretaría de Estado de Presupuestos y Gastos)",
           value: "Programa 261N: 959.526,75 miles de euros; 26BA (C02.I01): 1.980.000,00; 26BB (C02.I02): 500.000,00 (p. 112 del PDF)",
+          sourceType: "estadistica-oficial",
+        },
+        {
+          kind: "dato-oficial",
+          title: "Liquidación del Presupuesto del Estado 2019, política de gasto 26 «Acceso a la vivienda y fomento de la edificación» (pp. 40 y 44)",
+          url: "https://www.igae.pap.hacienda.gob.es/sitios/igae/es-ES/Contabilidad/ContabilidadPublica/CPE/EjecucionPresupuestaria/Documents/LIQUIDACION%20ESTADO_2019%20(INTERNET).pdf",
+          date: "2019-12-31",
+          publisher: "Intervención General de la Administración del Estado (Ministerio de Hacienda)",
+          value: "Créditos definitivos: 534.685 miles de euros; obligaciones reconocidas: 411.481 miles (77,0 %)",
+          sourceType: "estadistica-oficial",
+        },
+        {
+          kind: "dato-oficial",
+          title: "Liquidación del Presupuesto del Estado 2023, política de gasto 26 «Acceso a la vivienda y fomento de la edificación» (pp. 41 y 46)",
+          url: "https://www.igae.pap.hacienda.gob.es/sitios/igae/es-ES/Contabilidad/ContabilidadPublica/CPE/EjecucionPresupuestaria/Documents/LIQUIDACION%20ESTADO_2023%20(INTERNET).pdf",
+          date: "2023-12-31",
+          publisher: "Intervención General de la Administración del Estado (Ministerio de Hacienda)",
+          value: "Créditos definitivos: 5.033.525 miles de euros; obligaciones reconocidas: 2.487.911 miles (49,4 %)",
+          sourceType: "estadistica-oficial",
+        },
+        {
+          kind: "dato-oficial",
+          title: "Tribunal de Cuentas — Informe de fiscalización n.º 1.673, sobre el grado de ejecución de los programas de gasto del Plan de Recuperación del área de gasto 2, ejercicios 2022 y 2023 (pp. 39–41 impresas)",
+          url: "https://www.congreso.es/docu/inf_fiscTC/LegXV/251-211.pdf",
+          date: "2026-03-25",
+          publisher: "Tribunal de Cuentas",
+          value: "Programa 26BB (viviendas de alquiler social del Plan de Recuperación), 2023: 500 millones de crédito inicial y 294,8 millones de obligaciones; «sin que se haya aportado ninguna información por parte del Ministerio sobre su grado de ejecución»",
+          sourceType: "independiente",
         },
       ],
     },
@@ -539,20 +570,20 @@ export const saidVsDid: SaidVsDid[] = [
     i18n: {
       ca: {
         topic: "Habitatge",
-        summary: "El programa 261N («Promoción, administración y ayudas para rehabilitación y acceso a vivienda») va passar de 450,7 milions d'euros en el pressupost prorrogat del 2019 a 570,8 en els PGE del 2021, 771,5 en els del 2022 i 959,5 en els del 2023 (crèdits inicials). A més, des del 2021 els PGE inclouen programes d'habitatge finançats pel Mecanisme de Recuperació i Resiliència.",
-        note: "Es comparen crèdits inicials del mateix programa pressupostari (261N), no despesa executada: l'execució no s'ha contrastat. El pressupost del 2019 era el del 2018 prorrogat (aprovat amb el Govern del PP). La comparació arriba als PGE del 2023 (Llei 31/2022, BOE de 24-12-2022, data que es pren com la del fet); els exercicis posteriors no s'han contrastat. Unidas Podemos va signar el compromís i va formar part del Govern que va presentar els PGE del 2021, el 2022 i el 2023.",
+        summary: "El programa 261N («Promoción, administración y ayudas para rehabilitación y acceso a vivienda») va passar de 450,7 milions d'euros en el pressupost prorrogat del 2019 a 570,8 en els PGE del 2021, 771,5 en els del 2022 i 959,5 en els del 2023 (crèdits inicials). A més, des del 2021 els PGE inclouen programes d'habitatge finançats pel Mecanisme de Recuperació i Resiliència. Segons la liquidació del pressupost de la IGAE, la despesa realment reconeguda en la política d'habitatge va pujar de 411,5 milions d'euros el 2019 a 2.487,9 milions el 2023, tot i que aquell any només es va executar el 49,4 % dels crèdits definitius.",
+        note: "Revisada el 2026-10-07 amb la regla d'independència de la font: es manté «compleix» perquè el compromís era augmentar la dotació i la despesa executada també va créixer (IGAE). Matís: el grau d'execució de la política d'habitatge va caure del 97,2 % el 2020 al 49,4 % el 2023 i al 32,7 % el 2024, i el Tribunal de Comptes assenyala que el 2023 el programa d'habitatges de lloguer social del Pla de Recuperació va reconèixer 294,8 dels seus 500 milions sense que el Ministeri informés del seu grau d'execució. Revisada el 2026-10-07 con la regla de independencia de la fuente: se mantiene «cumple» porque el compromiso era aumentar la dotación y el gasto ejecutado también creció (IGAE). Matiz: el grado de ejecución de la política de vivienda cayó del 97,2 % en 2020 al 49,4 % en 2023 y al 32,7 % en 2024, y el Tribunal de Cuentas señala que en 2023 el programa de viviendas de alquiler social del Plan de Recuperación reconoció 294,8 de sus 500 millones sin que el Ministerio informara de su grado de ejecución. Es comparen crèdits inicials del mateix programa pressupostari (261N), no despesa executada: l'execució no s'ha contrastat. El pressupost del 2019 era el del 2018 prorrogat (aprovat amb el Govern del PP). La comparació arriba als PGE del 2023 (Llei 31/2022, BOE de 24-12-2022, data que es pren com la del fet); els exercicis posteriors no s'han contrastat. Unidas Podemos va signar el compromís i va formar part del Govern que va presentar els PGE del 2021, el 2022 i el 2023.",
         role: COALICION_ROLE_I18N.ca,
       },
       gl: {
         topic: "Vivenda",
-        summary: "O programa 261N («Promoción, administración y ayudas para rehabilitación y acceso a vivienda») pasou de 450,7 millóns de euros no orzamento prorrogado de 2019 a 570,8 nos PGE de 2021, 771,5 nos de 2022 e 959,5 nos de 2023 (créditos iniciais). Ademais, desde 2021 os PGE inclúen programas de vivenda financiados polo Mecanismo de Recuperación e Resiliencia.",
-        note: "Compáranse créditos iniciais do mesmo programa orzamentario (261N), non gasto executado: a execución non se contrastou. O orzamento de 2019 era o de 2018 prorrogado (aprobado co Goberno do PP). A comparación chega aos PGE de 2023 (Lei 31/2022, BOE do 24-12-2022, data que se toma como a do feito); os exercicios posteriores non se contrastaron. Unidas Podemos asinou o compromiso e formou parte do Goberno que presentou os PGE de 2021, 2022 e 2023.",
+        summary: "O programa 261N («Promoción, administración y ayudas para rehabilitación y acceso a vivienda») pasou de 450,7 millóns de euros no orzamento prorrogado de 2019 a 570,8 nos PGE de 2021, 771,5 nos de 2022 e 959,5 nos de 2023 (créditos iniciais). Ademais, desde 2021 os PGE inclúen programas de vivenda financiados polo Mecanismo de Recuperación e Resiliencia. Segundo a liquidación do orzamento da IGAE, o gasto realmente recoñecido na política de vivenda subiu de 411,5 millóns de euros en 2019 a 2.487,9 millóns en 2023, aínda que ese ano só se executou o 49,4 % dos créditos definitivos.",
+        note: "Revisada o 2026-10-07 coa regra de independencia da fonte: mantense «cumpre» porque o compromiso era aumentar a dotación e o gasto executado tamén medrou (IGAE). Matiz: o grao de execución da política de vivenda caeu do 97,2 % en 2020 ao 49,4 % en 2023 e ao 32,7 % en 2024, e o Tribunal de Contas sinala que en 2023 o programa de vivendas de alugamento social do Plan de Recuperación recoñeceu 294,8 dos seus 500 millóns sen que o Ministerio informase do seu grao de execución. Compáranse créditos iniciais do mesmo programa orzamentario (261N), non gasto executado: a execución non se contrastou. O orzamento de 2019 era o de 2018 prorrogado (aprobado co Goberno do PP). A comparación chega aos PGE de 2023 (Lei 31/2022, BOE do 24-12-2022, data que se toma como a do feito); os exercicios posteriores non se contrastaron. Unidas Podemos asinou o compromiso e formou parte do Goberno que presentou os PGE de 2021, 2022 e 2023.",
         role: COALICION_ROLE_I18N.gl,
       },
       eu: {
         topic: "Etxebizitza",
-        summary: "261N programa («Promoción, administración y ayudas para rehabilitación y acceso a vivienda») 2019ko aurrekontu luzatuko 450,7 milioi eurotik 2021eko PGEetako 570,8ra, 2022ko 771,5era eta 2023ko 959,5era igo zen (hasierako kredituak). Gainera, 2021etik PGEek Suspertze eta Erresilientzia Mekanismoak finantzatutako etxebizitza-programak dituzte.",
-        note: "Aurrekontu-programa bereko (261N) hasierako kredituak alderatzen dira, ez gauzatutako gastua: gauzatzea ez da egiaztatu. 2019ko aurrekontua 2018koa zen, luzatua (PPren Gobernuarekin onartua). Alderaketa 2023ko PGEetaraino iristen da (31/2022 Legea, 2022-12-24ko BOE, egitatearen datatzat hartzen dena); ondorengo ekitaldiak ez dira egiaztatu. Unidas Podemosek sinatu zuen konpromisoa, eta 2021eko, 2022ko eta 2023ko PGEak aurkeztu zituen Gobernuko kide izan zen.",
+        summary: "261N programa («Promoción, administración y ayudas para rehabilitación y acceso a vivienda») 2019ko aurrekontu luzatuko 450,7 milioi eurotik 2021eko PGEetako 570,8ra, 2022ko 771,5era eta 2023ko 959,5era igo zen (hasierako kredituak). Gainera, 2021etik PGEek Suspertze eta Erresilientzia Mekanismoak finantzatutako etxebizitza-programak dituzte. IGAEren aurrekontu-likidazioaren arabera, etxebizitza-politikan benetan aitortutako gastua 411,5 milioi eurotik (2019) 2.487,9 milioira (2023) igo zen, nahiz eta urte horretan behin betiko kredituen % 49,4 baino ez zen gauzatu.",
+        note: "2026-10-07an berrikusia, iturriaren independentziaren arauarekin: «betetzen du» mantentzen da, konpromisoa zuzkidura handitzea zelako eta gauzatutako gastua ere hazi zelako (IGAE). Ñabardura: etxebizitza-politikaren gauzatze-maila % 97,2tik (2020) % 49,4ra (2023) eta % 32,7ra (2024) jaitsi zen, eta Kontuen Auzitegiak dio 2023an Suspertze Planeko alokairu sozialeko etxebizitzen programak bere 500 milioietatik 294,8 aitortu zituela, Ministerioak haren gauzatze-mailari buruzko informaziorik eman gabe. Aurrekontu-programa bereko (261N) hasierako kredituak alderatzen dira, ez gauzatutako gastua: gauzatzea ez da egiaztatu. 2019ko aurrekontua 2018koa zen, luzatua (PPren Gobernuarekin onartua). Alderaketa 2023ko PGEetaraino iristen da (31/2022 Legea, 2022-12-24ko BOE, egitatearen datatzat hartzen dena); ondorengo ekitaldiak ez dira egiaztatu. Unidas Podemosek sinatu zuen konpromisoa, eta 2021eko, 2022ko eta 2023ko PGEak aurkeztu zituen Gobernuko kide izan zen.",
         role: COALICION_ROLE_I18N.eu,
       },
     },

@@ -14,6 +14,11 @@ import type { SaidVsDid } from "../types";
  *   (copia de psoe.es en archive.org: psoe.es bloquea la descarga directa).
  * - Votos recontados con `npm run afinidad:vote` sobre el JSON de congreso.es.
  * - Referencias BOE comprobadas con el XML de boe.es (título y fecha).
+ *
+ * Revisado el 2026-10-07 con la regla de independencia de la fuente
+ * (`AFINIDAD-DATOS.md` §5 bis): cada `dato-oficial` dice quién lo mide, y un
+ * «cumple» no se apoya solo en cifras del propio Gobierno. Hechos judiciales
+ * solo de documentos del Poder Judicial, con la situación procesal que dicen.
  */
 
 const CONGRESO = "https://www.congreso.es/webpublica/opendata/votaciones";
@@ -294,7 +299,7 @@ export const saidVsDid: SaidVsDid[] = [
     did: {
       date: "2023-02-15",
       summary:
-        "El Gobierno fijó el salario mínimo interprofesional de 2023 por Real Decreto 99/2023. Su preámbulo declara que con él «se culmina el objetivo de que el salario mínimo interprofesional alcance el 60 por ciento del salario medio en 2023».",
+        "El Gobierno fijó el salario mínimo de 2023 en 1.080 euros al mes en 14 pagas (Real Decreto 99/2023), cuyo preámbulo declara alcanzado el 60 % del salario medio. Las mediciones independientes del salario bruto no llegan a esa cifra: Eurostat sitúa el salario mínimo en el 49,1 % del salario bruto mensual medio en 2023, y la OCDE en el 44,0 % del salario medio a tiempo completo. Con la Encuesta de Estructura Salarial del INE (salario medio anual de 28.049,94 euros en 2023), los 15.120 euros anuales son el 53,9 %.",
       evidence: [
         {
           kind: "boe",
@@ -304,27 +309,63 @@ export const saidVsDid: SaidVsDid[] = [
           date: "2023-02-15",
           role: "gobierno",
         },
+        {
+          kind: "dato-oficial",
+          title: "Minimum wages as a proportion of mean/median gross monthly earnings (earn_mw_avgr2), España, industria, construcción y servicios (B-S)",
+          url: "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/earn_mw_avgr2?geo=ES&format=JSON",
+          date: "2023-12-31",
+          publisher: "Eurostat",
+          value: "Salario mínimo = 49,1 % del salario bruto mensual medio en 2023 (45,6 % en 2019; 51,9 % en 2025); 56,2 % del mediano en 2023",
+          sourceType: "independiente",
+        },
+        {
+          kind: "dato-oficial",
+          title: "Minimum relative to average wages of full-time workers (DSD_EARNINGS@MIN2AVE), España",
+          url: "https://sdmx.oecd.org/public/rest/data/OECD.ELS.SAE,DSD_EARNINGS@MIN2AVE,/ESP.......?startPeriod=2015",
+          date: "2023-12-31",
+          publisher: "OCDE",
+          value: "Salario mínimo = 43,97 % del salario medio a tiempo completo en 2023 (41,46 % en 2019; 46,25 % en 2025); 52,57 % del mediano en 2023",
+          sourceType: "independiente",
+        },
+        {
+          kind: "dato-oficial",
+          title: "Encuesta Anual de Estructura Salarial 2023, datos definitivos (nota de prensa del INE, p. 1)",
+          url: "https://www.ine.es/dyngs/Prensa/EAES2023.pdf",
+          date: "2025-05-28",
+          publisher: "INE",
+          value: "Salario medio anual: 28.049,94 euros por trabajador en 2023 (mediano: 23.349,00 euros)",
+          sourceType: "estadistica-oficial",
+        },
+        {
+          kind: "dato-oficial",
+          title: "II Informe de la Comisión Asesora para el Análisis del Salario Mínimo Interprofesional (diciembre de 2022), pp. 11 y 13 del PDF",
+          url: "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/trabajo14/Documents/2022/191222-Informe-SMI-2023.pdf",
+          date: "2022-12-19",
+          publisher: "Comisión Asesora del Ministerio de Trabajo y Economía Social (publicado por La Moncloa)",
+          value: "60 % del «salario medio neto estimado en 2022, 1867€» de un trabajador a tiempo completo, «considerados ambos en términos netos»",
+          sourceType: "gobierno",
+        },
       ],
     },
-    verdict: "cumple",
-    note: "El 60 % es la cifra que el propio Gobierno declara en el preámbulo, con base en el informe de la Comisión Asesora para el Análisis del SMI.",
+    verdict: "parcial",
+    note: "Antes «cumple», apoyado solo en el preámbulo del real decreto (regla de independencia de la fuente, 2026-10-07). El 60 % solo sale con la medida que eligió el Gobierno: salario neto de un trabajador a tiempo completo, según su comisión asesora. Ninguna medida independiente del salario bruto medio llega al 60 % (Eurostat: 49,1 % en 2023 y 51,9 % en 2025; OCDE: 44,0 % y 46,2 %). La promesa decía «salario medio» sin precisar bruto o neto. El salario mínimo sí subió mucho respecto al salario medio (Eurostat: 37,9 % en 2018). El 53,9 % es un cálculo propio: 15.120 euros (1.080 × 14) entre el salario medio anual del INE, que incluye el tiempo parcial.",
     i18n: {
       ca: {
         topic: "Salari mínim al 60 % del salari mitjà",
-        summary: "El Govern va fixar el salari mínim interprofessional del 2023 pel Reial decret 99/2023. El preàmbul declara que amb aquest decret «se culmina el objetivo de que el salario mínimo interprofesional alcance el 60 por ciento del salario medio en 2023».",
-        note: "El 60 % és la xifra que el mateix Govern declara al preàmbul, sobre la base de l'informe de la Comissió Assessora per a l'Anàlisi de l'SMI.",
+        summary: "El Govern va fixar el salari mínim del 2023 en 1.080 euros al mes en 14 pagues (Reial decret 99/2023), el preàmbul del qual declara assolit el 60 % del salari mitjà. Les mesures independents del salari brut no arriben a aquesta xifra: Eurostat situa el salari mínim en el 49,1 % del salari brut mensual mitjà el 2023, i l'OCDE en el 44,0 % del salari mitjà a temps complet. Amb l'Enquesta d'Estructura Salarial de l'INE (salari mitjà anual de 28.049,94 euros el 2023), els 15.120 euros anuals són el 53,9 %.",
+        note: "Abans «compleix», basat només en el preàmbul del reial decret (regla d'independència de la font, 2026-10-07). El 60 % només surt amb la mesura que va triar el Govern: salari net d'un treballador a temps complet, segons la seva comissió assessora. Cap mesura independent del salari brut mitjà no arriba al 60 % (Eurostat: 49,1 % el 2023 i 51,9 % el 2025; OCDE: 44,0 % i 46,2 %). La promesa deia «salari mitjà» sense precisar brut o net. El salari mínim sí que va pujar molt respecte al salari mitjà (Eurostat: 37,9 % el 2018). El 53,9 % és un càlcul propi: 15.120 euros (1.080 × 14) entre el salari mitjà anual de l'INE, que inclou el temps parcial.",
         role: "candidat a la Presidència del Govern (discurs d'investidura)",
       },
       gl: {
         topic: "Salario mínimo ao 60 % do salario medio",
-        summary: "O Goberno fixou o salario mínimo interprofesional de 2023 polo Real decreto 99/2023. O seu preámbulo declara que con el «se culmina el objetivo de que el salario mínimo interprofesional alcance el 60 por ciento del salario medio en 2023».",
-        note: "O 60 % é a cifra que o propio Goberno declara no preámbulo, con base no informe da Comisión Asesora para a Análise do SMI.",
+        summary: "O Goberno fixou o salario mínimo de 2023 en 1.080 euros ao mes en 14 pagas (Real decreto 99/2023), cuxo preámbulo declara alcanzado o 60 % do salario medio. As medicións independentes do salario bruto non chegan a esa cifra: Eurostat sitúa o salario mínimo no 49,1 % do salario bruto mensual medio en 2023, e a OCDE no 44,0 % do salario medio a tempo completo. Coa Enquisa de Estrutura Salarial do INE (salario medio anual de 28.049,94 euros en 2023), os 15.120 euros anuais son o 53,9 %.",
+        note: "Antes «cumpre», apoiado só no preámbulo do real decreto (regra de independencia da fonte, 2026-10-07). O 60 % só sae coa medida que escolleu o Goberno: salario neto dun traballador a tempo completo, segundo a súa comisión asesora. Ningunha medida independente do salario bruto medio chega ao 60 % (Eurostat: 49,1 % en 2023 e 51,9 % en 2025; OCDE: 44,0 % e 46,2 %). A promesa dicía «salario medio» sen precisar bruto ou neto. O salario mínimo si subiu moito respecto ao salario medio (Eurostat: 37,9 % en 2018). O 53,9 % é un cálculo propio: 15.120 euros (1.080 × 14) entre o salario medio anual do INE, que inclúe o tempo parcial.",
         role: "candidato á Presidencia do Goberno (discurso de investidura)",
       },
       eu: {
         topic: "Gutxieneko soldata batez besteko soldataren % 60an",
-        summary: "Gobernuak 2023ko lanbide arteko gutxieneko soldata finkatu zuen 99/2023 Errege Dekretuaren bidez. Haren hitzaurreak dioenez, horrekin «se culmina el objetivo de que el salario mínimo interprofesional alcance el 60 por ciento del salario medio en 2023».",
-        note: "% 60 hori Gobernuak berak adierazten du hitzaurrean, SMIaren Azterketarako Aholku Batzordearen txostenean oinarrituta.",
+        summary: "Gobernuak 2023ko gutxieneko soldata hilean 1.080 eurotan finkatu zuen, 14 ordainalditan (99/2023 Errege Dekretua), eta haren hitzaurreak dio batez besteko soldataren % 60a lortu dela. Soldata gordinaren neurketa independenteak ez dira zifra horretara iristen: Eurostaten arabera, gutxieneko soldata hileko batez besteko soldata gordinaren % 49,1 zen 2023an, eta ELGAren arabera lanaldi osoko batez besteko soldataren % 44,0. INEren Soldata Egituraren Inkestarekin (2023an urteko batez besteko soldata 28.049,94 euro), urteko 15.120 euroak % 53,9 dira.",
+        note: "Lehen «betetzen du», errege-dekretuaren hitzaurrean soilik oinarrituta (iturriaren independentziaren araua, 2026-10-07). % 60a Gobernuak aukeratutako neurriarekin baino ez da ateratzen: lanaldi osoko langile baten soldata garbia, bere aholku-batzordearen arabera. Batez besteko soldata gordinaren neurketa independente bakar bat ere ez da % 60ra iristen (Eurostat: % 49,1 2023an eta % 51,9 2025ean; ELGA: % 44,0 eta % 46,2). Promesak «batez besteko soldata» zioen, gordina ala garbia zehaztu gabe. Gutxieneko soldata asko igo zen batez besteko soldatarekiko (Eurostat: % 37,9 2018an). % 53,9 kalkulu propioa da: 15.120 euro (1.080 × 14) zati INEren urteko batez besteko soldata, lanaldi partziala barne.",
         role: "Gobernuko presidentetzarako hautagaia (inbestidura-hitzaldia)",
       },
     },
@@ -536,7 +577,7 @@ export const saidVsDid: SaidVsDid[] = [
     did: {
       date: "2026-10-06",
       summary:
-        "El Ministerio de Vivienda y Agenda Urbana cifra en 120.479 las viviendas «movilizadas en diferentes fases (desde entregadas a fase de construcción)» de su Plan de Vivienda en Alquiler Asequible, cuya meta sitúa en «más de 183.000 viviendas» «a lo largo de la reciente legislatura». En agosto de 2024 eran 80.745. Las Cortes se disolvieron el 6-10-2026.",
+        "El Ministerio de Vivienda y Agenda Urbana cifra en 120.479 las viviendas «movilizadas en diferentes fases (desde entregadas a fase de construcción)» de su Plan de Vivienda en Alquiler Asequible, cuya meta sitúa en «más de 183.000 viviendas». «Movilizada» no es una categoría de ninguna estadística oficial. La serie estadística del propio Ministerio cuenta 32.444 viviendas protegidas terminadas (calificaciones definitivas) en toda España de 2024 al primer trimestre de 2026, de todas las administraciones y para venta o alquiler. El Tribunal de Cuentas constató que ninguna de las actuaciones del Plan que fiscalizó estaba terminada. Las Cortes se disolvieron el 6-10-2026.",
       evidence: [
         {
           kind: "dato-oficial",
@@ -546,6 +587,7 @@ export const saidVsDid: SaidVsDid[] = [
           publisher: "Ministerio de Vivienda y Agenda Urbana",
           value:
             "120.479 viviendas movilizadas (68.325 Entidad Estatal de Vivienda; 24.867 Plan de Recuperación; 9.489 Fondo Social de Vivienda; 8.300 Plan Estatal; 6.102 subvenciones directas; 3.396 préstamos ICO), frente a una meta de más de 183.000",
+          sourceType: "gobierno",
         },
         {
           kind: "dato-oficial",
@@ -554,30 +596,49 @@ export const saidVsDid: SaidVsDid[] = [
           date: "2024-08-13",
           publisher: "Ministerio de Vivienda y Agenda Urbana",
           value: "80.745 viviendas movilizadas, el 43,88 % del objetivo de habilitar 184.000",
+          sourceType: "gobierno",
+        },
+        {
+          kind: "dato-oficial",
+          title: "Vivienda y rehabilitación protegida — calificaciones definitivas (viviendas protegidas terminadas) por provincia, conjunto de datos VDP007_01, tabla 1.6 (suma de las 52 provincias)",
+          url: "https://cdn.mivau.gob.es/portal-web-mivau/Datos_MIVAU/CSV/VDP007_01.csv",
+          date: "2026-03-31",
+          publisher: "Ministerio de Vivienda y Agenda Urbana (estadística)",
+          value: "Viviendas protegidas terminadas en España: 8.847 (2023), 14.371 (2024), 12.858 (2025) y 5.215 (primer trimestre de 2026)",
+          sourceType: "estadistica-oficial",
+        },
+        {
+          kind: "dato-oficial",
+          title: "Tribunal de Cuentas — Informe de fiscalización n.º 1.640, sobre la actividad de SEPES en la ejecución de vivienda pública, 2018–2023 (conclusiones 25 y 26, pp. 86–92 impresas)",
+          url: "https://www.congreso.es/docu/inf_fiscTC/LegXV/251-179.pdf",
+          date: "2025-09-25",
+          publisher: "Tribunal de Cuentas",
+          value: "Plan de Vivienda en Alquiler Asequible: 18 actuaciones con unas 16.800 viviendas a 31-12-2023; «ninguna de las actuaciones analizadas había finalizado y en todas ellas se han producido incidencias y demoras importantes»; coste estimado +18 % entre 2022 y 2024",
+          sourceType: "independiente",
         },
         DISOLUCION_2026,
       ],
     },
     verdict: "parcial",
     note:
-      "Con la propia métrica del Ministerio, al final de la legislatura constan 120.479 de más de 183.000 (alrededor del 66 %). «Movilizada» no es «terminada»: incluye viviendas en construcción y fases previas, y el Ministerio no publica en esa página cuántas se han entregado. La fecha del dato es la de la última modificación de la página (5-12-2025); la cifra seguía siendo la misma al consultarla el 7-10-2026. El objetivo figura como 183.000 en la página y 184.000 en la nota de 2024.",
+      "Revisada el 2026-10-07 con la regla de independencia de la fuente; la etiqueta no cambia, pero ya no se apoya solo en el Ministerio. Las 120.479 viviendas «movilizadas» (el 66 % de 183.000) son la métrica del propio Gobierno e incluyen viviendas en construcción y fases previas; el Ministerio no publica cuántas se han entregado. Lo que mide la estadística oficial son viviendas protegidas terminadas: 32.444 desde 2024 en toda España, contando las de comunidades y ayuntamientos y las de venta, así que ni siquiera esa cifra es atribuible entera al compromiso. El Tribunal de Cuentas, sobre 15.300 viviendas del Plan que fiscalizó, no encontró ninguna actuación terminada y pone en duda «la eficacia de los resultados pretendidos». Se queda en «parcial» y no en «no lo hicieron» porque hay viviendas en marcha y alguna entregada según el Ministerio, pero la distancia con las 183.000 es mucho mayor que la que sugiere su cifra. El Ministerio dio 183.000 en su página y 184.000 en la nota de 2024.",
     i18n: {
       ca: {
         topic: "Habitatge",
-        summary: "El Ministeri d'Habitatge i Agenda Urbana xifra en 120.479 els habitatges mobilitzats del seu Pla d'Habitatge en Lloguer Assequible, «en diferentes fases (desde entregadas a fase de construcción)», i en situa la meta en «más de 183.000 viviendas» «a lo largo de la reciente legislatura». L'agost del 2024 eren 80.745. Les Corts es van dissoldre el 6-10-2026.",
-        note: "Amb la mateixa mètrica del Ministeri, al final de la legislatura consten 120.479 de més de 183.000 (al voltant del 66 %). «Mobilitzat» no vol dir «acabat»: inclou habitatges en construcció i fases prèvies, i el Ministeri no publica en aquesta pàgina quants se n'han lliurat. La data de la dada és la de l'última modificació de la pàgina (5-12-2025); la xifra continuava sent la mateixa en consultar-la el 7-10-2026. L'objectiu figura com a 183.000 a la pàgina i com a 184.000 a la nota del 2024.",
+        summary: "El Ministeri d'Habitatge i Agenda Urbana xifra en 120.479 els habitatges «movilizadas en diferentes fases (desde entregadas a fase de construcción)» del seu Pla d'Habitatge en Lloguer Assequible, la meta del qual situa en «más de 183.000 viviendas». «Mobilitzat» no és una categoria de cap estadística oficial. La sèrie estadística del mateix Ministeri compta 32.444 habitatges protegits acabats (qualificacions definitives) a tot Espanya del 2024 al primer trimestre del 2026, de totes les administracions i per a venda o lloguer. El Tribunal de Comptes va constatar que cap de les actuacions del Pla que va fiscalitzar no estava acabada. Les Corts es van dissoldre el 6-10-2026.",
+        note: "Revisada el 2026-10-07 amb la regla d'independència de la font; l'etiqueta no canvia, però ja no es basa només en el Ministeri. Els 120.479 habitatges «mobilitzats» (el 66 % de 183.000) són la mètrica del mateix Govern i inclouen habitatges en construcció i fases prèvies; el Ministeri no publica quants se n'han lliurat. El que mesura l'estadística oficial són habitatges protegits acabats: 32.444 des del 2024 a tot Espanya, comptant els de comunitats i ajuntaments i els de venda, de manera que ni tan sols aquesta xifra és atribuïble sencera al compromís. El Tribunal de Comptes, sobre 15.300 habitatges del Pla que va fiscalitzar, no va trobar cap actuació acabada i posa en dubte «la eficacia de los resultados pretendidos». Es queda en «parcial» i no en «no ho van fer» perquè hi ha habitatges en marxa i algun de lliurat segons el Ministeri, però la distància amb els 183.000 és molt més gran que la que suggereix la seva xifra. El Ministeri va donar 183.000 a la pàgina i 184.000 a la nota del 2024.",
         role: "candidat a la Presidència del Govern (discurs d'investidura)",
       },
       gl: {
         topic: "Vivenda",
-        summary: "O Ministerio de Vivenda e Axenda Urbana cifra en 120.479 as vivendas mobilizadas do seu Plan de Vivenda en Alugamento Accesible, «en diferentes fases (desde entregadas a fase de construcción)», e sitúa a meta en «más de 183.000 viviendas» «a lo largo de la reciente legislatura». En agosto de 2024 eran 80.745. As Cortes disolvéronse o 6-10-2026.",
-        note: "Coa propia métrica do Ministerio, ao final da lexislatura constan 120.479 de máis de 183.000 (arredor do 66 %). «Mobilizada» non é «rematada»: inclúe vivendas en construción e fases previas, e o Ministerio non publica nesa páxina cantas se entregaron. A data do dato é a da última modificación da páxina (5-12-2025); a cifra seguía a ser a mesma ao consultala o 7-10-2026. O obxectivo figura como 183.000 na páxina e 184.000 na nota de 2024.",
+        summary: "O Ministerio de Vivenda e Axenda Urbana cifra en 120.479 as vivendas «movilizadas en diferentes fases (desde entregadas a fase de construcción)» do seu Plan de Vivenda en Alugamento Accesible, cuxa meta sitúa en «más de 183.000 viviendas». «Mobilizada» non é unha categoría de ningunha estatística oficial. A serie estatística do propio Ministerio conta 32.444 vivendas protexidas rematadas (cualificacións definitivas) en toda España de 2024 ao primeiro trimestre de 2026, de todas as administracións e para venda ou alugamento. O Tribunal de Contas constatou que ningunha das actuacións do Plan que fiscalizou estaba rematada. As Cortes disolvéronse o 6-10-2026.",
+        note: "Revisada o 2026-10-07 coa regra de independencia da fonte; a etiqueta non cambia, pero xa non se apoia só no Ministerio. As 120.479 vivendas «mobilizadas» (o 66 % de 183.000) son a métrica do propio Goberno e inclúen vivendas en construción e fases previas; o Ministerio non publica cantas se entregaron. O que mide a estatística oficial son vivendas protexidas rematadas: 32.444 desde 2024 en toda España, contando as de comunidades e concellos e as de venda, así que nin sequera esa cifra é atribuíble enteira ao compromiso. O Tribunal de Contas, sobre 15.300 vivendas do Plan que fiscalizou, non atopou ningunha actuación rematada e pon en dúbida «la eficacia de los resultados pretendidos». Queda en «parcial» e non en «non o fixeron» porque hai vivendas en marcha e algunha entregada segundo o Ministerio, pero a distancia coas 183.000 é moito maior que a que suxire a súa cifra. O Ministerio deu 183.000 na súa páxina e 184.000 na nota de 2024.",
         role: "candidato á Presidencia do Goberno (discurso de investidura)",
       },
       eu: {
         topic: "Etxebizitza",
-        summary: "Etxebizitza eta Hiri Agendako Ministerioaren arabera, Alokairu Eskuragarriko Etxebizitza Planean 120.479 etxebizitza mobilizatu dira, «en diferentes fases (desde entregadas a fase de construcción)», eta helburua «más de 183.000 viviendas» da, «a lo largo de la reciente legislatura». 2024ko abuztuan 80.745 ziren. Gorteak 6-10-2026an desegin ziren.",
-        note: "Ministerioaren beraren neurriaren arabera, legealdiaren amaieran 120.479 daude, 183.000tik gorako helburutik (% 66 inguru). «Mobilizatua» ez da «amaitua»: eraikitzen ari diren etxebizitzak eta aurreko faseak barne hartzen ditu, eta Ministerioak ez du orri horretan argitaratzen zenbat entregatu diren. Datuaren data orriaren azken aldaketarena da (5-12-2025); zifra bera zen 7-10-2026an kontsultatu zenean. Helburua 183.000 da orrian, eta 184.000 2024ko oharrean.",
+        summary: "Etxebizitza eta Hiri Agendako Ministerioak 120.479tan zenbatesten ditu Alokairu Eskuragarriko Etxebizitza Planeko etxebizitza «movilizadas en diferentes fases (desde entregadas a fase de construcción)», eta helburua «más de 183.000 viviendas» da. «Mobilizatua» ez da inongo estatistika ofizialeko kategoria. Ministerioaren beraren serie estatistikoak 32.444 babes ofizialeko etxebizitza amaitu (behin betiko kalifikazioak) zenbatzen ditu Espainia osoan 2024tik 2026ko lehen hiruhilekora arte, administrazio guztienak eta salmentarako zein alokairurako. Kontuen Auzitegiak egiaztatu zuen fiskalizatu zituen Planeko jardueretako bat ere ez zegoela amaituta. Gorteak 6-10-2026an desegin ziren.",
+        note: "2026-10-07an berrikusia, iturriaren independentziaren arauarekin; etiketa ez da aldatzen, baina jada ez da Ministerioan soilik oinarritzen. «Mobilizatutako» 120.479 etxebizitzak (183.000en % 66) Gobernuaren beraren neurria dira, eta eraikitzen ari diren etxebizitzak eta aurreko faseak barne hartzen dituzte; Ministerioak ez du argitaratzen zenbat entregatu diren. Estatistika ofizialak amaitutako babes ofizialeko etxebizitzak neurtzen ditu: 32.444 2024tik Espainia osoan, erkidegoenak eta udalenak eta salmentakoak barne; beraz, zifra hori ere ezin zaio osorik konpromisoari egotzi. Kontuen Auzitegiak, fiskalizatu zituen Planeko 15.300 etxebizitzetan, ez zuen amaitutako jarduerarik aurkitu, eta zalantzan jartzen du «la eficacia de los resultados pretendidos». «Partziala» geratzen da, eta ez «ez zuten egin», Ministerioaren arabera etxebizitzak martxan daudelako eta batzuk entregatu direlako, baina 183.000etarainoko aldea haren zifrak iradokitzen duena baino askoz handiagoa da. Ministerioak 183.000 eman zituen bere orrian eta 184.000 2024ko oharrean.",
         role: "Gobernuko presidentetzarako hautagaia (inbestidura-hitzaldia)",
       },
     },
@@ -596,7 +657,7 @@ export const saidVsDid: SaidVsDid[] = [
     did: {
       date: "2026-07-02",
       summary:
-        "La línea de avales se puso en marcha. Según la adenda del convenio entre el Ministerio de Vivienda y el ICO publicada en el BOE, a 31-10-2025 se habían formalizado 8.549 operaciones (6.119 de jóvenes y 2.430 de familias con menores a cargo), con 206,6 millones de euros avalados. La adenda prorroga hasta el 31-12-2027 el plazo para formalizar operaciones.",
+        "La línea de avales se puso en marcha. Según la adenda del convenio entre el Ministerio de Vivienda y el ICO publicada en el BOE, a 31-10-2025 se habían formalizado 8.549 operaciones (6.119 de jóvenes y 2.430 de familias con menores a cargo), con 206,6 millones de euros avalados. La adenda prorroga hasta el 31-12-2027 el plazo para formalizar operaciones. La serie de datos abiertos del ICO cuenta 10.454 operaciones acumuladas a diciembre de 2025, con 255,9 millones de euros avalados.",
       evidence: [
         {
           kind: "dato-oficial",
@@ -607,6 +668,16 @@ export const saidVsDid: SaidVsDid[] = [
           publisher: "Ministerio de Vivienda y Agenda Urbana e ICO (publicado en el BOE)",
           value:
             "8.549 operaciones formalizadas (6.119 de jóvenes, 2.430 de familias con menores a cargo); avales por 206,6 millones de euros; financiación avalada de 1.091,4 millones de euros",
+          sourceType: "gobierno",
+        },
+        {
+          kind: "dato-oficial",
+          title: "Tabla de actividad mensual y acumulada de la Línea de Avales ICO-MIVAU para la adquisición de primera vivienda por CCAA, diciembre de 2025 (datos abiertos del ICO), fila «Total general»",
+          url: "https://www.ico.es/documents/20124/1247246/Tabla+de+actividad+mensual+y+acumulada+de+la+Linea+de+Avales+ICO+MIVAU+para+la+adquisicion+de+primera+vivienda+por+CCAA+diciembre+2025.csv",
+          date: "2025-12-31",
+          publisher: "Instituto de Crédito Oficial (estadística de actividad)",
+          value: "10.454 operaciones acumuladas; 255.864.390 euros avalados; 1.344.387.902 euros financiados",
+          sourceType: "estadistica-oficial",
         },
       ],
     },
@@ -616,20 +687,20 @@ export const saidVsDid: SaidVsDid[] = [
     i18n: {
       ca: {
         topic: "Habitatge",
-        summary: "La línia d'avals es va posar en marxa. Segons l'addenda del conveni entre el Ministeri d'Habitatge i l'ICO publicada al BOE, a 31-10-2025 s'havien formalitzat 8.549 operacions (6.119 de joves i 2.430 de famílies amb menors a càrrec), amb 206,6 milions d'euros avalats. L'addenda prorroga fins al 31-12-2027 el termini per formalitzar operacions.",
-        note: "La línia existeix i funciona (creada per l'art. 191 del Reial decret llei 5/2023, abans de l'acord), però a 31-10-2025 hi havia 8.549 compres avalades davant de «unas 50.000» (al voltant del 17 %), i només 206,6 dels 2.500 milions d'euros compromesos en avals. El termini per formalitzar operacions continua obert fins al 31-12-2027, de manera que la xifra encara pot augmentar; no s'ha localitzat cap dada oficial posterior al 31-10-2025.",
+        summary: "La línia d'avals es va posar en marxa. Segons l'addenda del conveni entre el Ministeri d'Habitatge i l'ICO publicada al BOE, a 31-10-2025 s'havien formalitzat 8.549 operacions (6.119 de joves i 2.430 de famílies amb menors a càrrec), amb 206,6 milions d'euros avalats. L'addenda prorroga fins al 31-12-2027 el termini per formalitzar operacions. La sèrie de dades obertes de l'ICO compta 10.454 operacions acumulades al desembre del 2025, amb 255,9 milions d'euros avalats.",
+        note: "Revisada el 2026-10-07 amb la regla d'independència de la font: la dada de l'addenda és del mateix Ministeri i de l'ICO; s'hi afegeix la sèrie estadística d'activitat de l'ICO, que al desembre del 2025 dona 10.454 operacions (al voltant del 21 % de 50.000). Aquesta sèrie, reconstruïda a 31-10-2025, dona 8.718 operacions i no 8.549 com l'addenda; no se n'ha trobat l'explicació. L'etiqueta no canvia. Revisada el 2026-10-07 con la regla de independencia de la fuente: el dato de la adenda es del propio Ministerio y del ICO; se añade la serie estadística de actividad del ICO, que a diciembre de 2025 da 10.454 operaciones (alrededor del 21 % de 50.000). Esa serie, reconstruida a 31-10-2025, da 8.718 operaciones y no 8.549 como la adenda; no se ha encontrado la explicación. La etiqueta no cambia. La línia existeix i funciona (creada per l'art. 191 del Reial decret llei 5/2023, abans de l'acord), però a 31-10-2025 hi havia 8.549 compres avalades davant de «unas 50.000» (al voltant del 17 %), i només 206,6 dels 2.500 milions d'euros compromesos en avals. El termini per formalitzar operacions continua obert fins al 31-12-2027, de manera que la xifra encara pot augmentar; no s'ha localitzat cap dada oficial posterior al 31-10-2025.",
         role: "acord programàtic de Govern signat pels dos partits",
       },
       gl: {
         topic: "Vivenda",
-        summary: "A liña de avais púxose en marcha. Segundo a addenda do convenio entre o Ministerio de Vivenda e o ICO publicada no BOE, a 31-10-2025 formalizáranse 8.549 operacións (6.119 de mozos e 2.430 de familias con menores a cargo), con 206,6 millóns de euros avalados. A addenda prorroga ata o 31-12-2027 o prazo para formalizar operacións.",
-        note: "A liña existe e funciona (creada polo art. 191 do Real decreto-lei 5/2023, antes do acordo), pero a 31-10-2025 había 8.549 compras avaladas fronte a «unas 50.000» (arredor do 17 %), e só 206,6 dos 2.500 millóns de euros comprometidos en avais. O prazo para formalizar operacións segue aberto ata o 31-12-2027, así que a cifra aínda pode subir; non se localizou ningún dato oficial posterior ao 31-10-2025.",
+        summary: "A liña de avais púxose en marcha. Segundo a addenda do convenio entre o Ministerio de Vivenda e o ICO publicada no BOE, a 31-10-2025 formalizáranse 8.549 operacións (6.119 de mozos e 2.430 de familias con menores a cargo), con 206,6 millóns de euros avalados. A addenda prorroga ata o 31-12-2027 o prazo para formalizar operacións. A serie de datos abertos do ICO conta 10.454 operacións acumuladas a decembro de 2025, con 255,9 millóns de euros avalados.",
+        note: "Revisada o 2026-10-07 coa regra de independencia da fonte: o dato da addenda é do propio Ministerio e do ICO; engádese a serie estatística de actividade do ICO, que a decembro de 2025 dá 10.454 operacións (arredor do 21 % de 50.000). Esa serie, reconstruída a 31-10-2025, dá 8.718 operacións e non 8.549 como a addenda; non se atopou a explicación. A etiqueta non cambia. A liña existe e funciona (creada polo art. 191 do Real decreto-lei 5/2023, antes do acordo), pero a 31-10-2025 había 8.549 compras avaladas fronte a «unas 50.000» (arredor do 17 %), e só 206,6 dos 2.500 millóns de euros comprometidos en avais. O prazo para formalizar operacións segue aberto ata o 31-12-2027, así que a cifra aínda pode subir; non se localizou ningún dato oficial posterior ao 31-10-2025.",
         role: "acordo programático de Goberno asinado polos dous partidos",
       },
       eu: {
         topic: "Etxebizitza",
-        summary: "Abal-lerroa martxan jarri zen. Etxebizitza Ministerioaren eta ICOren arteko hitzarmenaren BOEn argitaratutako eranskinaren arabera, 31-10-2025erako 8.549 eragiketa formalizatu ziren (6.119 gazteenak eta 2.430 adingabeak ardurapean dituzten familienak), 206,6 milioi euro abalaturekin. Eranskinak 31-12-2027ra arte luzatzen du eragiketak formalizatzeko epea.",
-        note: "Lerroa badago eta badabil (5/2023 Errege Lege-dekretuaren 191. artikuluak sortu zuen, akordioa baino lehen), baina 31-10-2025ean 8.549 erosketa abalatu zeuden, «unas 50.000» haien aldean (% 17 inguru), eta abaletan konprometitutako 2.500 milioi euroetatik 206,6 bakarrik. Eragiketak formalizatzeko epea irekita dago 31-12-2027ra arte, eta, beraz, zifra oraindik igo daiteke; ez da aurkitu 31-10-2025etik aurrerako datu ofizialik.",
+        summary: "Abal-lerroa martxan jarri zen. Etxebizitza Ministerioaren eta ICOren arteko hitzarmenaren BOEn argitaratutako eranskinaren arabera, 31-10-2025erako 8.549 eragiketa formalizatu ziren (6.119 gazteenak eta 2.430 adingabeak ardurapean dituzten familienak), 206,6 milioi euro abalaturekin. Eranskinak 31-12-2027ra arte luzatzen du eragiketak formalizatzeko epea. ICOren datu irekien serieak 10.454 eragiketa metatu zenbatzen ditu 2025eko abenduan, 255,9 milioi euro abalaturekin.",
+        note: "2026-10-07an berrikusia, iturriaren independentziaren arauarekin: eranskineko datua Ministerioarena eta ICOrena berarena da; ICOren jarduera-serie estatistikoa gehitzen da, eta 2025eko abenduan 10.454 eragiketa ematen ditu (50.000en % 21 inguru). Serie horrek, 2025-10-31ra berreraikita, 8.718 eragiketa ematen ditu, eta ez 8.549 eranskinak bezala; ez da azalpenik aurkitu. Etiketa ez da aldatzen. Lerroa badago eta badabil (5/2023 Errege Lege-dekretuaren 191. artikuluak sortu zuen, akordioa baino lehen), baina 31-10-2025ean 8.549 erosketa abalatu zeuden, «unas 50.000» haien aldean (% 17 inguru), eta abaletan konprometitutako 2.500 milioi euroetatik 206,6 bakarrik. Eragiketak formalizatzeko epea irekita dago 31-12-2027ra arte, eta, beraz, zifra oraindik igo daiteke; ez da aurkitu 31-10-2025etik aurrerako datu ofizialik.",
         role: "bi alderdiek sinatutako Gobernu-akordio programatikoa",
       },
     },
@@ -708,7 +779,7 @@ export const saidVsDid: SaidVsDid[] = [
     did: {
       date: "2022-12-24",
       summary:
-        "El programa 261N («Promoción, administración y ayudas para rehabilitación y acceso a vivienda») pasó de 450,7 millones de euros en el presupuesto prorrogado de 2019 a 570,8 en los PGE de 2021, 771,5 en los de 2022 y 959,5 en los de 2023 (créditos iniciales). Además, desde 2021 los PGE incluyen programas de vivienda financiados por el Mecanismo de Recuperación y Resiliencia.",
+        "El programa 261N («Promoción, administración y ayudas para rehabilitación y acceso a vivienda») pasó de 450,7 millones de euros en el presupuesto prorrogado de 2019 a 570,8 en los PGE de 2021, 771,5 en los de 2022 y 959,5 en los de 2023 (créditos iniciales). Además, desde 2021 los PGE incluyen programas de vivienda financiados por el Mecanismo de Recuperación y Resiliencia. Según la liquidación del presupuesto de la IGAE, el gasto realmente reconocido en la política de vivienda subió de 411,5 millones de euros en 2019 a 2.487,9 millones en 2023, aunque ese año solo se ejecutó el 49,4 % de los créditos definitivos.",
       evidence: [
         {
           kind: "dato-oficial",
@@ -717,6 +788,7 @@ export const saidVsDid: SaidVsDid[] = [
           date: "2019-01-01",
           publisher: "Ministerio de Hacienda (Secretaría de Estado de Presupuestos y Gastos)",
           value: "Programa 261N: 450.652,67 miles de euros (p. 77 del PDF)",
+          sourceType: "estadistica-oficial",
         },
         {
           kind: "dato-oficial",
@@ -725,6 +797,7 @@ export const saidVsDid: SaidVsDid[] = [
           date: "2021-01-01",
           publisher: "Ministerio de Hacienda (Secretaría de Estado de Presupuestos y Gastos)",
           value: "Programa 261N: 570.768,27 miles de euros; programa 260A (Mecanismo de Recuperación y Resiliencia): 1.651.000,00 miles de euros (p. 91 del PDF)",
+          sourceType: "estadistica-oficial",
         },
         {
           kind: "dato-oficial",
@@ -733,6 +806,7 @@ export const saidVsDid: SaidVsDid[] = [
           date: "2022-01-01",
           publisher: "Ministerio de Hacienda (Secretaría de Estado de Presupuestos y Gastos)",
           value: "Programa 261N: 771.485,51 miles de euros; 26BA (C02.I01): 1.389.000,00; 26BB (C02.I02): 500.000,00 (p. 112 del PDF)",
+          sourceType: "estadistica-oficial",
         },
         {
           kind: "dato-oficial",
@@ -741,6 +815,34 @@ export const saidVsDid: SaidVsDid[] = [
           date: "2023-01-01",
           publisher: "Ministerio de Hacienda (Secretaría de Estado de Presupuestos y Gastos)",
           value: "Programa 261N: 959.526,75 miles de euros; 26BA (C02.I01): 1.980.000,00; 26BB (C02.I02): 500.000,00 (p. 112 del PDF)",
+          sourceType: "estadistica-oficial",
+        },
+        {
+          kind: "dato-oficial",
+          title: "Liquidación del Presupuesto del Estado 2019, política de gasto 26 «Acceso a la vivienda y fomento de la edificación» (pp. 40 y 44)",
+          url: "https://www.igae.pap.hacienda.gob.es/sitios/igae/es-ES/Contabilidad/ContabilidadPublica/CPE/EjecucionPresupuestaria/Documents/LIQUIDACION%20ESTADO_2019%20(INTERNET).pdf",
+          date: "2019-12-31",
+          publisher: "Intervención General de la Administración del Estado (Ministerio de Hacienda)",
+          value: "Créditos definitivos: 534.685 miles de euros; obligaciones reconocidas: 411.481 miles (77,0 %)",
+          sourceType: "estadistica-oficial",
+        },
+        {
+          kind: "dato-oficial",
+          title: "Liquidación del Presupuesto del Estado 2023, política de gasto 26 «Acceso a la vivienda y fomento de la edificación» (pp. 41 y 46)",
+          url: "https://www.igae.pap.hacienda.gob.es/sitios/igae/es-ES/Contabilidad/ContabilidadPublica/CPE/EjecucionPresupuestaria/Documents/LIQUIDACION%20ESTADO_2023%20(INTERNET).pdf",
+          date: "2023-12-31",
+          publisher: "Intervención General de la Administración del Estado (Ministerio de Hacienda)",
+          value: "Créditos definitivos: 5.033.525 miles de euros; obligaciones reconocidas: 2.487.911 miles (49,4 %)",
+          sourceType: "estadistica-oficial",
+        },
+        {
+          kind: "dato-oficial",
+          title: "Tribunal de Cuentas — Informe de fiscalización n.º 1.673, sobre el grado de ejecución de los programas de gasto del Plan de Recuperación del área de gasto 2, ejercicios 2022 y 2023 (pp. 39–41 impresas)",
+          url: "https://www.congreso.es/docu/inf_fiscTC/LegXV/251-211.pdf",
+          date: "2026-03-25",
+          publisher: "Tribunal de Cuentas",
+          value: "Programa 26BB (viviendas de alquiler social del Plan de Recuperación), 2023: 500 millones de crédito inicial y 294,8 millones de obligaciones; «sin que se haya aportado ninguna información por parte del Ministerio sobre su grado de ejecución»",
+          sourceType: "independiente",
         },
       ],
     },
@@ -750,20 +852,20 @@ export const saidVsDid: SaidVsDid[] = [
     i18n: {
       ca: {
         topic: "Habitatge",
-        summary: "El programa 261N («Promoción, administración y ayudas para rehabilitación y acceso a vivienda») va passar de 450,7 milions d'euros en el pressupost prorrogat del 2019 a 570,8 en els PGE del 2021, 771,5 en els del 2022 i 959,5 en els del 2023 (crèdits inicials). A més, des del 2021 els PGE inclouen programes d'habitatge finançats pel Mecanisme de Recuperació i Resiliència.",
-        note: "Es comparen crèdits inicials del mateix programa pressupostari (261N), no despesa executada: l'execució no s'ha contrastat. El pressupost del 2019 era el del 2018 prorrogat (aprovat amb el Govern del PP). La comparació arriba fins als PGE del 2023 (Llei 31/2022, BOE del 24-12-2022, data que es pren com la del fet); els exercicis posteriors no s'han contrastat.",
+        summary: "El programa 261N («Promoción, administración y ayudas para rehabilitación y acceso a vivienda») va passar de 450,7 milions d'euros en el pressupost prorrogat del 2019 a 570,8 en els PGE del 2021, 771,5 en els del 2022 i 959,5 en els del 2023 (crèdits inicials). A més, des del 2021 els PGE inclouen programes d'habitatge finançats pel Mecanisme de Recuperació i Resiliència. Segons la liquidació del pressupost de la IGAE, la despesa realment reconeguda en la política d'habitatge va pujar de 411,5 milions d'euros el 2019 a 2.487,9 milions el 2023, tot i que aquell any només es va executar el 49,4 % dels crèdits definitius.",
+        note: "Revisada el 2026-10-07 amb la regla d'independència de la font: es manté «compleix» perquè el compromís era augmentar la dotació i la despesa executada també va créixer (IGAE). Matís: el grau d'execució de la política d'habitatge va caure del 97,2 % el 2020 al 49,4 % el 2023 i al 32,7 % el 2024, i el Tribunal de Comptes assenyala que el 2023 el programa d'habitatges de lloguer social del Pla de Recuperació va reconèixer 294,8 dels seus 500 milions sense que el Ministeri informés del seu grau d'execució. Revisada el 2026-10-07 con la regla de independencia de la fuente: se mantiene «cumple» porque el compromiso era aumentar la dotación y el gasto ejecutado también creció (IGAE). Matiz: el grado de ejecución de la política de vivienda cayó del 97,2 % en 2020 al 49,4 % en 2023 y al 32,7 % en 2024, y el Tribunal de Cuentas señala que en 2023 el programa de viviendas de alquiler social del Plan de Recuperación reconoció 294,8 de sus 500 millones sin que el Ministerio informara de su grado de ejecución. Es comparen crèdits inicials del mateix programa pressupostari (261N), no despesa executada: l'execució no s'ha contrastat. El pressupost del 2019 era el del 2018 prorrogat (aprovat amb el Govern del PP). La comparació arriba fins als PGE del 2023 (Llei 31/2022, BOE del 24-12-2022, data que es pren com la del fet); els exercicis posteriors no s'han contrastat.",
         role: "signants de l'acord de Govern de coalició",
       },
       gl: {
         topic: "Vivenda",
-        summary: "O programa 261N («Promoción, administración y ayudas para rehabilitación y acceso a vivienda») pasou de 450,7 millóns de euros no orzamento prorrogado de 2019 a 570,8 nos PGE de 2021, 771,5 nos de 2022 e 959,5 nos de 2023 (créditos iniciais). Ademais, desde 2021 os PGE inclúen programas de vivenda financiados polo Mecanismo de Recuperación e Resiliencia.",
-        note: "Compáranse créditos iniciais do mesmo programa orzamentario (261N), non gasto executado: a execución non se contrastou. O orzamento de 2019 era o de 2018 prorrogado (aprobado co Goberno do PP). A comparación chega ata os PGE de 2023 (Lei 31/2022, BOE do 24-12-2022, data que se toma como a do feito); os exercicios posteriores non se contrastaron.",
+        summary: "O programa 261N («Promoción, administración y ayudas para rehabilitación y acceso a vivienda») pasou de 450,7 millóns de euros no orzamento prorrogado de 2019 a 570,8 nos PGE de 2021, 771,5 nos de 2022 e 959,5 nos de 2023 (créditos iniciais). Ademais, desde 2021 os PGE inclúen programas de vivenda financiados polo Mecanismo de Recuperación e Resiliencia. Segundo a liquidación do orzamento da IGAE, o gasto realmente recoñecido na política de vivenda subiu de 411,5 millóns de euros en 2019 a 2.487,9 millóns en 2023, aínda que ese ano só se executou o 49,4 % dos créditos definitivos.",
+        note: "Revisada o 2026-10-07 coa regra de independencia da fonte: mantense «cumpre» porque o compromiso era aumentar a dotación e o gasto executado tamén medrou (IGAE). Matiz: o grao de execución da política de vivenda caeu do 97,2 % en 2020 ao 49,4 % en 2023 e ao 32,7 % en 2024, e o Tribunal de Contas sinala que en 2023 o programa de vivendas de alugamento social do Plan de Recuperación recoñeceu 294,8 dos seus 500 millóns sen que o Ministerio informase do seu grao de execución. Compáranse créditos iniciais do mesmo programa orzamentario (261N), non gasto executado: a execución non se contrastou. O orzamento de 2019 era o de 2018 prorrogado (aprobado co Goberno do PP). A comparación chega ata os PGE de 2023 (Lei 31/2022, BOE do 24-12-2022, data que se toma como a do feito); os exercicios posteriores non se contrastaron.",
         role: "asinantes do acordo de Goberno de coalición",
       },
       eu: {
         topic: "Etxebizitza",
-        summary: "261N programa («Promoción, administración y ayudas para rehabilitación y acceso a vivienda») 2019ko aurrekontu luzatuko 450,7 milioi eurotik 2021eko PGEetako 570,8ra, 2022koetako 771,5era eta 2023koetako 959,5era igo zen (hasierako kredituak). Gainera, 2021etik, PGEek Suspertze eta Erresilientzia Mekanismoak finantzatutako etxebizitza-programak dituzte.",
-        note: "Aurrekontu-programa bereko (261N) hasierako kredituak alderatzen dira, ez gauzatutako gastua: gauzatzea ez da egiaztatu. 2019ko aurrekontua 2018koa zen, luzatuta (PPren Gobernuarekin onartua). Alderaketa 2023ko PGEetaraino iristen da (31/2022 Legea, 24-12-2022ko BOE; data hori hartzen da egitatearen datatzat); ondorengo ekitaldiak ez dira egiaztatu.",
+        summary: "261N programa («Promoción, administración y ayudas para rehabilitación y acceso a vivienda») 2019ko aurrekontu luzatuko 450,7 milioi eurotik 2021eko PGEetako 570,8ra, 2022koetako 771,5era eta 2023koetako 959,5era igo zen (hasierako kredituak). Gainera, 2021etik, PGEek Suspertze eta Erresilientzia Mekanismoak finantzatutako etxebizitza-programak dituzte. IGAEren aurrekontu-likidazioaren arabera, etxebizitza-politikan benetan aitortutako gastua 411,5 milioi eurotik (2019) 2.487,9 milioira (2023) igo zen, nahiz eta urte horretan behin betiko kredituen % 49,4 baino ez zen gauzatu.",
+        note: "2026-10-07an berrikusia, iturriaren independentziaren arauarekin: «betetzen du» mantentzen da, konpromisoa zuzkidura handitzea zelako eta gauzatutako gastua ere hazi zelako (IGAE). Ñabardura: etxebizitza-politikaren gauzatze-maila % 97,2tik (2020) % 49,4ra (2023) eta % 32,7ra (2024) jaitsi zen, eta Kontuen Auzitegiak dio 2023an Suspertze Planeko alokairu sozialeko etxebizitzen programak bere 500 milioietatik 294,8 aitortu zituela, Ministerioak haren gauzatze-mailari buruzko informaziorik eman gabe. Aurrekontu-programa bereko (261N) hasierako kredituak alderatzen dira, ez gauzatutako gastua: gauzatzea ez da egiaztatu. 2019ko aurrekontua 2018koa zen, luzatuta (PPren Gobernuarekin onartua). Alderaketa 2023ko PGEetaraino iristen da (31/2022 Legea, 24-12-2022ko BOE; data hori hartzen da egitatearen datatzat); ondorengo ekitaldiak ez dira egiaztatu.",
         role: "koalizio-Gobernuaren akordioaren sinatzaileak",
       },
     },
@@ -875,25 +977,98 @@ export const saidVsDid: SaidVsDid[] = [
       ],
     },
     verdict: "cumple",
-    note: "Se contrasta la creación de la prestación, no su cobertura ni su gestión (número de beneficiarios frente a los previstos), que no se han medido aquí.",
+    note: "Se contrasta la creación de la prestación. Su cobertura frente a los 850.000 hogares anunciados, medida por la AIReF, está en la entrada «psoe-imv-850000-hogares-2020».",
     i18n: {
       ca: {
         topic: "Ingrés mínim vital",
         summary: "El Govern va aprovar el Reial decret llei 20/2020, que crea l'ingrés mínim vital com a prestació no contributiva de la Seguretat Social. El decret es va tramitar després com a projecte de llei i es va publicar com a Llei 19/2021.",
-        note: "Es contrasta la creació de la prestació, no la cobertura ni la gestió (nombre de beneficiaris davant dels previstos), que no s'han mesurat aquí.",
+        note: "Es contrasta la creació de la prestació. La seva cobertura davant de les 850.000 llars anunciades, mesurada per l'AIReF, és a l'entrada «psoe-imv-850000-hogares-2020».",
         role: "signants de l'acord de Govern de coalició",
       },
       gl: {
         topic: "Ingreso mínimo vital",
         summary: "O Goberno aprobou o Real decreto-lei 20/2020, que crea o ingreso mínimo vital como prestación non contributiva da Seguridade Social. O decreto tramitouse despois como proxecto de lei e publicouse como Lei 19/2021.",
-        note: "Contrástase a creación da prestación, non a súa cobertura nin a súa xestión (número de beneficiarios fronte aos previstos), que non se mediron aquí.",
+        note: "Contrástase a creación da prestación. A súa cobertura fronte aos 850.000 fogares anunciados, medida pola AIReF, está na entrada «psoe-imv-850000-hogares-2020».",
         role: "asinantes do acordo de Goberno de coalición",
       },
       eu: {
         topic: "Bizitzeko gutxieneko diru-sarrera",
         summary: "Gobernuak 20/2020 Errege Lege-dekretua onartu zuen, bizitzeko gutxieneko diru-sarrera Gizarte Segurantzaren kotizaziorik gabeko prestazio gisa sortzen duena. Dekretua lege-proiektu gisa izapidetu zen gero, eta 19/2021 Lege gisa argitaratu.",
-        note: "Prestazioaren sorrera egiaztatzen da, ez haren estaldura edo kudeaketa (onuradunen kopurua aurreikusitakoen aldean); horiek ez dira hemen neurtu.",
+        note: "Prestazioaren sorrera egiaztatzen da. Iragarritako 850.000 etxeen aldean duen estaldura, AIReFek neurtua, «psoe-imv-850000-hogares-2020» sarreran dago.",
         role: "koalizio-Gobernuaren akordioaren sinatzaileak",
+      },
+    },
+  },
+  {
+    id: "psoe-imv-850000-hogares-2020",
+    partyId: "psoe",
+    topic: "Ingreso mínimo vital",
+    said: {
+      speaker: "Ministerio de Inclusión, Seguridad Social y Migraciones (Gobierno presidido por Pedro Sánchez)",
+      role: "nota del ministerio tras el Consejo de Ministros que aprobó el Real Decreto-ley 20/2020 (ministro: José Luis Escrivá)",
+      date: "2020-05-29",
+      text: "Llegará a 850.000 hogares en los que viven 2,3 millones de personas, con especial incidencia en los hogares en los que viven menores",
+      source: {
+        url: "https://www.inclusion.gob.es/w/el-gobierno-aprueba-la-creacion-de-un-ingreso-minimo-vital",
+        title: "Ministerio de Inclusión, Seguridad Social y Migraciones — «El Gobierno aprueba la creación de un Ingreso Mínimo Vital» (29-5-2020), subtítulo",
+        date: "2020-05-29",
+        kind: "gobierno",
+      },
+    },
+    did: {
+      date: "2025-12-31",
+      summary:
+        "Según la Autoridad Independiente de Responsabilidad Fiscal (AIReF), a 31-12-2025 cobraban el ingreso mínimo vital 484.792 hogares en toda España (455.401 en territorio fiscal común, el 44,2 % de los hogares que podrían cobrarlo). El 52 % de los hogares con derecho no lo solicita. A finales de 2021 eran 284.000 hogares (el 40 % de los potenciales).",
+      evidence: [
+        {
+          kind: "dato-oficial",
+          title: "AIReF — Quinta opinión sobre el Ingreso Mínimo Vital (julio de 2026), pp. 9, 21 (nota 8), 26 y 28 del PDF",
+          url: "https://www.airef.es/wp-content/uploads/2026/07/IMV/IMV_Opinion5.pdf",
+          date: "2025-12-31",
+          publisher: "Autoridad Independiente de Responsabilidad Fiscal (AIReF)",
+          value: "484.792 hogares con IMV en toda España a 31-12-2025; 455.401 en territorio común = 44,2 % de 1.031.442 hogares potenciales; 52 % de los hogares elegibles no lo solicita",
+          sourceType: "independiente",
+        },
+        {
+          kind: "dato-oficial",
+          title: "AIReF — Opinión 1/22 sobre el Ingreso Mínimo Vital (19-7-2022), pp. 7 y 10 del PDF",
+          url: "https://www.airef.es/wp-content/uploads/2022/08/IMV/OPINION-AIREF-IMV.pdf",
+          date: "2021-12-31",
+          publisher: "Autoridad Independiente de Responsabilidad Fiscal (AIReF)",
+          value: "284.000 hogares en diciembre de 2021 (40 % de unos 700.000 potenciales); 400.000 hogares con derecho no lo habían solicitado (57 %)",
+          sourceType: "independiente",
+        },
+        {
+          kind: "dato-oficial",
+          title: "La Moncloa — nota de prensa del Ministerio de Inclusión sobre el ingreso mínimo vital en agosto de 2026 (7-9-2026)",
+          url: "https://www.lamoncloa.gob.es/serviciosdeprensa/notasprensa/inclusion/paginas/2026/070926-ingreso-minimo-vital-agosto.aspx",
+          date: "2026-09-07",
+          publisher: "Ministerio de Inclusión, Seguridad Social y Migraciones (La Moncloa)",
+          value: "«ha llegado en agosto a 893.820 hogares en los que viven 2.725.899 personas»",
+          sourceType: "gobierno",
+        },
+      ],
+    },
+    verdict: "parcial",
+    note: "Añadida el 2026-10-07 con la regla de independencia de la fuente. La prestación existe y su alcance crece cada año, pero según la AIReF, cinco años y medio después llegaba a unos 485.000 hogares, el 57 % de los 850.000 anunciados, y más de la mitad de los hogares con derecho no la pide. La cifra del Gobierno de agosto de 2026 (893.820 hogares) no dice en la nota si incluye los hogares que solo cobran el complemento de ayuda para la infancia, que la AIReF cuenta aparte; por eso la etiqueta se apoya en la AIReF. Se atribuye al PSOE porque presidía el Gobierno que aprobó la prestación y nombró al ministro.",
+    i18n: {
+      ca: {
+        topic: "Ingrés mínim vital",
+        summary: "Segons l'Autoritat Independent de Responsabilitat Fiscal (AIReF), a 31-12-2025 cobraven l'ingrés mínim vital 484.792 llars a tot Espanya (455.401 en territori fiscal comú, el 44,2 % de les llars que podrien cobrar-lo). El 52 % de les llars amb dret no el sol·licita. A finals del 2021 eren 284.000 llars (el 40 % de les potencials).",
+        note: "Afegida el 2026-10-07 amb la regla d'independència de la font. La prestació existeix i el seu abast creix cada any, però segons l'AIReF, cinc anys i mig després arribava a unes 485.000 llars, el 57 % de les 850.000 anunciades, i més de la meitat de les llars amb dret no la demana. La xifra del Govern d'agost del 2026 (893.820 llars) no diu a la nota si inclou les llars que només cobren el complement d'ajuda per a la infància, que l'AIReF compta a part; per això l'etiqueta es basa en l'AIReF. S'atribueix al PSOE perquè presidia el Govern que va aprovar la prestació i va nomenar el ministre.",
+        role: "nota del ministeri després del Consell de Ministres que va aprovar el Reial decret llei 20/2020 (ministre: José Luis Escrivá)",
+      },
+      gl: {
+        topic: "Ingreso mínimo vital",
+        summary: "Segundo a Autoridade Independente de Responsabilidade Fiscal (AIReF), a 31-12-2025 cobraban o ingreso mínimo vital 484.792 fogares en toda España (455.401 en territorio fiscal común, o 44,2 % dos fogares que poderían cobralo). O 52 % dos fogares con dereito non o solicita. A finais de 2021 eran 284.000 fogares (o 40 % dos potenciais).",
+        note: "Engadida o 2026-10-07 coa regra de independencia da fonte. A prestación existe e o seu alcance medra cada ano, pero segundo a AIReF, cinco anos e medio despois chegaba a uns 485.000 fogares, o 57 % dos 850.000 anunciados, e máis da metade dos fogares con dereito non a pide. A cifra do Goberno de agosto de 2026 (893.820 fogares) non di na nota se inclúe os fogares que só cobran o complemento de axuda para a infancia, que a AIReF conta á parte; por iso a etiqueta apóiase na AIReF. Atribúeselle ao PSOE porque presidía o Goberno que aprobou a prestación e nomeou o ministro.",
+        role: "nota do ministerio tras o Consello de Ministros que aprobou o Real decreto-lei 20/2020 (ministro: José Luis Escrivá)",
+      },
+      eu: {
+        topic: "Bizitzeko gutxieneko diru-sarrera",
+        summary: "Erantzukizun Fiskalerako Agintaritza Independentearen (AIReF) arabera, 2025-12-31n 484.792 etxek kobratzen zuten bizitzeko gutxieneko diru-sarrera Espainia osoan (455.401 lurralde fiskal erkidean, hura kobra zezaketen etxeen % 44,2). Eskubidea duten etxeen % 52k ez du eskatzen. 2021aren amaieran 284.000 etxe ziren (potentzialen % 40).",
+        note: "2026-10-07an gehitua, iturriaren independentziaren arauarekin. Prestazioa badago eta haren irismena urtero hazten da, baina AIReFen arabera, bost urte eta erdi geroago 485.000 etxe ingurura iristen zen, iragarritako 850.000en % 57ra, eta eskubidea duten etxeen erdiak baino gehiagok ez du eskatzen. Gobernuak 2026ko abuztuan emandako zifrak (893.820 etxe) ez du oharrean esaten haurrentzako laguntza-osagarria soilik kobratzen duten etxeak barne hartzen dituen, AIReFek bereiz zenbatzen baititu; horregatik, etiketa AIReFen oinarritzen da. PSOEri egozten zaio, prestazioa onartu zuen eta ministroa izendatu zuen Gobernuko burua zelako.",
+        role: "ministerioaren oharra, 20/2020 Errege Lege-dekretua onartu zuen Ministro Kontseiluaren ondoren (ministroa: José Luis Escrivá)",
       },
     },
   },
@@ -982,6 +1157,7 @@ export const saidVsDid: SaidVsDid[] = [
           date: "2026-10-05",
           publisher: "Agencia Estatal Boletín Oficial del Estado",
           value: "Vigente: estatus de derogación «N» en los metadatos del BOE (actualizados el 5-10-2026)",
+          sourceType: "estadistica-oficial",
         },
       ],
     },
@@ -1042,6 +1218,7 @@ export const saidVsDid: SaidVsDid[] = [
           date: "2026-10-05",
           publisher: "Agencia Estatal Boletín Oficial del Estado",
           value: "Vigente: estatus de derogación «N» en los metadatos del BOE (actualizados el 5-10-2026)",
+          sourceType: "estadistica-oficial",
         },
         DISOLUCION_2026,
       ],
@@ -1094,6 +1271,7 @@ export const saidVsDid: SaidVsDid[] = [
           publisher: "Ministerio de Inclusión, Seguridad Social y Migraciones",
           value:
             "Dotaciones acumuladas: 56.986 M€ (2023), 60.590 M€ (2024), 64.963 M€ (2025); dotaciones del MEI: 2.218 M€ (2023), 3.577 M€ (2024), 4.356 M€ (2025); saldo a 31-12-2025: 14.069,81 M€ (0,83 % del PIB)",
+          sourceType: "estadistica-oficial",
         },
       ],
     },
@@ -1135,8 +1313,26 @@ export const saidVsDid: SaidVsDid[] = [
     did: {
       date: "2025-12-31",
       summary:
-        "Según la Intervención General de la Administración del Estado (contabilidad nacional), el déficit del conjunto de las Administraciones públicas fue del 3,52 % del PIB en 2023, del 3,22 % en 2024 (3,15 % antes de la revisión estadística de 2024) y del 2,39 % en 2025.",
+        "Según Eurostat (notificación de abril de 2026), el déficit del conjunto de las Administraciones públicas fue del 3,3 % del PIB en 2023, del 3,2 % en 2024 y del 2,4 % en 2025; en euros, 50.027, 51.267 y 40.330 millones. La IGAE da cifras muy parecidas (3,52 %, 3,22 % y 2,39 %). La deuda pública bajó del 105,2 % al 100,7 % del PIB, pero subió de 1.575.377 a 1.698.225 millones de euros.",
       evidence: [
+        {
+          kind: "dato-oficial",
+          title: "Government deficit/surplus, debt and associated data (gov_10dd_edpt1), España, Administraciones Públicas (S13), B9 y GD",
+          url: "https://ec.europa.eu/eurostat/databrowser/view/gov_10dd_edpt1/default/table?lang=es",
+          date: "2025-12-31",
+          publisher: "Eurostat",
+          value: "Déficit: −3,3 % del PIB en 2023 (−50.027 M€), −3,2 % en 2024 (−51.267 M€) y −2,4 % en 2025 (−40.330 M€); deuda: 105,2 %, 101,6 % y 100,7 % del PIB",
+          sourceType: "independiente",
+        },
+        {
+          kind: "dato-oficial",
+          title: "Recomendación del Consejo a España (documento 11121/26, basado en COM(2026) 209), considerandos 10 y 15",
+          url: "https://data.consilium.europa.eu/doc/document/ST-11121-2026-INIT/en/pdf",
+          date: "2026-07-03",
+          publisher: "Consejo de la Unión Europea",
+          value: "Gasto neto: +4,8 % en 2025, «above the recommended maximum growth rate» (desviación del 0,4 % del PIB en el año y del 0,1 % acumulada, dentro de la flexibilidad de la cláusula nacional de escape por gasto en defensa)",
+          sourceType: "independiente",
+        },
         {
           kind: "dato-oficial",
           title: "Informe trimestral de las Administraciones Públicas, contabilidad nacional, cuarto trimestre de 2024",
@@ -1144,6 +1340,7 @@ export const saidVsDid: SaidVsDid[] = [
           date: "2024-12-31",
           publisher: "Intervención General de la Administración del Estado (Ministerio de Hacienda)",
           value: "Necesidad de financiación de las AAPP: 3,52 % del PIB en 2023 y 3,15 % en 2024 (50.187 M€)",
+          sourceType: "estadistica-oficial",
         },
         {
           kind: "dato-oficial",
@@ -1152,29 +1349,30 @@ export const saidVsDid: SaidVsDid[] = [
           date: "2025-12-31",
           publisher: "Intervención General de la Administración del Estado (Ministerio de Hacienda)",
           value: "Necesidad de financiación de las AAPP: 3,22 % del PIB en 2024 (51.267 M€) y 2,39 % en 2025 (40.330 M€); sin el impacto de la DANA, 2,86 % y 2,18 %",
+          sourceType: "estadistica-oficial",
         },
       ],
     },
     verdict: "cumple",
     note:
-      "El compromiso era seguir reduciendo el déficit, sin cifra: bajó cada año. No se contrasta aquí con los objetivos numéricos comunicados a la Comisión Europea ni con la deuda pública. Parte del descenso de 2025 se debe, según la IGAE, a menores gastos extraordinarios (DANA y sentencias desfavorables).",
+      "Contrastado con Eurostat (regla de independencia de la fuente, 2026-10-07): se mantiene «cumple». El compromiso era seguir reduciendo el déficit, sin cifra, y en porcentaje del PIB bajó cada año. Matices: en euros, el déficit de 2024 fue mayor que el de 2023; la deuda en euros siguió creciendo; y el Consejo de la UE señala que el gasto neto de 2025 creció por encima del máximo recomendado, aunque dentro de la flexibilidad por gasto en defensa. Parte del descenso de 2025 se debe, según la IGAE, a menores gastos extraordinarios (DANA y sentencias desfavorables). Las cifras de 2023 de Eurostat (3,3 %) y de la IGAE de 2024 (3,52 %) son de revisiones distintas.",
     i18n: {
       ca: {
         topic: "Reducció del dèficit públic",
-        summary: "Segons la Intervenció General de l'Administració de l'Estat (comptabilitat nacional), el dèficit del conjunt de les administracions públiques va ser del 3,52 % del PIB el 2023, del 3,22 % el 2024 (3,15 % abans de la revisió estadística del 2024) i del 2,39 % el 2025.",
-        note: "El compromís era continuar reduint el dèficit, sense xifra: va baixar cada any. No es contrasta aquí amb els objectius numèrics comunicats a la Comissió Europea ni amb el deute públic. Part del descens del 2025 es deu, segons la IGAE, a unes despeses extraordinàries menors (DANA i sentències desfavorables).",
+        summary: "Segons Eurostat (notificació d'abril del 2026), el dèficit del conjunt de les administracions públiques va ser del 3,3 % del PIB el 2023, del 3,2 % el 2024 i del 2,4 % el 2025; en euros, 50.027, 51.267 i 40.330 milions. La IGAE dona xifres molt semblants (3,52 %, 3,22 % i 2,39 %). El deute públic va baixar del 105,2 % al 100,7 % del PIB, però va pujar de 1.575.377 a 1.698.225 milions d'euros.",
+        note: "Contrastat amb Eurostat (regla d'independència de la font, 2026-10-07): es manté «compleix». El compromís era continuar reduint el dèficit, sense xifra, i en percentatge del PIB va baixar cada any. Matisos: en euros, el dèficit del 2024 va ser més gran que el del 2023; el deute en euros va continuar creixent; i el Consell de la UE assenyala que la despesa neta del 2025 va créixer per sobre del màxim recomanat, tot i que dins de la flexibilitat per despesa en defensa. Part del descens del 2025 es deu, segons la IGAE, a unes despeses extraordinàries menors (DANA i sentències desfavorables). Les xifres del 2023 d'Eurostat (3,3 %) i de la IGAE del 2024 (3,52 %) són de revisions diferents.",
         role: "candidat a la Presidència del Govern (discurs d'investidura)",
       },
       gl: {
         topic: "Redución do déficit público",
-        summary: "Segundo a Intervención Xeral da Administración do Estado (contabilidade nacional), o déficit do conxunto das administracións públicas foi do 3,52 % do PIB en 2023, do 3,22 % en 2024 (3,15 % antes da revisión estatística de 2024) e do 2,39 % en 2025.",
-        note: "O compromiso era seguir reducindo o déficit, sen cifra: baixou cada ano. Non se contrasta aquí cos obxectivos numéricos comunicados á Comisión Europea nin coa débeda pública. Parte do descenso de 2025 débese, segundo a IGAE, a menores gastos extraordinarios (DANA e sentenzas desfavorables).",
+        summary: "Segundo Eurostat (notificación de abril de 2026), o déficit do conxunto das administracións públicas foi do 3,3 % do PIB en 2023, do 3,2 % en 2024 e do 2,4 % en 2025; en euros, 50.027, 51.267 e 40.330 millóns. A IGAE dá cifras moi parecidas (3,52 %, 3,22 % e 2,39 %). A débeda pública baixou do 105,2 % ao 100,7 % do PIB, pero subiu de 1.575.377 a 1.698.225 millóns de euros.",
+        note: "Contrastado con Eurostat (regra de independencia da fonte, 2026-10-07): mantense «cumpre». O compromiso era seguir reducindo o déficit, sen cifra, e en porcentaxe do PIB baixou cada ano. Matices: en euros, o déficit de 2024 foi maior que o de 2023; a débeda en euros seguiu crecendo; e o Consello da UE sinala que o gasto neto de 2025 medrou por riba do máximo recomendado, aínda que dentro da flexibilidade por gasto en defensa. Parte do descenso de 2025 débese, segundo a IGAE, a menores gastos extraordinarios (DANA e sentenzas desfavorables). As cifras de 2023 de Eurostat (3,3 %) e da IGAE de 2024 (3,52 %) son de revisións distintas.",
         role: "candidato á Presidencia do Goberno (discurso de investidura)",
       },
       eu: {
         topic: "Defizit publikoaren murrizketa",
-        summary: "Estatuko Administrazioaren Kontu-hartzailetza Nagusiaren arabera (kontabilitate nazionala), administrazio publiko guztien defizita BPGaren % 3,52 izan zen 2023an, % 3,22 2024an (% 3,15 2024ko berrikuspen estatistikoaren aurretik) eta % 2,39 2025ean.",
-        note: "Konpromisoa defizita murrizten jarraitzea zen, zifrarik gabe: urtero jaitsi zen. Hemen ez da alderatzen Europako Batzordeari jakinarazitako zenbakizko helburuekin, ezta zor publikoarekin ere. IGAEren arabera, 2025eko jaitsieraren zati bat aparteko gastu txikiagoei zor zaie (DANA eta aurkako epaiak).",
+        summary: "Eurostaten arabera (2026ko apirileko jakinarazpena), administrazio publiko guztien defizita BPGaren % 3,3 izan zen 2023an, % 3,2 2024an eta % 2,4 2025ean; eurotan, 50.027, 51.267 eta 40.330 milioi. IGAEk oso antzeko zifrak ematen ditu (% 3,52, % 3,22 eta % 2,39). Zor publikoa BPGaren % 105,2tik % 100,7ra jaitsi zen, baina 1.575.377 milioi eurotik 1.698.225 milioira igo zen.",
+        note: "Eurostatekin egiaztatua (iturriaren independentziaren araua, 2026-10-07): «betetzen du» mantentzen da. Konpromisoa defizita murrizten jarraitzea zen, zifrarik gabe, eta BPGaren ehunekotan urtero jaitsi zen. Ñabardurak: eurotan, 2024ko defizita 2023koa baino handiagoa izan zen; zorrak eurotan hazten jarraitu zuen; eta EBko Kontseiluak dio 2025eko gastu garbia gomendatutako gehienekoaren gainetik hazi zela, defentsa-gastuagatiko malgutasunaren barruan bada ere. IGAEren arabera, 2025eko jaitsieraren zati bat aparteko gastu txikiagoei zor zaie (DANA eta aurkako epaiak). Eurostaten 2023ko zifra (% 3,3) eta IGAEren 2024ko zifra (% 3,52) berrikuspen desberdinetakoak dira.",
         role: "Gobernuko presidentetzarako hautagaia (inbestidura-hitzaldia)",
       },
     },
@@ -1241,6 +1439,330 @@ export const saidVsDid: SaidVsDid[] = [
         summary: "XV. legealdian ez zen Estatuko Aurrekontu Orokorren lege-proiekturik sartu Kongresuan: ez zen aurrekonturik izan 2024rako, 2025erako ez 2026rako, eta 2023koak luzatuta jarraitu zuten (31/2022 Legea). Gorteak 6-10-2026an desegin ziren.",
         note: "Egin zezakeen: aurrekontuak egitea eta aurkeztea Gobernuaren eskumen esklusiboa da (Konstituzioaren 134.1 art.), eta ez du gehiengo parlamentariorik behar; gero onartzea beste kontu bat da. Ministro Kontseiluak finantzarioa ez den gastuaren muga onartu zuen 2025eko azaroan (presidenteak dio 19-11-2025eko kontrol-saioan; La Moncloaren transkripzioa: https://www.lamoncloa.gob.es/presidente/intervenciones/Documents/2025/20251119-sesion-control-preguntas-pg.pdf), baina proiektua ez zen bidali. 31/2022 Legea estekatzen da onartutako azken aurrekontuak datatzeko.",
         role: "Gobernuko presidentea eta PSOEko idazkari nagusia (ikasturte politikoaren balantzeari buruzko prentsaurrekoa; aurrekontuak aurkezteko konpromisoa hartzen ote zuen galderari erantzuna)",
+      },
+    },
+  },
+
+  // ─── Corrupción (añadido el 2026-10-07) ─────────────────────────────────
+  // Hechos judiciales solo de documentos del Poder Judicial (notas de la
+  // Oficina de Comunicación del CGPJ con la resolución enlazada) y hechos
+  // parlamentarios del Congreso y del Senado. Situación procesal tal como la
+  // dice el documento; nada de prensa (lo descartado está en busqueda.ts).
+  {
+    id: "psoe-corrupcion-mocion-censura-2018",
+    partyId: "psoe",
+    topic: "Corrupción",
+    said: {
+      speaker: SANCHEZ,
+      role: "candidato a la Presidencia del Gobierno (moción de censura, réplica al presidente del Gobierno)",
+      date: "2018-05-31",
+      text: "No hay ningún partido inmune a la corrupción. Lo que hay que hacer es prevenir esa corrupción, actuar cuando se produce esa corrupción y asumir las responsabilidades políticas cuando se produce esa corrupción.",
+      source: {
+        url: "https://www.congreso.es/public_oficiales/L12/CONG/DS/PL/DSCD-12-PL-126.PDF#page=32",
+        title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XII legislatura, núm. 126 (31-5-2018): moción de censura",
+        date: "2018-05-31",
+        page: "32",
+        kind: "diario-sesiones",
+      },
+    },
+    did: {
+      date: "2026-06-22",
+      summary:
+        "El Tribunal Supremo condenó el 22-6-2026 (sentencia 418/2026, «caso mascarillas») a José Luis Ábalos, ministro de Fomento desde junio de 2018 y secretario de Organización del PSOE hasta julio de 2021, a 24 años y 3 meses de prisión, y a su exasesor Koldo García a 19 años, 8 meses y un día, por organización criminal, cohecho, malversación y tráfico de influencias. Antes, Ábalos había pasado del Grupo Socialista al Grupo Mixto (27-2-2024) y el Congreso había concedido el suplicatorio por unanimidad (22-1-2025). Santos Cerdán, secretario de Organización del PSOE hasta 2025, figura como investigado en la misma causa y está en libertad provisional desde el 19-11-2025.",
+      evidence: [
+        {
+          kind: "dato-oficial",
+          title: "Comunicación Poder Judicial — «El Tribunal Supremo condena al exministro José Luis Ábalos y a su exasesor Koldo García a 24 años y 19 años de prisión…» (Sentencia 418/2026, causa especial 20775/2020, ECLI:ES:TS:2026:2553)",
+          url: "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Noticias-Judiciales/El-Tribunal-Supremo-condena-al-exministro-Jose-Luis-Abalos-y-a-su-exasesor-Koldo-Garcia-a-24-anos-y-19-anos-de-prision--respectivamente--por-delitos-de-organizacion-criminal--cohecho--malversacion-y-trafico-de-influencias",
+          date: "2026-06-22",
+          publisher: "Tribunal Supremo, Sala Segunda (nota de la Oficina de Comunicación del CGPJ)",
+          value: "Ábalos: 24 años y 3 meses de prisión; Koldo García: 19 años, 8 meses y 1 día; «los tres acusados formaron una organización criminal con reparto de funciones que cometió graves delitos de corrupción» (unanimidad)",
+          sourceType: "independiente",
+        },
+        {
+          kind: "dato-oficial",
+          title: "Comunicación Poder Judicial — el instructor del Tribunal Supremo acuerda la prisión provisional comunicada y sin fianza de José Luis Ábalos y Koldo García",
+          url: "https://www.poderjudicial.es/cgpj/es/Poder-Judicial/Noticias-Judiciales/El-instructor-del-Tribunal-Supremo-acuerda-la-prision-provisional-comunicada-y-sin-fianza-del-exministro-Jose-Luis-Abalos-y-de-su-exasesor-Koldo-Garcia-al-apreciar-riesgo-de-fuga",
+          date: "2025-11-27",
+          publisher: "Tribunal Supremo (nota de la Oficina de Comunicación del CGPJ)",
+          value: "«prisión provisional, comunicada y sin fianza» de los investigados Ábalos y Koldo García por «riesgo de fuga»",
+          sourceType: "independiente",
+        },
+        {
+          kind: "dato-oficial",
+          title: "Boletín Oficial de las Cortes Generales, Congreso, serie D, núm. 99 (5-3-2024), p. 8: composición de los grupos parlamentarios",
+          url: "https://www.congreso.es/public_oficiales/L15/CONG/BOCG/D/BOCG-15-D-99.PDF#page=8",
+          date: "2024-02-27",
+          publisher: "Congreso de los Diputados",
+          value: "Grupo Socialista: «Baja: ÁBALOS MECO, José Luis … 27-02-2024»; Grupo Mixto: alta el mismo día",
+          sourceType: "estadistica-oficial",
+        },
+        {
+          kind: "dato-oficial",
+          title: "Congreso de los Diputados — nota sobre el suplicatorio de José Luis Ábalos (Pleno en sesión secreta, 22-1-2025)",
+          url: "https://www.congreso.es/es/notas-de-prensa?_notasprensa_mvcPath=detalle&_notasprensa_notaId=47911",
+          date: "2025-01-22",
+          publisher: "Congreso de los Diputados",
+          value: "Suplicatorio «aprobado por unanimidad» (votación secreta: no hay voto por grupo en datos abiertos)",
+          sourceType: "estadistica-oficial",
+        },
+      ],
+    },
+    verdict: "parcial",
+    note: "Añadida el 2026-10-07. «Actuar» y «asumir responsabilidades» se hicieron en parte y después de que actuara la justicia: salida de Ábalos del Grupo Socialista en 2024, suplicatorio aprobado con los votos socialistas y expulsión anunciada en la web del PSOE el 16-6-2025 («expulsar definitivamente del PSOE a José Luis Ábalos, una vez acabado el expediente»; copia de archive.org de psoe.es). «Prevenir» no: el Supremo da por probados delitos de corrupción de quien era ministro y número tres del partido, el mismo diputado que presentó esta moción de censura (DSCD-12-PL-126, p. 2). Presunción de inocencia: ni la sentencia ni la nota dicen si es firme; Cerdán no está condenado. La renuncia al escaño de Ábalos y la suspensión de militancia de 2024 solo constan en prensa y no se usan.",
+    i18n: {
+      ca: {
+        topic: "Corrupció",
+        summary: "El Tribunal Suprem va condemnar el 22-6-2026 (sentència 418/2026, «cas mascaretes») José Luis Ábalos, ministre de Foment des del juny del 2018 i secretari d'Organització del PSOE fins al juliol del 2021, a 24 anys i 3 mesos de presó, i el seu exassessor Koldo García a 19 anys, 8 mesos i un dia, per organització criminal, suborn, malversació i tràfic d'influències. Abans, Ábalos havia passat del Grup Socialista al Grup Mixt (27-2-2024) i el Congrés havia concedit el suplicatori per unanimitat (22-1-2025). Santos Cerdán, secretari d'Organització del PSOE fins al 2025, consta com a investigat en la mateixa causa i és en llibertat provisional des del 19-11-2025.",
+        note: "Afegida el 2026-10-07. «Actuar» i «assumir responsabilitats» es van fer en part i després que actués la justícia: sortida d'Ábalos del Grup Socialista el 2024, suplicatori aprovat amb els vots socialistes i expulsió anunciada al web del PSOE el 16-6-2025 («expulsar definitivamente del PSOE a José Luis Ábalos, una vez acabado el expediente»; còpia d'archive.org de psoe.es). «Prevenir», no: el Suprem dona per provats delictes de corrupció de qui era ministre i número tres del partit, el mateix diputat que va presentar aquesta moció de censura (DSCD-12-PL-126, p. 2). Presumpció d'innocència: ni la sentència ni la nota diuen si és ferma; Cerdán no està condemnat. La renúncia a l'escó d'Ábalos i la suspensió de militància del 2024 només consten a la premsa i no s'utilitzen.",
+        role: "candidat a la Presidència del Govern (moció de censura, rèplica al president del Govern)",
+      },
+      gl: {
+        topic: "Corrupción",
+        summary: "O Tribunal Supremo condenou o 22-6-2026 (sentenza 418/2026, «caso máscaras») a José Luis Ábalos, ministro de Fomento desde xuño de 2018 e secretario de Organización do PSOE ata xullo de 2021, a 24 anos e 3 meses de prisión, e ao seu exasesor Koldo García a 19 anos, 8 meses e un día, por organización criminal, suborno, malversación e tráfico de influencias. Antes, Ábalos pasara do Grupo Socialista ao Grupo Mixto (27-2-2024) e o Congreso concedera o suplicatorio por unanimidade (22-1-2025). Santos Cerdán, secretario de Organización do PSOE ata 2025, figura como investigado na mesma causa e está en liberdade provisional desde o 19-11-2025.",
+        note: "Engadida o 2026-10-07. «Actuar» e «asumir responsabilidades» fixéronse en parte e despois de que actuase a xustiza: saída de Ábalos do Grupo Socialista en 2024, suplicatorio aprobado cos votos socialistas e expulsión anunciada na web do PSOE o 16-6-2025 («expulsar definitivamente del PSOE a José Luis Ábalos, una vez acabado el expediente»; copia de archive.org de psoe.es). «Previr», non: o Supremo dá por probados delitos de corrupción de quen era ministro e número tres do partido, o mesmo deputado que presentou esta moción de censura (DSCD-12-PL-126, p. 2). Presunción de inocencia: nin a sentenza nin a nota din se é firme; Cerdán non está condenado. A renuncia á acta de Ábalos e a suspensión de militancia de 2024 só constan na prensa e non se usan.",
+        role: "candidato á Presidencia do Goberno (moción de censura, réplica ao presidente do Goberno)",
+      },
+      eu: {
+        topic: "Ustelkeria",
+        summary: "Auzitegi Gorenak 2026-06-22an kondenatu zuen (418/2026 epaia, «maskaren kasua») José Luis Ábalos, 2018ko ekainetik Sustapen ministroa eta 2021eko uztailera arte PSOEko Antolakuntza idazkaria, 24 urte eta 3 hilabeteko espetxe-zigorrera, eta haren aholkulari ohi Koldo García 19 urte, 8 hilabete eta egun bateko zigorrera, erakunde kriminala, eroskeria, bidegabeko erabilera eta influentzia-trafikoagatik. Lehenago, Ábalos Talde Sozialistatik Talde Mistora igaro zen (2024-02-27), eta Kongresuak aho batez eman zuen suplikatorioa (2025-01-22). Santos Cerdán, 2025era arte PSOEko Antolakuntza idazkaria, ikertu gisa ageri da kausa berean, eta behin-behineko askatasunean dago 2025-11-19tik.",
+        note: "2026-10-07an gehitua. «Jardutea» eta «erantzukizunak hartzea» neurri batean egin ziren, eta justiziak jardun ondoren: Ábalos Talde Sozialistatik irten zen 2024an, suplikatorioa boto sozialistekin onartu zen, eta kanporatzea PSOEren webgunean iragarri zen 2025-06-16an («expulsar definitivamente del PSOE a José Luis Ábalos, una vez acabado el expediente»; psoe.es-en archive.org-eko kopia). «Prebenitzea», ez: Gorenak frogatutzat jotzen ditu ministroa eta alderdiko hirugarren kargua zenaren ustelkeria-delituak, zentsura-mozio hau aurkeztu zuen diputatu berberarenak (DSCD-12-PL-126, 2. or.). Errugabetasun-presuntzioa: ez epaiak ez oharrak ez dute esaten irmoa den; Cerdán ez dago kondenatuta. Ábalosek eserlekuari egindako uko egitea eta 2024ko militantzia-etetea prentsan baino ez daude jasota, eta ez dira erabiltzen.",
+        role: "Gobernuko presidentetzarako hautagaia (zentsura-mozioa, Gobernuko presidenteari erreplika)",
+      },
+    },
+  },
+  {
+    id: "psoe-comision-investigacion-koldo-2025",
+    partyId: "psoe",
+    topic: "Corrupción",
+    said: {
+      speaker: SANCHEZ,
+      role: "secretario general del PSOE (comparecencia en la sede federal, crónica oficial del partido)",
+      date: "2025-06-16",
+      text: "No vamos a tapar la corrupción que surja en nuestras filas por muy dolorosa que sea",
+      source: {
+        url: "https://www.psoe.es/actualidad/noticias-actualidad/pedro-sanchez-anuncia-mas-medidas-contra-la-corrupcion-el-psoe-es-una-organizacion-limpia/",
+        title: "PSOE — «Pedro Sánchez anuncia más medidas contra la corrupción: el PSOE es una organización limpia» (16-6-2025)",
+        date: "2025-06-16",
+        archiveUrl:
+          "https://web.archive.org/web/20250705134941/https://www.psoe.es/actualidad/noticias-actualidad/pedro-sanchez-anuncia-mas-medidas-contra-la-corrupcion-el-psoe-es-una-organizacion-limpia/",
+        kind: "partido",
+      },
+    },
+    did: {
+      date: "2026-10-06",
+      summary:
+        "La misma crónica anuncia «la creación de una comisión de Investigación para conocer toda la verdad del caso Koldo». El Grupo Socialista registró la solicitud al día siguiente (156/000011), pero quedó en la Junta de Portavoces desde el 24-6-2025 sin llegar al Pleno, y decayó con la disolución de las Cortes (6-10-2026). Antes, en 2024, el Grupo Socialista sí votó a favor de crear la comisión del Congreso sobre los contratos de material sanitario de la pandemia, y el Senado aprobó por unanimidad (259 votos) la que pidió el PP sobre el mismo asunto.",
+      evidence: [
+        {
+          kind: "iniciativa",
+          title: "Solicitud de creación de una Comisión de Investigación sobre las contrataciones públicas y demás aspectos relacionados con la operación Delorme y el informe de la UCO 96/2025 (156/000011, XV; López Álvarez, Patxi (GS) y 112 diputados)",
+          url: "https://www.congreso.es/es/web/guest/iniciativas-organo?p_p_id=iniciativas&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_iniciativas_mode=mostrarDetalle&_iniciativas_legislatura=XV&_iniciativas_id=156/000011",
+          status: "Junta de Portavoces (desde el 24-6-2025, sin votación en el Pleno al disolverse las Cortes)",
+          date: "2025-06-24",
+        },
+        {
+          kind: "votacion",
+          legislature: "XV",
+          session: 33,
+          date: "2024-03-21",
+          number: 14,
+          title: "Solicitud de creación de una Comisión de Investigación sobre los procesos de contratación para la adquisición de material sanitario por parte de las Administraciones públicas durante la crisis pandémica (156/000005)",
+          groupVote: "si",
+          url: `${CONGRESO}/Leg15/Sesion033/20240321/Votacion014/VOT_20240321105720.json`,
+        },
+        {
+          kind: "otro-parlamento",
+          chamber: "Senado",
+          title: "Comisión de Investigación del Senado solicitada por el Grupo Popular sobre la contratación de material sanitario (650/000002): 259 votos a favor de 259 emitidos (DS Senado, Pleno núm. 20, p. 90)",
+          date: "2024-03-12",
+          vote: "si",
+          url: "https://www.congreso.es/public_oficiales/L15/SEN/DS/PL/DS_P_15_20.PDF#page=90",
+        },
+        DISOLUCION_2026,
+      ],
+    },
+    verdict: "parcial",
+    note: "Añadida el 2026-10-07. Lo que el PSOE podía hacer por sí mismo lo hizo: registrar la solicitud con 113 firmas del Grupo Socialista y votar a favor de las comisiones de 2024. La comisión prometida en 2025 no llegó a crearse: no consta en la ficha del Congreso quién impidió que pasara de la Junta de Portavoces al Pleno, y por eso no se etiqueta «no lo hicieron». El voto por grupo del Senado no está en datos abiertos; el resultado unánime implica el voto a favor de los senadores socialistas presentes.",
+    i18n: {
+      ca: {
+        topic: "Corrupció",
+        summary: "La mateixa crònica anuncia «la creación de una comisión de Investigación para conocer toda la verdad del caso Koldo». El Grup Socialista va registrar la sol·licitud l'endemà (156/000011), però va quedar a la Junta de Portaveus des del 24-6-2025 sense arribar al Ple, i va decaure amb la dissolució de les Corts (6-10-2026). Abans, el 2024, el Grup Socialista sí que va votar a favor de crear la comissió del Congrés sobre els contractes de material sanitari de la pandèmia, i el Senat va aprovar per unanimitat (259 vots) la que va demanar el PP sobre el mateix assumpte.",
+        note: "Afegida el 2026-10-07. El que el PSOE podia fer per si mateix ho va fer: registrar la sol·licitud amb 113 signatures del Grup Socialista i votar a favor de les comissions del 2024. La comissió promesa el 2025 no es va arribar a crear: no consta a la fitxa del Congrés qui va impedir que passés de la Junta de Portaveus al Ple, i per això no s'etiqueta «no ho van fer». El vot per grup del Senat no és a les dades obertes; el resultat unànime implica el vot a favor dels senadors socialistes presents.",
+        role: "secretari general del PSOE (compareixença a la seu federal, crònica oficial del partit)",
+      },
+      gl: {
+        topic: "Corrupción",
+        summary: "A mesma crónica anuncia «la creación de una comisión de Investigación para conocer toda la verdad del caso Koldo». O Grupo Socialista rexistrou a solicitude ao día seguinte (156/000011), pero quedou na Xunta de Voceiros desde o 24-6-2025 sen chegar ao Pleno, e decaeu coa disolución das Cortes (6-10-2026). Antes, en 2024, o Grupo Socialista si votou a favor de crear a comisión do Congreso sobre os contratos de material sanitario da pandemia, e o Senado aprobou por unanimidade (259 votos) a que pediu o PP sobre o mesmo asunto.",
+        note: "Engadida o 2026-10-07. O que o PSOE podía facer por si mesmo fíxoo: rexistrar a solicitude con 113 sinaturas do Grupo Socialista e votar a favor das comisións de 2024. A comisión prometida en 2025 non chegou a crearse: non consta na ficha do Congreso quen impediu que pasase da Xunta de Voceiros ao Pleno, e por iso non se etiqueta «non o fixeron». O voto por grupo do Senado non está nos datos abertos; o resultado unánime implica o voto a favor dos senadores socialistas presentes.",
+        role: "secretario xeral do PSOE (comparecencia na sede federal, crónica oficial do partido)",
+      },
+      eu: {
+        topic: "Ustelkeria",
+        summary: "Kronika berak «la creación de una comisión de Investigación para conocer toda la verdad del caso Koldo» iragartzen du. Talde Sozialistak hurrengo egunean erregistratu zuen eskaera (156/000011), baina Bozeramaileen Batzarrean geratu zen 2025-06-24tik, Osoko Bilkurara iritsi gabe, eta Gorteak desegitearekin bertan behera geratu zen (2026-10-06). Lehenago, 2024an, Talde Sozialistak pandemiako material sanitarioaren kontratuei buruzko Kongresuko batzordea sortzearen alde bozkatu zuen, eta Senatuak aho batez onartu zuen (259 boto) PPk gai berari buruz eskatutakoa.",
+        note: "2026-10-07an gehitua. PSOEk berak egin zezakeena egin zuen: eskaera Talde Sozialistaren 113 sinadurarekin erregistratu eta 2024ko batzordeen alde bozkatu. 2025ean agindutako batzordea ez zen sortu: Kongresuaren fitxan ez dago jasota nork eragotzi zuen Bozeramaileen Batzarretik Osoko Bilkurara igarotzea, eta horregatik ez da «ez zuten egin» etiketatzen. Senatuko talde bakoitzaren botoa ez dago datu irekietan; aho batezko emaitzak esan nahi du bertan zeuden senatari sozialistek alde bozkatu zutela.",
+        role: "PSOEko idazkari nagusia (agerraldia egoitza federalean, alderdiaren kronika ofiziala)",
+      },
+    },
+  },
+
+  // ─── Sáhara Occidental y Marruecos (añadido el 2026-10-07) ──────────────
+  {
+    id: "psoe-sahara-autodeterminacion-2019",
+    partyId: "psoe",
+    topic: "Sáhara Occidental",
+    said: {
+      speaker: "PSOE",
+      role: "programa electoral de las generales del 28-4-2019",
+      date: "2019-04-17",
+      text: "Promoveremos la solución del conflicto de Sáhara Occidental a través del cumplimiento de las resoluciones de Naciones Unidas, que garantizan el derecho de autodeterminación del pueblo saharaui.",
+      source: {
+        url: "https://www.psoe.es/media-content/2019/04/PSOE-programa-electoral-elecciones-generales-28-de-abril-de-2019.pdf#page=143",
+        title: "PSOE — Programa electoral, elecciones generales del 28 de abril de 2019",
+        year: 2019,
+        page: "143 del PDF (pp. 282–283 impresas)",
+        archiveUrl:
+          "https://web.archive.org/web/20190417002326/https://www.psoe.es/media-content/2019/04/PSOE-programa-electoral-elecciones-generales-28-de-abril-de-2019.pdf",
+        kind: "programa",
+      },
+    },
+    did: {
+      date: "2022-04-07",
+      summary:
+        "El presidente del Gobierno escribió al rey de Marruecos el 14-3-2022 que «España considera la propuesta marroquí de autonomía presentada en 2007 como la base más seria, creíble y realista para la resolución de ese diferendo», y lo leyó en el Congreso. La declaración conjunta del 7-4-2022 lo repite. Ese mismo día el Congreso aprobó una proposición no de ley que «ratifica su apoyo a las resoluciones de la ONU y a la Misión de Naciones Unidas para el Referéndum en el Sáhara Occidental (MINURSO)»; el Grupo Socialista votó en contra (118 no, 1 sí). Las declaraciones conjuntas de 2023 y 2025 mantienen la posición.",
+      evidence: [
+        {
+          kind: "dato-oficial",
+          title: "Diario de Sesiones del Congreso, Pleno, XIV legislatura, núm. 174 (30-3-2022), p. 18: el presidente del Gobierno lee su carta al rey de Marruecos",
+          url: "https://www.congreso.es/public_oficiales/L14/CONG/DS/PL/DSCD-14-PL-174.PDF#page=18",
+          date: "2022-03-30",
+          publisher: "Congreso de los Diputados (Diario de Sesiones)",
+          value: "«España considera la propuesta marroquí de autonomía presentada en 2007 como la base más seria, creíble y realista para la resolución de ese diferendo»",
+          sourceType: "estadistica-oficial",
+        },
+        {
+          kind: "dato-oficial",
+          title: "Declaración conjunta España–Marruecos (7-4-2022), punto 1",
+          url: "https://www.lamoncloa.gob.es/presidente/actividades/Documents/2022/070422-declaracion-conjunta-Espana-Marruecos.pdf",
+          date: "2022-04-07",
+          publisher: "La Moncloa (Gobierno de España)",
+          value: "«España considera la iniciativa de autonomía marroquí, presentada en 2007, como la base más seria, realista y creíble para resolver este diferendo.»",
+          sourceType: "gobierno",
+        },
+        {
+          kind: "votacion",
+          legislature: "XIV",
+          session: 171,
+          date: "2022-04-07",
+          number: 1,
+          title: "Proposición no de Ley de los grupos GCUP-EC-GC, Republicano y EH Bildu relativa a la posición del Gobierno español en relación con el conflicto del Sáhara Occidental (162/000995)",
+          groupVote: "no",
+          url: `${CONGRESO}/Leg14/Sesion171/20220407/Votacion001/VOT_20230302191210.json`,
+        },
+        {
+          kind: "dato-oficial",
+          title: "Declaración conjunta de la XIII Reunión de Alto Nivel España–Marruecos (4-12-2025), punto 8",
+          url: "https://www.lamoncloa.gob.es/presidente/actividades/Documents/2025/04122025-declaracion-conjunta-espana-marruecos.pdf",
+          date: "2025-12-04",
+          publisher: "La Moncloa (Gobierno de España)",
+          value: "Reitera la posición de la declaración de 7-4-2022 y celebra la resolución 2797 del Consejo de Seguridad, que apoya negociar «tomando como base la propuesta de autonomía de Marruecos»",
+          sourceType: "gobierno",
+        },
+      ],
+    },
+    verdict: "contradice",
+    note: "Añadida el 2026-10-07 (antes descartada en el registro de búsqueda por «programa no explícito»: el programa de abril de 2019 sí lo es). El programa prometía resolver el conflicto con las resoluciones de la ONU «que garantizan el derecho de autodeterminación»; el Gobierno pasó a considerar el plan de autonomía marroquí «la base más seria». El presidente sostuvo en el mismo debate que «en mi carta reafirmo que Naciones Unidas es el marco» (DSCD-14-PL-174, p. 18). El programa del 10-N-2019 y el acuerdo de coalición no hablan del Sáhara; el de 2023 ya no menciona la autodeterminación. La proposición aprobada no habla de autodeterminación: ratifica las resoluciones de la ONU y la MINURSO. La única diputada socialista que votó sí fue Beatriz Carrillo de los Reyes; Unidas Podemos, socio de Gobierno, votó a favor.",
+    i18n: {
+      ca: {
+        topic: "Sàhara Occidental",
+        summary: "El president del Govern va escriure al rei del Marroc el 14-3-2022 que «España considera la propuesta marroquí de autonomía presentada en 2007 como la base más seria, creíble y realista para la resolución de ese diferendo», i ho va llegir al Congrés. La declaració conjunta del 7-4-2022 ho repeteix. Aquell mateix dia el Congrés va aprovar una proposició no de llei que «ratifica su apoyo a las resoluciones de la ONU y a la Misión de Naciones Unidas para el Referéndum en el Sáhara Occidental (MINURSO)»; el Grup Socialista hi va votar en contra (118 no, 1 sí). Les declaracions conjuntes del 2023 i el 2025 mantenen la posició.",
+        note: "Afegida el 2026-10-07 (abans descartada al registre de cerca per «programa no explícit»: el programa d'abril del 2019 sí que ho és). El programa prometia resoldre el conflicte amb les resolucions de l'ONU «que garantizan el derecho de autodeterminación»; el Govern va passar a considerar el pla d'autonomia marroquí «la base más seria». El president va sostenir en el mateix debat que «en mi carta reafirmo que Naciones Unidas es el marco» (DSCD-14-PL-174, p. 18). El programa del 10-N-2019 i l'acord de coalició no parlen del Sàhara; el del 2023 ja no esmenta l'autodeterminació. La proposició aprovada no parla d'autodeterminació: ratifica les resolucions de l'ONU i la MINURSO. L'única diputada socialista que va votar sí va ser Beatriz Carrillo de los Reyes; Unidas Podemos, soci de Govern, hi va votar a favor.",
+        role: "programa electoral de les generals del 28-4-2019",
+      },
+      gl: {
+        topic: "Sáhara Occidental",
+        summary: "O presidente do Goberno escribiulle ao rei de Marrocos o 14-3-2022 que «España considera la propuesta marroquí de autonomía presentada en 2007 como la base más seria, creíble y realista para la resolución de ese diferendo», e leuno no Congreso. A declaración conxunta do 7-4-2022 repíteo. Ese mesmo día o Congreso aprobou unha proposición non de lei que «ratifica su apoyo a las resoluciones de la ONU y a la Misión de Naciones Unidas para el Referéndum en el Sáhara Occidental (MINURSO)»; o Grupo Socialista votou en contra (118 non, 1 si). As declaracións conxuntas de 2023 e 2025 manteñen a posición.",
+        note: "Engadida o 2026-10-07 (antes descartada no rexistro de busca por «programa non explícito»: o programa de abril de 2019 si o é). O programa prometía resolver o conflito coas resolucións da ONU «que garantizan el derecho de autodeterminación»; o Goberno pasou a considerar o plan de autonomía marroquí «la base más seria». O presidente sostivo no mesmo debate que «en mi carta reafirmo que Naciones Unidas es el marco» (DSCD-14-PL-174, p. 18). O programa do 10-N-2019 e o acordo de coalición non falan do Sáhara; o de 2023 xa non menciona a autodeterminación. A proposición aprobada non fala de autodeterminación: ratifica as resolucións da ONU e a MINURSO. A única deputada socialista que votou si foi Beatriz Carrillo de los Reyes; Unidas Podemos, socio de Goberno, votou a favor.",
+        role: "programa electoral das xerais do 28-4-2019",
+      },
+      eu: {
+        topic: "Mendebaldeko Sahara",
+        summary: "Gobernuko presidenteak Marokoko erregeari idatzi zion 2022-03-14an «España considera la propuesta marroquí de autonomía presentada en 2007 como la base más seria, creíble y realista para la resolución de ese diferendo», eta Kongresuan irakurri zuen. 2022-04-07ko adierazpen bateratuak errepikatzen du. Egun berean, Kongresuak legez besteko proposamen bat onartu zuen, «ratifica su apoyo a las resoluciones de la ONU y a la Misión de Naciones Unidas para el Referéndum en el Sáhara Occidental (MINURSO)»; Talde Sozialistak aurka bozkatu zuen (118 ez, 1 bai). 2023ko eta 2025eko adierazpen bateratuek jarrera mantentzen dute.",
+        note: "2026-10-07an gehitua (lehen bilaketa-erregistroan baztertua, «programa ez esplizitua» zelakoan: 2019ko apirilekoa bada esplizitua). Programak NBEren ebazpenekin gatazka konpontzea agintzen zuen, «que garantizan el derecho de autodeterminación»; Gobernuak Marokoko autonomia-plana «la base más seria» jotzera igaro zen. Presidenteak eztabaida berean esan zuen «en mi carta reafirmo que Naciones Unidas es el marco» (DSCD-14-PL-174, 18. or.). 2019ko azaroaren 10eko programak eta koalizio-akordioak ez dute Saharaz hitz egiten; 2023koak ez du jada autodeterminazioa aipatzen. Onartutako proposamenak ez du autodeterminazioaz hitz egiten: NBEren ebazpenak eta MINURSO berresten ditu. Bai bozkatu zuen diputatu sozialista bakarra Beatriz Carrillo de los Reyes izan zen; Unidas Podemosek, Gobernu-kideak, alde bozkatu zuen.",
+        role: "2019-04-28ko hauteskunde orokorretarako programa",
+      },
+    },
+  },
+  {
+    id: "psoe-aduanas-ceuta-melilla-2022",
+    partyId: "psoe",
+    topic: "Ceuta y Marruecos",
+    said: {
+      speaker: SANCHEZ,
+      role: "presidente del Gobierno (rueda de prensa en Rabat tras la declaración conjunta con Marruecos)",
+      date: "2022-04-07",
+      text: "las mercancías también van a circular con normalidad, en régimen de expedición comercial a través de los respectivos puestos aduaneros.",
+      source: {
+        url: "https://www.lamoncloa.gob.es/presidente/intervenciones/Documents/2022/220407%20RDP%20DEL%20PG%20EN%20MARRUECOS.pdf",
+        title: "La Moncloa — Transcripción de la rueda de prensa del presidente del Gobierno en Marruecos (7-4-2022)",
+        date: "2022-04-07",
+        page: "p. 3",
+        kind: "gobierno",
+      },
+    },
+    did: {
+      date: "2025-12-04",
+      summary:
+        "La Agencia Tributaria adaptó en marzo de 2023 las instrucciones del documento único administrativo para las aduanas de Ceuta y Melilla. Según el ministro de Asuntos Exteriores en el Congreso, «el pasado 11 de febrero [de 2025] se restableció el paso oficial de mercancías entre Melilla y Marruecos, y también, por primera vez en nuestra historia, entre Ceuta y Marruecos», en «un proceso gradual y progresivo». La declaración conjunta de diciembre de 2025 celebra «la aplicación, en un marco concertado» de ese punto.",
+      evidence: [
+        {
+          kind: "boe",
+          reference: "BOE-A-2023-7502",
+          title: "Resolución de 17 de marzo de 2023, del Departamento de Aduanas e Impuestos Especiales de la Agencia Estatal de Administración Tributaria, por la que se modifica la de 11 de julio de 2014, sobre formalidades aduaneras (documento único administrativo), para Ceuta y Melilla",
+          url: "https://boe.es/boe/dias/2023/03/23/pdfs/BOE-A-2023-7502.pdf",
+          date: "2023-03-23",
+          role: "gobierno",
+        },
+        {
+          kind: "dato-oficial",
+          title: "Diario de Sesiones del Congreso, Comisión de Asuntos Exteriores, XV legislatura, núm. 314 (5-5-2025), pp. 8 y 38: comparecencia del ministro de Asuntos Exteriores",
+          url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/CO/DSCD-15-CO-314.PDF#page=8",
+          date: "2025-05-05",
+          publisher: "Ministro de Asuntos Exteriores (en el Diario de Sesiones del Congreso)",
+          value: "Paso oficial de mercancías restablecido el 11-2-2025 en Melilla y abierto en Ceuta; «Se trata de un proceso gradual y progresivo»",
+          sourceType: "gobierno",
+        },
+        {
+          kind: "dato-oficial",
+          title: "Declaración conjunta de la XIII Reunión de Alto Nivel España–Marruecos (4-12-2025), punto 61",
+          url: "https://www.lamoncloa.gob.es/presidente/actividades/Documents/2025/04122025-declaracion-conjunta-espana-marruecos.pdf",
+          date: "2025-12-04",
+          publisher: "La Moncloa (Gobierno de España)",
+          value: "Ambos gobiernos «se felicitan por la aplicación, en un marco concertado, del punto 3» de la hoja de ruta de 2022",
+          sourceType: "gobierno",
+        },
+      ],
+    },
+    verdict: "parcial",
+    note: "Añadida el 2026-10-07. Solo hay datos del propio Gobierno sobre la circulación real de mercancías: no se ha encontrado una estadística oficial de mercancías por las aduanas de Ceuta y Melilla ni un informe independiente. La norma aduanera existe (BOE) y el Gobierno declara abierto el paso desde febrero de 2025, pero él mismo lo describe como gradual: la «normalidad» prometida en 2022 no está documentada. Las cifras de volumen que dio el ministro no son coherentes entre sí y no se citan. En abril de 2026 VOX pidió una comparecencia sobre un «cierre unilateral de las aduanas» por Marruecos (213/000820); es solo el título de la solicitud, no un hecho comprobado. Etiqueta máxima por la regla de independencia de la fuente: solo hay datos del propio Gobierno.",
+    i18n: {
+      ca: {
+        topic: "Ceuta i el Marroc",
+        summary: "L'Agència Tributària va adaptar el març del 2023 les instruccions del document únic administratiu per a les duanes de Ceuta i Melilla. Segons el ministre d'Afers Exteriors al Congrés, «el pasado 11 de febrero [de 2025] se restableció el paso oficial de mercancías entre Melilla y Marruecos, y también, por primera vez en nuestra historia, entre Ceuta y Marruecos», en «un proceso gradual y progresivo». La declaració conjunta del desembre del 2025 celebra «la aplicación, en un marco concertado» d'aquest punt.",
+        note: "Afegida el 2026-10-07. Només hi ha dades del mateix Govern sobre la circulació real de mercaderies: no s'ha trobat cap estadística oficial de mercaderies per les duanes de Ceuta i Melilla ni cap informe independent. La norma duanera existeix (BOE) i el Govern declara obert el pas des del febrer del 2025, però ell mateix el descriu com a gradual: la «normalitat» promesa el 2022 no està documentada. Les xifres de volum que va donar el ministre no són coherents entre si i no se citen. L'abril del 2026 VOX va demanar una compareixença sobre un «cierre unilateral de las aduanas» pel Marroc (213/000820); és només el títol de la sol·licitud, no un fet comprovat. Etiqueta màxima per la regla d'independència de la font: només hi ha dades del mateix Govern.",
+        role: "president del Govern (roda de premsa a Rabat després de la declaració conjunta amb el Marroc)",
+      },
+      gl: {
+        topic: "Ceuta e Marrocos",
+        summary: "A Axencia Tributaria adaptou en marzo de 2023 as instrucións do documento único administrativo para as aduanas de Ceuta e Melilla. Segundo o ministro de Asuntos Exteriores no Congreso, «el pasado 11 de febrero [de 2025] se restableció el paso oficial de mercancías entre Melilla y Marruecos, y también, por primera vez en nuestra historia, entre Ceuta y Marruecos», nun «proceso gradual y progresivo». A declaración conxunta de decembro de 2025 celebra «la aplicación, en un marco concertado» dese punto.",
+        note: "Engadida o 2026-10-07. Só hai datos do propio Goberno sobre a circulación real de mercadorías: non se atopou unha estatística oficial de mercadorías polas aduanas de Ceuta e Melilla nin un informe independente. A norma aduaneira existe (BOE) e o Goberno declara aberto o paso desde febreiro de 2025, pero el mesmo descríbeo como gradual: a «normalidade» prometida en 2022 non está documentada. As cifras de volume que deu o ministro non son coherentes entre si e non se citan. En abril de 2026 VOX pediu unha comparecencia sobre un «cierre unilateral de las aduanas» por Marrocos (213/000820); é só o título da solicitude, non un feito comprobado. Etiqueta máxima pola regra de independencia da fonte: só hai datos do propio Goberno.",
+        role: "presidente do Goberno (rolda de prensa en Rabat tras a declaración conxunta con Marrocos)",
+      },
+      eu: {
+        topic: "Ceuta eta Maroko",
+        summary: "Zerga Agentziak 2023ko martxoan egokitu zituen Ceutako eta Melillako aduanetarako administrazio-agiri bakarraren jarraibideak. Kanpo Arazoetako ministroak Kongresuan esan zuenez, «el pasado 11 de febrero [de 2025] se restableció el paso oficial de mercancías entre Melilla y Marruecos, y también, por primera vez en nuestra historia, entre Ceuta y Marruecos», «un proceso gradual y progresivo» batean. 2025eko abenduko adierazpen bateratuak puntu horren «la aplicación, en un marco concertado» ospatzen du.",
+        note: "2026-10-07an gehitua. Gobernuaren beraren datuak baino ez daude salgaien benetako zirkulazioari buruz: ez da aurkitu Ceutako eta Melillako aduanetako salgaien estatistika ofizialik ez txosten independenterik. Aduana-araua badago (BOE), eta Gobernuak dio pasabidea irekita dagoela 2025eko otsailetik, baina berak mailakakotzat jotzen du: 2022an agindutako «normaltasuna» ez dago dokumentatuta. Ministroak emandako bolumen-zifrak ez datoz bat beren artean, eta ez dira aipatzen. 2026ko apirilean VOXek agerraldi bat eskatu zuen Marokok egindako «cierre unilateral de las aduanas» delakoaz (213/000820); eskaeraren izenburua baino ez da, ez egiaztatutako gertaera bat. Gehieneko etiketa, iturriaren independentziaren arauagatik: Gobernuaren beraren datuak baino ez daude.",
+        role: "Gobernuko presidentea (prentsaurrekoa Rabaten, Marokorekiko adierazpen bateratuaren ondoren)",
       },
     },
   },

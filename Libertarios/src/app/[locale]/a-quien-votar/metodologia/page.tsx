@@ -291,6 +291,7 @@ export default async function MetodologiaPage({ params }: { params: Promise<{ lo
             })}
           </p>
           <p>{rich(m.dvh.said)}</p>
+          <p>{rich(m.dvh.sources)}</p>
           <p>{rich(m.dvh.counts)}</p>
           <p>
             {rich(m.dvh.seeAll, {}, {

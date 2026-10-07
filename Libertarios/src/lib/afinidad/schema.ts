@@ -315,7 +315,9 @@ const didEvidenceSchema = z.union([
     date: isoDate,
   }),
   // Dato estadístico oficial (INE, ministerios, Tribunal de Cuentas, AIReF…).
-  // Solo aquí: no es una votación y nunca puntúa.
+  // Solo aquí: no es una votación y nunca puntúa. `sourceType` dice quién mide:
+  // un organismo independiente, una serie estadística oficial o el propio
+  // Gobierno (regla de independencia de la fuente, `OFFICIAL_SOURCE_TYPES`).
   z.object({
     kind: z.literal("dato-oficial"),
     title: nonEmpty,
@@ -323,8 +325,18 @@ const didEvidenceSchema = z.union([
     date: isoDate,
     publisher: nonEmpty,
     value: nonEmpty,
+    sourceType: z.enum(["independiente", "estadistica-oficial", "gobierno"]),
   }),
 ]);
+
+/** Las tres clases de fuente de un dato oficial, de más a menos independiente. */
+export const OFFICIAL_SOURCE_TYPES = ["independiente", "estadistica-oficial", "gobierno"] as const;
+
+/**
+ * Texto que debe llevar la nota de una entrada «parcial» cuyos datos oficiales
+ * son todos del propio Gobierno (regla de independencia de la fuente).
+ */
+export const ONLY_GOVERNMENT_DATA_NOTE = "solo hay datos del propio Gobierno";
 
 /** Identificador de una entrada de «Dijeron vs. hicieron»: va en la URL (`#dvh-<id>`). */
 export const SAID_VS_DID_ID = /^[a-z0-9][a-z0-9-]{0,79}$/;
@@ -390,6 +402,26 @@ export const saidVsDidSchema: z.ZodType<SaidVsDid> = z
         path: ["note"],
         message: "«no-hecho» exige una nota que explique por qué el partido podía hacerlo",
       });
+    // Regla de independencia de la fuente (2026-10-07), igual para todos los
+    // partidos: si los datos oficiales de la entrada son todos del propio
+    // Gobierno, no bastan para un «cumple» (un gobierno no se evalúa a sí
+    // mismo), y un «parcial» lo dice en la nota. Hace falta al menos un dato
+    // `independiente` o `estadistica-oficial`.
+    const datos = e.did.evidence.filter((x) => x.kind === "dato-oficial");
+    if (datos.length > 0 && datos.every((x) => x.sourceType === "gobierno")) {
+      if (e.verdict === "cumple")
+        ctx.addIssue({
+          code: "custom",
+          path: ["verdict"],
+          message: "«cumple» no puede apoyarse solo en datos del propio Gobierno: falta un dato independiente o de estadística oficial",
+        });
+      if (e.verdict === "parcial" && !e.note?.includes(ONLY_GOVERNMENT_DATA_NOTE))
+        ctx.addIssue({
+          code: "custom",
+          path: ["note"],
+          message: `«parcial» con solo datos del propio Gobierno: la nota debe decir «${ONLY_GOVERNMENT_DATA_NOTE}»`,
+        });
+    }
   });
 
 export const deputyAttributionSchema: z.ZodType<DeputyAttribution> = z.object({

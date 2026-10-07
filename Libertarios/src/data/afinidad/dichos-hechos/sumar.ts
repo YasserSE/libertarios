@@ -559,7 +559,7 @@ export const saidVsDid: SaidVsDid[] = [
     did: {
       date: "2026-07-02",
       summary:
-        "La línea de avales se puso en marcha. Según la adenda del convenio entre el Ministerio de Vivienda y el ICO publicada en el BOE, a 31-10-2025 se habían formalizado 8.549 operaciones (6.119 de jóvenes y 2.430 de familias con menores a cargo), con 206,6 millones de euros avalados. La adenda prorroga hasta el 31-12-2027 el plazo para formalizar operaciones.",
+        "La línea de avales se puso en marcha. Según la adenda del convenio entre el Ministerio de Vivienda y el ICO publicada en el BOE, a 31-10-2025 se habían formalizado 8.549 operaciones (6.119 de jóvenes y 2.430 de familias con menores a cargo), con 206,6 millones de euros avalados. La adenda prorroga hasta el 31-12-2027 el plazo para formalizar operaciones. La serie de datos abiertos del ICO cuenta 10.454 operaciones acumuladas a diciembre de 2025, con 255,9 millones de euros avalados.",
       evidence: [
         {
           kind: "dato-oficial",
@@ -570,6 +570,16 @@ export const saidVsDid: SaidVsDid[] = [
           publisher: "Ministerio de Vivienda y Agenda Urbana e ICO (publicado en el BOE)",
           value:
             "8.549 operaciones formalizadas (6.119 de jóvenes, 2.430 de familias con menores a cargo); avales por 206,6 millones de euros; financiación avalada de 1.091,4 millones de euros",
+          sourceType: "gobierno",
+        },
+        {
+          kind: "dato-oficial",
+          title: "Tabla de actividad mensual y acumulada de la Línea de Avales ICO-MIVAU para la adquisición de primera vivienda por CCAA, diciembre de 2025 (datos abiertos del ICO), fila «Total general»",
+          url: "https://www.ico.es/documents/20124/1247246/Tabla+de+actividad+mensual+y+acumulada+de+la+Linea+de+Avales+ICO+MIVAU+para+la+adquisicion+de+primera+vivienda+por+CCAA+diciembre+2025.csv",
+          date: "2025-12-31",
+          publisher: "Instituto de Crédito Oficial (estadística de actividad)",
+          value: "10.454 operaciones acumuladas; 255.864.390 euros avalados; 1.344.387.902 euros financiados",
+          sourceType: "estadistica-oficial",
         },
       ],
     },
@@ -579,24 +589,25 @@ export const saidVsDid: SaidVsDid[] = [
     i18n: {
       ca: {
         topic: "Habitatge",
-        summary: "La línia d'avals es va posar en marxa. Segons l'addenda del conveni entre el Ministeri d'Habitatge i l'ICO publicada al BOE, a 31-10-2025 s'havien formalitzat 8.549 operacions (6.119 de joves i 2.430 de famílies amb menors a càrrec), amb 206,6 milions d'euros avalats. L'addenda prorroga fins al 31-12-2027 el termini per formalitzar operacions.",
-        note: "La línia existeix i funciona (creada per l'art. 191 del Reial decret llei 5/2023, abans de l'acord), però a 31-10-2025 hi havia 8.549 compres avalades davant de «unas 50.000» (al voltant del 17 %), i només 206,6 dels 2.500 milions d'euros compromesos en avals. El termini per formalitzar operacions continua obert fins al 31-12-2027, de manera que la xifra encara pot augmentar; no s'ha localitzat cap dada oficial posterior al 31-10-2025. SUMAR va signar el compromís a l'acord de coalició; la línia la gestionen el Ministeri d'Habitatge i Agenda Urbana i l'ICO.",
+        summary: "La línia d'avals es va posar en marxa. Segons l'addenda del conveni entre el Ministeri d'Habitatge i l'ICO publicada al BOE, a 31-10-2025 s'havien formalitzat 8.549 operacions (6.119 de joves i 2.430 de famílies amb menors a càrrec), amb 206,6 milions d'euros avalats. L'addenda prorroga fins al 31-12-2027 el termini per formalitzar operacions. La sèrie de dades obertes de l'ICO compta 10.454 operacions acumulades al desembre del 2025, amb 255,9 milions d'euros avalats.",
+        note: "Revisada el 2026-10-07 amb la regla d'independència de la font: la dada de l'addenda és del mateix Ministeri i de l'ICO; s'hi afegeix la sèrie estadística d'activitat de l'ICO, que al desembre del 2025 dona 10.454 operacions (al voltant del 21 % de 50.000). Aquesta sèrie, reconstruïda a 31-10-2025, dona 8.718 operacions i no 8.549 com l'addenda; no se n'ha trobat l'explicació. L'etiqueta no canvia. Revisada el 2026-10-07 con la regla de independencia de la fuente: el dato de la adenda es del propio Ministerio y del ICO; se añade la serie estadística de actividad del ICO, que a diciembre de 2025 da 10.454 operaciones (alrededor del 21 % de 50.000). Esa serie, reconstruida a 31-10-2025, da 8.718 operaciones y no 8.549 como la adenda; no se ha encontrado la explicación. La etiqueta no cambia. La línia existeix i funciona (creada per l'art. 191 del Reial decret llei 5/2023, abans de l'acord), però a 31-10-2025 hi havia 8.549 compres avalades davant de «unas 50.000» (al voltant del 17 %), i només 206,6 dels 2.500 milions d'euros compromesos en avals. El termini per formalitzar operacions continua obert fins al 31-12-2027, de manera que la xifra encara pot augmentar; no s'ha localitzat cap dada oficial posterior al 31-10-2025. SUMAR va signar el compromís a l'acord de coalició; la línia la gestionen el Ministeri d'Habitatge i Agenda Urbana i l'ICO.",
         role: ACUERDO_ROLE_I18N.ca,
       },
       gl: {
         topic: "Vivenda",
-        summary: "A liña de avais púxose en marcha. Segundo a addenda do convenio entre o Ministerio de Vivenda e o ICO publicada no BOE, a 31-10-2025 formalizáranse 8.549 operacións (6.119 de mozos e 2.430 de familias con menores a cargo), con 206,6 millóns de euros avalados. A addenda prorroga ata o 31-12-2027 o prazo para formalizar operacións.",
-        note: "A liña existe e funciona (creada polo art. 191 do Real decreto-lei 5/2023, antes do acordo), pero a 31-10-2025 había 8.549 compras avaladas fronte a «unas 50.000» (arredor do 17 %), e só 206,6 dos 2.500 millóns de euros comprometidos en avais. O prazo para formalizar operacións segue aberto ata o 31-12-2027, así que a cifra aínda pode subir; non se localizou ningún dato oficial posterior ao 31-10-2025. SUMAR asinou o compromiso no acordo de coalición; a liña xestiónana o Ministerio de Vivenda e Axenda Urbana e o ICO.",
+        summary: "A liña de avais púxose en marcha. Segundo a addenda do convenio entre o Ministerio de Vivenda e o ICO publicada no BOE, a 31-10-2025 formalizáranse 8.549 operacións (6.119 de mozos e 2.430 de familias con menores a cargo), con 206,6 millóns de euros avalados. A addenda prorroga ata o 31-12-2027 o prazo para formalizar operacións. A serie de datos abertos do ICO conta 10.454 operacións acumuladas a decembro de 2025, con 255,9 millóns de euros avalados.",
+        note: "Revisada o 2026-10-07 coa regra de independencia da fonte: o dato da addenda é do propio Ministerio e do ICO; engádese a serie estatística de actividade do ICO, que a decembro de 2025 dá 10.454 operacións (arredor do 21 % de 50.000). Esa serie, reconstruída a 31-10-2025, dá 8.718 operacións e non 8.549 como a addenda; non se atopou a explicación. A etiqueta non cambia. A liña existe e funciona (creada polo art. 191 do Real decreto-lei 5/2023, antes do acordo), pero a 31-10-2025 había 8.549 compras avaladas fronte a «unas 50.000» (arredor do 17 %), e só 206,6 dos 2.500 millóns de euros comprometidos en avais. O prazo para formalizar operacións segue aberto ata o 31-12-2027, así que a cifra aínda pode subir; non se localizou ningún dato oficial posterior ao 31-10-2025. SUMAR asinou o compromiso no acordo de coalición; a liña xestiónana o Ministerio de Vivenda e Axenda Urbana e o ICO.",
         role: ACUERDO_ROLE_I18N.gl,
       },
       eu: {
         topic: "Etxebizitza",
-        summary: "Abal-lerroa martxan jarri zen. Etxebizitza Ministerioaren eta ICOren arteko hitzarmenaren eranskinaren arabera (BOEn argitaratua), 2025-10-31n 8.549 eragiketa formalizatuta zeuden (6.119 gazteenak eta 2.430 adingabeak ardurapean dituzten familienak), 206,6 milioi euroko abalekin. Eranskinak 2027-12-31ra arte luzatzen du eragiketak formalizatzeko epea.",
-        note: "Lerroa badago eta martxan dago (5/2023 Errege Lege-dekretuaren 191. artikuluak sortua, akordioa baino lehen), baina 2025-10-31n 8.549 erosketa abalatu zeuden, «unas 50.000»-en aldean (% 17 inguru), eta abaletan konprometitutako 2.500 milioi euroetatik 206,6 baino ez. Eragiketak formalizatzeko epea 2027-12-31ra arte dago zabalik; beraz, zifra oraindik igo daiteke; ez da aurkitu 2025-10-31z geroztiko datu ofizialik. SUMARek koalizio-akordioan sinatu zuen konpromisoa; lerroa Etxebizitza eta Hiri Agenda Ministerioak eta ICOk kudeatzen dute.",
+        summary: "Abal-lerroa martxan jarri zen. Etxebizitza Ministerioaren eta ICOren arteko hitzarmenaren eranskinaren arabera (BOEn argitaratua), 2025-10-31n 8.549 eragiketa formalizatuta zeuden (6.119 gazteenak eta 2.430 adingabeak ardurapean dituzten familienak), 206,6 milioi euroko abalekin. Eranskinak 2027-12-31ra arte luzatzen du eragiketak formalizatzeko epea. ICOren datu irekien serieak 10.454 eragiketa metatu zenbatzen ditu 2025eko abenduan, 255,9 milioi euro abalaturekin.",
+        note: "2026-10-07an berrikusia, iturriaren independentziaren arauarekin: eranskineko datua Ministerioarena eta ICOrena berarena da; ICOren jarduera-serie estatistikoa gehitzen da, eta 2025eko abenduan 10.454 eragiketa ematen ditu (50.000en % 21 inguru). Serie horrek, 2025-10-31ra berreraikita, 8.718 eragiketa ematen ditu, eta ez 8.549 eranskinak bezala; ez da azalpenik aurkitu. Etiketa ez da aldatzen. Lerroa badago eta martxan dago (5/2023 Errege Lege-dekretuaren 191. artikuluak sortua, akordioa baino lehen), baina 2025-10-31n 8.549 erosketa abalatu zeuden, «unas 50.000»-en aldean (% 17 inguru), eta abaletan konprometitutako 2.500 milioi euroetatik 206,6 baino ez. Eragiketak formalizatzeko epea 2027-12-31ra arte dago zabalik; beraz, zifra oraindik igo daiteke; ez da aurkitu 2025-10-31z geroztiko datu ofizialik. SUMARek koalizio-akordioan sinatu zuen konpromisoa; lerroa Etxebizitza eta Hiri Agenda Ministerioak eta ICOk kudeatzen dute.",
         role: ACUERDO_ROLE_I18N.eu,
       },
     },
-  },  {
+  },
+  {
     id: "sumar-indice-precios-alquiler-2023",
     partyId: "sumar",
     questionId: "vivienda-tope-alquiler",

@@ -3,8 +3,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import NextLink from "next/link";
 import { ArrowRight, Check, ChevronDown, ImageIcon, Info, Link2, Play, Scale, X } from "lucide-react";
-import { VERDICT_BADGE, VERDICT_FILL, VERDICT_ICON, VERDICT_ICON_COLOR } from "./dvhStyle";
-import type { DidEvidence, Party, SaidVsDid } from "@/data/afinidad/types";
+import { SOURCE_TYPE_ICON, VERDICT_BADGE, VERDICT_FILL, VERDICT_ICON, VERDICT_ICON_COLOR } from "./dvhStyle";
+import type { DidEvidence, OfficialSourceType, Party, SaidVsDid } from "@/data/afinidad/types";
 import {
   DVH_CARD_MAX,
   DVH_PARAMS,
@@ -132,12 +132,34 @@ export function VerdictLegend({ t }: { t: DvhStrings }) {
   );
 }
 
+/**
+ * Quién mide el dato: fuente independiente, estadística oficial o el propio
+ * Gobierno. El texto va siempre (no solo el icono) y la explicación en `title`.
+ */
+function SourceTypeBadge({ type, t }: { type: OfficialSourceType; t: DvhStrings }) {
+  const Icon = SOURCE_TYPE_ICON[type];
+  return (
+    <span
+      data-testid="dvh-source-type"
+      data-source-type={type}
+      title={t[`sourceTypeHelp_${type}`]}
+      className="inline-flex items-center gap-1 rounded-full border border-border bg-muted/60 px-2 py-0.5 text-[11px] font-medium text-foreground"
+    >
+      <Icon className="h-3 w-3" aria-hidden />
+      {t[`sourceType_${type}`]}
+    </span>
+  );
+}
+
 function EvidenceLine({ e, t, lang }: { e: DidEvidence; t: DvhStrings; lang: string }) {
   return (
     <li className="leading-snug">
       {e.kind === "dato-oficial" && (
         <span className="mb-1 block" data-testid="dvh-official-value">
-          <span className="block text-[11px] font-medium uppercase tracking-wide text-muted-foreground">{t.officialData}</span>
+          <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
+            <span className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">{t.officialData}</span>
+            <SourceTypeBadge type={e.sourceType} t={t} />
+          </span>
           <span className="block font-display text-2xl font-bold tabular-nums text-foreground">{e.value}</span>
         </span>
       )}
@@ -782,6 +804,7 @@ export function DvhCriteria({ t, maxWords }: { t: DvhStrings; maxWords: number }
       <li>{fmt(t.criteria3, { n: maxWords })}</li>
       <li>{t.criteria4}</li>
       <li>{t.criteria6}</li>
+      <li>{t.criteria8}</li>
       <li>{t.criteria5}</li>
     </ul>
   );

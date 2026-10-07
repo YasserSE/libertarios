@@ -284,7 +284,28 @@ export interface OfficialDataEvidence {
   publisher: string;
   /** El dato tal como lo da la fuente, con su unidad. */
   value: string;
+  /**
+   * Quién mide (regla de independencia de la fuente, 2026-10-07; ver
+   * `docs/AFINIDAD-DATOS.md` §5 bis). Se clasifica igual para todos los
+   * partidos que han gobernado:
+   * - `independiente`: organismo que no depende del Gobierno que se evalúa —
+   *   AIReF, Tribunal de Cuentas, Banco de España, Eurostat, OCDE, Comisión
+   *   Europea o Consejo de la UE, FMI, tribunales, evaluaciones oficiales de
+   *   universidades—.
+   * - `estadistica-oficial`: serie estadística o registro oficial con
+   *   metodología publicada —INE, series de la IGAE, estadísticas de la
+   *   Seguridad Social o de un ministerio (no sus notas de prensa), texto
+   *   consolidado del BOE, créditos de una ley de presupuestos—.
+   * - `gobierno`: lo que el Gobierno dice de sí mismo —notas de prensa,
+   *   páginas web de un ministerio, preámbulos, informes de La Moncloa,
+   *   autoevaluaciones—. Se enseña, pero con etiqueta, y un «cumple» no puede
+   *   apoyarse solo en esto.
+   */
+  sourceType: OfficialSourceType;
 }
+
+/** Quién publica un dato oficial: ver `OfficialDataEvidence.sourceType`. */
+export type OfficialSourceType = "independiente" | "estadistica-oficial" | "gobierno";
 
 /** Pruebas de «lo que hicieron»: las de Hechos, el estado de una iniciativa o un dato oficial. */
 export type DidEvidence = Evidence | InitiativeEvidence | OfficialDataEvidence;
