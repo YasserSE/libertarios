@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import NextLink from "next/link";
 import { ArrowRight, Check, ChevronDown, ImageIcon, Info, Link2, Play, Scale, X } from "lucide-react";
-import { VERDICT_FILL, VERDICT_ICON } from "./dvhStyle";
+import { VERDICT_BADGE, VERDICT_FILL, VERDICT_ICON, VERDICT_ICON_COLOR } from "./dvhStyle";
 import type { DidEvidence, Party, SaidVsDid } from "@/data/afinidad/types";
 import {
   DVH_CARD_MAX,
@@ -64,7 +64,7 @@ export function VerdictBadge({ verdict, t }: { verdict: DvhVerdict; t: DvhString
     <span
       title={t[`verdictHelp_${verdict}`]}
       data-verdict={verdict}
-      className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full border border-border bg-muted px-2 py-0.5 text-xs font-medium text-foreground"
+      className={`inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full border px-2 py-0.5 text-xs font-semibold ${VERDICT_BADGE[verdict]}`}
     >
       <Icon className="h-3.5 w-3.5" aria-hidden />
       {t[`verdict_${verdict}`]}
@@ -123,7 +123,7 @@ export function VerdictLegend({ t }: { t: DvhStrings }) {
         return (
           <li key={v} className="inline-flex items-center gap-1">
             <span className={`h-2 w-2 rounded-full ${VERDICT_FILL[v]}`} />
-            <Icon className="h-3 w-3" />
+            <Icon className={`h-3 w-3 ${VERDICT_ICON_COLOR[v]}`} />
             {t[`verdict_${v}`]}
           </li>
         );
@@ -272,7 +272,7 @@ export function SaidVsDidItem({
       {/* Nodo de la línea de tiempo: la etiqueta como icono (el texto va al lado). */}
       <span
         aria-hidden
-        className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full border border-border bg-card text-foreground shadow-soft"
+        className={`absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full border shadow-soft ${VERDICT_BADGE[entry.verdict]}`}
       >
         <Icon className="h-4 w-4" />
       </span>
@@ -645,7 +645,7 @@ export function SaidVsDidExplorer({
             const Icon = VERDICT_ICON[v];
             return (
               <FilterChip key={v} pressed={verdict === v} onClick={() => toggle(verdict, v, setVerdict)}>
-                <Icon className="h-3.5 w-3.5" aria-hidden />
+                <Icon className={`h-3.5 w-3.5 ${VERDICT_ICON_COLOR[v]}`} aria-hidden />
                 {t[`verdict_${v}`]}
               </FilterChip>
             );
