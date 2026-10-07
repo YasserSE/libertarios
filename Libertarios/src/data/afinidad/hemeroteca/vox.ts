@@ -1,0 +1,246 @@
+import type { Quote } from "../types";
+
+/**
+ * Hemeroteca de Vox: lo que dijeron sus portavoces en el debate de la votación
+ * ancla de cada pregunta. No puntúa. Todas las citas son literales, copiadas del
+ * Diario de Sesiones del Congreso (PDF oficial) y comprobadas contra su texto el
+ * 2026-10-06. `page` es la página impresa del Diario. `videoUrl` es el clip de la
+ * intervención en el archivo audiovisual de congreso.es (identificador tomado de la
+ * búsqueda de intervenciones de congreso.es y comprobado contra orador, fecha y
+ * página del Diario; el clip empieza en la intervención, por eso no lleva `videoStart`).
+ */
+export const quotes: Quote[] = [
+  {
+    partyId: "vox",
+    questionId: "amnistia",
+    speaker: "Santiago Abascal Conde",
+    role: "presidente de VOX, interviene por el GP VOX en el debate",
+    date: "2024-03-14",
+    text: "La mayoría pírrica de esta Cámara votará a favor de una ley de amnistía que pisotea la igualdad de los ciudadanos y que patea la dignidad de los españoles",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-32.PDF",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 32 (sesión plenaria núm. 30, 14-3-2024)",
+      date: "2024-03-14",
+      page: "p. 15",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15730173I",
+    i18n: {
+      ca: { role: "president de VOX, intervé pel GP VOX en el debat" },
+      gl: { role: "presidente de VOX, intervén polo GP VOX no debate" },
+      eu: { role: "VOXeko presidentea, GP VOXen izenean mintzatzen da eztabaidan" },
+    },
+  },
+  {
+    partyId: "vox",
+    questionId: "jornada-37-5",
+    speaker: "José María Figaredo Álvarez-Sala",
+    role: "defiende la enmienda de totalidad del GP VOX",
+    date: "2025-09-10",
+    text: "Lo cierto es que esta norma es y será, como les digo, un desastre para los trabajadores de España.",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-135.PDF",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 135 (sesión plenaria núm. 130, 10-9-2025)",
+      date: "2025-09-10",
+      page: "p. 123",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15758433I",
+    i18n: {
+      ca: { role: "defensa l'esmena a la totalitat del GP VOX" },
+      gl: { role: "defende a emenda á totalidade do GP VOX" },
+      eu: { role: "GP VOXen osoko zuzenketa defendatzen du" },
+    },
+  },
+  {
+    partyId: "vox",
+    questionId: "nuclear",
+    speaker: "José María Figaredo Álvarez-Sala",
+    role: "portavoz del GP VOX en el debate",
+    date: "2025-06-17",
+    text: "España no puede sobrevivir sin centrales nucleares hoy, y si queremos llegar al futuro, en el que se multiplicará el consumo eléctrico en España, sí o sí debemos tener las centrales nucleares.",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-123.PDF",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 123 (sesión plenaria núm. 119, 17-6-2025)",
+      date: "2025-06-17",
+      page: "p. 24",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15755823I",
+    i18n: {
+      ca: { role: "portaveu del GP VOX en el debat" },
+      gl: { role: "voceiro do GP VOX no debate" },
+      eu: { role: "GP VOXen bozeramailea eztabaidan" },
+    },
+  },
+  {
+    partyId: "vox",
+    questionId: "okupacion-desalojo",
+    speaker: "Ignacio Hoces Íñiguez",
+    role: "portavoz del GP VOX en el debate",
+    date: "2026-05-19",
+    text: "Señorías del Grupo Popular, esta iniciativa va en la buena dirección. Nos alegramos profundamente de ello. Desde que VOX nació en el año 2013 siempre ha querido atacar la okupación ilegal y ha defendido la propiedad privada.",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 185 (sesión plenaria núm. 179, 19-5-2026)",
+      date: "2026-05-19",
+      page: "p. 23",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15773354I",
+    i18n: {
+      ca: { role: "portaveu del GP VOX en el debat" },
+      gl: { role: "voceiro do GP VOX no debate" },
+      eu: { role: "GP VOXen bozeramailea eztabaidan" },
+    },
+  },
+  {
+    partyId: "vox",
+    questionId: "inmigracion-competencias-cataluna",
+    speaker: "María José Rodríguez de Millán Parro",
+    role: "portavoz del GP VOX en el debate",
+    date: "2025-09-23",
+    text: "Así que no, ni Cataluña ni ninguna región pueden tener competencias en inmigración. Estamos hablando de elementos ligados a la soberanía nacional",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 138 (sesión plenaria núm. 133, 23-9-2025)",
+      date: "2025-09-23",
+      page: "p. 25",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15759121I",
+    i18n: {
+      ca: { role: "portaveu del GP VOX en el debat" },
+      gl: { role: "voceira do GP VOX no debate" },
+      eu: { role: "GP VOXen bozeramailea eztabaidan" },
+    },
+  },
+  {
+    partyId: "vox",
+    questionId: "tauromaquia-patrimonio",
+    speaker: "María José Rodríguez de Millán Parro",
+    role: "portavoz del GP VOX en el debate",
+    date: "2025-10-07",
+    text: "Y la cultura les podrá gustar más o menos, pero es la nuestra y la tenemos que defender.",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-140.PDF",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 140 (sesión plenaria núm. 135, 7-10-2025)",
+      date: "2025-10-07",
+      page: "p. 17",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15759959I",
+    i18n: {
+      ca: { role: "portaveu del GP VOX en el debat" },
+      gl: { role: "voceira do GP VOX no debate" },
+      eu: { role: "GP VOXen bozeramailea eztabaidan" },
+    },
+  },
+  {
+    // Debate de la moción el 10-6-2026; la votación ancla fue el 11-6-2026 (DSCD-15-PL-191).
+    partyId: "vox",
+    questionId: "gasto-defensa",
+    speaker: "Jacobo González-Robatto Perote",
+    role: "portavoz del GP VOX en el debate",
+    date: "2026-06-10",
+    text: "Nuestra posición es clara: hay que invertir más y mejor en defensa. Hay que reforzar las Fuerzas Armadas.",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-190.PDF",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 190 (sesión plenaria núm. 184, 10-6-2026)",
+      date: "2026-06-10",
+      page: "p. 94",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15774763I",
+    i18n: {
+      ca: { role: "portaveu del GP VOX en el debat" },
+      gl: { role: "voceiro do GP VOX no debate" },
+      eu: { role: "GP VOXen bozeramailea eztabaidan" },
+    },
+  },
+  {
+    partyId: "vox",
+    questionId: "prisiones-agentes-autoridad",
+    speaker: "David García Gomis",
+    role: "portavoz del GP VOX en el debate",
+    date: "2026-06-11",
+    text: "Hoy, por fin, damos un paso más hacia las justas reivindicaciones que lleváis reclamando más de una década. Hoy no se os concede nada, se os reconoce por fin lo que siempre deberíais haber sido.",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF#page=8",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 191 (sesión plenaria núm. 185, 11-6-2026)",
+      date: "2026-06-11",
+      page: "p. 8",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15775017I",
+    i18n: {
+      ca: { role: "portaveu del GP VOX en el debat" },
+      gl: { role: "voceiro do GP VOX no debate" },
+      eu: { role: "GP VOXen bozeramailea eztabaidan" },
+    },
+  },
+  {
+    // VOX se abstuvo en la toma en consideración.
+    partyId: "vox",
+    questionId: "prostitucion-abolicion",
+    speaker: "María de la Cabeza Ruiz Solás",
+    role: "portavoz del GP VOX en el debate",
+    date: "2024-05-21",
+    text: "Resumiendo, señorías, esta proposición de ley no es suficiente para nosotros. No es suficiente, porque no castiga contundentemente a los proxenetas que abusan de las personas vulnerables y sin libertad para elegir su forma de sobrevivir.",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF#page=34",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 40 (sesión plenaria núm. 38, 21-5-2024)",
+      date: "2024-05-21",
+      page: "p. 34",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15733415I",
+    i18n: {
+      ca: { role: "portaveu del GP VOX en el debat" },
+      gl: { role: "voceira do GP VOX no debate" },
+      eu: { role: "GP VOXen bozeramailea eztabaidan" },
+    },
+  },
+  {
+    partyId: "vox",
+    questionId: "impuesto-banca",
+    speaker: "Pablo Sáez Alonso-Muñumer",
+    role: "portavoz del GP VOX en el debate",
+    date: "2024-04-09",
+    text: "No se dan cuenta, señores de Podemos, de que la dinámica de crear continuamente nuevos impuestos e incrementar constantemente la presión fiscal crea inseguridad jurídica y provoca la huida de los inversores.",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF#page=30",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 36 (sesión plenaria núm. 34, 9-4-2024)",
+      date: "2024-04-09",
+      page: "p. 30",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15731479I",
+    i18n: {
+      ca: { role: "portaveu del GP VOX en el debat" },
+      gl: { role: "voceiro do GP VOX no debate" },
+      eu: { role: "GP VOXen bozeramailea eztabaidan" },
+    },
+  },
+  {
+    partyId: "vox",
+    questionId: "registro-lobbies",
+    speaker: "Emilio Jesús del Valle Rodríguez",
+    role: "portavoz del GP VOX en el debate",
+    date: "2026-09-16",
+    text: "Señorías, no voy a entrar en el contenido del real decreto ley. La objeción es de forma y, como es sabido, en derecho público, la forma es el fondo cuando de lo que se trata es de calidad democrática.",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF#page=81",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 205 (sesión plenaria núm. 198, 16-9-2026)",
+      date: "2026-09-16",
+      page: "p. 81",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15778470I",
+    i18n: {
+      ca: { role: "portaveu del GP VOX en el debat" },
+      gl: { role: "voceiro do GP VOX no debate" },
+      eu: { role: "GP VOXen bozeramailea eztabaidan" },
+    },
+  },
+];

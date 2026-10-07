@@ -1,0 +1,269 @@
+import type { Quote } from "../types";
+
+/**
+ * Hemeroteca de PP: lo que dijeron sus portavoces en el debate de la votación
+ * ancla de cada pregunta. No puntúa. Todas las citas son literales, copiadas del
+ * Diario de Sesiones del Congreso (PDF oficial) y comprobadas contra su texto el
+ * 2026-10-06. `page` es la página impresa del Diario. `videoUrl` es el clip de la
+ * intervención en el archivo audiovisual de congreso.es (identificador tomado de la
+ * búsqueda de intervenciones de congreso.es y comprobado contra orador, fecha y
+ * página del Diario; el clip empieza en la intervención, por eso no lleva `videoStart`).
+ */
+export const quotes: Quote[] = [
+  {
+    partyId: "pp",
+    questionId: "amnistia",
+    speaker: "Alberto Núñez Feijóo",
+    role: "presidente del PP, interviene por el GP Popular en el debate",
+    date: "2024-03-14",
+    text: "Lo que dice la amnistía es que somos una nación fallida que tiene que pedir perdón a quienes voluntaria y conscientemente la atacaron, y eso no lo vamos a consentir.",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-32.PDF",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 32 (sesión plenaria núm. 30, 14-3-2024)",
+      date: "2024-03-14",
+      page: "p. 18",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15730175I",
+    i18n: {
+      ca: { role: "president del PP, intervé pel GP Popular en el debat" },
+      gl: { role: "presidente do PP, intervén polo GP Popular no debate" },
+      eu: { role: "PPko presidentea, GP Popularraren izenean mintzatzen da eztabaidan" },
+    },
+  },
+  {
+    partyId: "pp",
+    questionId: "irpf-inflacion",
+    speaker: "Juan Bravo Baena",
+    role: "defiende la proposición no de ley del GP Popular",
+    date: "2024-04-09",
+    text: "¿de dónde ha subido la recaudación? Principalmente de la inflación vinculada a los sueldos. Eso es realmente lo que está pasando, que la inflación y los impuestos se están comiendo los sueldos.",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 36 (sesión plenaria núm. 34, 9-4-2024)",
+      date: "2024-04-09",
+      page: "p. 45",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15731494I",
+    i18n: {
+      ca: { role: "defensa la proposició no de llei del GP Popular" },
+      gl: { role: "defende a proposición non de lei do GP Popular" },
+      eu: { role: "GP Popularraren legez besteko proposamena defendatzen du" },
+    },
+  },
+  {
+    partyId: "pp",
+    questionId: "jornada-37-5",
+    speaker: "Juan Bravo Baena",
+    role: "defiende la enmienda de totalidad del GP Popular",
+    date: "2025-09-10",
+    text: "La jornada laboral bajará, como lleva haciéndose desde años, pero no desde la imposición, sino desde el acuerdo y el diálogo.",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-135.PDF",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 135 (sesión plenaria núm. 130, 10-9-2025)",
+      date: "2025-09-10",
+      page: "p. 125",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15758434I",
+    i18n: {
+      ca: { role: "defensa l'esmena a la totalitat del GP Popular" },
+      gl: { role: "defende a emenda á totalidade do GP Popular" },
+      eu: { role: "GP Popularraren osoko zuzenketa defendatzen du" },
+    },
+  },
+  {
+    partyId: "pp",
+    questionId: "nuclear",
+    speaker: "Juan Diego Requena Ruiz",
+    role: "defiende la proposición de ley del GP Popular",
+    date: "2025-06-17",
+    text: "el Partido Popular introdujo en el debate político que la energía nuclear era fundamental para la transición energética, que la transición energética del Gobierno no iba por buen camino y que la seguridad de suministro estaba en peligro.",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-123.PDF",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 123 (sesión plenaria núm. 119, 17-6-2025)",
+      date: "2025-06-17",
+      page: "p. 8",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15755815I",
+    i18n: {
+      ca: { role: "defensa la proposició de llei del GP Popular" },
+      gl: { role: "defende a proposición de lei do GP Popular" },
+      eu: { role: "GP Popularraren lege-proposamena defendatzen du" },
+    },
+  },
+  {
+    partyId: "pp",
+    questionId: "okupacion-desalojo",
+    speaker: "Sergio Sayas López",
+    role: "defiende la proposición de ley del GP Popular",
+    date: "2026-05-19",
+    text: "Por eso nosotros traemos esta ley, una ley para sacar a los okupas en veinticuatro horas. Basta ya de impunidad.",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-185.PDF",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 185 (sesión plenaria núm. 179, 19-5-2026)",
+      date: "2026-05-19",
+      page: "p. 8",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15773344I",
+    i18n: {
+      ca: { role: "defensa la proposició de llei del GP Popular" },
+      gl: { role: "defende a proposición de lei do GP Popular" },
+      eu: { role: "GP Popularraren lege-proposamena defendatzen du" },
+    },
+  },
+  {
+    partyId: "pp",
+    questionId: "inmigracion-competencias-cataluna",
+    speaker: "Nacho Martín Blanco",
+    role: "turno en contra, GP Popular",
+    date: "2025-09-23",
+    text: "Y es evidente que esta proposición es perjudicial para el conjunto de los españoles. Pero les digo más: Sobre todo, es perjudicial, concretamente, para los catalanes.",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-138.PDF",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 138 (sesión plenaria núm. 133, 23-9-2025)",
+      date: "2025-09-23",
+      page: "p. 12",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15759110I",
+    i18n: {
+      ca: { role: "torn en contra, GP Popular" },
+      gl: { role: "quenda en contra, GP Popular" },
+      eu: { role: "aurkako txanda, GP Popular" },
+    },
+  },
+  {
+    partyId: "pp",
+    questionId: "tauromaquia-patrimonio",
+    speaker: "María Soledad Cruz-Guzmán García",
+    role: "portavoz del GP Popular en el debate",
+    date: "2025-10-07",
+    text: "Nuestra cultura no debería manosearse como arma electoral en ninguna propuesta legislativa. Ningún Gobierno debe decir qué cultura es legítima y cuál hay que censurar.",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-140.PDF",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 140 (sesión plenaria núm. 135, 7-10-2025)",
+      date: "2025-10-07",
+      page: "p. 20",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15759961I",
+    i18n: {
+      ca: { role: "portaveu del GP Popular en el debat" },
+      gl: { role: "voceira do GP Popular no debate" },
+      eu: { role: "GP Popularraren bozeramailea eztabaidan" },
+    },
+  },
+  {
+    partyId: "pp",
+    questionId: "vivienda-tope-alquiler",
+    speaker: "Ana María Zurita Expósito",
+    role: "portavoz del GP Popular en el debate",
+    date: "2023-04-27",
+    text: "Y tampoco me hable del control de rentas porque sabe que no funciona; usted sabe tan bien como yo que el efecto es el contrario, y los precios pueden subir hasta un 25 % como ha ocurrido en Barcelona.",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L14/CONG/DS/PL/DSCD-14-PL-265.PDF",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XIV legislatura, núm. 265 (sesión plenaria núm. 256, 27-4-2023)",
+      date: "2023-04-27",
+      page: "p. 25",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/14723325I",
+    i18n: {
+      ca: { role: "portaveu del GP Popular en el debat" },
+      gl: { role: "voceira do GP Popular no debate" },
+      eu: { role: "GP Popularraren bozeramailea eztabaidan" },
+    },
+  },
+  {
+    partyId: "pp",
+    questionId: "prisiones-agentes-autoridad",
+    speaker: "Ana Belén Vázquez Blanco",
+    role: "portavoz del GP Popular en el debate",
+    date: "2026-06-11",
+    text: "Hoy, lo importante son los trabajadores penitenciarios, los funcionarios, esos que llevan días, años, luchando simplemente por una protección jurídica, una protección económica, unas mejoras en sus condiciones sociolaborales.",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF#page=20",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 191 (sesión plenaria núm. 185, 11-6-2026)",
+      date: "2026-06-11",
+      page: "p. 20",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15775042I",
+    i18n: {
+      ca: { role: "portaveu del GP Popular en el debat" },
+      gl: { role: "voceira do GP Popular no debate" },
+      eu: { role: "GP Popularraren bozeramailea eztabaidan" },
+    },
+  },
+  {
+    // El GP Popular votó «no» a la toma en consideración; en la misma intervención pide retirarla y negociar
+    // una ley integral contra la trata.
+    partyId: "pp",
+    questionId: "prostitucion-abolicion",
+    speaker: "Ana Isabel Alós López",
+    role: "portavoz del GP Popular en el debate",
+    date: "2024-05-21",
+    text: "Es necesario adaptar, modificar y corregir la redacción del artículo 187 del Código Penal para que se penalice el proxenetismo en todas sus formas y no esté condicionado a que pueda ser demostrada la explotación, pero también reconocemos que esta proposición de ley que ustedes presentan es absolutamente insuficiente.",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-40.PDF#page=35",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 40 (sesión plenaria núm. 38, 21-5-2024)",
+      date: "2024-05-21",
+      page: "p. 35",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15733416I",
+    i18n: {
+      ca: { role: "portaveu del GP Popular en el debat" },
+      gl: { role: "voceira do GP Popular no debate" },
+      eu: { role: "GP Popularraren bozeramailea eztabaidan" },
+    },
+  },
+  {
+    partyId: "pp",
+    questionId: "impuesto-banca",
+    speaker: "Miguel Ángel Paniagua Núñez",
+    role: "portavoz del GP Popular en el debate",
+    date: "2024-04-09",
+    text: "Y no es justo ni razonable, primero, porque todas las subidas impositivas en el sector financiero tienen incidencia directa en su competitividad, en los gastos que repercuten a los clientes y en la evolución del crédito sobre la economía",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-36.PDF#page=33",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 36 (sesión plenaria núm. 34, 9-4-2024)",
+      date: "2024-04-09",
+      page: "p. 33",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15731481I",
+    i18n: {
+      ca: { role: "portaveu del GP Popular en el debat" },
+      gl: { role: "voceiro do GP Popular no debate" },
+      eu: { role: "GP Popularraren bozeramailea eztabaidan" },
+    },
+  },
+  {
+    // El GP Popular votó «no» a la convalidación; en la réplica (p. 87) dijo: «Nosotros estamos en contra del
+    // real decreto, no de la regulación de los lobbies».
+    partyId: "pp",
+    questionId: "registro-lobbies",
+    speaker: "Edurne Uriarte Bengoechea",
+    role: "portavoz del GP Popular en el debate",
+    date: "2026-09-16",
+    text: "Señorías, ¿hay que regular la actividad de los grupos de interés? La respuesta es claramente sí, por una mejora de la calidad de la democracia, porque lo piden los ciudadanos, porque lo pide la Unión Europea y lo piden también los grupos de interés.",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF#page=84",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 205 (sesión plenaria núm. 198, 16-9-2026)",
+      date: "2026-09-16",
+      page: "p. 84",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15778472I",
+    i18n: {
+      ca: { role: "portaveu del GP Popular en el debat" },
+      gl: { role: "voceira do GP Popular no debate" },
+      eu: { role: "GP Popularraren bozeramailea eztabaidan" },
+    },
+  },
+];
