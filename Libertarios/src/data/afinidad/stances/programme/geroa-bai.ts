@@ -89,12 +89,15 @@ export const stances: Stance[] = [
   noPosition("okupacion-desalojo", "«ocupación», «okupa», «desalojo»"),
   noPosition("inmigracion-competencias-cataluna", "«inmigración», «Cataluña», «competencias» (solo competencias de Navarra)"),
   noPosition("tauromaquia-patrimonio", "«tauromaquia», «toros», «corrida»"),
-  noPosition("prisiones-agentes-autoridad", "«prisiones», «penitenciari», «funcionarios de prisiones», «agentes de la autoridad» (solo la transferencia de instituciones penitenciarias a Navarra, pp. 47 y 156, y servicios del Centro Penitenciario de Pamplona, p. 159)"),
   noPosition(
     "prostitucion-abolicion",
     "«prostitución», «proxenetismo», «trata», «explotación sexual». Solo «Rechazo de la trata de personas y la explotación sexual» y «una alternativa laboral real a la prostitución, para quienes deseen salir de ella» (p. 115); nada sobre castigar al cliente o al proxeneta",
   ),
   noPosition("impuesto-banca", "«banca», «bancos», «entidades financieras», «gravamen» (solo colaboración con entidades financieras para el crédito, p. 22)"),
-  noPosition("registro-lobbies", "«lobby», «grupos de interés», «grupos de presión», «registro de transparencia», «huella normativa»"),
   noPosition("iva-primera-vivienda", "«IVA», «primera vivienda», «compra», «adquisición», «Transmisiones», «fiscalidad» junto a «vivienda» (solo pide «un IVA reducido en promoción de vivienda protegida de alquiler o proyectos de rehabilitación», p. 105, que no es la compra)"),
+  noPosition("oficina-anticorrupcion", "«corrupción», «anticorrupción», «antifraude», «integridad», «oficina», «agencia», «autoridad independiente», «Fiscalía», «conflicto de intereses», «malversación», «denunciantes» (solo el Plan de Lucha contra el Fraude Fiscal, p. 55, y actualizar el Consejo de Transparencia de Navarra, p. 156; ningún organismo contra la corrupción)"),
+  noPosition(
+    "ceuta-embajador-marruecos",
+    "«Marruecos», «Ceuta», «Melilla», «Sáhara», «frontera», «embajada», «soberanía», «integridad territorial», «aduana». Solo el apartado «Sahara» (p. 70): apoya «la realización de un referéndum como única solución a la situación de ocupación de su territorio que sufren los y las saharauis, por parte del Reino de Marruecos»; no trata la respuesta a Marruecos por Ceuta, así que no puntúa",
+  ),
 ];

@@ -166,3 +166,18 @@ PSOE: `psoe-imv-850000-hogares-2020` (AIReF), `psoe-corrupcion-mocion-censura-20
 ### Validación
 
 `npx vitest run`, `npx tsc --noEmit -p .`, eslint de los ficheros tocados, `npx next build` y `npm run afinidad:json`.
+
+## Revisión 3 — preguntas nuevas del 2026-10-07 (corrupción y Ceuta)
+
+**Alcance**: las celdas de programa de «oficina-anticorrupcion» y «ceuta-embajador-marruecos» de los 32 partidos (`docs/AFINIDAD-PREGUNTAS.md` §9; reglas en `docs/AFINIDAD-DATOS.md` §7). Codificaron cuatro agentes, cada uno con su grupo de ficheros y la misma fuente que ya cita cada fichero.
+
+**Procedimiento**: un script fuera del repo extrajo de cada celda verificada solo `{celda, enunciado, cita, traducción, título y página de la fuente}` (10 celdas; Compromís hereda la de Sumar). Un agente distinto, que solo pudo abrir ese extracto y las reglas, codificó cada una antes de comparar.
+
+**Resultado**: 8 de 10 idénticas (100 % de acuerdo en las que el revisor consideró en tema). En 2 el revisor dijo **«fuera de tema»**, y las dos pasan a `sin-posicion` con la cita y el motivo en `note`, aplicando a todos el mismo criterio:
+
+| Celda | Codificador | Revisor | Decisión |
+|---|---|---|---|
+| pp · oficina-anticorrupcion | +1 (medida 248: reformar la Ley 2/2023 «para asegurar la independencia de las actuaciones») | fuera de tema: la cita no nombra ningún organismo | `sin-posicion` |
+| vox · ceuta-embajador-marruecos | +2 (medida 193: «Ni un euro de los españoles debe financiar a países que violentan nuestras fronteras») | fuera de tema: no nombra a Marruecos ni a Ceuta o Melilla | `sin-posicion` (mismo trato que el condicionamiento genérico de ayudas de SALF) |
+
+Las 8 restantes llevan `reviewer: { position, agrees: true }` (en CHA y Més per Menorca, en su tabla `REVISOR`): PSOE, VOX, Sumar/Compromís, Podemos, Adelante Andalucía, CHA y Més per Menorca +1 en la oficina; PSOE −1 en Ceuta. **Contested: ninguna.**

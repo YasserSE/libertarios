@@ -71,8 +71,8 @@ export const stances: Stance[] = [
     record: null,
   },
   sinPosicion(
-    "prisiones-agentes-autoridad",
-    "«presons», «penitenciari», «funcionaris de presons», «agents de l’autoritat». Solo pide la «jubilació anticipada del cos de funcionaris de presons» de Cataluña, el País Valenciano y las Baleares (p. 21); nada sobre su condición de agentes de la autoridad",
+    "ceuta-embajador-marruecos",
+    "«Marroc», «marroquí», «Ceuta», «Melilla», «Sàhara», «frontera», «ambaixada», «sobirania», «integritat territorial», «duana». Pide revertir el reconocimiento de la soberanía marroquí sobre el Sáhara Occidental (p. 14) y defender su autodeterminación (p. 29), poner fin a los acuerdos de externalización de fronteras con Marruecos, Mauritania, Mali y Senegal por falta de garantías de derechos humanos y acabar con las devoluciones en caliente en Ceuta y Melilla (p. 38), y eliminar los privilegios fiscales de Ceuta y Melilla (p. 80); nada sobre una respuesta diplomática a Marruecos por sus actuaciones en Ceuta, Melilla o la frontera",
   ),
   {
     partyId: "erc",
@@ -146,8 +146,8 @@ export const stances: Stance[] = [
     record: null,
   },
   sinPosicion(
-    "registro-lobbies",
-    "«lobby», «grups d’interès», «registre», «portes giratòries», «transparència». Solo denuncia las «portes giratòries» como «corrupció institucionalitzada» (p. 23) y pide reformar la Ley 19/2013 de transparencia (p. 30); nada sobre un registro de grupos de interés",
+    "oficina-anticorrupcion",
+    "«corrupció», «anticorrupció», «antifrau», «integritat», «oficina», «agència», «autoritat independent», «fiscalia», «conflicte d’interessos», «malversació», «alertadors», «denunciants». Diagnostica una «corrupció estructural i institucionalitzada» y las «portes giratòries» (pp. 23-24), pide denunciar la adjudicación de contratos a empresas condenadas por corrupción (p. 27) y reformar la Ley 19/2013 de transparencia (p. 30); la Oficina Antifrau de Catalunya solo aparece por las conversaciones de su exdirector con el exministro del Interior (p. 26). Ningún organismo estatal de prevención o investigación de la corrupción",
   ),
   sinPosicion(
     "inmigracion-competencias-cataluna",

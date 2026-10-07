@@ -205,7 +205,7 @@ export interface DeputyAttribution {
   source: Source;
 }
 
-export const DATASET_VERSION = "2026.10.0";
+export const DATASET_VERSION = "2026.10.1";
 
 // ─── Tipos auxiliares (derivados; no amplían el contrato del plan) ─────────
 

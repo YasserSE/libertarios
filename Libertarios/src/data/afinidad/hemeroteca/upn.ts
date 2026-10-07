@@ -87,13 +87,13 @@ export const quotes: Quote[] = [
   },
   {
     partyId: "upn",
-    questionId: "prisiones-agentes-autoridad",
+    questionId: "oficina-anticorrupcion",
     speaker: SPEAKER,
     role: ROLE,
-    date: "2026-06-11",
-    text: "En esta formación política, Unión del Pueblo Navarro, siempre hemos tenido muy claro que había que proteger a los funcionarios y a los trabajadores de los centros penitenciarios españoles y que la figura de agente de la autoridad era una medida oportuna y necesaria.",
-    source: dscd("191", 10, "2026-06-11", "DSCD Pleno núm. 191 (XV), 11-6-2026 — Dictamen de la Proposición de Ley Orgánica que reconoce a los funcionarios de prisiones como agentes de la autoridad (art. 80 LOGP)"),
-    videoUrl: "https://app.congreso.es/v1/15775019I",
+    date: "2025-09-16",
+    text: "No será Unión del Pueblo Navarro quien vote en contra de medidas para luchar contra la corrupción. Pero, señores de SUMAR, con esta iniciativa lo que se evidencia es su hipocresía ante los casos de corrupción que acechan al Gobierno y también a sus socios",
+    source: dscd("136", 19, "2025-09-16", "DSCD Pleno núm. 136 (XV), 16-9-2025 — Proposición de Ley del GSUMAR de creación de la Oficina de prevención de la corrupción (toma en consideración)"),
+    videoUrl: "https://app.congreso.es/v1/15758680I",
     i18n: ROLE_I18N,
   },
 ];

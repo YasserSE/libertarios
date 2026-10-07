@@ -60,21 +60,10 @@ export const stances: Stance[] = [
     record: null,
   },
   sinPosicion("jornada-37-5", "«jornada», «hores setmanals», «setmana laboral». Solo aparecen las reducciones de jornada por cuidado de hijos (p. 115)"),
-  {
-    partyId: "junts",
-    questionId: "prisiones-agentes-autoridad",
-    programme: {
-      position: 2,
-      status: "verificado",
-      reviewer: { position: 1, agrees: true },
-      confidence: "media",
-      quote:
-        "Cal promoure les modificacions legislatives necessàries per reconèixer al col·lectiu dels funcionaris de presons catalans la condició d’agents de l'autoritat.",
-      source: at("128"),
-      note: "Traducción: «Hay que promover las modificaciones legislativas necesarias para reconocer al colectivo de los funcionarios de prisiones catalanes la condición de agentes de la autoridad». Epígrafe «Funcionaris de presons i personal laboral de presons» del apartado de justicia. Compromiso concreto con la medida del enunciado; confianza media porque se refiere solo a los funcionarios de prisiones de Cataluña (la Generalitat gestiona sus prisiones).",
-    },
-    record: null,
-  },
+  sinPosicion(
+    "ceuta-embajador-marruecos",
+    "«Marroc», «marroquí», «Ceuta», «Melilla», «Sàhara», «frontera», «ambaixada», «sobirania», «integritat territorial», «duana». No menciona Marruecos, Ceuta ni Melilla; solo exige cumplir las resoluciones de la ONU y las sentencias del TJUE sobre el Sáhara (p. 30) y critica el uso de las embajadas contra la acción exterior catalana (p. 31)",
+  ),
   {
     partyId: "junts",
     questionId: "amnistia",
@@ -135,8 +124,8 @@ export const stances: Stance[] = [
     "«banca», «bancs», «impost», «beneficis extraordinaris», «gravamen». El apartado fiscal (pp. 58-61) no menciona el gravamen a la banca; sobre el sector solo pide estimular la competencia bancaria y la licencia bancaria del Institut Català de Finances (p. 62)",
   ),
   sinPosicion(
-    "registro-lobbies",
-    "«lobby», «grups d’interès», «registre», «portes giratòries», «transparència». Solo principios generales de «govern obert» (p. 123) y una nueva ley de secretos oficiales (p. 24); «lobby» aparece solo como «lobby jurídic espanyol» (p. 23)",
+    "oficina-anticorrupcion",
+    "«corrupció», «anticorrupció», «antifrau», «integritat», «oficina», «agència», «autoritat independent», «fiscalia», «conflicte d’interessos», «malversació», «alertadors», «denunciants». Pide reformar el delito de malversación «d’acord amb els estàndards europeus en matèria de corrupció» y una nueva ley de secretos oficiales que «doni transparència a la corrupció» (p. 24); la única «autoritat independent» que propone es el Consell de l’Audiovisual de Catalunya (p. 115). Ningún organismo de prevención o investigación de la corrupción",
   ),
   {
     partyId: "junts",

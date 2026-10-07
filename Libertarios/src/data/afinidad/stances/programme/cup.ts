@@ -97,8 +97,8 @@ export const stances: Stance[] = [
     "toros, tauromàquia, correbous. Solo una mención genérica a los «drets dels animals no humans» (p. 10)",
   ),
   sinPosicion(
-    "prisiones-agentes-autoridad",
-    "presons, penitenciari, funcionaris de presons, agents de l'autoritat. Solo dice que combatirá «un sistema penitenciari classista, masclista i racista» (p. 7), sin hablar de la condición de los funcionarios",
+    "ceuta-embajador-marruecos",
+    "Marroc, marroquí, Ceuta, Melilla, Sàhara, frontera, ambaixada, sobirania, integritat territorial, duana. Denuncia la «massacre de migrants a Melilla per part de la policia marroquina» con la aquiescencia de la policía española y la «traïció» al pueblo saharaui (p. 3), y la actitud española ante la masacre de Melilla y la ocupación del Sáhara (p. 9); no propone ninguna medida ante Marruecos",
   ),
   sinPosicion("prostitucion-abolicion", "prostitució, proxenetisme, tràfic, tracta, explotació sexual"),
   sinPosicion(
@@ -106,8 +106,8 @@ export const stances: Stance[] = [
     "banca, bancs, impost, gravamen, beneficis extraordinaris. Critica el rescate bancario y pide que «els bancs retornin els milers de milions d'euros que l'Estat els va regalar» (p. 8), sin proponer un impuesto a la banca",
   ),
   sinPosicion(
-    "registro-lobbies",
-    "lobbies, grups d'interès, registre, portes giratòries. Solo «combatem els lobbies» y denuncia las «portes giratòries» (p. 11), sin proponer un registro",
+    "oficina-anticorrupcion",
+    "corrupció, anticorrupció, antifrau, integritat, oficina, agència, autoritat independent, fiscalia, malversació, denunciants. En «5. Fem fora la màfia» (p. 11) propone «estructures de participació» para el «control popular i directe» de los asuntos públicos como antídoto contra la corrupción, proteger a quien denuncie «les màfies» y auditar el fraude fiscal y las privatizaciones; ningún organismo estatal contra la corrupción",
   ),
   sinPosicion(
     "iva-primera-vivienda",

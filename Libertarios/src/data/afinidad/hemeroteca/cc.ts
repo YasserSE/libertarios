@@ -67,18 +67,6 @@ export const quotes: Quote[] = [
     },
   },
   {
-    // La cita empieza en la p. 10 y termina en la p. 11.
-    partyId: "cc",
-    questionId: "prisiones-agentes-autoridad",
-    speaker: VALIDO,
-    role: ROLE_VALIDO,
-    date: "2026-06-11",
-    text: "En Coalición Canaria estamos contentos con que hoy podamos votar por fin a favor de acabar con una injusticia histórica, una anomalía histórica: el reconocimiento de estos profesionales como agentes de seguridad.",
-    source: dscd(15, "191", 10, "2026-06-11", "DSCD Pleno núm. 191 (XV), 11-6-2026 — Dictamen de la Proposición de Ley Orgánica que reconoce a los funcionarios de prisiones como agentes de la autoridad (art. 80 LOGP)"),
-    videoUrl: "https://app.congreso.es/v1/15775023I",
-    i18n: ROLE_VALIDO_I18N,
-  },
-  {
     partyId: "cc",
     questionId: "prostitucion-abolicion",
     speaker: VALIDO,
@@ -87,6 +75,17 @@ export const quotes: Quote[] = [
     text: "Señorías, sí, creemos que hay que tomar en consideración, hay que debatir, hay que profundizar, hay que trabajar para evitar que muchos impresentables se sigan beneficiando de la explotación de mujeres, niñas y niños.",
     source: dscd(15, "40", 24, "2024-05-21", "DSCD Pleno núm. 40 (XV), 21-5-2024 — Proposición de Ley Orgánica del GS para prohibir el proxenetismo en todas sus formas (toma en consideración)"),
     videoUrl: "https://app.congreso.es/v1/15733408I",
+    i18n: ROLE_VALIDO_I18N,
+  },
+  {
+    partyId: "cc",
+    questionId: "oficina-anticorrupcion",
+    speaker: VALIDO,
+    role: ROLE_VALIDO,
+    date: "2025-09-16",
+    text: "necesitamos saber de quién va a depender, cuánto va a costar y cómo se va a garantizar su independencia, porque la independencia de un órgano como este es fundamental.",
+    source: dscd(15, "136", 20, "2025-09-16", "DSCD Pleno núm. 136 (XV), 16-9-2025 — Proposición de Ley del GSUMAR de creación de la Oficina de prevención de la corrupción (toma en consideración)"),
+    videoUrl: "https://app.congreso.es/v1/15758681I",
     i18n: ROLE_VALIDO_I18N,
   },
 ];

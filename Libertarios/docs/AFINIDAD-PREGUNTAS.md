@@ -180,3 +180,111 @@ A una pregunta de distancia quedan: vox~upn (prostitución), sumar~eh-bildu, eh-
 - Traducciones ca/gl/eu del enunciado nuevo: pendientes de revisión humana (`AFINIDAD-CAMBIOS.md`).
 - Celdas de programa de «iva-primera-vivienda»: sin investigar.
 - Inmigración sigue sin pregunta específica. Para recuperar la regularización haría falta antes otra pregunta que separe a Compromís y a ERC de EH Bildu.
+
+## 9. Tercera revisión (2026-10-07): corrupción y Ceuta / Marruecos / Sáhara Occidental
+
+Petición del dueño: añadir una pregunta de **corrupción** y otra de **Ceuta / Marruecos / Sáhara Occidental**, preferiblemente **sustituyendo** las de menos relieve («prisiones-agentes-autoridad» y «registro-lobbies») para quedarse en 15, y pasar a 16–17 solo si la sustitución rompe equilibrio, dominancia o discriminación. Misma métrica que §2 y §8 (pares separados por signo entre los 14 partidos con historial; simulación de `checks.ts`), más el STRICT completo de `afinidad-dataset.test.ts`.
+
+### Búsqueda
+
+Se rastrearon de nuevo las **8 758 votaciones nominales** de la XIV y la XV (ZIP diarios de datos abiertos, 1 731 días hábiles) buscando en `textoExpediente`/`textoSubGrupo` «Sáhara», «Marruecos», «Ceuta», «Melilla», «corrupción», «comisión de investigación», «Koldo», «denunciantes/informantes», «aforamiento», «integridad», «transparencia»… Para cada candidata: recuento con `npm run afinidad:vote -- <url> --json` y texto en el BOCG (ficha de la iniciativa en congreso.es).
+
+### Sáhara Occidental: por qué no tiene pregunta propia
+
+| Votación | Resultado | Reparto |
+|---|---|---|
+| PNL de GCUP-EC-GC, ERC y EH Bildu sobre la posición del Gobierno en el Sáhara (XIV, ses. 171, 7-4-2022, nº 1) | 168/118/61 | **PSOE no**; VOX abst.; todos los demás sí |
+| PNL del GPP, punto 2: «Recuperar la posición histórica de neutralidad activa de España respecto al contencioso del Sáhara Occidental» (XV, ses. 49, 20-6-2024, nº 2; BOCG-15-D-170) | 228/121/0 | **PSOE no** (y Ábalos, sin atribuir); los 13 partidos restantes sí |
+
+Con el enunciado propuesto («España debe apoyar el plan de autonomía de Marruecos como base para resolver el conflicto del Sáhara Occidental», `agreeMeans: "no"`) solo el PSOE queda a favor: **incumple el mínimo de 2 partidos por lado** (`ITEM_MIN_PER_SIDE`, test 5 en hechos) y separa **13 pares**, el mínimo posible (la media del cuestionario es 48,5). Es una división «Gobierno contra todos» que no distingue a ningún par dentro de un bloque. Se valoró meterla como **segunda ancla** de la pregunta de Ceuta, como pedía el coordinador si discriminaba bien: no se hace porque (1) no discrimina (ver arriba) y (2) mezclaría dos medidas distintas (el plan de autonomía y la respuesta a la crisis de Ceuta) en una sola afirmación, y la regla de varias anclas (`AFINIDAD-DATOS.md` §3) bajaría a ±1 o 0 a ERC, EH Bildu, Podemos, BNG y Compromís (no en Ceuta, sí en el Sáhara) sin que eso dijera nada de ninguna de las dos medidas. Queda en `rejectedCandidates` («sahara-plan-autonomia») con el recuento verificado.
+
+### Ceuta y Marruecos: candidatas
+
+La crisis de Ceuta de los días 30 y 31 de julio de 2026 (entrada masiva por la frontera; declaración de situación de interés para la seguridad nacional) generó en septiembre de 2026 varias votaciones. En la de mayo de 2021 no hubo votaciones nominales sobre Ceuta en el Pleno (ningún título lo menciona).
+
+| Candidata | Resultado | Sí / No / Abst. (14 partidos) | Pares | Pares de bloque que separa | Simulación (en lugar de prisiones, con la de corrupción en lugar de lobbies) |
+|---|---|---|---|---|---|
+| **Moción del GPP sobre la crisis de Ceuta, punto 3 del 2.º apartado**: convocar a la embajadora de Marruecos, exigir explicaciones por la actuación marroquí del 30–31 de julio y llamar a consultas al embajador de España (XV, ses. 198, 16-9-2026, nº 14; BOCG-15-D-590) | 195/139/13 | PP, VOX, Sumar, Frente Amplio, UPN / PSOE, Podemos, ERC, EH Bildu, BNG, Compromís / Junts, PNV, CC | **63** | **PSOE/Sumar**, **Sumar/Podemos**, **Sumar/ERC, EH Bildu, BNG, Compromís**, PP/Junts, PNV/EH Bildu, CC/UPN | **0 problemas en hechos y por comunidad** |
+| PNL del GPP de 20-6-2024, punto 4: reabrir la aduana de Melilla y abrir la de Ceuta en 90 días | 181/146/21 | PP, VOX, PNV, Podemos, CC, UPN / PSOE, Sumar, FA, Compromís / ERC, EH Bildu, Junts, BNG | 64 | Sumar/Podemos, **Compromís/ERC**, PNV/EH Bildu | 0 en hechos; en el ranking combinado de 32 partidos, un problema más que la elegida |
+| Misma moción de 2026, punto 2: devolución de quienes entraron irregularmente; menores, a su familia o a los servicios de su país | 183/163/1 | PP, VOX, Junts, PNV, UPN / toda la izquierda / CC | 53 | Junts/ERC, PNV/EH Bildu | Sumar, EH Bildu y FA indistinguibles en hechos; 3 partidos al 2,0 % (moderado) |
+| PNL del GPP «respuesta de Estado ante la crisis de seguridad nacional en Ceuta» (10-9-2026, nº 4) | 170/175/1 | PP, VOX, UPN / resto | 33 | ninguno | descartada |
+| Mociones de VOX sobre Ceuta (16-9 y 30-9-2026) | 33/174/137 y 33/176/138 | solo VOX a favor | — | — | incumple el mínimo por lado |
+| RDL 22/2026 de apoyo a Ceuta (convalidación) | 304/33/7 | casi unanimidad | — | — | no discrimina |
+
+**Elegida: «ceuta-embajador-marruecos»** — «Tras la entrada masiva de personas en Ceuta en julio de 2026, España debe llamar a consultas a su embajador en Marruecos y exigir explicaciones al Gobierno marroquí.» `agreeMeans: "si"`. Es el asunto de política exterior de más relieve del momento, la medida es concreta (un paso diplomático, no un juicio sobre culpas), y es la candidata que más separa dentro de los bloques. El enunciado no dice «invasión» (palabra de la moción) sino «entrada masiva de personas», y no presume ninguna responsabilidad marroquí: pide explicaciones, como el texto aprobado. URL: <https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion014/VOT_20260916195402.json>.
+
+### Corrupción: candidatas
+
+| Candidata | Resultado | Reparto | Motivo |
+|---|---|---|---|
+| **PL del GSUMAR de creación de la Oficina de prevención de la corrupción**, toma en consideración (XV, ses. 131, 16-9-2025, nº 2; BOCG-15-B-99-1) | 170/176/1 | sí PSOE, Sumar, FA, Podemos, ERC, EH Bildu, PNV, BNG, CC, Compromís / no PP, VOX, Junts / abst. UPN | **Elegida.** Medida de política, no sobre personas; separa **Junts/ERC**, **Junts/PNV** y **UPN/PP-VOX**; 43 pares |
+| Comisión de investigación del caso Koldo / Ábalos / Cerdán | — | — | **No hay ninguna votación del Pleno del Congreso** que la cree o la rechace (la del PP se constituyó en el Senado). Lo más cercano es la siguiente |
+| Solicitud del PSOE de comisión de investigación sobre la contratación de material sanitario en la pandemia (XV, 21-3-2024, nº 14) | 175/33/136 | solo VOX no; PP abst. | Incumple el mínimo por lado |
+| Ley 2/2023 de protección de informantes, dictamen (XIV, 22-12-2022, nº 373) | 200/142/4 | PP y VOX no; resto sí | División de bloques ya retirada en §3; además, ley en vigor |
+| PL de VOX de protección de denunciantes de corrupción (XIV, 22-6-2021) y PL de Cs de lucha contra la corrupción (XIV, 17-6-2020) | 149/192; 159/178 | derecha frente a izquierda | XIV, partido extinto (Cs) y misma división |
+| Mociones del GPP sobre «tramas de corrupción» (2024–2026) y reprobaciones | varias | PP+VOX frente al resto | Tratan de personas concretas y presumen hechos investigados: incompatibles con la presunción de inocencia del enunciado |
+| PNL del PSOE «sobre la necesidad de transparencia» (10-9-2026, nº 5; BOCG-15-D-573) | 163/174/8 | — | Dirigida a declaraciones del jefe de la oposición: de parte |
+| Aforamientos | — | — | Solo reformas de estatutos (Cantabria, Baleares) votadas por unanimidad |
+
+**Elegida: «oficina-anticorrupcion»** — «Debe crearse una oficina estatal independiente contra la corrupción, con dirección elegida por el Congreso, que pueda investigar el uso de fondos públicos e imponer sanciones.» `agreeMeans: "si"`. El enunciado resume los artículos 1, 9, 34 y el título VI de la proposición (independencia orgánica y funcional, investigación de fondos públicos, contratos y subvenciones, dirección elegida por el Congreso por tres quintos, potestad sancionadora). URL: <https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion131/20250916/Votacion002/VOT_20250916211206.json>.
+
+### Qué sale
+
+- **prisiones-agentes-autoridad** (49 pares): la candidata del dueño de menos relieve. Su función (separar a Sumar del resto de la izquierda) la cumple mejor la de Ceuta.
+- **registro-lobbies** (56 pares): mismo ámbito (integridad pública) que la oficina anticorrupción, de menos relieve y con un ancla (convalidación de un decreto-ley) que mezclaba la medida con la vía.
+
+Se simularon también las variantes que **mantienen prisiones** y quitan registro-lobbies y otra pregunta (cada una de las 14 restantes) y la de **16 preguntas** (solo quitar registro-lobbies): ninguna mejora de forma clara a la elegida (todas siguen con Compromís por debajo del 2 % en el ranking combinado de 32 partidos, que es estructural; quitar jornada, prostitución, IVA o competencias de inmigración crea nuevos pares indistinguibles). Por eso se queda en **15**.
+
+**Equilibrio de redacción**: sale una afirmación de iniciativa de la izquierda (lobbies, decreto del Gobierno) y entra otra (oficina, PL de Sumar); sale una de la derecha (prisiones) y entra otra (Ceuta, moción del PP). El reparto sigue en **7 izquierda / 8 derecha**. Ninguna de las dos nuevas tiene a un bloque entero de un lado: la de Ceuta pone a Sumar con PP y VOX, y la de la oficina a Junts con PP y VOX.
+
+### Recuento por partido (hechos)
+
+| Partido | ceuta-embajador-marruecos (16-9-2026) | oficina-anticorrupcion (16-9-2025) |
+|---|---|---|
+| PSOE | no (120) → −2 | sí (118) → +2 |
+| PP | sí (137) → +2 | no (136) → −2 |
+| VOX | sí (32) → +2 | no (33) → −2 |
+| Sumar (GSUMAR sin atribuidos) | sí (24) → +2 | sí (26) → +2 |
+| Frente Amplio (historial de GSUMAR) | sí → +2 | sí → +2 |
+| Podemos (4 diputados del Mixto) | no (4) → −2 | sí (4) → +2 |
+| ERC | no (7) → −2 | sí (7) → +2 |
+| Junts | abst. (7) → 0 | no (7) → −2 |
+| EH Bildu | no (6) → −2 | sí (6) → +2 |
+| PNV | abst. (5) → 0 | sí (5) → +2 |
+| BNG (Rego) | no → −2 | sí → +2 |
+| CC (Valido) | abst. → 0 | sí → +2 |
+| UPN (Catalán) | sí → +2 | abst. → 0 |
+| Compromís (Micó) | no → −2 | sí → +2 |
+| Mixto sin atribuir | Ortega Smith: sí | Ábalos: sí |
+
+### Antes y después
+
+Hechos (14 partidos con historial, 10 000 usuarios por perfil):
+
+| | Antes | Después |
+|---|---|---|
+| Pares separados, media / mínimo | 48,5 / 39 | 48,5 / 39 (Ceuta 63, oficina 43) |
+| Indistinguibles para el votante perfecto (hechos) | sumar~frente-amplio, compromis~erc | sumar~frente-amplio, compromis~erc (iguales) |
+| Problemas de dominancia en hechos (2–35 %) | 0 | **0** |
+| Problemas de dominancia por comunidad (STRICT, lo que ve la UI) | 0 | **0** |
+
+Dominancia en hechos, después (% de victorias, uniforme / moderado): upn 13,4 / 12,8; pp 12,0 / 12,5; cc 10,9 / 11,4; podemos 9,7 / 9,1; psoe 8,5 / 8,7; junts 8,5 / 10,2; bng 6,9 / 8,3; pnv 6,8 / 6,4; sumar 4,5 / 4,5; frente-amplio 4,5 / 4,5; eh-bildu 4,4 / 3,1; vox 4,1 / 3,0; erc 2,8 / 2,8; compromis 2,8 / 2,8. Antes (misma simulación): upn 13,8 / 12,8; pp 11,2 / 11,1; cc 11,9 / 10,0; podemos 9,8 / 12,0; psoe 7,8 / 7,9; junts 7,8 / 9,4; bng 7,5 / 9,2; pnv 6,5 / 5,4; eh-bildu 6,2 / 4,6; erc 4,3 / 4,7; vox 3,5 / 3,6; sumar 3,2 / 3,0; frente-amplio 3,2 / 3,0; compromis 3,3 / 3,1.
+
+Ranking combinado con los **32 partidos juntos** (vista que no existe en la UI; STRICT la marca): antes 6 problemas (pp 1,8 %, sumar 2,0 %, erc 1,5 %, compromis 0,1 % uniforme; erc 1,4 %, compromis 0 % moderado); después 7 (vox 2,0 % y 1,6 %, erc 1,5 % y 1,2 %, compromis 0,3 % y 0,2 %, sumar 1,9 % moderado). El PP sale del aviso y entra VOX, que pierde su celda de programa de prisiones (+2, coincidía con casi todo usuario de derecha) y, tras la revisión ciega, no puntúa en la de Ceuta; gana la de la oficina (+1). Compromís sigue casi a cero por motivos estructurales: su programa es el de Sumar y en hechos sigue a una abstención de ERC.
+
+Programa (STRICT, test 5): «oficina-anticorrupcion» 8 a favor y 0 en contra (ningún programa se opone a un órgano así; VOX y PSOE lo proponen) y «ceuta-embajador-marruecos» 0 / 1 (solo el PSOE, −1, «nueva etapa» con Marruecos; los programas son anteriores a la crisis). Es el mismo tipo de aviso que ya tenían 9 preguntas en programa; no se corrige tocando posiciones (`AFINIDAD-DATOS.md` §6). Test 7 (cobertura por bloque en programa): el bloque izquierda pasa de estar dentro del margen a 48,9 % frente a 28,1 % de media, porque las celdas nuevas que puntúan son sobre todo de partidos de izquierda (Sumar, Compromís, Podemos, CHA, Adelante Andalucía, Més per Menorca) y salen dos que puntuaban en Junts y Aliança Catalana (prisiones).
+
+### Programa y hemeroteca
+
+- **Programa** (32 partidos, misma fuente que cita cada fichero): «oficina-anticorrupcion» puntúa en PSOE, VOX, Sumar (y Compromís), Podemos, Adelante Andalucía, CHA y Més per Menorca, todos **+1** (refuerzan un órgano existente, no le dan funciones de investigación o sanción, o son de ámbito autonómico o europeo); «ceuta-embajador-marruecos» solo en el PSOE (−1). El resto, `sin-posicion` con palabras buscadas (ASG, AHI y Democracia Ourensana, `pendiente`; Frente Amplio, `pendiente` por no tener programa). Revisión ciega con extracto solo de cita: ver `AFINIDAD-REVISION.md`, revisión 3.
+- **Hemeroteca**: 15 citas nuevas de los Diarios de Sesiones de los dos debates (DSCD-15-PL-136, pp. 19–32; DSCD-15-PL-205, pp. 133–142), con vídeo de congreso.es; se quitaron las 21 citas de las dos preguntas retiradas. Sin cita (no hablaron o no trataron la medida): en la oficina, BNG y Compromís; en Ceuta, PSOE, Podemos, ERC, Junts, EH Bildu, BNG, CC, UPN y Compromís (motivo por partido en el informe de la ronda).
+
+### Compatibilidad
+
+`DATASET_VERSION` pasa a **2026.10.1**: las respuestas se codifican por posición (`order`), y las preguntas 4 y 13 cambian, así que un enlace compartido con la versión anterior muestra el aviso de «versión anterior». JSON abierto: `public/afinidad/datos-2026.10.1.json` (`npm run afinidad:json`); el de 2026.10.0 se conserva.
+
+### Pendiente
+
+- Traducciones ca/gl/eu de los dos enunciados y etiquetas nuevos: pendientes de revisión humana.
+- Programas de 2026: la pregunta de Ceuta es posterior a todos los programas de 2023; se rehará con los de 2026.
+- Sáhara Occidental: si una votación futura deja a otro partido junto al PSOE, se puede recuperar «sahara-plan-autonomia».

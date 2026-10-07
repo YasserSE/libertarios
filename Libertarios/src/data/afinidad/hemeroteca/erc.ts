@@ -141,25 +141,6 @@ export const quotes: Quote[] = [
   },
   {
     partyId: "erc",
-    questionId: "prisiones-agentes-autoridad",
-    speaker: "Pilar Vallugera Balañà",
-    role: "Diputada del Grupo Parlamentario Republicano",
-    date: "2026-06-11",
-    // DSCD (p. 14), traducción del propio Diario: «pero seguimos creyendo y diciendo que con la atribución de
-    // la condición de agente de autoridad de los funcionarios de instituciones penitenciarias ―y ahora
-    // haciéndolo extensivo al personal laboral― no resolvemos absolutamente la multitud de problemas que
-    // existen en el día a día de su trabajo»
-    text: "Però seguim creient i seguim dient que l’atribució de la condició d’agent d’autoritat als funcionaris d’institucions penitenciàries i ara fent-ho extensiu al personal laboral no resolem en absolut la multitud de problemes que existeixen en el dia a dia de la seva feina.",
-    source: dscd(15, "191", 13, "2026-06-11", "DSCD Pleno núm. 191 (XV), 11-6-2026 — Dictamen de la Proposición de Ley Orgánica que reconoce a los funcionarios de prisiones como agentes de la autoridad (art. 80 LOGP)"),
-    videoUrl: "https://app.congreso.es/v1/15775033I",
-    i18n: {
-      ca: { role: "Diputada del Grup Parlamentari Republicà" },
-      gl: { role: "Deputada do Grupo Parlamentario Republicano" },
-      eu: { role: "Talde Parlamentario Errepublikanoko diputatua" },
-    },
-  },
-  {
-    partyId: "erc",
     questionId: "prostitucion-abolicion",
     speaker: "Pilar Vallugera Balañà",
     role: "Diputada del Grupo Parlamentario Republicano",
@@ -193,15 +174,15 @@ export const quotes: Quote[] = [
   },
   {
     partyId: "erc",
-    questionId: "registro-lobbies",
+    questionId: "oficina-anticorrupcion",
     speaker: "Francesc-Marc Álvaro Vidal",
     role: "Diputado del Grupo Parlamentario Republicano",
-    date: "2026-09-16",
-    // DSCD (p. 79), traducción del propio Diario: «La norma es necesaria, pero como ha dicho el señor Matute y
-    // otros diputados, es incompleta»
-    text: "La norma és necessària, però com ha dit el senyor Matute i altres diputats, és incompleta.",
-    source: dscd(15, "205", 77, "2026-09-16", "DSCD Pleno núm. 205 (XV), 16-9-2026 — Convalidación del Real Decreto-ley 21/2026, de transparencia e integridad de los grupos de interés"),
-    videoUrl: "https://app.congreso.es/v1/15778468I",
+    date: "2025-09-16",
+    // DSCD (p. 28), traducción del propio Diario: «Nosotros, en Esquerra, votaremos a favor de la tramitación
+    // de esta proposición, pero somos escépticos en cuanto al recorrido que pueda tener.»
+    text: "Bé, nosaltres, Esquerra, votarem a favor de tramitar aquesta proposició, però som escèptic sobre el recorregut que pugui tenir.",
+    source: dscd(15, "136", 27, "2025-09-16", "DSCD Pleno núm. 136 (XV), 16-9-2025 — Proposición de Ley del GSUMAR de creación de la Oficina de prevención de la corrupción (toma en consideración)"),
+    videoUrl: "https://app.congreso.es/v1/15758686I",
     i18n: {
       ca: { role: "Diputat del Grup Parlamentari Republicà" },
       gl: { role: "Deputado do Grupo Parlamentario Republicano" },

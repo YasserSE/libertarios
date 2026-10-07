@@ -108,8 +108,8 @@ export const stances: Stance[] = [
     record: null,
   },
   none(
-    "prisiones-agentes-autoridad",
-    "No trata la condición de agentes de la autoridad de los funcionarios de prisiones. Buscado: «prisiones», «penitenciari», «funcionarios de prisiones», «agentes de la autoridad», «cárcel».",
+    "oficina-anticorrupcion",
+    "No propone ningún organismo contra la corrupción. Buscado: «corrupción», «anticorrupción», «antifraude», «integridad», «oficina», «agencia», «autoridad independiente», «Fiscalía Anticorrupción», «conflicto de intereses», «malversación», «denunciantes». «Corrupción» solo aparece en la p. 52 (reformar la ley de contratos con «más flexibilidad sin abrir puertas a facilitar la corrupción»); «fraude» solo como fraude fiscal y laboral (pp. 49 y 51); «transparencia», solo una plataforma de información sobre migraciones (p. 88).",
   ),
   none("prostitucion-abolicion", "No trata la prostitución. Buscado: «prostitución», «proxenetismo», «trata», «explotación sexual»."),
   {
@@ -128,8 +128,8 @@ export const stances: Stance[] = [
     record: null,
   },
   none(
-    "registro-lobbies",
-    "No trata la regulación de los lobbies. Buscado: «lobby», «grupos de interés», «grupos de presión», «registro de transparencia», «huella normativa», «puertas giratorias».",
+    "ceuta-embajador-marruecos",
+    "No trata Ceuta, Melilla ni la relación diplomática con Marruecos. Buscado: «Marruecos», «Ceuta», «Melilla», «Sáhara», «frontera», «embajada», «soberanía», «integridad territorial», «aduana». Marruecos solo aparece como país de origen en datos de población extranjera (p. 74); sobre el Sáhara, apoyo al referéndum de autodeterminación del pueblo saharaui (p. 90), que no puntúa; «fronteras» solo en el enfoque general de las migraciones (p. 88).",
   ),
   none(
     "iva-primera-vivienda",

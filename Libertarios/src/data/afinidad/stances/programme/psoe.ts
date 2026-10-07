@@ -111,9 +111,6 @@ const programme: Record<string, ProgrammeStance> = {
   "tauromaquia-patrimonio": sinPosicion(
     "Buscado «taurin», «tauromaquia», «toros», «corrida», «festejos», «patrimonio cultural inmaterial»: sin resultados.",
   ),
-  "prisiones-agentes-autoridad": sinPosicion(
-    "Buscado «penitenci», «prisiones», «prisión», «cárcel», «presos», «agente(s) de la autoridad», «funcionarios de prisiones» en todo el PDF. Solo aparece «Fortaleceremos las políticas resocializadoras de nuestro sistema penitenciario para evitar la reincidencia» (p. 238); nada sobre la condición de agentes de la autoridad de los funcionarios de prisiones.",
-  ),
   "prostitucion-abolicion": {
     position: 2,
     status: "verificado",
@@ -139,16 +136,26 @@ const programme: Record<string, ProgrammeStance> = {
     note:
       "Posición explícitamente abierta («Evaluaremos la prórroga y ajustes»): no se compromete a subir el gravamen ni a añadir uno sobre beneficios extraordinarios, tampoco a suprimirlo. Codificado 0 por ambivalencia textual, como «impuesto-grandes-fortunas» (misma página). Página impresa 37.",
   },
-  "registro-lobbies": {
-    position: 2,
+  "oficina-anticorrupcion": {
+    position: 1,
     status: "verificado",
     reviewer: { position: 1, agrees: true },
-    confidence: "media",
+    confidence: "alta",
     quote:
-      "Aprobaremos la Ley de Lobbies para dar transparencia a las actividades de los grupos de interés, creando un registro público y gratuito que permita monitorizar las actividades de influencia que se ejercen sobre el personal empleado público.",
-    source: at("243"),
+      "Reforzando la actividad y la independencia de la Oficina de Conflictos de Intereses, para la comprobación del patrimonio y la actividad de los máximos responsables públicos, dotándole además de facultades para detectar posibles casos del nuevo delito de enriquecimiento ilícito de altos cargos.",
+    source: at("246"),
     note:
-      "Compromiso concreto con una ley de lobbies y un registro público; no dice expresamente que sea obligatorio ni menciona multas: confianza media. Repetido en la p. 246 («Aprobaremos las leyes de transparencia de grupos de interés…») y en la p. 247 (huella normativa). Página impresa 236.",
+      "Va tras «Aprobaremos las leyes de transparencia de grupos de interés y de prevención de conflictos de intereses del personal empleado público.» Refuerza como independiente un órgano de control ya existente, sin crear una oficina nueva: +1. Misma página: reforzar «la entrada en funcionamiento de la Autoridad de Protección del Informante con la aprobación por el Gobierno de la Estrategia Nacional Anticorrupción»; p. 252: «pondremos en funcionamiento la Autoridad Independiente de protección del informante». Buscado también «corrup», «anticorrup», «antifraude», «integridad», «agencia», «malversación», «denunciantes». Página impresa 239.",
+  },
+  "ceuta-embajador-marruecos": {
+    position: -1,
+    status: "verificado",
+    reviewer: { position: -1, agrees: true },
+    confidence: "media",
+    quote: "Seguiremos profundizando en la nueva etapa en nuestras relaciones bilaterales con Marruecos",
+    source: at("264"),
+    note:
+      "Programa anterior a la crisis de julio de 2026. La frase sigue en la p. 265: «en la que hemos firmado una veintena de acuerdos para fortalecer la cooperación en la lucha contra la trata de personas y contra el terrorismo, la cooperación migratoria, o la promoción de las empresas exportadoras y de las empresas españolas en Marruecos». Compromiso expreso con la «nueva etapa» de 2022, sin pronunciarse sobre medidas de presión: −1. Sobre el Sáhara (p. 265), apoyo al Enviado Personal de la ONU para «una solución mutuamente aceptable» (no puntúa). Buscado también «Ceuta», «Melilla», «frontera», «embajad», «soberanía», «aduana»: nada sobre Ceuta ni Melilla. Página impresa 256.",
   },
 };
 

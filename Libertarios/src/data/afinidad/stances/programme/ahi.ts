@@ -11,7 +11,7 @@ import type { Stance } from "../../types";
  * Ninguna celda puntúa hasta que aparezca el programa.
  */
 
-const QUESTIONS = ["vivienda-tope-alquiler","irpf-inflacion","jornada-37-5","amnistia","nuclear","gasto-defensa","impuesto-grandes-fortunas","okupacion-desalojo","iva-primera-vivienda","inmigracion-competencias-cataluna","tauromaquia-patrimonio","prisiones-agentes-autoridad","prostitucion-abolicion","impuesto-banca","registro-lobbies"] as const;
+const QUESTIONS = ["vivienda-tope-alquiler","irpf-inflacion","jornada-37-5","amnistia","nuclear","gasto-defensa","impuesto-grandes-fortunas","okupacion-desalojo","iva-primera-vivienda","inmigracion-competencias-cataluna","tauromaquia-patrimonio","prostitucion-abolicion","impuesto-banca","oficina-anticorrupcion","ceuta-embajador-marruecos"] as const;
 
 const NOTE =
   "Pendiente: no se ha localizado un programa electoral oficial de AHI (búsqueda web del 2026-10-06). En 2023 concurrió en listas únicas con NC en El Hierro según la prensa; no se usa el programa de NC-BC sin confirmar que fuera común.";

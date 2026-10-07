@@ -77,7 +77,6 @@ export const stances: Stance[] = [
   },
   sinPosicion("inmigracion-competencias-cataluna", "competencias de inmigración, Generalitat, Cataluña"),
   sinPosicion("tauromaquia-patrimonio", "tauromaquia, toros, taurino"),
-  sinPosicion("prisiones-agentes-autoridad", "prisiones, penitenciario, funcionarios de prisiones, agentes de la autoridad (pág. 161 solo menciona una oficina judicial en el Centro Penitenciario de El Dueso)"),
   {
     partyId: "prc",
     questionId: "prostitucion-abolicion",
@@ -95,7 +94,6 @@ export const stances: Stance[] = [
     record: null,
   },
   sinPosicion("impuesto-banca", "banca, bancos, entidades financieras, gravamen, beneficios extraordinarios"),
-  sinPosicion("registro-lobbies", "lobbies, grupos de interés, grupos de presión, registro de transparencia, huella normativa"),
   {
     partyId: "prc",
     questionId: "iva-primera-vivienda",
@@ -112,4 +110,12 @@ export const stances: Stance[] = [
     },
     record: null,
   },
+  sinPosicion(
+    "oficina-anticorrupcion",
+    "corrupción, anticorrupción, antifraude, integridad, oficina, agencia, autoridad independiente, Fiscalía, conflicto de intereses, malversación, denunciantes. Solo una declaración de principios contra la corrupción (pág. 29: «La lucha e intolerancia con la corrupción debe empezar por una política activa…»), la transparencia y gobierno abierto (págs. 45, 167-170) y crear un Tribunal de Cuentas propio de Cantabria (págs. 33 y 36); ningún organismo contra la corrupción",
+  ),
+  sinPosicion(
+    "ceuta-embajador-marruecos",
+    "Marruecos, Ceuta, Melilla, Sáhara, frontera (solo la «frontera» vasco-cántabra y fiscal, págs. 35, 83 y 96), embajada, soberanía, integridad territorial, aduana",
+  ),
 ];

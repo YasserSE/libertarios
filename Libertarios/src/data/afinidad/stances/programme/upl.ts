@@ -45,10 +45,8 @@ export const stances: Stance[] = [
   noPosition("okupacion-desalojo", "«ocupación», «okupa», «desalojo»"),
   noPosition("inmigracion-competencias-cataluna", "«inmigración», «Cataluña»"),
   noPosition("tauromaquia-patrimonio", "«tauromaquia», «toros», «corrida» (solo aparece la localidad de Toro)"),
-  noPosition("prisiones-agentes-autoridad", "«prisiones», «penitenciari», «funcionarios de prisiones», «agentes de la autoridad»"),
   noPosition("prostitucion-abolicion", "«prostitución», «proxenetismo», «trata», «explotación sexual»"),
   noPosition("impuesto-banca", "«banca», «bancos», «entidades financieras», «gravamen» (solo «un mayor acceso a la banca en nuestras comarcas rurales», p. 93)"),
-  noPosition("registro-lobbies", "«lobby», «grupos de interés», «grupos de presión», «registro de transparencia»"),
   {
     partyId: "upl",
     questionId: "iva-primera-vivienda",
@@ -64,4 +62,6 @@ export const stances: Stance[] = [
     },
     record: null,
   },
+  noPosition("oficina-anticorrupcion", "«corrupción», «anticorrupción», «antifraude», «integridad», «oficina», «agencia», «autoridad independiente», «Fiscalía», «conflicto de intereses», «malversación», «denunciantes» (solo «fraude de ley» en la temporalidad de los empleados públicos, p. 54, y transparencia en los fondos de igualdad, p. 85)"),
+  noPosition("ceuta-embajador-marruecos", "«Marruecos», «Ceuta», «Melilla», «Sáhara», «frontera» (solo la frontera con Portugal, pp. 22, 46, 47 y 93), «embajada», «soberanía» (solo soberanía alimentaria), «integridad territorial», «aduana»"),
 ];

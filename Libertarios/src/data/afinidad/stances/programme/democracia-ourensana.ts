@@ -24,10 +24,10 @@ const QUESTIONS = [
   "iva-primera-vivienda",
   "inmigracion-competencias-cataluna",
   "tauromaquia-patrimonio",
-  "prisiones-agentes-autoridad",
   "prostitucion-abolicion",
   "impuesto-banca",
-  "registro-lobbies",
+  "oficina-anticorrupcion",
+  "ceuta-embajador-marruecos",
 ] as const;
 
 const NOTE =

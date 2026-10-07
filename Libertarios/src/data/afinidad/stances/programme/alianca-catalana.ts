@@ -135,24 +135,16 @@ export const stances: Stance[] = [
     record: null,
   },
   sinPosicion("tauromaquia-patrimonio", "toros, tauromàquia, correbous, bous"),
-  {
-    partyId: "alianca-catalana",
-    questionId: "prisiones-agentes-autoridad",
-    programme: {
-      position: 2,
-      status: "verificado",
-      reviewer: { position: 2, agrees: true },
-      confidence: "alta",
-      quote:
-        "volem que els treballadors de presons siguin reconeguts com a agents de l’autoritat, tal com fan els països del nostre entorn europeu.",
-      source: { ...PROGRAMA, page: "12" },
-      note: `${ELECCION} Traducción: «queremos que los trabajadores de prisiones sean reconocidos como agentes de la autoridad, tal como hacen los países de nuestro entorno europeo». Apartado «11. Presons» (pp. 11-13); en Cataluña las prisiones son de la Generalitat, pero la medida coincide con el enunciado.`,
-    },
-    record: null,
-  },
+  sinPosicion(
+    "ceuta-embajador-marruecos",
+    "Marroc, marroquí, Ceuta, Melilla, Sàhara, frontera, ambaixada, sobirania, integritat territorial, duana. No menciona Marruecos, Ceuta, Melilla ni el Sáhara; «fronteres» solo aparece para cerrar Cataluña a la inmigración económica (p. 2)",
+  ),
   sinPosicion("prostitucion-abolicion", "prostitució, proxenetisme, tràfic, tracta, explotació sexual"),
   sinPosicion("impuesto-banca", "banca, bancs, entitats financeres, impost, gravamen (solo «bancs d'aliments», p. 2)"),
-  sinPosicion("registro-lobbies", "lobbies, grups d'interès, grups de pressió, registre de transparència"),
+  sinPosicion(
+    "oficina-anticorrupcion",
+    "corrupció, anticorrupció, antifrau, integritat, oficina, agència, autoritat independent, fiscalia, conflicte d'interessos, malversació, denunciants, transparència. Solo propone reducir conselleries, altos cargos y organismos y hacer una «auditoria per saber on i com s’han gastat els diners dels catalans i detectar-ne irregularitats» (p. 13); ningún organismo contra la corrupción, ni a favor ni en contra",
+  ),
   {
     partyId: "alianca-catalana",
     questionId: "iva-primera-vivienda",

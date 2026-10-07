@@ -154,27 +154,4 @@ export const quotes: Quote[] = [
       eu: { role: "Compromíseko diputatua, GP Plurinacional SUMARen bozeramailea eztabaidan" },
     },
   },
-  {
-    partyId: "compromis",
-    questionId: "registro-lobbies",
-    speaker: "Àgueda Micó i Micó",
-    role: "diputada de Compromís (Grupo Mixto) en el debate",
-    date: "2026-09-16",
-    // DSCD (p. 67), traducción del propio Diario: «porque una cosa es hacer un lobby y otra, muy distinta es
-    // comprar voluntades.»
-    text: "Perquè una cosa és fer un lobby i una altra molt distinta és comprar voluntats.",
-    source: {
-      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF#page=67",
-      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 205 (sesión plenaria núm. 198, 16-9-2026)",
-      date: "2026-09-16",
-      page: "p. 67",
-      kind: "diario-sesiones",
-    },
-    videoUrl: "https://app.congreso.es/v1/15778460I",
-    i18n: {
-      ca: { role: "diputada de Compromís (Grup Mixt) en el debat" },
-      gl: { role: "deputada de Compromís (Grupo Mixto) no debate" },
-      eu: { role: "Compromíseko diputatua (Talde Mistoa) eztabaidan" },
-    },
-  },
 ];

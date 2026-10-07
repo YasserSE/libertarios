@@ -119,12 +119,15 @@ export const stances: Stance[] = [
   },
   sinPosicion("inmigracion-competencias-cataluna", "competencias de inmigración, Cataluña, Generalitat, delegación"),
   sinPosicion("tauromaquia-patrimonio", "toros, tauromaquia, patrimonio cultural"),
-  sinPosicion("prisiones-agentes-autoridad", "prisiones, penitenciario, funcionarios de prisiones, agentes de la autoridad, cárcel"),
+  sinPosicion(
+    "oficina-anticorrupcion",
+    "corrupción, anticorrupción, antifraude, integridad, oficina, agencia, autoridad independiente, Fiscalía Anticorrupción, conflicto de intereses, malversación, denunciantes (el Eje 07 «Corrupción» del de Andalucía propone premiar con un 10 % al denunciante, personar a la Junta como acusación particular, negar el tercer grado al corrupto que no restituya y auditar los bienes de los altos cargos, y el de Castilla y León, p. 13, lo mismo más «abriremos una investigación interna independiente» sobre adjudicaciones fraudulentas; ninguno propone un organismo de prevención o investigación de la corrupción)",
+  ),
   sinPosicion("prostitucion-abolicion", "prostitución, proxenetismo, trata, explotación sexual"),
   sinPosicion("impuesto-banca", "banca, bancos, entidades financieras, gravamen temporal, beneficios extraordinarios"),
   sinPosicion(
-    "registro-lobbies",
-    "lobbies, grupos de interés, grupos de presión, registro de transparencia, huella normativa (el programa de Andalucía dice que suprimir la publicidad institucional «libera al poder político de los grupos de presión económicos» y el de Castilla y León, p. 12, propone el «Fin de las subvenciones a partidos, sindicatos y lobbies»; ninguno habla de un registro de grupos de interés)",
+    "ceuta-embajador-marruecos",
+    "Marruecos, Ceuta, Melilla, Sáhara, frontera, embajada, soberanía, integridad territorial, aduana (el de Castilla y León, p. 8, propone «cortar cualquier subvención o convenio de cooperación» con «países o entidades que favorezcan o permitan la inmigración ilegal», sin nombrar a Marruecos ni a Ceuta; no trata la relación con Marruecos)",
   ),
   {
     partyId: "salf",

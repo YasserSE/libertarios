@@ -203,4 +203,27 @@ export const quotes: Quote[] = [
       eu: { role: "Podemoseko idazkari nagusia, Talde Mistoaren lege-proposamena defendatzen du" },
     },
   },
+  {
+    partyId: "podemos",
+    questionId: "oficina-anticorrupcion",
+    speaker: "Martina Velarde Gómez",
+    role: "diputada de Podemos (Grupo Mixto) en el debate",
+    date: "2025-09-16",
+    // Podemos votó «sí» a la toma en consideración; la cita va en sentido contrario.
+    text: "el sistema bipartidista corrupto no se combate con una oficina anticorrupción, sino que hay que cambiarlo todo, de izquierda a derecha. ¿De qué nos sirve una ley que deja fuera de su ámbito de actuación la actividad de los partidos políticos, sus fundaciones o los grupos parlamentarios?",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-136.PDF#page=21",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 136 (sesión plenaria núm. 131, 16-9-2025)",
+      date: "2025-09-16",
+      page: "p. 21",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15758682I",
+    contrastsWithRecord: true,
+    i18n: {
+      ca: { role: "diputada de Podemos (Grup Mixt) en el debat" },
+      gl: { role: "deputada de Podemos (Grupo Mixto) no debate" },
+      eu: { role: "Podemoseko diputatua (Talde Mistoa) eztabaidan" },
+    },
+  },
 ];

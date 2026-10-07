@@ -42,8 +42,8 @@ export const stances: Stance[] = [
   sinPosicion("irpf-inflacion", "«IRPF», «deflact», «tramos»; el IPC solo aparece referido a las pensiones (pp. 32-33)"),
   sinPosicion("jornada-37-5", "«jornada», «horas semanales», «tiempo de trabajo». El capítulo de empleo (pp. 28-31) no trata la jornada máxima"),
   sinPosicion(
-    "prisiones-agentes-autoridad",
-    "«prisión», «penitenciari», «funcionarios», «agentes de la autoridad». Solo habla de los derechos de las personas presas y de humanizar el sistema penitenciario (p. 7) y rechaza la prisión permanente revisable (p. 10); nada sobre los funcionarios de prisiones",
+    "ceuta-embajador-marruecos",
+    "«Marruecos», «marroquí», «Ceuta», «Melilla», «Sáhara», «frontera», «embajada», «soberanía», «integridad territorial», «aduana». Rechaza el giro del Gobierno hacia el reconocimiento de la soberanía marroquí sobre el Sáhara y defiende la autodeterminación saharaui (p. 11), y denuncia los «trágicos acontecimientos de Melilla» del 24-6-2022 (p. 10); nada sobre una respuesta diplomática a Marruecos por Ceuta, Melilla o la frontera",
   ),
   sinPosicion("amnistia", "«amnist», «Cataluña», «indult». «Amnistía» solo aparece referida a la ley de 1977 (p. 9)"),
   sinPosicion("nuclear", "«nuclear», «centrales». El capítulo de energía (pp. 19-23) solo trata renovables, redes e hidrógeno"),
@@ -64,21 +64,10 @@ export const stances: Stance[] = [
     "impuesto-banca",
     "«banca», «gravamen», «beneficios extraordinarios», «tipos de interés». Sobre los gravámenes temporales a la banca y a las energéticas solo dice que, «en caso de querer mantenerlas», deberían tramitarse como impuestos y no como prestaciones patrimoniales no tributarias, para poder concertarlos con las haciendas forales (pp. 16-17); no se pronuncia sobre subirlos",
   ),
-  {
-    partyId: "pnv",
-    questionId: "registro-lobbies",
-    programme: {
-      position: 1,
-      status: "verificado",
-      reviewer: { position: 1, agrees: true },
-      confidence: "media",
-      quote:
-        "Regulación de los lobbies, estableciendo medidas efectivas para la máxima transparencia de su actividad, y en concreto de sus interacciones y relaciones con las y los cargos públicos y representantes políticos.",
-      source: at("13"),
-      note: "Apartado «Ética en la acción pública». A favor de regular los lobbies y hacer transparentes sus contactos con cargos públicos, pero no concreta un registro obligatorio ni sanciones: +1.",
-    },
-    record: null,
-  },
+  sinPosicion(
+    "oficina-anticorrupcion",
+    "«corrupción», «anticorrupción», «antifraude», «integridad», «oficina», «agencia», «autoridad independiente», «fiscalía», «conflicto de intereses», «malversación», «denunciantes». El apartado «Ética en la acción pública» (pp. 12-13) pide «Firmeza ante la corrupción» con «tolerancia cero» desde los propios partidos, transparencia, regular los lobbies y suprimir los aforamientos (p. 13); ningún organismo de prevención o investigación de la corrupción",
+  ),
   sinPosicion(
     "inmigracion-competencias-cataluna",
     "«Cataluña», «competencias», «inmigración». Pide la «Transferencia a la CAV de las políticas migratorias» (p. 11), pero nada sobre Cataluña; no se extrapola",

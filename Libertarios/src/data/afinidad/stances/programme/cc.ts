@@ -48,7 +48,6 @@ export const stances: Stance[] = [
     "«IRPF», «deflact», «inflación». Solo propone ampliar diez años la bonificación del 60 % del IRPF para residentes en La Palma (compromiso 14, p. 5)",
   ),
   sinPosicion("jornada-37-5", "«jornada», «horas semanales». El apartado de empleo (compromisos 15-17) no trata la jornada"),
-  sinPosicion("prisiones-agentes-autoridad", "«prisión», «penitenciari», «funcionarios», «agentes de la autoridad»"),
   sinPosicion("amnistia", "«amnist», «Cataluña», «indult»"),
   sinPosicion("nuclear", "«nuclear». Solo trata renovables y transición energética en Canarias (compromisos 44-45)"),
   {
@@ -70,7 +69,14 @@ export const stances: Stance[] = [
   sinPosicion("impuesto-grandes-fortunas", "«patrimonio», «fortunas», «riqueza»"),
   sinPosicion("okupacion-desalojo", "«ocupación», «okupa», «desalojo»"),
   sinPosicion("impuesto-banca", "«banca», «bancos», «impuesto», «beneficios», «gravamen»"),
-  sinPosicion("registro-lobbies", "«lobby», «grupos de interés», «registro», «puertas giratorias», «transparencia», «corrupción»"),
+  sinPosicion(
+    "oficina-anticorrupcion",
+    "«corrupción», «anticorrupción», «antifraude», «integridad», «oficina», «agencia», «autoridad independiente», «conflicto de intereses», «malversación», «denunciantes», «transparencia». «Agencia» solo aparece por la Agencia Tributaria estatal (p. 9)",
+  ),
+  sinPosicion(
+    "ceuta-embajador-marruecos",
+    "«Marruecos», «Ceuta», «Melilla», «Sáhara», «frontera», «embajada», «soberanía», «integridad territorial», «aduana». Programa anterior a la crisis de julio de 2026. Solo pide que Canarias esté presente, con representación propia, en las negociaciones del Estado con Marruecos sobre «la delimitación de los espacios marítimos y el control de los movimientos migratorios» (compromiso 13, p. 5); nada sobre Ceuta ni sobre presión diplomática a Marruecos",
+  ),
   sinPosicion(
     "inmigracion-competencias-cataluna",
     "«Cataluña», «competencias». Pide presencia de Canarias en las negociaciones con Marruecos sobre «el control de los movimientos migratorios» (compromiso 13, p. 5), nada sobre Cataluña",

@@ -39,7 +39,6 @@ const REVISOR: Record<string, Position> = {
   "nuclear": -1,
   "tauromaquia-patrimonio": -2,
   "prostitucion-abolicion": 1,
-  "registro-lobbies": 1,
   "iva-primera-vivienda": 0,
 };
 
@@ -118,7 +117,10 @@ export const stances: Stance[] = [
     "11",
     "Traducción: «Retomaremos la lucha por la abolición total de la tauromaquia y reclamaremos la soberanía plena del Govern de las Illes Balears para legislar en temas de bienestar animal».",
   ),
-  noPosition("prisiones-agentes-autoridad", "«presons», «penitenciari», «funcionaris de presons», «agents de l’autoritat»"),
+  noPosition(
+    "oficina-anticorrupcion",
+    "«corrupció», «anticorrupció», «antifrau», «integritat», «oficina», «agència», «autoritat independent», «Fiscalia Anticorrupció», «conflicte d’interessos», «malversació», «denunciants», «alertadors». En el apartado «Radicalitat democràtica» (p. 26) solo hay medidas generales: personar a la CAIB en los casos de corrupción, retirar honores a los condenados y «identificar i perseguir les conductes que utilitzin el servei públic com una oportunitat per afavorir negocis privats»; ninguna oficina o agencia anticorrupción. Las «oficinas» del programa son de evaluación pública (p. 28), planificación (p. 31) y otras materias",
+  ),
   verified(
     "prostitucion-abolicion",
     1,
@@ -131,13 +133,9 @@ export const stances: Stance[] = [
     "impuesto-banca",
     "«banca», «bancs», «entitats financeres», «gravamen», «beneficis extraordinaris» (p. 36: «Demanarem a l’Estat l’exercici d’un control sobre els beneficis extraordinaris empresarials que resultin de la inflació», sin mencionar la banca ni un impuesto)",
   ),
-  verified(
-    "registro-lobbies",
-    1,
-    "media",
-    "Realitzarem des del Parlament un registre dels lobbys de pressió de les Illes Balears.",
-    "26",
-    "Traducción: «Realizaremos desde el Parlamento un registro de los lobbies de presión de las Illes Balears». Registro autonómico, sin decir si será obligatorio ni prever multas: +1.",
+  noPosition(
+    "ceuta-embajador-marruecos",
+    "«Marroc», «Ceuta», «Melilla», «Sàhara», «frontera», «ambaixada», «sobirania», «integritat territorial», «duana». Ninguno de los dos programas menciona Marruecos, Ceuta o Melilla; «sobirania» solo aparece referida a las Illes Balears (fiscal, energética, de datos)",
   ),
   verified(
     "iva-primera-vivienda",

@@ -87,13 +87,19 @@ export const stances: Stance[] = [
   noPosition("okupacion-desalojo", "«ocupación», «okupa», «desalojo»"),
   noPosition("inmigracion-competencias-cataluna", "«inmigración», «Cataluña», «competencias»"),
   noPosition("tauromaquia-patrimonio", "«tauromaquia», «toros», «corrida»"),
-  noPosition("prisiones-agentes-autoridad", "«prisiones», «penitenciari», «funcionarios de prisiones», «agentes de la autoridad» (solo el Juzgado de Vigilancia Penitenciaria, p. 10)"),
+  noPosition(
+    "oficina-anticorrupcion",
+    "«corrupción», «anticorrupción», «antifraude», «integridad», «oficina», «agencia», «autoridad independiente», «Fiscalía Anticorrupción», «conflicto de intereses», «malversación», «denunciantes». No aparece «corrupción» en todo el programa; «oficina» y «agencia» solo para atención al ciudadano, turismo y cooperación (pp. 9, 74, 84, 112), y «transparencia» solo de forma genérica",
+  ),
   noPosition(
     "prostitucion-abolicion",
     "«prostitución», «proxenetismo», «trata», «explotación sexual». Solo propone vetar la publicidad institucional en medios «que realicen publicidad de la prostitución» (p. 81) y «un Plan contra la Explotación Sexual en el Principado de Asturias, encaminado a rescatar y ofrecer alternativas a las mujeres víctimas» (p. 82); nada sobre castigar al cliente o al proxeneta",
   ),
   noPosition("impuesto-banca", "«banca», «bancos», «entidades financieras», «gravamen», «beneficios extraordinarios»"),
-  noPosition("registro-lobbies", "«lobby», «grupos de interés», «grupos de presión», «registro de transparencia», «huella normativa»"),
+  noPosition(
+    "ceuta-embajador-marruecos",
+    "«Marruecos», «Ceuta», «Melilla», «Sáhara», «frontera», «embajada», «soberanía», «integridad territorial», «aduana». No menciona Marruecos, Ceuta ni Melilla; solo la cooperación con el pueblo saharaui y sus refugiados (p. 84), que no puntúa, y ventajas «aduaneras» de zonas francas en los puertos asturianos (p. 39)",
+  ),
   noPosition(
     "iva-primera-vivienda",
     "«IVA», «superreducido», «primera vivienda», «Transmisiones», «Actos Jurídicos», «compra de una vivienda». No trata los impuestos de la compraventa; solo propone, para los concejos en riesgo de despoblación, una deducción autonómica en el IRPF del 5 % por adquisición, construcción o rehabilitación de vivienda habitual (p. 123), que es un impuesto sobre la renta y no se extrapola al IVA de la compra",

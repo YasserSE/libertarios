@@ -116,32 +116,4 @@ export const quotes: Quote[] = [
     videoUrl: "https://app.congreso.es/v1/15774759I",
     i18n: ROLE_XV_I18N,
   },
-  {
-    partyId: "bng",
-    questionId: "registro-lobbies",
-    speaker: SPEAKER,
-    role: ROLE_XV,
-    date: "2026-09-16",
-    // DSCD (p. 70), traducción del propio Diario: «dar consideración legal de lobbies a las organizaciones
-    // sindicales es un despropósito mayúsculo, que desfigura la función que incluso constitucionalmente tienen
-    // en defensa de las entidades de los trabajadores y trabajadoras.»
-    text: "dar a consideración legal de lobbies ás organizacións sindicais é un despropósito maiúsculo que deturpa a función que mesmo constitucionalmente teñen de defensa dos intereses dos traballadores e traballadoras.",
-    source: dscd(15, "205", 69, "2026-09-16", "DSCD Pleno núm. 205 (XV), 16-9-2026 — Convalidación del Real Decreto-ley 21/2026, de transparencia e integridad de los grupos de interés"),
-    videoUrl: "https://app.congreso.es/v1/15778461I",
-    i18n: ROLE_XV_I18N,
-  },
-  {
-    partyId: "bng",
-    questionId: "registro-lobbies",
-    speaker: SPEAKER,
-    role: ROLE_XV,
-    date: "2026-09-16",
-    // DSCD (p. 70), traducción del propio Diario: «El BNG no se opondrá a que se pueda avanzar siempre y
-    // cuando haya disposición a la tramitación del proyecto de ley e incorporar los cambios necesarios que
-    // acabo de indicar.»
-    text: "O BNG non se oporá a que se poda avanzar sempre e cando haxa disposición á tramitación como proxecto de lei e a incorporar as mudanzas necesarias na dirección que veño de indicar.",
-    source: dscd(15, "205", 69, "2026-09-16", "DSCD Pleno núm. 205 (XV), 16-9-2026 — Convalidación del Real Decreto-ley 21/2026, de transparencia e integridad de los grupos de interés"),
-    videoUrl: "https://app.congreso.es/v1/15778461I",
-    i18n: ROLE_XV_I18N,
-  },
 ];

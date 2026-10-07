@@ -109,10 +109,6 @@ export const stances: Stance[] = [
     source: at(56),
   }),
   sinPosicion(
-    "prisiones-agentes-autoridad",
-    "«penitenci», «prisiones», «prisión», «cárcel», «agente(s) de (la) autoridad», «funcionarios de prisiones». Habla de sanidad penitenciaria (pp. 92 y 133), de suprimir la prisión permanente revisable (p. 133) y de que en la policía haya funciones «que no requieran ser agente de autoridad» (p. 131); nada sobre la condición de los funcionarios de prisiones",
-  ),
-  sinPosicion(
     "prostitucion-abolicion",
     "«prostitu», «proxenet», «abolic», «tercería», «cliente», «trabajo sexual». Solo una ley integral contra la trata y «consolidar el Plan de Inserción sociolaboral dirigido a mujeres víctimas de trata y de explotación sexual y a mujeres en situación de prostitución» (p. 110); nada sobre castigar a quien paga ni el proxenetismo consentido",
   ),
@@ -136,14 +132,18 @@ export const stances: Stance[] = [
     source: at(16),
     note: "Sigue: «Es justo que quienes, por el contrario, se han beneficiado de la subida de los precios y de los tipos de interés contribuyan a sufragarlas.» Defiende el gravamen sobre los beneficios de la subida de tipos, pero se compromete a mantenerlo, no a subirlo ni a duplicarlo: +1. En las pp. 8, 77 y 79 se financia un bono hipotecario «con cargo al impuesto extraordinario a la banca».",
   }),
-  cell("registro-lobbies", {
+  cell("oficina-anticorrupcion", {
     position: 1,
     status: "verificado",
-    reviewer: { position: 2, agrees: true },
+    reviewer: { position: 1, agrees: true },
     confidence: "media",
     quote:
-      "Promoveremos la regulación de los grupos de interés, limitando su influencia y estableciendo la difusión pública obligatoria de sus actividades.",
-    source: at(146),
-    note: "Está en el apartado «Unas instituciones europeas transparentes al servicio de la ciudadanía», es decir, referido a la UE, no al Gobierno de España; no menciona registro ni multas: +1. Buscado también «lobby», «grupos de presión», «huella normativa», «puertas giratorias»: sin más resultados.",
+      "se mejorará la independencia, autonomía, funciones y recursos operativos de la autoridad pública creada en la débil transposición realizada por la Ley 2/2023 de 20 de febrero de la Directiva 2019/1937 de la Unión Europea.",
+    source: at(17),
+    note: "Medida 11 «Reducción del fraude fiscal y mejorar los instrumentos contra la corrupción»; la cita es el final de una frase larga que empieza con medidas contra el fraude fiscal. Refuerza como independiente un órgano estatal ya existente (la Autoridad Independiente de Protección del Informante de la Ley 2/2023) sin crear una oficina nueva ni concretar funciones de investigación o sanción: +1. Otras menciones: «mecanismos de prevención de la corrupción (buzón anónimo para las personas denunciantes)» (p. 119), «políticas de integridad y de rendición de cuentas» (p. 120) y, en el ámbito de la UE, «el fortalecimiento de la Oficina Europea de Lucha contra el Fraude» (p. 146). Buscado «corrup», «anticorrup», «antifraude», «integridad», «oficina», «agencia», «autoridad independiente», «conflicto de intereses», «malversación», «denunciantes».",
   }),
+  sinPosicion(
+    "ceuta-embajador-marruecos",
+    "«Marruecos», «Ceuta», «Melilla», «Sáhara», «saharaui», «frontera», «embajad», «soberanía», «integridad territorial», «aduana», «Magreb». Programa anterior a la crisis de julio de 2026. Sobre el Sáhara (p. 141): dar «marcha atrás con celeridad al cambio de posición adoptado en 2022», apoyar la libre determinación y, desde la UE, «revisar, en consecuencia, los diferentes acuerdos entre la Unión Europea y Marruecos que puedan afectar al Sáhara Occidental»; es sobre el Sáhara, no sobre Ceuta, y no puntúa. Vecindad Sur (p. 141): «En situaciones de tensión, apostaremos por el diálogo, sin abandonar los valores y objetivos propios, evitando una política puramente reactiva», referido al Magreb en general, sin nombrar a Marruecos ni Ceuta. Frontera Sur (p. 149): poner fin a los acuerdos de externalización de fronteras con países que no garantizan los derechos humanos y que no se repita la masacre de Melilla de junio de 2022; es política migratoria, no presión a Marruecos por Ceuta",
+  ),
 ];

@@ -108,16 +108,6 @@ const programme: Record<string, ProgrammeStance> = {
   "tauromaquia-patrimonio": sinPosicion(
     "Buscado «taurin», «tauromaquia», «toros», «corrida», «festejos», «tradici», «patrimonio cultural inmaterial»: sin resultados. La medida 77 (p. 31) sobre la caza como «acervo cultural» no trata la tauromaquia.",
   ),
-  "prisiones-agentes-autoridad": {
-    position: 2,
-    status: "verificado",
-    reviewer: { position: 2, agrees: true },
-    confidence: "alta",
-    quote:
-      "REFORMAREMOS LA LEY GENERAL PENITENCIARIA incluyendo, entre otros aspectos, la consideración de los funcionarios de prisiones como agentes de la autoridad.",
-    source: at("80"),
-    note: "Medida 264; sigue «Mejoraremos sus condiciones sociolaborales». Página impresa 78.",
-  },
   "prostitucion-abolicion": sinPosicion(
     "Buscado «prostitu», «proxenet», «abolic», «tercería», «cliente», «explotación sexual». Lo único es la medida 205 (p. 62): una ley orgánica integral «DE LUCHA CONTRA LA TRATA CON FINES DE EXPLOTACIÓN SEXUAL», en la que «Perseguiremos a los proxenetas y el beneficio económico extraído de esta actividad por terceras personas»; se refiere a la trata, no a la prostitución consentida, ni a quien paga ni a quien la ejerce. No se extrapola.",
   ),
@@ -135,17 +125,12 @@ const programme: Record<string, ProgrammeStance> = {
   "impuesto-banca": sinPosicion(
     "Buscado «banca», «bancos», «bancari», «entidades financieras», «gravamen», «impuestos temporales», «beneficios extraordinarios», «caídos del cielo» y leído el objetivo «Controlar el déficit y la deuda y reducir la presión fiscal» (pp. 23-24): ninguna mención al gravamen temporal sobre la banca. Solo «Eliminaremos el impuesto a las grandes fortunas» (p. 23), que es otro impuesto.",
   ),
-  "registro-lobbies": {
-    position: 1,
-    status: "verificado",
-    reviewer: { position: 1, agrees: true },
-    confidence: "media",
-    quote:
-      "SE PROCEDERÁ A UNA REGULACIÓN DE LOS LOBBIES Y HUELLA LEGISLATIVA, es decir, una ficha pública para cada proyecto o proposición de ley en la que se señale quién intermedió o negoció durante el proceso, quien enmendó y quien votó, dejando constancia real de los procesos de influencia sobre cada texto legislativo.",
-    source: at("74"),
-    note:
-      "Medida 236. Compromete regular los lobbies, pero lo que concreta es la huella legislativa de cada ley, no un registro obligatorio de grupos de interés ante el Gobierno ni multas: +1. La extracción da «LEGISLA TIV A» por el maquetado. Página impresa 72.",
-  },
+  "oficina-anticorrupcion": sinPosicion(
+    "Revisión ciega del 2026-10-07: la cita de la medida 248 (p. 76, impresa 74) —«REFORMAREMOS LA LEY REGULADORA DE LA PROTECCIÓN DE LAS PERSONAS QUE INFORMEN SOBRE INFRACCIONES NORMATIVAS Y DE LUCHA CONTRA LA CORRUPCIÓN para asegurar la independencia de las actuaciones y la no injerencia del Gobierno.»— no nombra ningún organismo; el revisor la consideró fuera de tema y, con el mismo criterio que en el resto de partidos, no puntúa. Nota original: Medida 248. La ley que cita (Ley 2/2023) es la que crea la Autoridad Independiente de Protección del Informante; reforzar la independencia de un órgano de control existente, sin crear una oficina nueva ni nombrar funciones de investigación o sanción: +1. En la p. 67 pide además «reguladores y órganos de control independientes» en general. Buscado también «corrup», «anticorrup», «antifraude», «integridad», «oficina», «agencia», «conflicto de intereses», «malversación» (medida 220, p. 72: recuperar el delito de malversación), «denunciantes». La extracción da «NORMA TIV AS» por el maquetado. Página impresa 74.",
+  ),
+  "ceuta-embajador-marruecos": sinPosicion(
+    "Programa anterior a la crisis de julio de 2026. Buscado «Marruecos», «Ceuta», «Melilla», «Sáhara», «frontera», «embajad», «soberanía», «integridad territorial», «aduana», «Magreb». Aparece: medida 261 (p. 79), más apoyo del Estado y nueva financiación para Ceuta y Melilla como «única frontera terrestre de la Unión Europea en África»; p. 95, la sociedad que «ha sabido mantener un razonable equilibrio entre Marruecos y Argelia»; p. 101, «España debe recuperar una política exterior que haga compatible una relación de vecindad profunda y sólida con Marruecos y con Argelia» y medida 328, «UNA RELACIÓN EQUILIBRADA CON LOS PAÍSES DEL MAGREB» basada «en el respeto mutuo» y apoyo a la ONU en el Sáhara Occidental. Nada sobre presión diplomática a Marruecos ni exigencias sobre la frontera de Ceuta y Melilla; la «relación profunda y sólida» se plantea como equilibrio con Argelia, no como compromiso con la etapa de 2022 ni rechazo a la presión: no puntúa.",
+  ),
 };
 
 export const stances: Stance[] = Object.entries(programme).map(([questionId, p]) => ({

@@ -46,10 +46,8 @@ export const stances: Stance[] = [
   noPosition("okupacion-desalojo", "«ocupación», «okupa», «desalojo»"),
   noPosition("inmigracion-competencias-cataluna", "«inmigración», «Cataluña»"),
   noPosition("tauromaquia-patrimonio", "«tauromaquia», «toros», «corrida»"),
-  noPosition("prisiones-agentes-autoridad", "«prisiones», «penitenciari», «funcionarios de prisiones», «agentes de la autoridad» (solo plazas de docentes en Instituciones Penitenciarias, p. 21)"),
   noPosition("prostitucion-abolicion", "«prostitución», «proxenetismo», «trata», «explotación sexual»"),
   noPosition("impuesto-banca", "«banca», «bancos», «entidades financieras», «gravamen»"),
-  noPosition("registro-lobbies", "«lobby», «grupos de interés», «grupos de presión», «registro de transparencia»"),
   {
     partyId: "soria-ya",
     questionId: "iva-primera-vivienda",
@@ -65,4 +63,6 @@ export const stances: Stance[] = [
     },
     record: null,
   },
+  noPosition("oficina-anticorrupcion", "«corrupción», «anticorrupción», «antifraude», «integridad», «oficina», «agencia», «autoridad independiente», «Fiscalía», «conflicto de intereses», «malversación», «denunciantes», «transparencia»"),
+  noPosition("ceuta-embajador-marruecos", "«Marruecos», «Ceuta», «Melilla», «Sáhara», «frontera», «embajada», «soberanía», «integridad territorial», «aduana»"),
 ];

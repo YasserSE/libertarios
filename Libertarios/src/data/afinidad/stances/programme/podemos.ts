@@ -124,10 +124,6 @@ export const stances: Stance[] = [
     note: "No cita la Ley 18/2013, pero propone acabar con la excepción legal de la tauromaquia y prohibir los espectáculos con maltrato animal, de ahí confianza media.",
   }),
   sinPosicion(
-    "prisiones-agentes-autoridad",
-    "«penitenci», «prisiones», «prisión», «cárcel», «presos», «agente(s) de (la) autoridad», «funcionarios de prisiones». «Prisión» solo aparece en política exterior (pp. 114 y 119)",
-  ),
-  sinPosicion(
     "prostitucion-abolicion",
     "«prostitu», «proxenet», «abolic», «tercería», «cliente», «trabajo sexual». Solo «Aumentar los fondos destinados a la lucha contra la trata, trata con fines de explotaciones sexual y mujeres en contextos de prostitución» y planes de inserción sociolaboral (p. 22); nada sobre castigar a quien paga ni el proxenetismo consentido",
   ),
@@ -145,14 +141,18 @@ export const stances: Stance[] = [
     source: { ...EUROPEAS_2024, page: "58-59" },
     note: "La frase empieza en la p. 58 y termina en la p. 59 (es una sola frase). Gravamen sobre los beneficios extraordinarios de la banca por la subida de tipos, pero a escala europea y sin las cifras del enunciado (duplicar el gravamen, 75 %): +1.",
   }),
-  cell("registro-lobbies", {
+  cell("oficina-anticorrupcion", {
     position: 1,
     status: "verificado",
-    reviewer: { position: 2, agrees: true },
+    reviewer: { position: 1, agrees: true },
     confidence: "media",
     quote:
-      "Impulsaremos medidas para limitar y controlar las actividades de los lobbies. Se hará una difusión pública obligatoria de su actividad más transparente que el actual registro oficial de grupos de presión",
-    source: at(15),
-    note: "La frase sigue: «de modo que cada vez que un lobby con intereses económicos se reúna con algún miembro de la Comisión, del Consejo, del Parlamento o con un o una alto cargo de la UE, la ciudadanía pueda saberlo». Referido a las instituciones de la UE, no al Gobierno de España, y sin multas: +1.",
+      "Se promoverá la conversión de la Oficina Europea de Lucha contra el Fraude (OLAF) en agencia europea, lo que aumentará sus recursos para investigar el fraude, la evasión y el blanqueo de capitales, y se reforzará su control democrático.",
+    source: at(60),
+    note: "Organismo con funciones de investigación, pero de ámbito europeo y sin hablar de independencia: +1. Lo repite en el «Plan Europeo contra la Corrupción» (pp. 16-17: «reforzaremos la Oficina Europea de Lucha contra el Fraude (OLAF), que se convertirá en agencia, y su control democrático»), donde también propone que la UE establezca «un cuerpo de policía especializado en delitos de corrupción y delitos financieros» y un programa de protección para quien denuncie la corrupción (también p. 18). Nada sobre un organismo estatal español. Buscado «corrup», «anticorrup», «antifraude», «integridad», «oficina», «agencia», «autoridad independiente», «conflicto de intereses», «malversación», «denunciantes».",
   }),
+  sinPosicion(
+    "ceuta-embajador-marruecos",
+    "«Marruecos», «Ceuta», «Melilla», «Sáhara», «saharaui», «frontera», «embajad», «soberanía», «integridad territorial», «aduana», «Magreb». Programa anterior a la crisis de julio de 2026. Sobre el Sáhara (p. 117): critica respaldar «el plan de ocupación de Marruecos», apoya el referéndum, exige que la UE «ceje en su empeño de negociar los acuerdos de pesca en aguas saharauis con Marruecos» y relaciones de alto nivel con la RASD; es sobre el Sáhara, no sobre Ceuta, y no puntúa. Tras el «Moroccogate» (p. 15), investigar las influencias de Marruecos, Catar, Israel y Turquía en la UE y retirarles el acceso a sus edificios (injerencia en la UE, no Ceuta). Ceuta solo aparece por El Tarajal 2014 en el Día Europeo de las Víctimas de las Fronteras (p. 52). La nueva política de vecindad sur (p. 118) trata a la región como «socio estratégico» sin nombrar a Marruecos",
+  ),
 ];

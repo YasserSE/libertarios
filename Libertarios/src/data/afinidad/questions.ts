@@ -28,9 +28,15 @@
  *   segunda revisión del mismo día se cambió «seguro-ingresos-agrarios» (poco
  *   relieve público) por «iva-primera-vivienda», y «jornada-37-5» ganó una
  *   segunda ancla que separa PP de VOX.
+ * - **Corrupción y Ceuta/Marruecos** (revisión del 2026-10-07, petición del
+ *   dueño; `docs/AFINIDAD-PREGUNTAS.md` §9): «prisiones-agentes-autoridad» y
+ *   «registro-lobbies» se sustituyen por «ceuta-embajador-marruecos» y
+ *   «oficina-anticorrupcion». El Sáhara Occidental no tiene pregunta propia:
+ *   en sus votaciones el PSOE vota solo frente al resto (ver
+ *   `rejectedCandidates`).
  * - **Reparto temático**: vivienda (3), impuestos (2), banca, trabajo,
- *   seguridad, modelo territorial (2), energía, prostitución, defensa,
- *   transparencia, cultura.
+ *   política exterior (Ceuta/Marruecos), modelo territorial (2), energía,
+ *   prostitución, defensa, corrupción, cultura.
  *
  * Votaciones de la XIV: los grupos de entonces no son los de ahora (Unidas
  * Podemos = GCUP-EC-GC, Junts y BNG estaban en el Grupo Plural, existía Cs). El
@@ -192,45 +198,45 @@ export const questions: Question[] = [
     },
   },
   {
-    id: "prisiones-agentes-autoridad",
+    id: "ceuta-embajador-marruecos",
     order: 4,
-    topic: "seguridad",
-    label: "prisiones: agentes de la autoridad",
+    topic: "exterior",
+    label: "Ceuta: embajador en Marruecos a consultas",
     text: {
-      es: "Los funcionarios de prisiones deben tener por ley la condición de agentes de la autoridad.",
-      ca: "Els funcionaris de presons han de tenir per llei la condició d'agents de l'autoritat.",
-      gl: "Os funcionarios de prisións deben ter por lei a condición de axentes da autoridade.",
-      eu: "Espetxeetako funtzionarioek legez agintaritzaren agente izaera izan behar dute.",
+      es: "Tras la entrada masiva de personas en Ceuta en julio de 2026, España debe llamar a consultas a su embajador en Marruecos y exigir explicaciones al Gobierno marroquí.",
+      ca: "Després de l'entrada massiva de persones a Ceuta el juliol de 2026, Espanya ha de cridar a consultes el seu ambaixador al Marroc i exigir explicacions al Govern marroquí.",
+      gl: "Tras a entrada masiva de persoas en Ceuta en xullo de 2026, España debe chamar a consultas ao seu embaixador en Marrocos e esixir explicacións ao Goberno marroquí.",
+      eu: "2026ko uztailean jende asko Ceutan masiboki sartu ondoren, Espainiak Marokon duen enbaxadorea kontsultetara deitu behar du eta Marokoko Gobernuari azalpenak eskatu.",
     },
     rationale:
-      "Mide el apoyo a reconocer por ley a los funcionarios de la Administración Penitenciaria como agentes de la autoridad (modificación del artículo 80 de la Ley Orgánica General Penitenciaria). Ancla: votación de conjunto de la proposición de ley orgánica en el Pleno (XV), aprobada por 323 votos a favor y 21 en contra. Separa a Sumar (sí) de Podemos, ERC, EH Bildu y BNG (no).",
+      "Mide qué respuesta diplomática se apoya ante Marruecos tras la crisis de Ceuta de los días 30 y 31 de julio de 2026. Ancla: punto 3 del segundo apartado de la moción del GPP sobre la crisis de Ceuta (XV; BOCG-15-D-590), aprobado por 195 votos a favor, 139 en contra y 13 abstenciones. Pedía convocar de nuevo a la embajadora de Marruecos por las reivindicaciones de miembros de su Gobierno sobre Ceuta y Melilla, exigir explicaciones sobre la actuación de las autoridades marroquíes en esos días y llamar a consultas al embajador de España en Marruecos. Separa a Sumar (sí) de PSOE, Podemos, ERC, EH Bildu, BNG y Compromís (no); Junts, PNV y CC se abstuvieron.",
     anchors: [
       {
         legislature: "XV",
-        session: 185,
-        date: "2026-06-11",
-        number: 39,
+        session: 198,
+        date: "2026-09-16",
+        number: 14,
         title:
-          "Proposición de Ley Orgánica por la que se modifica el artículo ochenta de la Ley Orgánica 1/1979, de 26 de septiembre, General Penitenciaria, para reconocer, a efectos legales, el carácter de agentes de la autoridad a los funcionarios de la Administración Penitenciaria. Votación de conjunto, por tener la misma carácter orgánico.",
-        url: `${CONGRESO}/Leg15/Sesion185/20260611/Votacion039/VOT_20260611145750.json`,
+          "Moción consecuencia de interpelación urgente del Grupo Parlamentario Popular en el Congreso, sobre la crisis que atraviesa la Ciudad Autónoma de Ceuta. Votación separada por puntos. Punto 3 del segundo apartado.",
+        url: `${CONGRESO}/Leg15/Sesion198/20260916/Votacion014/VOT_20260916195402.json`,
         agreeMeans: "si",
       },
     ],
     i18n: {
       ca: {
-        label: "presons: agents de l'autoritat",
+        label: "Ceuta: ambaixador al Marroc a consultes",
         rationale:
-          "Mesura el suport a reconèixer per llei els funcionaris de l'Administració Penitenciària com a agents de l'autoritat (modificació de l'article 80 de la Llei orgànica general penitenciària). Àncora: votació de conjunt de la proposició de llei orgànica al Ple (XV), aprovada per 323 vots a favor i 21 en contra. Separa Sumar (sí) de Podemos, ERC, EH Bildu i BNG (no).",
+          "Mesura quina resposta diplomàtica es dona suport davant el Marroc després de la crisi de Ceuta dels dies 30 i 31 de juliol de 2026. Àncora: punt 3 del segon apartat de la moció del GPP sobre la crisi de Ceuta (XV; BOCG-15-D-590), aprovat per 195 vots a favor, 139 en contra i 13 abstencions. Demanava convocar de nou l'ambaixadora del Marroc per les reivindicacions de membres del seu Govern sobre Ceuta i Melilla, exigir explicacions sobre l'actuació de les autoritats marroquines aquells dies i cridar a consultes l'ambaixador d'Espanya al Marroc. Separa Sumar (sí) del PSOE, Podemos, ERC, EH Bildu, BNG i Compromís (no); Junts, PNV i CC es van abstenir.",
       },
       gl: {
-        label: "prisións: axentes da autoridade",
+        label: "Ceuta: embaixador en Marrocos a consultas",
         rationale:
-          "Mide o apoio a recoñecer por lei os funcionarios da Administración Penitenciaria como axentes da autoridade (modificación do artigo 80 da Lei orgánica xeral penitenciaria). Áncora: votación de conxunto da proposición de lei orgánica no Pleno (XV), aprobada por 323 votos a favor e 21 en contra. Separa Sumar (si) de Podemos, ERC, EH Bildu e BNG (non).",
+          "Mide que resposta diplomática se apoia ante Marrocos tras a crise de Ceuta dos días 30 e 31 de xullo de 2026. Áncora: punto 3 do segundo apartado da moción do GPP sobre a crise de Ceuta (XV; BOCG-15-D-590), aprobado por 195 votos a favor, 139 en contra e 13 abstencións. Pedía convocar de novo a embaixadora de Marrocos polas reivindicacións de membros do seu Goberno sobre Ceuta e Melilla, esixir explicacións sobre a actuación das autoridades marroquís neses días e chamar a consultas o embaixador de España en Marrocos. Separa Sumar (si) de PSOE, Podemos, ERC, EH Bildu, BNG e Compromís (non); Junts, PNV e CC abstivéronse.",
       },
       eu: {
-        label: "espetxeak: agintaritzaren agenteak",
+        label: "Ceuta: Marokoko enbaxadorea kontsultetara",
         rationale:
-          "Espetxe Administrazioko funtzionarioak legez agintaritzaren agente gisa aitortzearen aldeko jarrera neurtzen du (Espetxeei buruzko Lege Organiko Orokorraren 80. artikuluaren aldaketa). Aingura: lege organikoaren proposamenaren testu osoaren bozketa Osoko Bilkuran (XV), 323 aldeko botoz eta 21 kontrakoz onartua. Sumar (bai) bereizten du Podemos, ERC, EH Bildu eta BNGtik (ez).",
+          "2026ko uztailaren 30eko eta 31ko Ceutako krisiaren ondoren Marokoren aurrean zer erantzun diplomatiko babesten den neurtzen du. Aingura: GPPk Ceutako krisiari buruz aurkeztutako mozioaren bigarren ataleko 3. puntua (XV; BOCG-15-D-590), 195 aldeko botoz, 139 kontrakoz eta 13 abstentziorekin onartua. Marokoko enbaxadorea berriro deitzea eskatzen zuen, haren Gobernuko kide batzuek Ceutari eta Melillari buruz egindako aldarrikapenengatik, egun haietan Marokoko agintariek izandako jardunari buruzko azalpenak eskatzea, eta Espainiak Marokon duen enbaxadorea kontsultetara deitzea. Sumar (bai) bereizten du PSOE, Podemos, ERC, EH Bildu, BNG eta Compromísetik (ez); Juntsek, EAJ-PNVk eta CCk abstentzioa egin zuten.",
       },
     },
   },
@@ -579,45 +585,44 @@ export const questions: Question[] = [
     },
   },
   {
-    id: "registro-lobbies",
+    id: "oficina-anticorrupcion",
     order: 13,
-    topic: "transparencia",
-    label: "registro obligatorio de lobbies",
+    topic: "corrupcion",
+    label: "oficina estatal independiente anticorrupción",
     text: {
-      es: "Los grupos de interés (lobbies) que tratan con el Gobierno deben inscribirse en un registro público obligatorio, con multas si incumplen sus normas de conducta.",
-      ca: "Els grups d'interès (lobbies) que tracten amb el Govern s'han d'inscriure en un registre públic obligatori, amb multes si incompleixen les seves normes de conducta.",
-      gl: "Os grupos de interese (lobbies) que tratan co Goberno deben inscribirse nun rexistro público obrigatorio, con multas se incumpren as súas normas de conduta.",
-      eu: "Gobernuarekin harremanak dituzten interes-taldeek (lobbyek) derrigorrezko erregistro publiko batean izena eman behar dute, eta isunak jaso jokabide-arauak betetzen ez badituzte.",
+      es: "Debe crearse una oficina estatal independiente contra la corrupción, con dirección elegida por el Congreso, que pueda investigar el uso de fondos públicos e imponer sanciones.",
+      ca: "S'ha de crear una oficina estatal independent contra la corrupció, amb una direcció elegida pel Congrés, que pugui investigar l'ús de fons públics i imposar sancions.",
+      gl: "Debe crearse unha oficina estatal independente contra a corrupción, cunha dirección elixida polo Congreso, que poida investigar o uso de fondos públicos e impor sancións.",
+      eu: "Ustelkeriaren aurkako estatuko bulego independente bat sortu behar da, Kongresuak hautatutako zuzendaritzarekin, funts publikoen erabilera ikertu eta zigorrak ezarri ahal izango dituena.",
     },
     rationale:
-      "Mide el apoyo a regular la actividad de los lobbies ante la Administración General del Estado. El Real Decreto-ley 21/2026 (BOE-A-2026-18148) creaba un Registro de grupos de interés público y obligatorio, principios de conducta, el informe de huella normativa y multas de 5.000 a 40.000 euros; también prohibía a los ex altos cargos hacer de lobby en su materia durante dos años. Ancla: convalidación, rechazada (XV), por lo que el decreto quedó derogado. Al ser un decreto-ley, el voto también puede reflejar el rechazo a regularlo por esa vía; se advierte al mostrar la votación.",
+      "Mide el apoyo a un órgano estatal independiente que prevenga e investigue la corrupción. La proposición de ley del GSUMAR de creación de la Oficina de prevención de la corrupción (BOCG-15-B-99-1) la configuraba con independencia orgánica y funcional, una dirección elegida por el Pleno del Congreso por mayoría de tres quintos, funciones de investigación sobre el uso de fondos públicos, contratos y subvenciones, y potestad sancionadora. Ancla: toma en consideración (XV), rechazada por 170 votos a favor y 176 en contra. Separa a Junts (no) de ERC y PNV (sí), y a UPN (abstención) de PP y VOX (no).",
     anchors: [
       {
         legislature: "XV",
-        session: 198,
-        date: "2026-09-16",
-        number: 16,
-        title:
-          "Real Decreto-ley 21/2026, de 25 de agosto, de transparencia e integridad de las actividades de los grupos de interés.",
-        url: `${CONGRESO}/Leg15/Sesion198/20260916/Votacion016/VOT_20260916195406.json`,
+        session: 131,
+        date: "2025-09-16",
+        number: 2,
+        title: "Proposición de Ley del Grupo Parlamentario Plurinacional SUMAR, de creación de la Oficina de prevención de la corrupción.",
+        url: `${CONGRESO}/Leg15/Sesion131/20250916/Votacion002/VOT_20250916211206.json`,
         agreeMeans: "si",
       },
     ],
     i18n: {
       ca: {
-        label: "registre obligatori de lobbies",
+        label: "oficina estatal independent anticorrupció",
         rationale:
-          "Mesura el suport a regular l'activitat dels lobbies davant l'Administració General de l'Estat. El Reial decret llei 21/2026 (BOE-A-2026-18148) creava un Registre de grups d'interès públic i obligatori, principis de conducta, l'informe d'empremta normativa i multes de 5.000 a 40.000 euros; també prohibia als ex alts càrrecs fer de lobby en el seu àmbit durant dos anys. Àncora: convalidació, rebutjada (XV), de manera que el decret va quedar derogat. Com que és un decret llei, el vot també pot reflectir el rebuig a regular-ho per aquesta via; s'adverteix en mostrar la votació.",
+          "Mesura el suport a un òrgan estatal independent que previngui i investigui la corrupció. La proposició de llei del GSUMAR de creació de l'Oficina de prevenció de la corrupció (BOCG-15-B-99-1) la configurava amb independència orgànica i funcional, una direcció elegida pel Ple del Congrés per majoria de tres cinquens, funcions d'investigació sobre l'ús de fons públics, contractes i subvencions, i potestat sancionadora. Àncora: presa en consideració (XV), rebutjada per 170 vots a favor i 176 en contra. Separa Junts (no) d'ERC i el PNV (sí), i UPN (abstenció) del PP i VOX (no).",
       },
       gl: {
-        label: "rexistro obrigatorio de lobbies",
+        label: "oficina estatal independente anticorrupción",
         rationale:
-          "Mide o apoio a regular a actividade dos lobbies ante a Administración Xeral do Estado. O Real decreto-lei 21/2026 (BOE-A-2026-18148) creaba un Rexistro de grupos de interese público e obrigatorio, principios de conduta, o informe de pegada normativa e multas de 5.000 a 40.000 euros; tamén prohibía aos ex altos cargos facer de lobby na súa materia durante dous anos. Áncora: convalidación, rexeitada (XV), polo que o decreto quedou derrogado. Ao ser un decreto-lei, o voto tamén pode reflectir o rexeitamento a regulalo por esa vía; advírtese ao mostrar a votación.",
+          "Mide o apoio a un órgano estatal independente que preveña e investigue a corrupción. A proposición de lei do GSUMAR de creación da Oficina de prevención da corrupción (BOCG-15-B-99-1) configurábaa con independencia orgánica e funcional, unha dirección elixida polo Pleno do Congreso por maioría de tres quintos, funcións de investigación sobre o uso de fondos públicos, contratos e subvencións, e potestade sancionadora. Áncora: toma en consideración (XV), rexeitada por 170 votos a favor e 176 en contra. Separa Junts (non) de ERC e o PNV (si), e UPN (abstención) do PP e VOX (non).",
       },
       eu: {
-        label: "lobbyen derrigorrezko erregistroa",
+        label: "ustelkeriaren aurkako estatuko bulego independentea",
         rationale:
-          "Estatuko Administrazio Orokorraren aurrean lobbyen jarduera arautzearen aldeko jarrera neurtzen du. 21/2026 Errege Lege-dekretuak (BOE-A-2026-18148) interes-taldeen erregistro publiko eta derrigorrezkoa sortzen zuen, baita jokabide-printzipioak, arau-aztarnaren txostena eta 5.000 eta 40.000 euro bitarteko isunak ere; gainera, goi-kargudun ohiei debekatzen zien bi urtez beren arloan lobby gisa jardutea. Aingura: baliozkotzea, baztertua (XV); beraz, dekretua indargabetuta geratu zen. Lege-dekretu bat zenez, botoak bide horretatik arautzearen aurkako jarrera ere adieraz dezake; bozketa erakustean ohartarazten da.",
+          "Ustelkeria prebenitu eta ikertuko duen estatuko organo independente baten aldeko jarrera neurtzen du. GSUMARek Ustelkeria prebenitzeko Bulegoa sortzeko aurkeztutako lege-proposamenak (BOCG-15-B-99-1) independentzia organiko eta funtzionala ematen zion, Kongresuko Osoko Bilkurak bost hirugarrenen gehiengoz hautatutako zuzendaritza, funts publikoen, kontratuen eta diru-laguntzen erabilera ikertzeko eginkizunak, eta zigortzeko ahala. Aingura: aintzat hartzea (XV), 170 aldeko botoz eta 176 kontrakoz baztertua. Junts (ez) bereizten du ERCtik eta EAJ-PNVtik (bai), eta UPN (abstentzioa) PPtik eta VOXetik (ez).",
       },
     },
   },
@@ -809,5 +814,64 @@ export const rejectedCandidates: Array<{
     anchorUrl: `${CONGRESO}/Leg15/Sesion167/20260324/Votacion002/VOT_20260324205013.json`,
     reason:
       "Retirada el 2026-10-06 (segunda revisión, docs/AFINIDAD-PREGUNTAS.md §8): discriminaba bien en hechos (53 pares separados; era la única que separaba ERC de EH Bildu y Compromís de Sumar), pero es un tema de poco relieve público y el test tiene que ser reconocible para cualquier votante. Se sustituye por «iva-primera-vivienda» (61 pares), que mantiene esas dos separaciones.",
+  },
+  // ── Retiradas y descartadas en la revisión del 2026-10-07 (corrupción y Ceuta/Marruecos/Sáhara) ──
+  // Petición del dueño: preguntas sobre corrupción y sobre Ceuta, Marruecos y
+  // el Sáhara Occidental, manteniendo 15. Detalle y cifras:
+  // docs/AFINIDAD-PREGUNTAS.md §9.
+  {
+    id: "prisiones-agentes-autoridad",
+    statement: "Los funcionarios de prisiones deben tener por ley la condición de agentes de la autoridad.",
+    anchorUrl: `${CONGRESO}/Leg15/Sesion185/20260611/Votacion039/VOT_20260611145750.json`,
+    reason:
+      "Retirada el 2026-10-07 para dar sitio a «ceuta-embajador-marruecos»: tema de poco relieve público (una de las dos candidatas a salir que propuso el dueño). Discriminaba bien (49 pares), pero la pregunta que entra separa más (63 pares) y también a Sumar del resto de la izquierda; con el cambio no aparece ningún problema nuevo de dominancia en hechos ni por comunidad.",
+  },
+  {
+    id: "registro-lobbies",
+    statement:
+      "Los grupos de interés (lobbies) que tratan con el Gobierno deben inscribirse en un registro público obligatorio, con multas si incumplen sus normas de conducta.",
+    anchorUrl: `${CONGRESO}/Leg15/Sesion198/20260916/Votacion016/VOT_20260916195406.json`,
+    reason:
+      "Retirada el 2026-10-07 para dar sitio a «oficina-anticorrupcion», del mismo ámbito (integridad pública) y de más relieve. Su ancla era la convalidación de un decreto-ley, cuyo voto mezclaba la medida con el rechazo a regularla por esa vía.",
+  },
+  {
+    id: "sahara-plan-autonomia",
+    statement:
+      "España debe apoyar el plan de autonomía de Marruecos como base para resolver el conflicto del Sáhara Occidental.",
+    anchorUrl: `${CONGRESO}/Leg15/Sesion049/20240620/Votacion002/VOT_20240620132725.json`,
+    reason:
+      "Descartada el 2026-10-07. En las dos votaciones del Congreso sobre el giro del Gobierno (PNL de GCUP-EC-GC, ERC y EH Bildu, XIV, 7-4-2022, nº 1, 168/118/61; y punto 2 de la PNL del GPP «Recuperar la posición histórica de neutralidad activa», XV, 20-6-2024, nº 2, 228/121/0) el PSOE vota solo frente a todos los demás partidos con escaño (en 2022 VOX se abstuvo). Con `agreeMeans: \"no\"` solo el PSOE quedaría a favor: incumple el mínimo de 2 partidos por lado (ITEM_MIN_PER_SIDE) y separa 13 pares, el mínimo posible. Meterla como segunda ancla de «ceuta-embajador-marruecos» mezclaría dos medidas distintas en una afirmación.",
+  },
+  {
+    id: "ceuta-melilla-aduanas",
+    statement:
+      "España debe exigir a Marruecos la reapertura de la aduana comercial de Melilla y la apertura de la de Ceuta en un plazo máximo de noventa días.",
+    anchorUrl: `${CONGRESO}/Leg15/Sesion049/20240620/Votacion004/VOT_20240620132727.json`,
+    reason:
+      "Alternativa de Ceuta (punto 4 de la PNL del GPP del 20-6-2024, 181/146/21). Discrimina mucho (64 pares; separa Sumar/Podemos y Compromís/ERC), pero es de menos relieve que la crisis de Ceuta de 2026 y en la simulación dejaba más partidos por debajo del 2 % en el ranking combinado. Recuento ya verificado por si se recupera.",
+  },
+  {
+    id: "ceuta-devolucion",
+    statement:
+      "Las personas que entraron de forma irregular en Ceuta en julio de 2026 deben ser devueltas, y los menores no acompañados, entregados a sus familias o a los servicios de protección de su país cuando sea en su interés.",
+    anchorUrl: `${CONGRESO}/Leg15/Sesion198/20260916/Votacion013/VOT_20260916195400.json`,
+    reason:
+      "Alternativa de Ceuta (punto 2 del segundo apartado de la misma moción, 183/163/1). Toda la izquierda vota igual (no): Sumar, EH Bildu y Frente Amplio quedaban indistinguibles en hechos y tres partidos al 2 % en la simulación.",
+  },
+  {
+    id: "comision-investigacion-mascarillas",
+    statement:
+      "El Congreso debe crear una comisión de investigación sobre los contratos de material sanitario de la pandemia en todas las administraciones.",
+    anchorUrl: `${CONGRESO}/Leg15/Sesion033/20240321/Votacion014/VOT_20240321105720.json`,
+    reason:
+      "Única comisión de investigación del Congreso ligada a los contratos investigados en el caso Koldo (solicitud del PSOE, 21-3-2024, 175/33/136). Solo VOX en contra y el PP se abstuvo: incumple el mínimo de 2 partidos por lado. No hay en datos abiertos ninguna votación del Pleno del Congreso sobre una comisión del caso Koldo/Ábalos/Cerdán (la del PP se creó en el Senado).",
+  },
+  {
+    id: "ley-proteccion-informantes",
+    statement:
+      "La ley debe proteger a quien denuncie casos de corrupción en su empresa o administración y obligar a tener canales internos de denuncia.",
+    anchorUrl: `${CONGRESO}/Leg14/Sesion229/20221222/Votacion373/VOT_20230302133951.json`,
+    reason:
+      "Ley 2/2023 (dictamen, XIV, 22-12-2022, 200/142/4): PP y VOX en contra y todos los demás a favor, la división de bloques que se retiró en la revisión de discriminación; además, ya está en vigor.",
   },
 ];

@@ -70,10 +70,16 @@ export const stances: Stance[] = [
   sinPosicion("okupacion-desalojo", "okupación, ocupación ilegal, desalojo, desahucio"),
   sinPosicion("inmigracion-competencias-cataluna", "competencias de inmigración, Generalitat, Cataluña, delegación"),
   sinPosicion("tauromaquia-patrimonio", "tauromaquia, toros, festejos taurinos, bous"),
-  sinPosicion("prisiones-agentes-autoridad", "prisiones, penitenciario, funcionarios de prisiones, agentes de la autoridad, cárcel"),
+  sinPosicion(
+    "oficina-anticorrupcion",
+    "corrupción, anticorrupción, antifraude, integridad, oficina, agencia, autoridad independiente, Fiscalía Anticorrupción, conflicto de intereses, malversación, denunciantes (pág. 6 de 2023 solo pide «garantizar la transparencia, la rendición de cuentas y unas políticas antifraude efectivas que acaben con la corrupción», sin organismo de prevención o investigación; la «Oficina de Defensa del Territorio», pág. 17 de 2026, es un servicio de apoyo a ayuntamientos rurales, otro asunto)",
+  ),
   sinPosicion("prostitucion-abolicion", "prostitución, proxenetismo, trata, explotación sexual"),
   sinPosicion("impuesto-banca", "banca, bancos, entidades financieras, gravamen, beneficios extraordinarios"),
-  sinPosicion("registro-lobbies", "lobbies, grupos de interés, grupos de presión, registro de transparencia, huella normativa"),
+  sinPosicion(
+    "ceuta-embajador-marruecos",
+    "Marruecos, Ceuta, Melilla, Sáhara, frontera, embajada, soberanía, integridad territorial, aduana (Marruecos solo aparece en el de autonómicas 2026, pág. 19, para rechazar «la competencia desleal de los acuerdos de libre comercio con terceros países (Mercosur y Marruecos)» y pedir cláusulas espejo a los productos agroalimentarios; nada sobre Ceuta, Melilla o la frontera)",
+  ),
   {
     partyId: "aragon-existe",
     questionId: "iva-primera-vivienda",

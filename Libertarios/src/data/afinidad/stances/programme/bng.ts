@@ -72,8 +72,8 @@ export const stances: Stance[] = [
     record: null,
   },
   sinPosicion(
-    "prisiones-agentes-autoridad",
-    "«prisión», «penitenciari», «cárcere», «funcionariado», «axentes da autoridade». Solo pide derogar la prisión permanente revisable (p. 27), el traslado a Galicia de los presos gallegos (p. 28) y transferir la «saúde penal» (p. 37); nada sobre los funcionarios de prisiones",
+    "ceuta-embajador-marruecos",
+    "«Marrocos», «marroquí», «Ceuta», «Melilla», «Sáhara», «fronteira», «embaixada», «soberanía», «integridade territorial», «alfándega». Critica la asunción de la propuesta de Marruecos sobre el Sáhara y la «masacre de Melilla» (p. 5) y pide anular el cambio de posición sobre el Sáhara, condenar la «ocupación marroquí» e impulsar un referéndum de autodeterminación (p. 67); nada sobre una respuesta diplomática a Marruecos por Ceuta, Melilla o la frontera",
   ),
   sinPosicion(
     "amnistia",
@@ -145,8 +145,8 @@ export const stances: Stance[] = [
     record: null,
   },
   sinPosicion(
-    "registro-lobbies",
-    "«lobby», «grupos de interese», «rexistro», «portas xiratorias», «transparencia». Pide una «Regulación estrita das portas xiratorias e das incompatibilidades» (p. 29) y transparencia en la contratación pública (p. 30), pero nada sobre un registro de grupos de interés",
+    "oficina-anticorrupcion",
+    "«corrupción», «anticorrupción», «antifraude», «integridade», «oficina», «axencia», «autoridade independente», «fiscalía», «conflito de intereses», «malversación», «alertadores», «denunciantes». Las medidas «na loita contra a corrupción» (pp. 29-30) son inhabilitar a los cargos que cometan fraude fiscal, regular las puertas giratorias y las incompatibilidades y dar transparencia a la contratación pública; la única «Autoridade Independente» que propone es la de investigación de accidentes ferroviarios (p. 53). Ningún organismo contra la corrupción",
   ),
   sinPosicion("inmigracion-competencias-cataluna", "«Catalunya», «inmigración», «competencias». Las transferencias que pide son para Galicia"),
   sinPosicion("tauromaquia-patrimonio", "«tauromaquia», «touros», «corridas»"),

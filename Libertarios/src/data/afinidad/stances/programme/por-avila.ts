@@ -40,9 +40,9 @@ export const stances: Stance[] = [
   noPosition("okupacion-desalojo", "«ocupación», «okupa», «desalojo»"),
   noPosition("inmigracion-competencias-cataluna", "«inmigración», «Cataluña», «competencias»"),
   noPosition("tauromaquia-patrimonio", "«tauromaquia», «toros», «corrida»"),
-  noPosition("prisiones-agentes-autoridad", "«prisiones», «penitenciari», «funcionarios de prisiones», «agentes de la autoridad»"),
   noPosition("prostitucion-abolicion", "«prostitución», «proxenetismo», «trata», «explotación sexual»"),
   noPosition("impuesto-banca", "«banca», «bancos», «entidades financieras», «gravamen»"),
-  noPosition("registro-lobbies", "«lobby», «grupos de interés», «grupos de presión», «registro de transparencia»"),
   noPosition("iva-primera-vivienda", "«IVA», «vivienda», «primera vivienda», «compra», «Transmisiones», «impuestos»"),
+  noPosition("oficina-anticorrupcion", "«corrupción», «anticorrupción», «antifraude», «integridad», «oficina», «agencia», «autoridad independiente», «Fiscalía», «conflicto de intereses», «malversación», «denunciantes», «transparencia»"),
+  noPosition("ceuta-embajador-marruecos", "«Marruecos», «Ceuta», «Melilla», «Sáhara», «frontera», «embajada», «soberanía», «integridad territorial», «aduana» (solo «Defendemos la unidad territorial de España», p. 19, sin mención a Ceuta, Melilla ni Marruecos)"),
 ];

@@ -71,10 +71,6 @@ export const stances: Stance[] = [
   },
   sinPosicion("jornada-37-5", "«jornada», «horas», «37,5». El apartado de empleo (p. 4) trata de contratos-programa, empleo juvenil y pensiones"),
   sinPosicion(
-    "prisiones-agentes-autoridad",
-    "«prisión», «penitenciari», «funcionarios», «agentes de la autoridad». Solo pide revisar los «beneficios penitenciarios sin arrepentimiento» de los presos de ETA (p. 3)",
-  ),
-  sinPosicion(
     "amnistia",
     "«amnist», «indult», «Cataluña». El programa es anterior a la ley (2024); solo pide que el Gobierno no dependa «ni de EH Bildu ni de los independentistas» (p. 2), sin hablar de amnistía",
   ),
@@ -105,8 +101,12 @@ export const stances: Stance[] = [
     "«banca», «bancos», «impuesto», «gravamen». Solo el objetivo genérico «Reducir impuestos» (p. 2) y un convenio para el acceso a servicios financieros en pequeñas poblaciones (p. 5)",
   ),
   sinPosicion(
-    "registro-lobbies",
-    "«lobby», «grupos de interés», «registro», «puertas giratorias», «transparencia». Solo el lema genérico «Lucha contra la corrupción» (p. 2)",
+    "oficina-anticorrupcion",
+    "«corrupción», «anticorrupción», «antifraude», «integridad», «oficina», «agencia», «autoridad independiente», «conflicto de intereses», «malversación», «denunciantes», «transparencia». Solo el lema genérico «Lucha contra la corrupción. UPN es el único partido que no tiene casos de corrupción.» (p. 2), sin organismo alguno",
+  ),
+  sinPosicion(
+    "ceuta-embajador-marruecos",
+    "«Marruecos», «Ceuta», «Melilla», «Sáhara», «frontera», «embajada», «soberanía», «integridad territorial», «aduana», «exterior». Programa anterior a la crisis de julio de 2026; lo único de acción exterior es el fomento de las exportaciones navarras (p. 5)",
   ),
   sinPosicion("inmigracion-competencias-cataluna", "«inmigración», «Cataluña», «competencias». Las competencias que trata son las de Navarra"),
   {

@@ -179,27 +179,6 @@ export const quotes: Quote[] = [
     },
   },
   {
-    partyId: "pp",
-    questionId: "prisiones-agentes-autoridad",
-    speaker: "Ana Belén Vázquez Blanco",
-    role: "portavoz del GP Popular en el debate",
-    date: "2026-06-11",
-    text: "Hoy, lo importante son los trabajadores penitenciarios, los funcionarios, esos que llevan días, años, luchando simplemente por una protección jurídica, una protección económica, unas mejoras en sus condiciones sociolaborales.",
-    source: {
-      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-191.PDF#page=20",
-      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 191 (sesión plenaria núm. 185, 11-6-2026)",
-      date: "2026-06-11",
-      page: "p. 20",
-      kind: "diario-sesiones",
-    },
-    videoUrl: "https://app.congreso.es/v1/15775042I",
-    i18n: {
-      ca: { role: "portaveu del GP Popular en el debat" },
-      gl: { role: "voceira do GP Popular no debate" },
-      eu: { role: "GP Popularraren bozeramailea eztabaidan" },
-    },
-  },
-  {
     // El GP Popular votó «no» a la toma en consideración; en la misma intervención pide retirarla y negociar
     // una ley integral contra la trata.
     partyId: "pp",
@@ -244,26 +223,45 @@ export const quotes: Quote[] = [
     },
   },
   {
-    // El GP Popular votó «no» a la convalidación; en la réplica (p. 87) dijo: «Nosotros estamos en contra del
-    // real decreto, no de la regulación de los lobbies».
     partyId: "pp",
-    questionId: "registro-lobbies",
+    questionId: "oficina-anticorrupcion",
     speaker: "Edurne Uriarte Bengoechea",
     role: "portavoz del GP Popular en el debate",
-    date: "2026-09-16",
-    text: "Señorías, ¿hay que regular la actividad de los grupos de interés? La respuesta es claramente sí, por una mejora de la calidad de la democracia, porque lo piden los ciudadanos, porque lo pide la Unión Europea y lo piden también los grupos de interés.",
+    date: "2025-09-16",
+    text: "En este contexto, la pregunta es: pero, vamos a ver, ¿para qué proponen ustedes entonces esta oficina para la corrupción si no quieren perseguir la suya propia? ¿Solo para los partidos de oposición?",
     source: {
-      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF#page=84",
-      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 205 (sesión plenaria núm. 198, 16-9-2026)",
-      date: "2026-09-16",
-      page: "p. 84",
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-136.PDF#page=32",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 136 (sesión plenaria núm. 131, 16-9-2025)",
+      date: "2025-09-16",
+      page: "p. 32",
       kind: "diario-sesiones",
     },
-    videoUrl: "https://app.congreso.es/v1/15778472I",
+    videoUrl: "https://app.congreso.es/v1/15758689I",
     i18n: {
       ca: { role: "portaveu del GP Popular en el debat" },
       gl: { role: "voceira do GP Popular no debate" },
       eu: { role: "GP Popularraren bozeramailea eztabaidan" },
+    },
+  },
+  {
+    partyId: "pp",
+    questionId: "ceuta-embajador-marruecos",
+    speaker: "Javier Celaya Brey",
+    role: "defiende la moción por el GP Popular",
+    date: "2026-09-16",
+    text: "¿Por qué no se han pedido explicaciones a la embajadora marroquí y se ha llamado a nuestro embajador en Rabat a consultas? Aspiramos a mantener las mejores relaciones posibles con nuestro vecino del sur, pero no a costa de consentir el acoso y derribo a Ceuta y Melilla.",
+    source: {
+      url: "https://www.congreso.es/public_oficiales/L15/CONG/DS/PL/DSCD-15-PL-205.PDF#page=133",
+      title: "Diario de Sesiones del Congreso de los Diputados, Pleno, XV legislatura, núm. 205 (sesión plenaria núm. 198, 16-9-2026)",
+      date: "2026-09-16",
+      page: "p. 133",
+      kind: "diario-sesiones",
+    },
+    videoUrl: "https://app.congreso.es/v1/15778507I",
+    i18n: {
+      ca: { role: "defensa la moció en nom del GP Popular" },
+      gl: { role: "defende a moción polo GP Popular" },
+      eu: { role: "mozioa defendatzen du GP Popularraren izenean" },
     },
   },
 ];

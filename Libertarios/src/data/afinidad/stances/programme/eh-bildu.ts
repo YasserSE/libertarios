@@ -69,7 +69,10 @@ export const stances: Stance[] = [
     },
     record: null,
   },
-  sinPosicion("prisiones-agentes-autoridad", "«prisión», «penitenciari», «cárcel», «presos», «agentes de la autoridad»"),
+  sinPosicion(
+    "ceuta-embajador-marruecos",
+    "«Marruecos», «Ceuta», «Melilla», «Sáhara», «frontera», «embajada», «soberanía», «integridad territorial», «aduana». No menciona Marruecos, Ceuta, Melilla ni el Sáhara; «soberanía» solo se refiere a Euskal Herria (pp. 1, 14, 16) y en migración pide el fin de las devoluciones en caliente y vías seguras en el Bidasoa (p. 11)",
+  ),
   sinPosicion("amnistia", "«amnist», «Cataluña», «represión»"),
   sinPosicion("nuclear", "«nuclear», «centrales». El apartado de emergencia climática (p. 9) solo habla de renovables"),
   sinPosicion(
@@ -108,7 +111,10 @@ export const stances: Stance[] = [
     },
     record: null,
   },
-  sinPosicion("registro-lobbies", "«lobby», «grupos de interés», «registro», «puertas giratorias», «transparencia», «corrupción»"),
+  sinPosicion(
+    "oficina-anticorrupcion",
+    "«corrupción», «anticorrupción», «antifraude», «integridad», «oficina», «agencia», «autoridad independiente», «fiscalía», «conflicto de intereses», «malversación», «denunciantes», «transparencia». Ninguna aparece; el único «mecanismo externo e independiente» que propone es de supervisión de las actuaciones policiales (p. 12)",
+  ),
   sinPosicion(
     "inmigracion-competencias-cataluna",
     "«Cataluña», «inmigración». Pide para Euskadi y Navarra la transferencia de «Migración» y de «Puertos y aeropuertos» (pp. 15-16), pero nada sobre Cataluña; no se extrapola",

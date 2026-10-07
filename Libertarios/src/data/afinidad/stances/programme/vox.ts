@@ -111,17 +111,6 @@ const programme: Record<string, ProgrammeStance> = {
     note:
       "Medida 325. En la misma página, medida 327: «Apoyaremos con medidas fiscales y crediticias la tauromaquia y los espectáculos taurinos.»",
   },
-  "prisiones-agentes-autoridad": {
-    position: 2,
-    status: "verificado",
-    reviewer: { position: 2, agrees: true },
-    confidence: "alta",
-    quote:
-      "Los funcionarios de Prisiones serán agentes de autoridad y junto a los miembros de las FFAA y FCSE recibirán la adecuada instrucción y adiestramiento",
-    source: at("90"),
-    note:
-      "Medida 184 (la frase sigue con medios y amparo legal). En la p. 129, medida 282: «Impulsaremos un nuevo plan penitenciario y un aumento del personal de equipamiento de los funcionarios de prisiones.»",
-  },
   "prostitucion-abolicion": sinPosicion(
     "Buscado «prostitu», «proxenet», «abolic», «tercería», «trata», «explotación sexual», «cliente» en todo el PDF: solo una iniciativa sobre abusos y explotación sexual en centros de menores (p. 70). Nada sobre la prostitución ni el proxenetismo.",
   ),
@@ -139,8 +128,19 @@ const programme: Record<string, ProgrammeStance> = {
   "impuesto-banca": sinPosicion(
     "Buscado «banca», «bancos», «bancari», «entidades financieras», «gravamen», «impuesto extraordinario», «beneficios extraordinarios», «caídos del cielo» y leído el apartado fiscal (medidas 144-156, pp. 74-79): solo baja del Impuesto de Sociedades al 15 % (medida 150, p. 77). Nada sobre el gravamen a la banca.",
   ),
-  "registro-lobbies": sinPosicion(
-    "Buscado «lobby», «lobbies», «grupos de interés», «grupos de presión», «registro», «huella normativa», «puertas giratorias». «Lobbies» aparece solo como crítica a lobbies verdes, ecologistas o ideológicos (pp. 52, 108-110, 133) y las puertas giratorias en los consejos de las eléctricas (p. 119); nada sobre un registro de grupos de interés.",
+  "oficina-anticorrupcion": {
+    position: 1,
+    status: "verificado",
+    reviewer: { position: 1, agrees: true },
+    confidence: "alta",
+    quote:
+      "Crearemos una Oficina Nacional de lucha contra el Fraude y la Corrupción, que garantice la independencia en la función y la igualdad de los españoles, poniendo fin a la dispersión autonómica.",
+    source: at("84"),
+    note:
+      "Medida 177; sigue «Mejoraremos los mecanismos y portales de transparencia, denuncia y rendición de cuentas para prevenir la corrupción en la Administración». Compromiso de crear un organismo estatal independiente, pero no le atribuye funciones de investigación ni de sanción ni dice cómo se elige su dirección: +1. La medida 176 (misma página) promete «la protección integral de los denunciantes». «Poniendo fin a la dispersión autonómica» no dice expresamente que se supriman las oficinas antifraude autonómicas. La medida 81 (p. 48) crea otra «Oficina Nacional de lucha contra el fraude en el etiquetado», que no es de corrupción.",
+  },
+  "ceuta-embajador-marruecos": sinPosicion(
+    "Revisión ciega del 2026-10-07: la medida 193 (p. 92) —«La ayuda internacional de España a países en vías de desarrollo estará vinculada a la colaboración con la política migratoria nacional. Ni un euro de los españoles debe financiar a países que violentan nuestras fronteras.»— condiciona la ayuda al desarrollo de forma genérica y no nombra a Marruecos ni a Ceuta o Melilla; el revisor la consideró fuera de tema y, con el mismo criterio que el condicionamiento genérico de ayudas de SALF (programa de Castilla y León 2026, p. 8), no puntúa. Nota original: Medida 193. Programa anterior a la crisis de julio de 2026. Condiciona la ayuda a los países que «violentan nuestras fronteras» (medida de presión), sin nombrar a Marruecos en esa frase: confianza media. Marruecos aparece en la medida 28 (pp. 17-18): «Garantizaremos la protección de Ceuta y Melilla, parte indivisible de España, cada vez más acosadas por Marruecos con la complicidad del gobierno de Sánchez», con más agentes para «frenar las oleadas de inmigración masiva alentadas por el gobierno marroquí»; la medida 187 (p. 91), despliegue militar en las fronteras de Ceuta, Melilla y Canarias «ante invasiones promocionadas desde estados vecinos»; la 192 (p. 92), incluir Ceuta y Melilla en el Tratado del Atlántico Norte. La medida 84 (p. 49) pide aranceles a los productos agrícolas de Marruecos por motivos comerciales.",
   ),
 };
 

@@ -156,10 +156,21 @@ export const stances: Stance[] = [
     },
     record: null,
   },
-  none(
-    "prisiones-agentes-autoridad",
-    "No trata la condición de agentes de la autoridad de los funcionarios de prisiones. Buscado: «prisiones», «penitenciari», «funcionarios de prisiones», «agentes de la autoridad»; leído el apartado 10.2 «Derechos civiles y prisiones» (pp. 279-280: malos tratos, salud mental en prisión, asumir la competencia de ejecución penitenciaria, transporte a las prisiones).",
-  ),
+  {
+    partyId: "adelante-andalucia",
+    questionId: "oficina-anticorrupcion",
+    programme: {
+      position: 1,
+      status: "verificado",
+      reviewer: { position: 1, agrees: true },
+      confidence: "media",
+      quote:
+        "Dotar correctamente una oficina independiente de lucha contra la corrupción y las malas prácticas en la administración andaluza, blindar por ley al funcionariado que recurra a ella para denunciar casos de corrupción garantizándole que no sufrirá represalias de ningún tipo incluso si el expediente no acaba en sanción.",
+      source: { ...SOURCE, page: "218" },
+      note: `Propuesta 1216, apartado 4.2 «Higiene Democrática»; sigue: «La oficina rendirá cuentas ante el Parlamento regularmente». Oficina independiente contra la corrupción, pero autonómica (administración andaluza), no estatal: +1. En la p. 217 propone además un informe anual sobre la corrupción en Andalucía (Propuesta 1212). ${NOTE_ELECCION}`,
+    },
+    record: null,
+  },
   {
     partyId: "adelante-andalucia",
     questionId: "prostitucion-abolicion",
@@ -190,21 +201,10 @@ export const stances: Stance[] = [
     },
     record: null,
   },
-  {
-    partyId: "adelante-andalucia",
-    questionId: "registro-lobbies",
-    programme: {
-      position: 1,
-      status: "verificado",
-      reviewer: { position: 1, agrees: true },
-      confidence: "media",
-      quote:
-        "Aprobación de una norma que regule la actividad de los grupos de interés que aporte transparencia al proceso de toma de decisiones que se dan en el ámbito público, fortalezca la prevención de conflictos de intereses, contribuya a la lucha contra la corrupción y refuerce los estándares de integridad pública.",
-      source: { ...SOURCE, page: "215" },
-      note: `Propuesta 1199 del apartado de transparencia (el número se repite en la p. 232 para otra medida). En la misma página pide publicar «La huella normativa» y «el informe de participación de los grupos de interés». Regulación autonómica de los lobbies, sin mencionar un registro obligatorio ni multas: +1. ${NOTE_ELECCION}`,
-    },
-    record: null,
-  },
+  none(
+    "ceuta-embajador-marruecos",
+    "No trata Ceuta, Melilla ni la respuesta diplomática a Marruecos. Buscado: «Marruecos», «Ceuta», «Melilla», «Sáhara», «frontera», «embajada», «soberanía», «integridad territorial», «aduana». Solo aparece Marruecos a propósito del Sáhara Occidental, que no puntúa: Propuesta 1493 (p. 282: «Se evitará cualquier relación entre la Junta de Andalucía y el Estado de Marruecos que dé a entender, directa o indirectamente, que el Sáhara Occidental se trata de un territorio marroquí»), no apoyar actividades económicas que exploten los recursos del Sáhara (p. 285), aguas saharauis (p. 174) y cooperación con el Rif y el Sahara (p. 271).",
+  ),
   none(
     "iva-primera-vivienda",
     "No trata los impuestos de la compra de vivienda. Buscado: «IVA», «superreducido», «primera vivienda», «compra de vivienda», «adquisición», «Transmisiones», «Actos Jurídicos» y «fiscal» junto a «vivienda». El IVA solo aparece para el reparto autonómico de impuestos (Propuestas 760 y 767) y para tipos reducidos de productos de primera necesidad, cultura e instrumentos musicales (Propuestas 780 y 1397, pp. 305-306); en vivienda, solo la exención del IBI de las viviendas públicas en alquiler (Propuesta 346).",

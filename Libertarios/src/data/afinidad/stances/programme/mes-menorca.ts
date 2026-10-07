@@ -29,8 +29,8 @@ const REVISOR: Record<string, Position> = {
   "vivienda-tope-alquiler": 2,
   "jornada-37-5": 0,
   "impuesto-grandes-fortunas": 1,
-  "registro-lobbies": 1,
   "iva-primera-vivienda": 1,
+  "oficina-anticorrupcion": 1,
 };
 
 const revisor = (questionId: string, position: Position): { reviewer?: ProgrammeStance["reviewer"] } => {
@@ -98,16 +98,19 @@ export const stances: Stance[] = [
   noPosition("okupacion-desalojo", "«okupació», «ocupació il·legal», «desallotjament»"),
   noPosition("inmigracion-competencias-cataluna", "«immigració», «Catalunya», «competències» (p. 51 pide para Baleares «les competències exclusives en immigració»; no trata Cataluña, no se extrapola)"),
   noPosition("tauromaquia-patrimonio", "«tauromàquia», «toros», «bous», «corrida»"),
-  noPosition("prisiones-agentes-autoridad", "«presons», «penitenciari», «funcionaris de presons», «agents de l’autoritat» (solo «agents de l’autoritat ambiental», p. 32, y el centro penitenciario en el hospital, p. 53)"),
-  noPosition("prostitucion-abolicion", "«prostitució», «proxenetisme», «tràfic», «tracta», «explotació sexual»"),
-  noPosition("impuesto-banca", "«banca», «bancs», «entitats financeres», «gravamen», «beneficis extraordinaris» (solo expropiación del uso de viviendas de entidades financieras, p. 43)"),
   verified(
-    "registro-lobbies",
+    "oficina-anticorrupcion",
     1,
     "media",
-    "Impulsarem la creació d’un registre de grups d’interès (lobbies) de caràcter autonòmic.",
+    "Vetlarem pel bon funcionament i la independència de l’Oficina Anticorrupció de les Illes Balears, dotant-la dels recursos humans, tècnics i econòmics necessaris.",
     "84",
-    "Traducción: «Impulsaremos la creación de un registro de grupos de interés (lobbies) de carácter autonómico». Medida n.º 40 del apartado de administración. Registro autonómico, sin decir si será obligatorio ni prever multas: +1.",
+    "Traducción: «Velaremos por el buen funcionamiento y la independencia de la Oficina Anticorrupción de las Illes Balears, dotándola de los recursos humanos, técnicos y económicos necesarios». Medida n.º 36 del apartado «Administració pública, transparència i bon govern». Refuerza como independiente un organismo anticorrupción autonómico, no estatal: +1. El texto extraído del PDF muestra los guiones como «·» («dotant·la»); se ha escrito el guion.",
+  ),
+  noPosition("prostitucion-abolicion", "«prostitució», «proxenetisme», «tràfic», «tracta», «explotació sexual»"),
+  noPosition("impuesto-banca", "«banca», «bancs», «entitats financeres», «gravamen», «beneficis extraordinaris» (solo expropiación del uso de viviendas de entidades financieras, p. 43)"),
+  noPosition(
+    "ceuta-embajador-marruecos",
+    "«Marroc», «Ceuta», «Melilla», «Sàhara», «frontera», «ambaixada», «sobirania», «integritat territorial», «duana». No menciona Marruecos, Ceuta ni Melilla; «sobirania» solo se refiere a la de los pueblos y de Menorca (pp. 81-82) y «ambaixador» al «ambaixador energètic» de los hoteles (p. 20)",
   ),
   verified(
     "iva-primera-vivienda",

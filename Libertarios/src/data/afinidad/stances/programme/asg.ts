@@ -14,7 +14,7 @@ import type { Stance } from "../../types";
  * de ASG. Ninguna celda puntúa hasta que aparezca el programa.
  */
 
-const QUESTIONS = ["vivienda-tope-alquiler","irpf-inflacion","jornada-37-5","amnistia","nuclear","gasto-defensa","impuesto-grandes-fortunas","okupacion-desalojo","iva-primera-vivienda","inmigracion-competencias-cataluna","tauromaquia-patrimonio","prisiones-agentes-autoridad","prostitucion-abolicion","impuesto-banca","registro-lobbies"] as const;
+const QUESTIONS = ["vivienda-tope-alquiler","irpf-inflacion","jornada-37-5","amnistia","nuclear","gasto-defensa","impuesto-grandes-fortunas","okupacion-desalojo","iva-primera-vivienda","inmigracion-competencias-cataluna","tauromaquia-patrimonio","prostitucion-abolicion","impuesto-banca","oficina-anticorrupcion","ceuta-embajador-marruecos"] as const;
 
 const NOTE =
   "Pendiente: no se ha localizado un programa electoral oficial de ASG (búsqueda web del 2026-10-06; sin web oficial accesible). El acuerdo de gobierno CC-PP-ASG de 2023 no es un programa y no se usa.";

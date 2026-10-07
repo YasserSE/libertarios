@@ -147,24 +147,6 @@ export const quotes: Quote[] = [
     },
   },
   {
-    partyId: "junts",
-    questionId: "prisiones-agentes-autoridad",
-    speaker: "Marta Madrenas i Mir",
-    role: "Diputada del Grupo Parlamentario Junts per Catalunya",
-    date: "2026-06-11",
-    // DSCD (p. 8), traducción del propio Diario: «En Junts siempre hemos defendido que los trabajadores
-    // penitenciarios merecen este reconocimiento. Es necesario reforzar su estatus jurídico y reconocer la
-    // autoridad que necesitan cada día para el ejercicio de sus funciones.»
-    text: "Junts sempre hem defensat que els treballadors penitenciaris mereixen aquest reconeixement. És necessari reforçar el seu estatus jurídic i reconèixer l’autoritat que els cal cada dia per a l’exercici de les seves funcions.",
-    source: dscd(15, "191", 7, "2026-06-11", "DSCD Pleno núm. 191 (XV), 11-6-2026 — Dictamen de la Proposición de Ley Orgánica que reconoce a los funcionarios de prisiones como agentes de la autoridad (art. 80 LOGP)"),
-    videoUrl: "https://app.congreso.es/v1/15775016I",
-    i18n: {
-      ca: { role: "Diputada del Grup Parlamentari Junts per Catalunya" },
-      gl: { role: "Deputada do Grupo Parlamentario Junts per Catalunya" },
-      eu: { role: "Junts per Catalunya Talde Parlamentarioko diputatua" },
-    },
-  },
-  {
     // La cita empieza en la p. 28 y termina en la p. 29.
     partyId: "junts",
     questionId: "prostitucion-abolicion",
@@ -186,17 +168,16 @@ export const quotes: Quote[] = [
   },
   {
     partyId: "junts",
-    questionId: "registro-lobbies",
+    questionId: "oficina-anticorrupcion",
     speaker: "Josep Pagès i Massó",
     role: "Diputado del Grupo Parlamentario Junts per Catalunya",
-    date: "2026-09-16",
-    // DSCD (p. 76), traducción del propio Diario: «Nosotros, señor ministro, estamos totalmente de acuerdo en
-    // que las grandes empresas y los profesionales del lobby pasen por el tubo, ¡y tanto!, pero lo que no
-    // vamos a aceptar es que las pequeñas empresas, las entidades y asociaciones de nuestro tejido social
-    // tengan que pasar por el mismo tubo.»
-    text: "Nosaltres, senyor ministre, estem totalment d’acord en que les grans empreses i els professionals del lobby passin pel tubo. I tant! Ara el que no acceptarem és que les petites empreses, les entitats i associacions del nostre teixit social, hagin de passar pel mateix tubo.",
-    source: dscd(15, "205", 74, "2026-09-16", "DSCD Pleno núm. 205 (XV), 16-9-2026 — Convalidación del Real Decreto-ley 21/2026, de transparencia e integridad de los grupos de interés"),
-    videoUrl: "https://app.congreso.es/v1/15778467I",
+    date: "2025-09-16",
+    // DSCD (p. 26), traducción del propio Diario: «Pero lo que no es de recibo es la creación del nuevo
+    // órgano, que parece más una ocurrencia de última hora que el resultado de una voluntad real de encontrar
+    // soluciones al problema de la corrupción.»
+    text: "Però el que no és de rebut és la creació d’un nou òrgan que apareix més com una ocurrència d’última hora que com el resultat d’una voluntat real de buscar solucions al problema de la corrupció.",
+    source: dscd(15, "136", 25, "2025-09-16", "DSCD Pleno núm. 136 (XV), 16-9-2025 — Proposición de Ley del GSUMAR de creación de la Oficina de prevención de la corrupción (toma en consideración)"),
+    videoUrl: "https://app.congreso.es/v1/15758685I",
     i18n: {
       ca: { role: "Diputat del Grup Parlamentari Junts per Catalunya" },
       gl: { role: "Deputado do Grupo Parlamentario Junts per Catalunya" },

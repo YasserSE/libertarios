@@ -56,6 +56,7 @@ const REVISOR: Record<string, Position> = {
   "tauromaquia-patrimonio": -1,
   "prostitucion-abolicion": 2,
   "impuesto-banca": 1,
+  "oficina-anticorrupcion": 1,
 };
 
 const revisor = (questionId: string, position: Position): { reviewer?: ProgrammeStance["reviewer"] } => {
@@ -142,9 +143,13 @@ export const stances: Stance[] = [
     "151",
     "Apartado «Regular los espectáculos con animales». La medida anterior de la misma página pide «Suprimir las declaraciones de Bien de Interés Cultural, Turístico o Fiesta de Interés de la Comunidad Autónoma de Aragón donde se produzca maltrato animal», y otra «Prohibir el acceso de menores de edad a corridas de toros o escuelas taurinas». −1 y no −2: no pide expresamente derogar la protección legal estatal (Ley 18/2013).",
   ),
-  sinPosicion(
-    "prisiones-agentes-autoridad",
-    "prisiones, penitenciario, funcionarios de prisiones, agentes de la autoridad (pág. 15 solo pide «Reclamar las competencias en materia de gestión penitenciaria» y la sanidad penitenciaria)",
+  verificado(
+    "oficina-anticorrupcion",
+    1,
+    "media",
+    "Crear la Oficina Antifraude de Aragón, como entidad pública independiente adscrita a las Cortes de Aragón, con la función específica de velar por la transparencia e integridad de la gestión pública y prevenir e investigar posibles casos de destino ilegal de fondos públicos, conflictos de intereses, uso en beneficio particular de informaciones públicas",
+    "20",
+    "Apartado «Buen gobierno y transparencia». Organismo independiente con funciones de investigación, pero autonómico (Aragón), no estatal: +1. Se han quitado los guiones de partición de línea («inde-pendiente», «pre-venir»).",
   ),
   verificado(
     "prostitucion-abolicion",
@@ -162,6 +167,9 @@ export const stances: Stance[] = [
     "110",
     "Apartado «Modelo fiscal aragonés». Quiere gravar más a la banca, pero con un impuesto autonómico sobre depósitos, no con el gravamen temporal sobre márgenes ni el 75 % sobre beneficios extraordinarios del enunciado: +1.",
   ),
-  sinPosicion("registro-lobbies", "lobbies, grupos de interés, grupos de presión, registro de transparencia, huella normativa, puertas giratorias"),
+  sinPosicion(
+    "ceuta-embajador-marruecos",
+    "Marruecos, Ceuta, Melilla, Sáhara, frontera, embajada, soberanía, integridad territorial, aduana (pág. 85, apartado «Cultura de la paz y la solidaridad internacionalista», solo trata el Sáhara Occidental, que no puntúa: referéndum de autodeterminación, reconocer al Frente Polisario y sus sedes «como embajadas del pueblo saharaui» y «Denunciar e impedir el establecimiento de todo tipo de acuerdos comerciales con Marruecos referentes a los recursos naturales» saharauis; nada sobre Ceuta, Melilla o la frontera)",
+  ),
   sinPosicion("iva-primera-vivienda", "IVA, superreducido, primera vivienda, compra de vivienda, adquisición, Transmisiones Patrimoniales, Actos Jurídicos Documentados, fiscalidad de la vivienda (págs. 52-53: solo pide «medidas fiscales» que eximan de tributar las ayudas al alquiler y la rehabilitación y explorar reducciones del IRPF por alquiler; nada sobre los impuestos de la compra)"),
 ];

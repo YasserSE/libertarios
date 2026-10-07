@@ -155,13 +155,13 @@ export const quotes: Quote[] = [
   },
   {
     partyId: "eh-bildu",
-    questionId: "registro-lobbies",
+    questionId: "oficina-anticorrupcion",
     speaker: "Oskar Matute García de Jalón",
     role: "Diputado del Grupo Parlamentario Euskal Herria Bildu",
-    date: "2026-09-16",
-    text: "Es, en definitiva, arrojar luz sobre eso que en muchas ocasiones desde esta tribuna hemos señalado como un poder en la sombra: aquellos que no se presentan a las elecciones pero que gobiernan",
-    source: dscd(15, "205", 72, "2026-09-16", "DSCD Pleno núm. 205 (XV), 16-9-2026 — Convalidación del Real Decreto-ley 21/2026, de transparencia e integridad de los grupos de interés"),
-    videoUrl: "https://app.congreso.es/v1/15778466I",
+    date: "2025-09-16",
+    text: "Nosotros vamos a apoyar la iniciativa; de hecho, recogemos el ofrecimiento que se ha hecho para participar en la mejora de este texto, porque es verdad, como se acaba de señalar, que hay algunos elementos que creemos que deben pulirse",
+    source: dscd(15, "136", 22, "2025-09-16", "DSCD Pleno núm. 136 (XV), 16-9-2025 — Proposición de Ley del GSUMAR de creación de la Oficina de prevención de la corrupción (toma en consideración)"),
+    videoUrl: "https://app.congreso.es/v1/15758684I",
     i18n: {
       ca: { role: "Diputat del Grup Parlamentari Euskal Herria Bildu" },
       gl: { role: "Deputado do Grupo Parlamentario Euskal Herria Bildu" },

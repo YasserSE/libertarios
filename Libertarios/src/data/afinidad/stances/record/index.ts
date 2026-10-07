@@ -2,7 +2,7 @@ import type { Stance } from "../../types";
 import { stances as viviendaTopeAlquiler } from "./vivienda-tope-alquiler";
 import { stances as irpfInflacion } from "./irpf-inflacion";
 import { stances as jornada375 } from "./jornada-37-5";
-import { stances as prisionesAgentesAutoridad } from "./prisiones-agentes-autoridad";
+import { stances as ceutaEmbajadorMarruecos } from "./ceuta-embajador-marruecos";
 import { stances as amnistia } from "./amnistia";
 import { stances as nuclear } from "./nuclear";
 import { stances as prostitucionAbolicion } from "./prostitucion-abolicion";
@@ -11,7 +11,7 @@ import { stances as impuestoGrandesFortunas } from "./impuesto-grandes-fortunas"
 import { stances as okupacionDesalojo } from "./okupacion-desalojo";
 import { stances as ivaPrimeraVivienda } from "./iva-primera-vivienda";
 import { stances as impuestoBanca } from "./impuesto-banca";
-import { stances as registroLobbies } from "./registro-lobbies";
+import { stances as oficinaAnticorrupcion } from "./oficina-anticorrupcion";
 import { stances as inmigracionCompetenciasCataluna } from "./inmigracion-competencias-cataluna";
 import { stances as tauromaquiaPatrimonio } from "./tauromaquia-patrimonio";
 
@@ -35,7 +35,7 @@ export const recordStanceFiles: ReadonlyArray<readonly Stance[]> = [
   viviendaTopeAlquiler,
   irpfInflacion,
   jornada375,
-  prisionesAgentesAutoridad,
+  ceutaEmbajadorMarruecos,
   amnistia,
   nuclear,
   prostitucionAbolicion,
@@ -44,7 +44,7 @@ export const recordStanceFiles: ReadonlyArray<readonly Stance[]> = [
   okupacionDesalojo,
   ivaPrimeraVivienda,
   impuestoBanca,
-  registroLobbies,
+  oficinaAnticorrupcion,
   inmigracionCompetenciasCataluna,
   tauromaquiaPatrimonio,
 ];

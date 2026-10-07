@@ -147,3 +147,18 @@ Un compromiso público y lo que el partido hizo después. **No puntúa nunca.** 
 - Todos los ficheros de `stances/programme`, `stances/record`, `hemeroteca` y `dichos-hechos` están registrados en su `index.ts` (un fichero sin registrar no se validaría).
 
 Si una comprobación de equilibrio falla con datos reales, **no se corrige tocando posiciones**: se revisa la redacción del cuestionario (WP2) o se busca la fuente que falta.
+
+## 7. Reglas de consistencia de las preguntas del 2026-10-07
+
+Para «oficina-anticorrupcion» y «ceuta-embajador-marruecos» (`docs/AFINIDAD-PREGUNTAS.md` §9). Se aplican igual a los 32 partidos; las fijó el coordinador antes de codificar y las usó también la revisión ciega.
+
+- **`oficina-anticorrupcion`** («Debe crearse una oficina estatal independiente contra la corrupción, con dirección elegida por el Congreso, que pueda investigar el uso de fondos públicos e imponer sanciones»):
+  - **+2** compromiso de crear (o convertir en independiente) un organismo **estatal** contra la corrupción con funciones de investigación o sanción.
+  - **+1** organismo así sin independencia o sin funciones de investigación o sanción, de ámbito autonómico o europeo, o reforzar como independiente un órgano de control ya existente (Oficina de Conflictos de Intereses, Autoridad Independiente de Protección del Informante).
+  - **−1 / −2** solo si el texto se opone expresamente a un organismo de este tipo; «suprimir organismos» genérico no basta.
+  - **`sin-posicion`**: medidas generales (más penas, inhabilitación, transparencia, protección de denunciantes) sin organismo, o una cita que no nombra ningún organismo.
+- **`ceuta-embajador-marruecos`** («Tras la entrada masiva de personas en Ceuta en julio de 2026, España debe llamar a consultas a su embajador en Marruecos y exigir explicaciones al Gobierno marroquí»). Los programas de 2023 son anteriores a la crisis, así que el criterio es estricto:
+  - **+2** medidas de presión diplomática a Marruecos (llamar a consultas, sanciones, suspender o condicionar acuerdos o ayudas) **nombrando** a Marruecos o a Ceuta y Melilla.
+  - **+1** exigir firmeza a Marruecos o el respeto de la soberanía o la frontera de Ceuta y Melilla, sin medida concreta.
+  - **−1** compromiso expreso de mantener o profundizar la relación con Marruecos como socio («nueva etapa», hoja de ruta de 2022) o rechazo expreso a la confrontación diplomática.
+  - **`sin-posicion`**: planes económicos para Ceuta y Melilla, condicionar ayudas a «países» sin nombrar a Marruecos, y las posiciones sobre el **Sáhara Occidental** (autodeterminación, referéndum), que se citan en `note` con página pero no puntúan: tratan otra medida.
