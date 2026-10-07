@@ -7,7 +7,13 @@ import { it } from "./dictionaries/it";
 import { de } from "./dictionaries/de";
 import type { DeepPartial } from "./types";
 
-const PARTIALS: Record<Locale, DeepPartial<Dictionary>> = { es, ca, pt, fr, it, de };
+/*
+ * `gl` y `eu` existen solo por «¿A quién votar?», cuyos textos viven aparte
+ * (`src/i18n/afinidad/`). El resto del sitio no está traducido a ellos, así
+ * que su parcial es vacío y todo cae al castellano: mejor una página entera en
+ * castellano que una mezcla a medias o claves sin texto.
+ */
+const PARTIALS: Record<Locale, DeepPartial<Dictionary>> = { es, ca, pt, fr, it, de, gl: {}, eu: {} };
 
 /**
  * Mezcla el diccionario del idioma sobre el castellano.

@@ -21,6 +21,7 @@ export const ca: DeepPartial<Dictionary> = {
     learnResources: "Recursos",
     learnResourcesHint: "On llegir sobre això",
     project: "El projecte",
+    vote: "A qui votar?",
     more: "Més",
     doTest: "Fer el test",
     register: "Comptar-m'hi",
@@ -28,6 +29,18 @@ export const ca: DeepPartial<Dictionary> = {
     closeMenu: "Tancar menú",
     home: "Libertarios.eu — inici",
     language: "Idioma",
+  },
+  afinidad: {
+    eyebrow: "Eleccions generals · 29-N",
+    title: "A qui votar? Objectivament",
+    body:
+      "Uns 3 minuts. Les teves respostes, comparades amb el que promet cada partit i amb el que ha votat al Congrés, amb la font de cada dada.",
+    neutral:
+      "És un test a part i neutral: no està afiliat a cap partit i no puntua segons les idees d'aquest web.",
+    cta: "Fer el test",
+    quadrantTitle: "I a quin partit t'assembles de veritat?",
+    quadrantBody: "Compara-ho amb el que prometen i el que han votat.",
+    quadrantCta: "A qui votar? Objectivament",
   },
   hero: {
     demoBadge: "Xifres d'exemple · el registre encara no és obert",

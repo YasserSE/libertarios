@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocale } from "@/i18n/Link";
 import { getDictionary } from "@/i18n/getDictionary";
+import { afinidadHref } from "@/i18n/config";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, Play, X } from "lucide-react";
@@ -49,6 +50,9 @@ export function Header() {
         { label: t.learnResources, href: "/noticias", description: t.learnResourcesHint },
       ],
     },
+    // «¿A quién votar?» como enlace directo y no dentro de un menú: es un
+    // test aparte (con su propio idioma: desde pt/fr/it/de va al castellano).
+    { label: t.vote, href: afinidadHref(locale) },
     { label: t.project, href: "/proyecto" },
   ];
 
@@ -71,7 +75,14 @@ export function Header() {
         { label: t.learnResources, href: "/noticias" },
       ],
     },
-    { title: t.more, items: [{ label: t.test, href: "/cuadrante" }, { label: t.project, href: "/proyecto" }] },
+    {
+      title: t.more,
+      items: [
+        { label: t.test, href: "/cuadrante" },
+        { label: t.vote, href: afinidadHref(locale) },
+        { label: t.project, href: "/proyecto" },
+      ],
+    },
   ];
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);

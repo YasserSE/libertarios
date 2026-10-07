@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { LOCALES, LOCALE_META, isLocale } from "@/i18n/config";
+import { LOCALES, LOCALE_META, SITE_LOCALES, isLocale } from "@/i18n/config";
 
 /**
  * Capa por idioma.
@@ -24,8 +24,12 @@ export async function generateMetadata({
   return {
     alternates: {
       canonical: `/${locale}`,
+      // Solo los idiomas en que el sitio está traducido: `/gl` y `/eu` sirven
+      // el castellano, y anunciarlos como versiones gallega y vasca sería
+      // contenido duplicado con etiqueta falsa. El layout de `/a-quien-votar`
+      // declara sus propias alternativas (es, ca, gl, eu).
       languages: Object.fromEntries(
-        LOCALES.map((l) => [LOCALE_META[l].htmlLang, `/${l}`]),
+        SITE_LOCALES.map((l) => [LOCALE_META[l].htmlLang, `/${l}`]),
       ),
     },
   };

@@ -235,6 +235,40 @@ export default function ProyectoPage() {
                   </p>
                 </div>
 
+                {/*
+                  Boletín (migración 0011). Lo que dice este bloque es lo que
+                  hacen `newsletter_subscribers`, `src/lib/newsletter/` y el
+                  formulario: si cambia uno, cambia el otro.
+                */}
+                <div id="novedades" className="scroll-mt-24">
+                  <h3 className="font-display font-semibold text-foreground">
+                    Las novedades por correo
+                  </h3>
+                  <p className="mt-2 leading-relaxed">
+                    «Novedades de Libertarios.eu» es un boletín de este sitio, no del test «¿A quién
+                    votar?». Solo te apuntas si marcas su casilla —que está sin marcar, es aparte de
+                    cualquier otra y nunca hace falta para ver un resultado ni para registrarte— y
+                    confirmas desde el correo que te mandamos. Guardamos tu correo, cuándo y desde
+                    dónde te apuntaste (test, registro o pie de página), la versión del texto que
+                    aceptaste, el idioma y la fecha de confirmación o de baja.
+                  </p>
+                  <p className="mt-2 leading-relaxed">
+                    No lo guardamos junto a tus respuestas, tu resultado, tu voto, tu comunidad ni tu
+                    posición política, y no hacemos envíos distintos según lo que pienses: el boletín
+                    es el mismo para todo el mundo. Los correos los envía{" "}
+                    <strong className="text-foreground">Brevo</strong> (Sendinblue SAS, Francia, en la
+                    UE) como encargado del tratamiento; solo recibe tu dirección. Cada correo lleva un
+                    enlace para darte de baja en un clic. Si te das de baja guardamos solo la dirección y
+                    la fecha, para no volver a escribirte; si te apuntas y no confirmas, borramos la
+                    dirección a los 30 días.
+                  </p>
+                  <p className="mt-2 leading-relaxed">
+                    Si te registraste en el mapa antes de que existiera el boletín, tu consentimiento
+                    incluía que pudiéramos escribirte. Aun así, lo primero que recibirás es un correo
+                    preguntándote si quieres las novedades; si no contestas, no te enviamos ninguna.
+                  </p>
+                </div>
+
                 <div>
                   <h3 className="font-display font-semibold text-foreground">
                     Por qué tu posición no aparece nunca sola

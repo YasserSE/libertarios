@@ -27,6 +27,7 @@ export const es = {
     learnResources: "Recursos",
     learnResourcesHint: "Dónde leer sobre esto",
     project: "El proyecto",
+    vote: "¿A quién votar?",
     more: "Más",
     doTest: "Hacer el test",
     register: "Contarme",
@@ -119,6 +120,26 @@ export const es = {
     compareWith: "Comparar con",
     economic: "Económico",
     social: "Social",
+  },
+
+  /**
+   * Invitaciones del sitio a «¿A quién votar? Objetivamente» (portada y
+   * resultado del cuadrante). Los textos del propio test viven en
+   * `src/i18n/afinidad/`; aquí solo lo que el sitio dice para llevar a él. Se
+   * insiste en que es neutral porque se anuncia desde una web que sí tiene
+   * posición: quien llega desde aquí tiene que saber que el test no la tiene.
+   */
+  afinidad: {
+    eyebrow: "Elecciones generales · 29-N",
+    title: "¿A quién votar? Objetivamente",
+    body:
+      "Unos 3 minutos. Tus respuestas, comparadas con lo que promete cada partido y con lo que ha votado en el Congreso, con la fuente de cada dato.",
+    neutral:
+      "Es un test aparte y neutral: no está afiliado a ningún partido y no puntúa según las ideas de esta web.",
+    cta: "Hacer el test",
+    quadrantTitle: "¿Y a qué partido te pareces de verdad?",
+    quadrantBody: "Compara con lo que prometen y lo que han votado.",
+    quadrantCta: "¿A quién votar? Objetivamente",
   },
 
   /** Aviso que ve quien navega en un idioma parcialmente traducido. */

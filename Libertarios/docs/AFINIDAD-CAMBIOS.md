@@ -1,0 +1,71 @@
+# «¿A quién votar? Objetivamente» — registro de cambios
+
+Registro público de cambios de datos, de método y de correcciones recibidas. La metodología (`/a-quien-votar/metodologia`) y la página de datos abiertos enlazan aquí. Cada entrada lleva fecha, versión del dataset (`Dataset.version`) y motivo.
+
+Reglas del registro:
+
+- Cualquier cambio de una celda que puntúa (posición, estado o fuente) se anota con partido, pregunta, valor anterior, valor nuevo y fuente.
+- Las correcciones recibidas se anotan tanto si se aceptan como si se rechazan; si se rechazan, con el motivo.
+- Los cambios de método (fórmula, umbrales, criterio de inclusión) se anotan aunque no cambien ninguna celda.
+- Las correcciones se reciben en contacto@libertarios.es (asunto «Corrección — ¿A quién votar? Objetivamente»).
+
+## Versiones
+
+### 2026.10.0 — 2026-10-06 (sin publicar)
+
+Método:
+
+- Elección de referencia: generales del 29-N-2026 (Real Decreto 806/2026, BOE del 6 de octubre).
+- Escala de respuesta de 4 puntos más «No sé» (sin punto medio). Los partidos conservan el 0 para abstención o ambivalencia expresa.
+- Métrica de **acuerdo direccional** (mismo signo → `1 − |u − p| / 8`; signo contrario → 0; partido en 0 → 0,5). Sustituye a `1 − |u − p| / 4`, que en simulación daba al centro el 72 % de las victorias.
+- Cobertura mínima del 70 % de las respuestas (sustituida el 2026-10-07 por un mínimo de 5 respuestas con dato por lente; ver abajo) y mínimo de 8 respuestas para dar resultado; «Esto me importa» pesa ×2.
+- Criterio de inclusión de partidos publicado: escaño en el Congreso XV, coaliciones registradas para el 29-N que los integren, y extraparlamentarios con escaño en el Parlamento Europeo o en un parlamento autonómico o ≥ 1 % en las generales de 2023. El P-LIB se somete a la misma regla.
+- Programas de 2023 como fuente provisional hasta que se publiquen los de 2026, con etiqueta visible.
+- Hemeroteca (citas con fecha y fuente) añadida como capa informativa; no puntúa.
+- «Dijeron vs. hicieron» (petición del dueño): compromisos públicos y lo que el partido hizo después, con etiqueta cumple / contradice / parcial / no lo hicieron (solo si podía hacerlo), recuento de las cuatro siempre visible y el mismo criterio para todos los partidos (incluye lo cumplido). No puntúa. Tarjeta en el resultado, página `/a-quien-votar/dijeron-vs-hicieron`, sección en cada ficha y criterios en la metodología. Eventos nuevos `afinidad_dvh_open` y `afinidad_share_dvh` (migración 0010).
+
+Datos:
+
+- Cuestionario, revisión de discriminación (2026-10-06, `docs/AFINIDAD-PREGUNTAS.md`): se retiran «eutanasia», «autodeterminacion-sexo-registral», «castellano-vehicular», «arraigo» y «menores-migrantes-reparto» (en hechos casi todos los partidos votaban en dos bloques: PP y VOX salían idénticos, y Sumar, ERC, EH Bildu, Compromís y Frente Amplio también) y entran «prisiones-agentes-autoridad», «prostitucion-abolicion», «seguro-ingresos-agrarios», «impuesto-banca» y «registro-lobbies», con votación ancla verificada en el JSON de congreso.es. Las celdas de programa y las citas de hemeroteca de las preguntas retiradas se han quitado (salvo en los programas de ERC, Junts, EH Bildu, PNV, BNG, CC y UPN, que se estaban redactando a la vez). Las celdas de programa de las preguntas nuevas están por investigar.
+- Cuestionario, segunda revisión (2026-10-06, `docs/AFINIDAD-PREGUNTAS.md` §8): «seguro-ingresos-agrarios» (poco relieve público) se sustituye por «iva-primera-vivienda» (punto 1.d de la moción del GPP sobre vivienda, XV, sesión 196, 10-9-2026, votación 10). «jornada-37-5» gana una segunda ancla (PNL del GSUMAR, XV, sesión 23, 22-2-2024, votación 2): PP y Junts pasan de −2 a −1 en hechos. Se estudió una pregunta de inmigración (regularización extraordinaria) y se descartó por dejar a Compromís sin usuarios ganados; queda en `rejectedCandidates`.
+- Páginas de metodología, datos abiertos, fichas de partido y `/api/afinidad/datos.json` (CC BY 4.0) preparadas. El dataset está **vacío**: las páginas muestran «datos en preparación» hasta que se carguen celdas con fuente.
+
+- Integración final (2026-10-06):
+  - Registrados todos los ficheros de datos: programa de ERC, Junts, EH Bildu, PNV, BNG, CC y UPN; «Dijeron vs. hicieron» de BNG, CC, PNV, PP, UPN y Vox. Un test exige que todo fichero de las carpetas de datos esté registrado.
+  - **Reglas de consistencia** (`AFINIDAD-DATOS.md` §2) aplicadas a programa. `impuesto-grandes-fortunas`: ERC +2 → +1, EH Bildu +2 → +1, BNG +2 → +1, Adelante Andalucía +2 → +1, Sumar +2 → +1 (y Compromís, que hereda la celda de Sumar), Foro −1 → −2, SALF −1 → −2. `irpf-inflacion`: Aliança Catalana +2 → +1. Misma cita y fuente; se conserva la posición del revisor ciego (todas a ≤ 1 punto).
+  - «Dijeron vs. hicieron»: el criterio es «compromiso real, nunca una intervención en el mismo debate de la votación, sin plazo mínimo». Se retira la regla de 30 días de la revisión ciega y vuelve `pp-irpf-2011`. Se publica el registro de búsqueda por partido y el contexto de gobierno de cada partido junto a su recuento.
+  - Método (decisión del dueño, 2026-10-07): **se retira el umbral de cobertura del 70 %**. Una lente enseña cifra cuando el partido tiene dato en al menos `MIN_LENS_ITEMS` = 5 de las preguntas respondidas, sea cual sea el porcentaje; por debajo, «datos insuficientes». Junto a cada barra (programa y votos) se dice siempre «basado en X de Y respuestas». Motivo: el 70 % escondía a partidos cuyo programa de 2023 calla en muchas preguntas (el PSOE salía «datos insuficientes» en programa). Se mantiene el orden (usables primero; cifra, cobertura, nombre) y la protección «3 coincidencias no ganan a 15 al 90 %».
+  - Método (decisión del dueño, 2026-10-07): **encogimiento hacia el neutro**. La afinidad de cada lente es `(Σ peso × acuerdo + K × 0,5) / (Σ peso + K)` con `SHRINK_K` = 3: 5 de 5 coincidencias dan un 81 %, no un 100 %; 15 de 15, un 92 %. Motivo: con el mínimo de 5 respuestas, los partidos con pocas celdas (SALF, Més per Menorca) ganaban a más usuarios sintéticos solo por varianza. Se probó K = 2, 3, 4 y 5: con todos, la dominancia por comunidad pasa y el votante perfecto sale 1.º; con los 32 partidos juntos (vista que no existe en la UI) Compromís y ERC siguen por debajo del 2 % con cualquier K, porque Compromís copia el programa de Sumar y vota como ERC. Se elige K = 3. El votante perfecto se exige 1.º y con al menos un 75 %.
+  - Método: la dominancia y el votante perfecto se aplican solo a partidos comparables (≥ 5 preguntas con dato en alguna lente, la misma regla del motor); los demás no compiten y su hueco lo mide la cobertura. Umbrales exportados como constantes y citados desde la metodología.
+
+## Correcciones recibidas
+
+| Fecha | Partido | Pregunta | Qué se pedía | Decisión | Motivo / fuente |
+|---|---|---|---|---|---|
+| — | — | — | — | — | Ninguna todavía. |
+
+## Traducciones pendientes de revisión humana (ca, gl, eu)
+
+Las traducciones de un test electoral son sensibles: un matiz («en contra» frente a «contrario») puede cambiar lo que se entiende. **Todo el catalán, gallego y euskera del módulo está traducido automáticamente (por agentes) el 2026-10-07** y no debe darse por bueno hasta que una persona nativa lo revise y firme aquí. Criterio pedido: catalán estándar central (IEC), gallego normativo RAG, euskera batua (Euskaltzaindia); registro neutro; nombres de partidos, siglas, títulos oficiales y citas literales sin traducir.
+
+Desde el 2026-10-07 el módulo está completo en las cuatro lenguas: ninguna clave cae al castellano. Lo comprueba `src/test/afinidad-i18n.test.ts` (claves que faltan o idénticas al castellano, con lista explícita `SAME_OK` para las coincidencias legítimas; datos traducidos entrada a entrada; forma del registro de búsqueda).
+
+### Prioridad de revisión
+
+1. **Los 15 enunciados** (`Question.text.ca/gl/eu`) y sus `i18n.label` / `i18n.rationale` en `src/data/afinidad/questions.ts`. Comprobar la polaridad (a favor / en contra) frase a frase; en las cuatro preguntas con `agreeMeans: "no"` la explicación del voto «sí» debe seguir diciendo «en contra de la afirmación». Términos a revisar: «agents de l'autoritat / axentes da autoridade / agintaritzaren agente», «gravamen / gravame / karga», «lobbies», «IVA / IVE / BEZ», «tercería locativa» (parafraseada en eu), «okupatutako etxea 24 orduan hustea».
+2. **Etiquetas de veredicto y de lente** (`src/i18n/afinidad/dvh.ts`, `transparency.ts`, `result.ts`): compleix / contradiu / parcial / no ho van fer; cumpre / contradí / parcial / non o fixeron; betetzen du / kontraesaten du / partziala / ez zuten egin; Programa / Fets / Feitos / Egitateak. Etiquetas de posición en eu («Aurka, ñabardurekin»…) y «Honela puntuatzen du:».
+3. **Metodología** (`src/i18n/afinidad/methodology.ts`, antes solo en castellano): prosa completa traducida. En eu se evitan sufijos pegados a `{marcadores}` y queda algo rígido («gutxienez {score} lortuta», «{n}. galdera»); cifras con formato es-ES («90 %») en las cuatro lenguas.
+
+### Resto (todo traducción automática, pendiente)
+
+| Fichero | Contenido | Estado | Revisado por |
+|---|---|---|---|
+| `src/i18n/afinidad/flow.ts` | Flujo del test (portada, contexto, preguntas, revisión, cabecera). | Pendiente | — |
+| `src/i18n/afinidad/result.ts` | Resultado, compartir, avisos, imagen OG. eu: sufijos tras el nombre del partido resueltos con `{party}(r)ekin` y similares; gl «dabondo». | Pendiente | — |
+| `src/i18n/afinidad/seo.ts` | Títulos y descripciones para buscadores y vistas previas. | Pendiente | — |
+| `src/i18n/afinidad/transparency.ts` | Datos abiertos y fichas de partido; abreviaturas «leg./ses./núm.», «lex./ses./n.º», «leg./bilk./zk.». Las notas técnicas de cada celda (`programme.note`, `record.note`, 362) se dejan en castellano a propósito y se rotulan «Nota tècnica (en castellà)» / «Nota técnica (en castelán)» / «Ohar teknikoa (gaztelaniaz)». | Pendiente | — |
+| `src/i18n/afinidad/dvh.ts` | «Dijeron vs. hicieron»: criterios, filtros, recuentos; rótulo corto de la franja (`modulePill`, eu «Esanak eta eginak»). | Pendiente | — |
+| `src/data/afinidad/parties.ts` (`i18n`) | `inclusionReason` y `recordNote` de los 32 partidos. eu: nombres de grupo («Euskal Taldea (EAJ-PNV)», «SUMAR Talde Plurinazionala», «Talde Popularra»). | Pendiente | — |
+| `src/data/afinidad/dichos-hechos/*.ts` (`i18n`) | Tema, resumen del hecho, nota y cargo de las 86 entradas. **Las citas (`said.text`) no se traducen.** Términos: «per crida / por chamamento / deialdi bidezko bozketa», «arrelament / arraigamento / errotzea», «txostengintza» (ponencia), «23-J» sin adaptar en gl/eu. | Pendiente | — |
+| `src/data/afinidad/dichos-hechos/busqueda-i18n/{ca,gl,eu}.ts` | Registro «Qué buscamos y por qué no entró». Las frases citadas entre «» siguen en su lengua original. eu: «aingura-bozketa», «ez-betetzeak» (método de búsqueda, no veredicto). | Pendiente | — |
+| `src/data/afinidad/hemeroteca/*.ts` (`i18n.role`) | Cargo de quien habla en las 127 citas (no la cita). gl «voceiro/voceira» según la persona; eu sufijos sobre siglas («SUMARreko»). | Pendiente | — |

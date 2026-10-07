@@ -8,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { LOCALES, LOCALE_META, localisePath, type Locale } from "@/i18n/config";
+import { AFINIDAD_LOCALES, SITE_LOCALES, LOCALE_META, isAfinidadPath, localisePath, type Locale } from "@/i18n/config";
 import { useLocale } from "@/i18n/Link";
 
 /**
@@ -25,6 +25,7 @@ export function LanguageSwitcher({ label }: { label: string }) {
   const pathname = usePathname() ?? "/";
   const router = useRouter();
   const current = useLocale();
+  const afinidad = isAfinidadPath(pathname);
 
   const change = (locale: Locale) => {
     document.cookie = `libertarios-locale=${locale};path=/;max-age=31536000;samesite=lax`;
@@ -41,7 +42,11 @@ export function LanguageSwitcher({ label }: { label: string }) {
         <span className="tabular-nums">{LOCALE_META[current].short}</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-48 p-1.5">
-        {LOCALES.map((locale) => {
+        {/* Los idiomas en que existe la página: el sitio en seis; «¿A quién
+            votar?» (que desde el rediseño usa esta misma cabecera) en las
+            cuatro lenguas oficiales. Ofrecer «Deutsch» dentro del test llevaría
+            a una página que no existe en alemán. */}
+        {(afinidad ? AFINIDAD_LOCALES : SITE_LOCALES).map((locale) => {
           const meta = LOCALE_META[locale];
           const active = locale === current;
           return (

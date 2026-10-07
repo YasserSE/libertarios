@@ -3,7 +3,7 @@
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 import { forwardRef, type ComponentProps } from "react";
-import { DEFAULT_LOCALE, isLocale, type Locale } from "./config";
+import { DEFAULT_LOCALE, isAfinidadPath, isLocale, siteLocaleFor, type Locale } from "./config";
 
 /**
  * Enlace interno con el idioma actual ya puesto.
@@ -29,9 +29,17 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
   const locale = useLocale();
   const raw = typeof href === "string" ? href : null;
 
+  /*
+   * Desde «¿A quién votar?» en gallego o euskera, la cabecera y el pie del sitio
+   * (que el módulo usa desde el rediseño) enlazan a páginas que solo existen en
+   * castellano: se manda directamente a `/es/...` en vez de a `/gl/cuadrante`,
+   * que sería castellano etiquetado como gallego. Los enlaces al propio módulo
+   * conservan el idioma.
+   */
+  const target = raw && !isAfinidadPath(raw) ? siteLocaleFor(locale) : locale;
   const localised =
     raw && raw.startsWith("/") && !isLocale(raw.split("/").filter(Boolean)[0] ?? "")
-      ? `/${locale}${raw === "/" ? "" : raw}`
+      ? `/${target}${raw === "/" ? "" : raw}`
       : href;
 
   return <NextLink ref={ref} href={localised} {...props} />;

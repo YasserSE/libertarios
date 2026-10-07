@@ -1,4 +1,5 @@
 import { Link } from "@/i18n/Link";
+import { FooterNewsletter } from "@/components/newsletter/FooterNewsletter";
 
 /*
  * Cada enlace del pie tiene que llevar a algo que exista.
@@ -106,6 +107,11 @@ export function Footer() {
               ))}
             </ul>
           </div>
+        </div>
+
+        {/* Boletín: opcional, con su propia casilla sin marcar. */}
+        <div className="mb-12 max-w-xl">
+          <FooterNewsletter />
         </div>
 
         {/* Bottom bar */}

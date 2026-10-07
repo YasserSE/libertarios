@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
+import { SITE_URL } from "@/lib/site";
 
 /**
  * Metadatos base de todo el sitio.
@@ -11,9 +12,10 @@ import { Providers } from "./providers";
  * gente comparte su resultado, eso es el agujero más caro que tenía.
  *
  * `metadataBase` es lo que convierte las rutas relativas de imagen en absolutas.
- * Sin él, Next avisa y los rastreadores no resuelven la imagen.
+ * Sin él, Next avisa y los rastreadores no resuelven la imagen. La URL sale de
+ * `@/lib/site` (`NEXT_PUBLIC_SITE_URL` o el dominio de producción).
  */
-const SITE = "https://www.libertarios.eu";
+const SITE = SITE_URL;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE),

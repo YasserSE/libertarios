@@ -5,6 +5,7 @@ import { LearnSection } from "@/components/LearnSection";
 import { DataSection } from "@/components/DataSection";
 import { LibertarianSection } from "@/components/LibertarianSection";
 import { CompareSection } from "@/components/CompareSection";
+import { AfinidadPromoSection } from "@/components/AfinidadPromoSection";
 import { MeasuresSection } from "@/components/MeasuresSection";
 import { NewsResourcesSection } from "@/components/NewsResourcesSection";
 import { CTASection } from "@/components/CTASection";
@@ -36,8 +37,12 @@ export async function HomePage({ scope }: { scope: MapScope }) {
           scope={scope}
           registrationOpen={registrationOpen}
         />
-        {/* La comparación va inmediatamente después del mapa: es el gancho que
-            explica de qué van los dos ejes que el hero acaba de mostrar. */}
+        {/* «¿A quién votar?» entre el mapa y la comparación: con las generales
+            del 29-N convocadas es la llamada más útil para quien llega, pero
+            una banda, no un segundo hero. */}
+        <AfinidadPromoSection />
+        {/* La comparación va justo después: es el gancho que explica de qué
+            van los dos ejes que el hero acaba de mostrar. */}
         <CompareSection />
         <FaceExplorer
           ids={FEATURED_FIGURE_IDS}

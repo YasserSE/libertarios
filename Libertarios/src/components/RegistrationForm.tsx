@@ -17,6 +17,10 @@ import { submitRegistration } from "@/app/[locale]/registro/actions";
 import { resolveProvince } from "@/data/geo/spain-provinces";
 import { storeResult } from "@/lib/results/storage";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Link, useLocale } from "@/i18n/Link";
+import { subscribeNewsletter } from "@/app/[locale]/novedades/actions";
+import { getNewsletterStrings } from "@/i18n/newsletter";
+import { isNewsletterEnabled } from "@/lib/newsletter/enabled";
 
 const provinces = [
   "A Coruña", "Álava", "Albacete", "Alicante", "Almería", "Asturias", "Ávila",
@@ -84,6 +88,10 @@ export function RegistrationForm({ onComplete, quadrantPosition }: RegistrationF
     email: "",
   });
   const [consent, setConsent] = useState(false);
+  // Boletín: casilla aparte, sin marcar, y no hace falta para registrarse.
+  const [newsletter, setNewsletter] = useState(false);
+  const locale = useLocale();
+  const nl = getNewsletterStrings(locale).form;
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async () => {
@@ -133,6 +141,22 @@ export function RegistrationForm({ onComplete, quadrantPosition }: RegistrationF
     };
 
     toast.success("Registro completado. Gracias por contarte.");
+
+    /*
+     * El boletín va en una petición aparte y a una tabla aparte
+     * (`newsletter_subscribers`), sin enlace con el registro: ni id, ni
+     * posición, ni provincia. Solo el correo, la casilla, el origen y el
+     * idioma. Que falle no afecta al registro, que ya está hecho.
+     */
+    if (newsletter) {
+      const data = new FormData();
+      data.set("email", formData.email);
+      data.set("consent", "on");
+      data.set("source", "registro");
+      data.set("locale", locale);
+      const res = await subscribeNewsletter(data).catch(() => null);
+      if (res?.ok) toast.success(nl.success);
+    }
     onComplete?.(registrationData);
   };
 
@@ -490,6 +514,32 @@ export function RegistrationForm({ onComplete, quadrantPosition }: RegistrationF
               <span className="text-foreground">contacto@libertarios.es</span>.
             </span>
           </label>
+
+          {/*
+            Boletín «Novedades de Libertarios.eu»: consentimiento distinto del
+            de arriba (LSSI art. 21), sin marcar y opcional. Registrarse no
+            depende de esto.
+          */}
+          {isNewsletterEnabled() && (
+          <label className="flex cursor-pointer items-start gap-3 rounded-xl border border-border bg-background p-4">
+            <Checkbox
+              checked={newsletter}
+              onCheckedChange={(v) => setNewsletter(v === true)}
+              className="mt-0.5"
+              aria-describedby="newsletter-text"
+              data-testid="registration-newsletter"
+            />
+            <span id="newsletter-text" className="text-sm leading-relaxed text-muted-foreground">
+              {nl.checkbox}{" "}
+              <span className="block text-xs">
+                {nl.registrationHint}{" "}
+                <Link href="/proyecto#privacidad" className="underline underline-offset-4 hover:text-foreground">
+                  {nl.privacyLink}
+                </Link>
+              </span>
+            </span>
+          </label>
+          )}
 
           <div className="flex gap-3">
             <Button variant="outline" className="flex-1" onClick={() => setStep(3)}>
