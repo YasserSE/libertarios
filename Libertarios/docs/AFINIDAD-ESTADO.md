@@ -99,7 +99,7 @@ Las celdas de `iva-primera-vivienda` (programa y hemeroteca) se estaban escribie
 
 ## Lista de lanzamiento
 
-- [ ] Aplicar en Supabase las migraciones `0008_afinidad.sql`, `0009_afinidad_events.sql` y `0010_afinidad_events_dvh.sql`, en ese orden.
+- [x] (2026-10-08) Aplicar en Supabase las migraciones `0008_afinidad.sql`, `0009_afinidad_events.sql` y `0010_afinidad_events_dvh.sql`, en ese orden.
 - [ ] Crear el token de administración con `afinidad_admin_issue_token` (solo con el rol de servicio). Guardarlo fuera del repo y comprobar el acceso a `/admin/afinidad`.
 - [ ] Revisión por una persona nativa de las traducciones ca/gl/eu: enunciados, diccionarios `afinidad`, `transparency.ts`, `dvh.ts` y `result.ts`, incluida la nueva cadena «basado en X de Y respuestas». Que firme la tabla de `AFINIDAD-CAMBIOS.md`.
 - [ ] **26-oct** (cierre de listas): descargar los programas de 2026, recodificar por diferencias con los de 2023, repetir la revisión ciega y quitar la etiqueta «programa 2023» donde ya no aplique.
