@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "./providers";
+import { PrivateAnalytics } from "@/components/PrivateAnalytics";
 import { SITE_URL } from "@/lib/site";
 
 /**
@@ -52,6 +53,7 @@ export default function RootLayout({
     <html lang="es">
       <body className="font-body antialiased">
         <Providers>{children}</Providers>
+        <PrivateAnalytics />
       </body>
     </html>
   );
