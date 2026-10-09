@@ -1,0 +1,25 @@
+{
+  "name": "libertarios-social",
+  "private": true,
+  "description": "Reels y carruseles de Instagram generados con Remotion a partir de los datos del test «¿A quién votar?».",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts",
+    "still": "remotion still src/index.ts",
+    "script": "tsx scripts/print-script.ts",
+    "check": "tsx scripts/check-data.ts",
+    "tts": "tsx scripts/tts.ts"
+  },
+  "dependencies": {
+    "@remotion/cli": "^4.0.300",
+    "@remotion/google-fonts": "^4.0.300",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.300"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
+  }
+}

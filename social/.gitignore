@@ -1,0 +1,4 @@
+node_modules
+out
+# Voz generada (ElevenLabs): se regenera con `npm run tts -- <id>`
+public/vo/

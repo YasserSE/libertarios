@@ -1,0 +1,32 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<!-- Foto de perfil de Instagram (1080×1080). Instagram la recorta en círculo:
+     todo lo importante cabe en el círculo central. ?bg=paper para la variante clara. -->
+<style>
+  html, body { margin: 0; }
+  .a { width: 1080px; height: 1080px; position: relative; overflow: hidden;
+       background: #119e83;
+       background-image: repeating-linear-gradient(135deg, rgba(255,255,255,.06) 0 4px, transparent 4px 56px); }
+  .a.paper { background: #f4f1e8; background-image: none; }
+  svg { position: absolute; left: 50%; top: 52%; transform: translate(-50%, -50%); width: 700px; }
+</style></head><body>
+<div class="a" id="a">
+  <svg viewBox="0 0 230 230">
+    <!-- sombra dura -->
+    <rect x="22" y="58" width="170" height="160" rx="10" fill="#0c6f5b"/>
+    <rect x="30" y="50" width="170" height="160" rx="10" fill="#141a24"/>
+    <path d="M85 85 v80 h60" stroke="#119e83" stroke-width="26" fill="none"/>
+    <circle cx="80" cy="55" r="32" fill="#f4f1e8" stroke="#141a24" stroke-width="7"/>
+    <circle cx="150" cy="55" r="32" fill="#f4f1e8" stroke="#141a24" stroke-width="7"/>
+    <circle cx="86" cy="60" r="12" fill="#141a24"/>
+    <circle cx="156" cy="60" r="12" fill="#141a24"/>
+    <path d="M30 150 q-20 10 -10 40 M200 150 q20 10 10 40" stroke="#141a24" stroke-width="14" fill="none" stroke-linecap="round"/>
+  </svg>
+</div>
+<script>
+  if (location.search.includes("bg=paper")) {
+    document.getElementById("a").classList.add("paper");
+    document.querySelector('rect[fill="#0c6f5b"]').setAttribute("fill", "#c9cfc9");
+  }
+</script>
+</body></html>
