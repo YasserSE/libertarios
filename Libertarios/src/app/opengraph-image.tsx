@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { INSTAGRAM_HANDLE } from "@/lib/social";
 
 /**
  * La imagen que aparece al compartir un enlace del sitio.
@@ -24,8 +25,12 @@ export default function Image() {
           background: "#f7f9f8",
           padding: 64,
           fontFamily: "sans-serif",
+          position: "relative",
         }}
       >
+        <div style={{ display: "flex", position: "absolute", left: 64, bottom: 28, fontSize: 22, color: "#3d4a45" }}>
+          Instagram {INSTAGRAM_HANDLE}
+        </div>
         <div style={{ display: "flex", flexDirection: "column", flex: 1, justifyContent: "center" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 28 }}>
             <div

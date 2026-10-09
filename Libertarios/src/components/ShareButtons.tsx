@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Share2, Twitter, Facebook, Link2, Check } from "lucide-react";
 import { toast } from "sonner";
+import { InstagramIcon } from "@/components/InstagramIcon";
+import { INSTAGRAM_HANDLE, INSTAGRAM_URL } from "@/lib/social";
 
 /**
  * Botones de compartir (X, Facebook, WhatsApp, Telegram, copiar y compartir
@@ -25,6 +27,7 @@ export interface ShareButtonsLabels {
   copiedToast: string;
   copyError: string;
   shareError: string;
+  follow: string;
 }
 
 const DEFAULT_LABELS: ShareButtonsLabels = {
@@ -34,6 +37,7 @@ const DEFAULT_LABELS: ShareButtonsLabels = {
   copiedToast: "¡Enlace copiado al portapapeles!",
   copyError: "No se pudo copiar el enlace",
   shareError: "Error al compartir",
+  follow: "Síguenos en Instagram",
 };
 
 export interface ShareButtonsProps {
@@ -153,6 +157,17 @@ export function ShareButtons({ url, text, title, labels, onShare }: ShareButtons
           </Button>
         )}
       </div>
+
+      {/* Cierre de cada test: la cuenta de Instagram del proyecto. */}
+      <a
+        href={INSTAGRAM_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-4 flex items-center justify-center gap-2 text-sm font-medium text-primary hover:underline"
+      >
+        <InstagramIcon />
+        {l.follow} · {INSTAGRAM_HANDLE}
+      </a>
     </>
   );
 }

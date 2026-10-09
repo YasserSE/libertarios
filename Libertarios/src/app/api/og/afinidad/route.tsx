@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { INSTAGRAM_HANDLE } from "@/lib/social";
 import type { ReactNode } from "react";
 import { dataset as baseDataset } from "@/data/afinidad";
 import type { Dataset, Party } from "@/data/afinidad/types";
@@ -211,8 +212,12 @@ function genericCard(seo: SeoStrings) {
         background: `linear-gradient(135deg, ${SITE_BG} 0%, #ffffff 55%, ${SITE_ACCENT} 100%)`,
         fontFamily: "sans-serif",
         borderBottom: `12px solid ${SITE_PRIMARY}`,
+        position: "relative",
       }}
     >
+      <div style={{ display: "flex", position: "absolute", right: 64, bottom: 24, fontSize: 22, color: SITE_INK_SOFT }}>
+        Instagram {INSTAGRAM_HANDLE}
+      </div>
       <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", flex: 1, padding: "0 0 0 64px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 30 }}>
           <div
@@ -349,8 +354,12 @@ function Frame({ t, generic = false, children }: { t: ResultStrings; generic?: b
         padding: "48px 64px",
         fontFamily: "sans-serif",
         borderBottom: `10px solid ${LINE}`,
+        position: "relative",
       }}
     >
+      <div style={{ display: "flex", position: "absolute", right: 64, bottom: 20, fontSize: 22, color: MUTED }}>
+        Instagram {INSTAGRAM_HANDLE}
+      </div>
       {!generic && <div style={{ display: "flex", fontSize: 26, fontWeight: 700, color: MUTED, marginBottom: 6 }}>{t.ogTitle}</div>}
       {children}
     </div>

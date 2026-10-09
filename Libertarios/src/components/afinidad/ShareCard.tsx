@@ -119,6 +119,7 @@ export function ShareCard({
           copiedToast: t.copiedToast,
           copyError: t.copyError,
           shareError: t.shareError,
+          follow: t.followInstagram,
         }}
       />
     </section>
