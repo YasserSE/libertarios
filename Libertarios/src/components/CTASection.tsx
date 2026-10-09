@@ -1,6 +1,7 @@
 import { Link } from "@/i18n/Link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, Lock, Play } from "lucide-react";
+import { Mascot } from "@/components/Mascot";
 
 export function CTASection() {
   return (
@@ -12,8 +13,12 @@ export function CTASection() {
 
       <div className="container relative z-10">
         <div className="max-w-3xl mx-auto text-center">
+          <Mascot className="mx-auto mb-4 w-24" />
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-            Un movimiento empieza por saber cuántos sois
+            Un movimiento empieza por saber{" "}
+            <span className="ink-border hard-shadow-sm inline-block -rotate-1 bg-primary px-2 text-primary-foreground">
+              cuántos sois
+            </span>
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-10">
             No implica afiliación, militancia ni exposición pública: nadie verá tu nombre. Es la

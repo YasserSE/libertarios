@@ -128,8 +128,9 @@ export function Header() {
             className="flex shrink-0 items-center gap-2 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             aria-label={t.home}
           >
-            <span className="gradient-primary flex h-8 w-8 items-center justify-center rounded-lg">
-              <span className="font-display text-sm font-bold text-primary-foreground">L</span>
+            {/* La marca «L» de los Reels: verde, borde de tinta, letra de tinta. */}
+            <span className="ink-border flex h-8 w-8 items-center justify-center rounded-md bg-primary">
+              <span className="font-display text-sm font-bold text-[hsl(var(--ink))]">L</span>
             </span>
             <span className="font-display text-lg font-semibold tracking-tight text-foreground">
               Libertarios

@@ -1,5 +1,6 @@
 import { Link } from "@/i18n/Link";
 import { FooterNewsletter } from "@/components/newsletter/FooterNewsletter";
+import { Mascot } from "@/components/Mascot";
 
 /*
  * Cada enlace del pie tiene que llevar a algo que exista.
@@ -37,10 +38,10 @@ export function Footer() {
       <div className="container">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
-          <div>
+          <div className="relative">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-display font-bold text-sm">L</span>
+              <div className="w-8 h-8 rounded-md bg-primary border-2 border-background flex items-center justify-center">
+                <span className="text-[hsl(var(--ink))] font-display font-bold text-sm">L</span>
               </div>
               <span className="font-display font-semibold text-lg">
                 Libertarios
@@ -57,6 +58,20 @@ export function Footer() {
             >
               contacto@libertarios.es
             </a>
+            <a
+              href="https://www.instagram.com/libertarios.eu/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 flex items-center gap-2 text-sm text-primary hover:underline"
+            >
+              <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+              </svg>
+              Instagram: @libertarios.eu
+            </a>
+            <Mascot pose="point" className="mascot-outline mt-6 w-16" />
           </div>
 
           {/* Links columns */}

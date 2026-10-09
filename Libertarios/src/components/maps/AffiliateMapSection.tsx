@@ -15,6 +15,7 @@ import { AffiliateDataTable, type TableRow } from "./AffiliateDataTable";
 import { formatPerMillion } from "@/lib/affiliates/format";
 import { CountUp } from "@/components/motion/CountUp";
 import { Reveal } from "@/components/motion/Reveal";
+import { Mascot } from "@/components/Mascot";
 
 export type MapScope = "europe" | "ES";
 
@@ -225,19 +226,18 @@ export function AffiliateMapSection({
                 </p>
               )}
 
-              <h1 className="font-display text-4xl font-bold leading-[1.06] tracking-tight text-foreground sm:text-5xl">
-                <span className="block">{t.line1}</span>
-                <span
-                  className="block bg-clip-text text-transparent"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(190 70% 45%) 50%, hsl(var(--primary)) 100%)",
-                  }}
-                >
-                  {t.line2}
-                </span>
-                <span className="block">{t.line3}</span>
-              </h1>
+              <div className="relative">
+                {/* El personaje de los Reels, asomado junto al titular. */}
+                <Mascot look="left" className="absolute -top-3 right-0 w-20 sm:w-24" />
+                <h1 className="font-display text-4xl font-bold leading-[1.06] tracking-tight text-foreground sm:text-5xl">
+                  <span className="block">{t.line1}</span>
+                  {/* Recuadro de tinta del estilo «papeleta» (como «¿QUÉ TE CAMBIA?» en los Reels). */}
+                  <span className="ink-border hard-shadow-sm my-1.5 inline-block -rotate-1 bg-primary px-2.5 text-primary-foreground">
+                    {t.line2}
+                  </span>
+                  <span className="block">{t.line3}</span>
+                </h1>
+              </div>
 
               <p className="mt-5 text-base leading-relaxed text-muted-foreground lg:text-lg">
 {isSpain ? t.subtitleSpain : t.subtitleEurope}

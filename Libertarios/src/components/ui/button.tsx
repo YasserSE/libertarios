@@ -15,9 +15,11 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        hero: "gradient-cta text-primary-foreground shadow-card hover:shadow-elevated motion-safe:hover:scale-[1.02] motion-safe:active:scale-[0.98]",
-        heroOutline: "border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground",
-        cta: "gradient-cta text-primary-foreground shadow-soft hover:shadow-card motion-safe:hover:scale-[1.01] motion-safe:active:scale-[0.99]",
+        // Estilo «papeleta» de los Reels: borde de tinta y sombra dura (globals.css).
+        hero: "gradient-cta ink-border hard-shadow hover:hard-shadow text-primary-foreground motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0",
+        heroOutline:
+          "ink-border hard-shadow-sm hover:hard-shadow-sm bg-background text-foreground hover:bg-accent hover:text-accent-foreground motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0",
+        cta: "gradient-cta ink-border hard-shadow-sm hover:hard-shadow-sm text-primary-foreground motion-safe:hover:-translate-y-0.5 motion-safe:active:translate-y-0",
       },
       size: {
         default: "h-10 px-4 py-2",

@@ -46,6 +46,11 @@
     --shadow-card: 0 8px 32px -8px hsl(220 25% 10% / 0.1);
     --shadow-elevated: 0 16px 48px -12px hsl(220 25% 10% / 0.15);
 
+    /* Estilo «papeleta» de los Reels: tinta y papel fijos en los dos modos. */
+    --ink: 220 25% 10%;
+    --paper: 43 33% 93%;
+    --mint: 164 63% 87%;
+
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;
 
@@ -181,6 +186,51 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Contraste de los Reels («papeleta»): borde de tinta y sombra dura. */
+  .ink-border {
+    border: 2px solid hsl(var(--foreground));
+  }
+
+  .hard-shadow {
+    box-shadow: -6px 6px 0 hsl(var(--foreground));
+  }
+
+  .hard-shadow-sm {
+    box-shadow: -4px 4px 0 hsl(var(--foreground));
+  }
+}
+
+/* Personaje (components/Mascot.tsx): parpadeo y respiración, solo si se permite movimiento. */
+.mascot-blink {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .mascot-blink {
+    animation: mascot-blink 4.5s infinite;
+  }
+
+  .mascot-bob {
+    animation: mascot-bob 3.2s ease-in-out infinite;
+  }
+}
+
+@keyframes mascot-blink {
+  0%, 95%, 100% { transform: scaleY(1); }
+  97.5% { transform: scaleY(0.1); }
+}
+
+@keyframes mascot-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* Sobre fondo oscuro (modo oscuro o el pie) el cuerpo de tinta se perdería: contorno de papel. */
+.dark .mascot-bob,
+.mascot-outline {
+  filter: drop-shadow(1.5px 0 0 hsl(var(--paper))) drop-shadow(-1.5px 0 0 hsl(var(--paper))) drop-shadow(0 1.5px 0 hsl(var(--paper))) drop-shadow(0 -1.5px 0 hsl(var(--paper)));
 }
 
 /* Smooth scroll */
