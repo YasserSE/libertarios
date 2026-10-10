@@ -32,6 +32,7 @@ import { DvhPartyButton, SaidVsDidCard } from "./SaidVsDid";
 import { getDvhStrings } from "@/i18n/afinidad/dvh";
 import { QuestionBreakdown } from "./QuestionBreakdown";
 import { ShareCard } from "./ShareCard";
+import { ResultNextSteps } from "./ResultNextSteps";
 import { QuestionGrid } from "./QuestionGrid";
 import { Disclosure, SectionCard } from "./ui";
 import { NewsletterForm } from "@/components/newsletter/NewsletterForm";
@@ -263,6 +264,9 @@ export function ResultView({ dataset, decoded, lang, origin: originProp }: Resul
           </Button>
         )}
       </SectionCard>
+
+      {/* 2b. «¿Te sorprende tu resultado?»: compartir o hacer el cuadrante, justo tras el ranking. */}
+      <ResultNextSteps lang={lang} />
 
       {/* 3–4. Las dos tarjetas destacadas, lado a lado en escritorio. */}
       {(surpriseData || contradictionParty) && (

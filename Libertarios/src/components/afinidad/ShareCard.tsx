@@ -5,6 +5,7 @@ import { Share2, Vote } from "lucide-react";
 import type { Party } from "@/data/afinidad/types";
 import { PartyAvatar } from "./PartyBadge";
 import { ShareButtons, type ShareChannel } from "@/components/ShareButtons";
+import { SHARE_ANCHOR } from "./ResultNextSteps";
 import type { ResultStrings } from "@/i18n/afinidad/result";
 import { track } from "@/lib/afinidad/track";
 
@@ -56,7 +57,7 @@ export function ShareCard({
   const showLeader = !anon && leader;
 
   return (
-    <section className="rounded-2xl border border-border bg-card p-6 shadow-card">
+    <section id={SHARE_ANCHOR} className="scroll-mt-24 rounded-2xl border border-border bg-card p-6 shadow-card">
       <div className="mb-4 flex items-center gap-3">
         <Share2 className="h-5 w-5 text-primary" aria-hidden />
         <h2 className="font-display font-semibold text-foreground">{t.shareTitle}</h2>

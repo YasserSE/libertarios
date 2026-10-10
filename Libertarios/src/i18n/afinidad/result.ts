@@ -210,6 +210,9 @@ const es = {
   inviteMixtoTitle: "¿Dónde estás en libertad económica y personal?",
   inviteMixtoBody: "Descúbrelo en 3 minutos.",
   inviteCta: "Hacer el test del cuadrante",
+  nextTitle: "¿Te sorprende tu resultado?",
+  nextBody: "Compártelo y compáralo con el de tus amigos. O da un paso más: haz el test del cuadrante y quítate las etiquetas simplistas de izquierda contra derecha.",
+  nextShare: "Compartir mi resultado",
   inviteFootnote: "Calculado solo con tus {n} respuestas sobre impuestos; no se guarda.",
 };
 
@@ -384,6 +387,9 @@ const ca: ResultStrings = {
   inviteMixtoTitle: "On et situes en llibertat econòmica i personal?",
   inviteMixtoBody: "Descobreix-ho en 3 minuts.",
   inviteCta: "Fer el test del quadrant",
+  nextTitle: "T'ha sorprès el resultat?",
+  nextBody: "Comparteix-lo i compara'l amb el dels teus amics. O fes un pas més: fes el test del quadrant i treu-te les etiquetes simplistes d'esquerra contra dreta.",
+  nextShare: "Compartir el meu resultat",
   inviteFootnote: "Calculat només amb les teves {n} respostes sobre impostos; no es desa.",
 };
 
@@ -556,6 +562,9 @@ const gl: ResultStrings = {
   inviteMixtoTitle: "Onde estás en liberdade económica e persoal?",
   inviteMixtoBody: "Descóbreo en 3 minutos.",
   inviteCta: "Facer o test do cadrante",
+  nextTitle: "Sorpréndeche o teu resultado?",
+  nextBody: "Compárteo e compárao co dos teus amigos. Ou dá un paso máis: fai o test do cadrante e quítate as etiquetas simplistas de esquerda contra dereita.",
+  nextShare: "Compartir o meu resultado",
   inviteFootnote: "Calculado só coas túas {n} respostas sobre impostos; non se garda.",
 };
 
@@ -728,6 +737,9 @@ const eu: ResultStrings = {
   inviteMixtoTitle: "Non zaude askatasun ekonomikoan eta pertsonalean?",
   inviteMixtoBody: "Jakin ezazu 3 minututan.",
   inviteCta: "Egin koadrantearen testa",
+  nextTitle: "Harritu zaitu emaitzak?",
+  nextBody: "Partekatu eta konparatu zure lagunenarekin. Edo egin urrats bat gehiago: egin koadrantearen testa eta ahaztu ezkerra eta eskuina bezalako etiketa sinpleak.",
+  nextShare: "Partekatu nire emaitza",
   inviteFootnote: "Zergei buruzko zure {n} erantzunekin bakarrik kalkulatua; ez da gordetzen.",
 };
 

@@ -312,3 +312,22 @@ describe("del cuadrante a «¿A quién votar?»", () => {
     expect(invite.querySelector("a")?.getAttribute("href")).toBe("/es/a-quien-votar");
   });
 });
+
+/** «¿Te sorprende tu resultado?» (petición del dueño, 10-10-2026): justo tras el ranking. */
+describe("«¿Te sorprende tu resultado?» tras el ranking", () => {
+  const isAfter = (a: Element, b: Element) =>
+    Boolean(b.compareDocumentPosition(a) & Node.DOCUMENT_POSITION_FOLLOWING);
+
+  it("va después del ranking y antes del detalle, y enlaza a compartir y al cuadrante", () => {
+    const { container } = view(sampleDataset, decoded(answersA));
+    const next = screen.getByTestId("result-next");
+    const ranking = screen.getByRole("heading", { name: "Todos los partidos" });
+    const breakdown = screen.getByRole("heading", { name: "Pregunta a pregunta" });
+    expect(isAfter(next, ranking)).toBe(true);
+    expect(isAfter(breakdown, next)).toBe(true);
+    expect(within(next).getByRole("heading", { name: "¿Te sorprende tu resultado?" })).toBeInTheDocument();
+    const links = Array.from(next.querySelectorAll("a")).map((a) => a.getAttribute("href"));
+    expect(links).toEqual(["#compartir", "/es/cuadrante"]);
+    expect(container.querySelector("#compartir")).not.toBeNull();
+  });
+});
