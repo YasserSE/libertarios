@@ -1,0 +1,66 @@
+{
+ "url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion101/20250320/Votacion019/VOT_20250320125720.json",
+ "fecha": "20/3/2025",
+ "titulo": "Dictámenes de Comisiones sobre iniciativas legislativas.",
+ "expediente": "Votación del dictamen del Proyecto de Ley por la que se crea la Agencia Estatal de Salud Pública y se modifica la Ley 33/2011, de 4 de octubre, General de Salud Pública.",
+ "totales": {
+  "asentimiento": "No",
+  "presentes": 345,
+  "afavor": 167,
+  "enContra": 176,
+  "abstenciones": 2,
+  "noVotan": 5
+ },
+ "partidos": {
+  "pp": {
+   "si": 0,
+   "no": 135,
+   "abstencion": 0,
+   "ausente": 2,
+   "mayoria": {
+    "vote": "no",
+    "strong": true
+   }
+  },
+  "psoe": {
+   "si": 119,
+   "no": 1,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  },
+  "vox": {
+   "si": 0,
+   "no": 33,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "no",
+    "strong": true
+   }
+  },
+  "sumar": {
+   "si": 25,
+   "no": 0,
+   "abstencion": 0,
+   "ausente": 1,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  },
+  "podemos": {
+   "si": 4,
+   "no": 0,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  }
+ }
+}

@@ -18,7 +18,7 @@ export const introFrames = () => {
 };
 
 /** Fotograma (relativo al beat) en que se dice la primera palabra que empieza por `w`, o `fallback`. */
-const at = (t: WordTiming[], w: string, fallback: number) =>
+export const at = (t: WordTiming[], w: string, fallback: number) =>
   t.find((x) => x.word.toLowerCase().replace(/[^\p{L}]/gu, "").startsWith(w))?.start ?? fallback;
 
 /* ── Pantallas ──────────────────────────────────────────────────────── */
@@ -91,7 +91,7 @@ const Slider: React.FC<{ label: string; sub: string; enterAt: number; to: number
   );
 };
 
-const Axes: React.FC<{ t: WordTiming[] }> = ({ t }) => (
+export const Axes: React.FC<{ t: WordTiming[] }> = ({ t }) => (
   <>
     <div style={{ position: "absolute", left: 44, right: 44, top: 50, font: `700 76px ${GROTESK}`, lineHeight: 0.95, letterSpacing: -3, textTransform: "uppercase", ...useEnter(0, { x: -60 }) }}>
       No es una línea.
@@ -170,7 +170,7 @@ const QuadCell: React.FC<{ name: string; sub: string; at: number; bg: string; bo
   );
 };
 
-const Who: React.FC<{ t: WordTiming[] }> = ({ t }) => (
+export const Who: React.FC<{ t: WordTiming[] }> = ({ t }) => (
   <>
     <div style={{ position: "absolute", left: 44, right: 44, top: 50, font: `700 84px ${GROTESK}`, lineHeight: 0.95, letterSpacing: -3, textTransform: "uppercase", ...useEnter(0, { x: -60 }) }}>
       Qué es

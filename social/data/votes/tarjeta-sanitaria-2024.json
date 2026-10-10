@@ -1,0 +1,66 @@
+{
+ "url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion080/20241126/Votacion003/VOT_20241126173408.json",
+ "fecha": "26/11/2024",
+ "titulo": "Toma en consideración de Proposiciones de Ley.",
+ "expediente": "Proposición de Ley del Grupo Parlamentario VOX, para la garantía, a nivel estatal, del funcionamiento efectivo de la tarjeta sanitaria individual y de la plena interoperabilidad de las historias clínicas.",
+ "totales": {
+  "asentimiento": "No",
+  "presentes": 340,
+  "afavor": 32,
+  "enContra": 174,
+  "abstenciones": 134,
+  "noVotan": 10
+ },
+ "partidos": {
+  "pp": {
+   "si": 0,
+   "no": 0,
+   "abstencion": 133,
+   "ausente": 4,
+   "mayoria": {
+    "vote": "abstencion",
+    "strong": true
+   }
+  },
+  "psoe": {
+   "si": 0,
+   "no": 118,
+   "abstencion": 0,
+   "ausente": 2,
+   "mayoria": {
+    "vote": "no",
+    "strong": true
+   }
+  },
+  "vox": {
+   "si": 32,
+   "no": 0,
+   "abstencion": 0,
+   "ausente": 1,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  },
+  "sumar": {
+   "si": 0,
+   "no": 24,
+   "abstencion": 0,
+   "ausente": 2,
+   "mayoria": {
+    "vote": "no",
+    "strong": true
+   }
+  },
+  "podemos": {
+   "si": 0,
+   "no": 4,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "no",
+    "strong": true
+   }
+  }
+ }
+}

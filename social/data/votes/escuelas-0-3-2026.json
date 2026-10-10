@@ -1,0 +1,66 @@
+{
+ "url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion180/20260520/Votacion006/VOT_20260520142328.json",
+ "fecha": "20/5/2026",
+ "titulo": "Mociones consecuencia de interpelaciones urgentes.",
+ "expediente": "Moción consecuencia de interpelación urgente del Grupo Parlamentario Mixto (Sra. Belarra Urteaga), referida a la política del Gobierno en materia educativa.\nSe vota en los términos de la enmienda transaccional presentada por el Grupo Parlamentario Socialista, el Grupo Parlamentario Republicano, el Grupo Parlamentario EH Bildu y el Grupo Parlamentario Mixto (Sra. Belarra Urteaga).",
+ "totales": {
+  "asentimiento": "No",
+  "presentes": 347,
+  "afavor": 169,
+  "enContra": 170,
+  "abstenciones": 8,
+  "noVotan": 3
+ },
+ "partidos": {
+  "pp": {
+   "si": 0,
+   "no": 137,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "no",
+    "strong": true
+   }
+  },
+  "psoe": {
+   "si": 119,
+   "no": 0,
+   "abstencion": 0,
+   "ausente": 2,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  },
+  "vox": {
+   "si": 0,
+   "no": 32,
+   "abstencion": 0,
+   "ausente": 1,
+   "mayoria": {
+    "vote": "no",
+    "strong": true
+   }
+  },
+  "sumar": {
+   "si": 26,
+   "no": 0,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  },
+  "podemos": {
+   "si": 4,
+   "no": 0,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  }
+ }
+}

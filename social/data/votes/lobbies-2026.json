@@ -1,0 +1,66 @@
+{
+ "url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion198/20260916/Votacion016/VOT_20260916195406.json",
+ "fecha": "16/9/2026",
+ "titulo": "Convalidación o derogación de Reales Decretos-leyes.",
+ "expediente": "Real Decreto-ley 21/2026, de 25 de agosto, de transparencia e integridad de las actividades de los grupos de interés.",
+ "totales": {
+  "asentimiento": "No",
+  "presentes": 346,
+  "afavor": 155,
+  "enContra": 179,
+  "abstenciones": 12,
+  "noVotan": 4
+ },
+ "partidos": {
+  "pp": {
+   "si": 0,
+   "no": 137,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "no",
+    "strong": true
+   }
+  },
+  "psoe": {
+   "si": 120,
+   "no": 0,
+   "abstencion": 0,
+   "ausente": 1,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  },
+  "vox": {
+   "si": 0,
+   "no": 32,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "no",
+    "strong": true
+   }
+  },
+  "sumar": {
+   "si": 19,
+   "no": 1,
+   "abstencion": 3,
+   "ausente": 3,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  },
+  "podemos": {
+   "si": 0,
+   "no": 0,
+   "abstencion": 4,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "abstencion",
+    "strong": true
+   }
+  }
+ }
+}

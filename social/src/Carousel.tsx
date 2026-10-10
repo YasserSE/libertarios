@@ -10,6 +10,10 @@ import { Background, Ballot } from "./components/Ballot";
 import { ChapterBeat, DvhBeat, EndingBeat, HookBeat } from "./components/Beats";
 import { Character } from "./components/Character";
 import { INTRO, INTRO_RAIL } from "./intro-script";
+import { explainerClips, sceneTimings } from "./Explainer";
+import { EXPLAINERS } from "./explainers";
+import { SceneView } from "./components/scenes";
+import { Axes, Who } from "./Intro";
 import { IntroScreenView } from "./Intro";
 import { C, MONO } from "./theme";
 
@@ -66,6 +70,29 @@ export const IntroPost: React.FC = () => {
         {s.screen === "ending" ? <Character x={760} y={POST.top + 760} pose="point" /> : <Character x={570} y={POST.top - 112} size={200} />}
       </Freeze>
       <PageDots n={INTRO.length} i={slide} />
+    </AbsoluteFill>
+  );
+};
+
+/* ── Vídeos explicativos: una diapositiva por escena ─────────────────── */
+
+export const ExplainerPost: React.FC<{ id: string }> = ({ id }) => {
+  const i = Math.floor(useCurrentFrame() / SLIDE);
+  const e = EXPLAINERS[id];
+  const s = e.scenes[i];
+  const clip = explainerClips(e)?.[i];
+  const t = sceneTimings(s.script, clip, 30);
+  const ending = s.scene.kind === "ending";
+  return (
+    <AbsoluteFill>
+      <Background />
+      <Freeze frame={SETTLED}>
+        <Ballot rail={e.rail} current={s.rail} showBadge={false} header={e.header} top={POST.top} height={POST.ballotHeight}>
+          <SceneView scene={s.scene.kind === "ending" ? { ...s.scene, body: "" } : s.scene} t={t} Axes={Axes} Who={Who} Ending={EndingBeat} />
+        </Ballot>
+        {ending ? <Character x={760} y={POST.top + 760} pose="point" /> : <Character x={720} y={POST.top - 112} size={200} />}
+      </Freeze>
+      <PageDots n={e.scenes.length} i={i} />
     </AbsoluteFill>
   );
 };

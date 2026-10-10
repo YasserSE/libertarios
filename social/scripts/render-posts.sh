@@ -6,7 +6,7 @@ cd "$(dirname "$0")/.."
 B=$(ls -d ~/Library/Caches/ms-playwright/chromium_headless_shell-*/*/ | tail -1)chrome-headless-shell
 IDS=${*:-"intro pp psoe vox sumar podemos"}
 for id in $IDS; do
-  n=$(npx tsx -e "import { partySlides } from './src/Carousel'; import { INTRO } from './src/intro-script'; console.log('$id' === 'intro' ? INTRO.length : partySlides('$id').count)")
+  n=$(npx tsx -e "import { partySlides } from './src/Carousel'; import { INTRO } from './src/intro-script'; import { EXPLAINERS } from './src/explainers'; const id = '$id'; console.log(id === 'intro' ? INTRO.length : EXPLAINERS[id] ? EXPLAINERS[id].scenes.length : partySlides(id).count)")
   mkdir -p "out/final/post-$id"
   i=0
   while [ $i -lt "$n" ]; do

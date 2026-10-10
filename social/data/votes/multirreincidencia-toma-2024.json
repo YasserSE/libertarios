@@ -1,0 +1,66 @@
+{
+ "url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion059/20240917/Votacion002/VOT_20240917204417.json",
+ "fecha": "17/9/2024",
+ "titulo": "Toma en consideración de Proposiciones de Ley.",
+ "expediente": "Proposición de Ley del Grupo Parlamentario Junts per Catalunya, Orgánica en materia de multirreincidencia, por la que se modifica la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal y el Real Decreto de 14 de septiembre de 1882, por el que se aprueba la Ley de Enjuiciamiento Criminal.",
+ "totales": {
+  "asentimiento": "No",
+  "presentes": 350,
+  "afavor": 304,
+  "enContra": 38,
+  "abstenciones": 8,
+  "noVotan": 0
+ },
+ "partidos": {
+  "pp": {
+   "si": 137,
+   "no": 0,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  },
+  "psoe": {
+   "si": 120,
+   "no": 0,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  },
+  "vox": {
+   "si": 33,
+   "no": 0,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  },
+  "sumar": {
+   "si": 0,
+   "no": 26,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "no",
+    "strong": true
+   }
+  },
+  "podemos": {
+   "si": 0,
+   "no": 4,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "no",
+    "strong": true
+   }
+  }
+ }
+}

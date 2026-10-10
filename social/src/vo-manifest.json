@@ -5378,5 +5378,6861 @@
     }
    ]
   }
+ ],
+ "vivienda": [
+  {
+   "file": "vo/vivienda/00.wav",
+   "seconds": 6.415,
+   "words": [
+    {
+     "word": "¿Por",
+     "t": 0
+    },
+    {
+     "word": "qué",
+     "t": 0.197
+    },
+    {
+     "word": "no",
+     "t": 0.302
+    },
+    {
+     "word": "hay",
+     "t": 0.372
+    },
+    {
+     "word": "forma",
+     "t": 0.488
+    },
+    {
+     "word": "de",
+     "t": 0.72
+    },
+    {
+     "word": "encontrar",
+     "t": 0.789
+    },
+    {
+     "word": "casa?",
+     "t": 1.126
+    },
+    {
+     "word": "¿Los",
+     "t": 1.8
+    },
+    {
+     "word": "caseros?",
+     "t": 2.113
+    },
+    {
+     "word": "¿Faltan",
+     "t": 2.868
+    },
+    {
+     "word": "casas?",
+     "t": 3.297
+    },
+    {
+     "word": "¿O",
+     "t": 4.075
+    },
+    {
+     "word": "están",
+     "t": 4.319
+    },
+    {
+     "word": "donde",
+     "t": 4.563
+    },
+    {
+     "word": "no",
+     "t": 4.76
+    },
+    {
+     "word": "toca?",
+     "t": 4.853
+    },
+    {
+     "word": "Veámoslo.",
+     "t": 5.608
+    }
+   ]
+  },
+  {
+   "file": "vo/vivienda/01.wav",
+   "seconds": 8.452,
+   "words": [
+    {
+     "word": "Seguro",
+     "t": 0.04
+    },
+    {
+     "word": "que",
+     "t": 0.365
+    },
+    {
+     "word": "piensas",
+     "t": 0.47
+    },
+    {
+     "word": "que",
+     "t": 0.783
+    },
+    {
+     "word": "tu",
+     "t": 0.888
+    },
+    {
+     "word": "casero",
+     "t": 0.992
+    },
+    {
+     "word": "es",
+     "t": 1.271
+    },
+    {
+     "word": "un",
+     "t": 1.41
+    },
+    {
+     "word": "fondo.",
+     "t": 1.503
+    },
+    {
+     "word": "Pues",
+     "t": 2.223
+    },
+    {
+     "word": "no:",
+     "t": 2.455
+    },
+    {
+     "word": "nueve",
+     "t": 3.082
+    },
+    {
+     "word": "de",
+     "t": 3.337
+    },
+    {
+     "word": "cada",
+     "t": 3.43
+    },
+    {
+     "word": "diez",
+     "t": 3.639
+    },
+    {
+     "word": "pisos",
+     "t": 3.837
+    },
+    {
+     "word": "en",
+     "t": 4.092
+    },
+    {
+     "word": "alquiler",
+     "t": 4.185
+    },
+    {
+     "word": "son",
+     "t": 4.58
+    },
+    {
+     "word": "de",
+     "t": 4.765
+    },
+    {
+     "word": "particulares.",
+     "t": 4.858
+    },
+    {
+     "word": "Las",
+     "t": 5.915
+    },
+    {
+     "word": "empresas,",
+     "t": 6.124
+    },
+    {
+     "word": "solo",
+     "t": 6.937
+    },
+    {
+     "word": "un",
+     "t": 7.238
+    },
+    {
+     "word": "8",
+     "t": 7.366
+    },
+    {
+     "word": "%.",
+     "t": 7.633
+    }
+   ]
+  },
+  {
+   "file": "vo/vivienda/02.wav",
+   "seconds": 13.294,
+   "words": [
+    {
+     "word": "Por",
+     "t": 0.04
+    },
+    {
+     "word": "eso",
+     "t": 0.238
+    },
+    {
+     "word": "topar",
+     "t": 0.412
+    },
+    {
+     "word": "el",
+     "t": 0.644
+    },
+    {
+     "word": "alquiler",
+     "t": 0.725
+    },
+    {
+     "word": "castiga",
+     "t": 1.074
+    },
+    {
+     "word": "al",
+     "t": 1.387
+    },
+    {
+     "word": "pequeño",
+     "t": 1.48
+    },
+    {
+     "word": "casero.",
+     "t": 1.793
+    },
+    {
+     "word": "Y",
+     "t": 2.548
+    },
+    {
+     "word": "ya",
+     "t": 2.722
+    },
+    {
+     "word": "se",
+     "t": 2.827
+    },
+    {
+     "word": "ha",
+     "t": 2.896
+    },
+    {
+     "word": "probado:",
+     "t": 2.966
+    },
+    {
+     "word": "en",
+     "t": 3.651
+    },
+    {
+     "word": "San",
+     "t": 3.779
+    },
+    {
+     "word": "Francisco",
+     "t": 3.906
+    },
+    {
+     "word": "se",
+     "t": 4.301
+    },
+    {
+     "word": "retiraron",
+     "t": 4.406
+    },
+    {
+     "word": "un",
+     "t": 4.812
+    },
+    {
+     "word": "15",
+     "t": 4.905
+    },
+    {
+     "word": "%",
+     "t": 5.207
+    },
+    {
+     "word": "de",
+     "t": 5.555
+    },
+    {
+     "word": "los",
+     "t": 5.625
+    },
+    {
+     "word": "pisos.",
+     "t": 5.764
+    },
+    {
+     "word": "En",
+     "t": 6.507
+    },
+    {
+     "word": "Estocolmo,",
+     "t": 6.67
+    },
+    {
+     "word": "nueve",
+     "t": 7.413
+    },
+    {
+     "word": "años",
+     "t": 7.68
+    },
+    {
+     "word": "de",
+     "t": 7.924
+    },
+    {
+     "word": "cola.",
+     "t": 8.016
+    },
+    {
+     "word": "Y",
+     "t": 8.62
+    },
+    {
+     "word": "en",
+     "t": 8.759
+    },
+    {
+     "word": "Buenos",
+     "t": 8.829
+    },
+    {
+     "word": "Aires,",
+     "t": 9.096
+    },
+    {
+     "word": "al",
+     "t": 9.653
+    },
+    {
+     "word": "quitar",
+     "t": 9.828
+    },
+    {
+     "word": "la",
+     "t": 10.083
+    },
+    {
+     "word": "ley,",
+     "t": 10.187
+    },
+    {
+     "word": "la",
+     "t": 10.687
+    },
+    {
+     "word": "oferta",
+     "t": 10.78
+    },
+    {
+     "word": "subió",
+     "t": 11.151
+    },
+    {
+     "word": "un",
+     "t": 11.442
+    },
+    {
+     "word": "62",
+     "t": 11.534
+    },
+    {
+     "word": "%",
+     "t": 12.08
+    },
+    {
+     "word": "en",
+     "t": 12.498
+    },
+    {
+     "word": "un",
+     "t": 12.637
+    },
+    {
+     "word": "mes.",
+     "t": 12.719
+    }
+   ]
+  },
+  {
+   "file": "vo/vivienda/03.wav",
+   "seconds": 5.921,
+   "words": [
+    {
+     "word": "¿Faltan",
+     "t": 0.04
+    },
+    {
+     "word": "casas?",
+     "t": 0.516
+    },
+    {
+     "word": "En",
+     "t": 1.131
+    },
+    {
+     "word": "2025",
+     "t": 1.294
+    },
+    {
+     "word": "se",
+     "t": 2.025
+    },
+    {
+     "word": "formaron",
+     "t": 2.107
+    },
+    {
+     "word": "240.000",
+     "t": 2.432
+    },
+    {
+     "word": "hogares",
+     "t": 3.233
+    },
+    {
+     "word": "y",
+     "t": 3.941
+    },
+    {
+     "word": "solo",
+     "t": 4.08
+    },
+    {
+     "word": "se",
+     "t": 4.254
+    },
+    {
+     "word": "terminaron",
+     "t": 4.336
+    },
+    {
+     "word": "92.000",
+     "t": 4.719
+    },
+    {
+     "word": "casas.",
+     "t": 5.264
+    }
+   ]
+  },
+  {
+   "file": "vo/vivienda/04.wav",
+   "seconds": 6.06,
+   "words": [
+    {
+     "word": "Desde",
+     "t": 0.04
+    },
+    {
+     "word": "2021",
+     "t": 0.284
+    },
+    {
+     "word": "faltan",
+     "t": 0.957
+    },
+    {
+     "word": "750.000.",
+     "t": 1.259
+    },
+    {
+     "word": "Y",
+     "t": 2.594
+    },
+    {
+     "word": "un",
+     "t": 2.745
+    },
+    {
+     "word": "joven",
+     "t": 2.815
+    },
+    {
+     "word": "necesita",
+     "t": 3.093
+    },
+    {
+     "word": "siete",
+     "t": 3.477
+    },
+    {
+     "word": "años",
+     "t": 3.72
+    },
+    {
+     "word": "de",
+     "t": 3.953
+    },
+    {
+     "word": "sueldo,",
+     "t": 4.022
+    },
+    {
+     "word": "sin",
+     "t": 4.58
+    },
+    {
+     "word": "gastar",
+     "t": 4.754
+    },
+    {
+     "word": "nada,",
+     "t": 5.079
+    },
+    {
+     "word": "para",
+     "t": 5.381
+    },
+    {
+     "word": "comprar.",
+     "t": 5.578
+    }
+   ]
+  },
+  {
+   "file": "vo/vivienda/05.wav",
+   "seconds": 7.814,
+   "words": [
+    {
+     "word": "¿Y",
+     "t": 0.04
+    },
+    {
+     "word": "la",
+     "t": 0.296
+    },
+    {
+     "word": "ubicación?",
+     "t": 0.366
+    },
+    {
+     "word": "Hay",
+     "t": 1.19
+    },
+    {
+     "word": "3,8",
+     "t": 1.457
+    },
+    {
+     "word": "millones",
+     "t": 2.084
+    },
+    {
+     "word": "de",
+     "t": 2.374
+    },
+    {
+     "word": "casas",
+     "t": 2.455
+    },
+    {
+     "word": "vacías,",
+     "t": 2.711
+    },
+    {
+     "word": "pero",
+     "t": 3.326
+    },
+    {
+     "word": "solo",
+     "t": 3.465
+    },
+    {
+     "word": "una",
+     "t": 3.663
+    },
+    {
+     "word": "de",
+     "t": 3.79
+    },
+    {
+     "word": "cada",
+     "t": 3.872
+    },
+    {
+     "word": "diez",
+     "t": 4.034
+    },
+    {
+     "word": "en",
+     "t": 4.232
+    },
+    {
+     "word": "una",
+     "t": 4.325
+    },
+    {
+     "word": "gran",
+     "t": 4.452
+    },
+    {
+     "word": "ciudad.",
+     "t": 4.603
+    },
+    {
+     "word": "Y",
+     "t": 5.207
+    },
+    {
+     "word": "más",
+     "t": 5.358
+    },
+    {
+     "word": "de",
+     "t": 5.497
+    },
+    {
+     "word": "la",
+     "t": 5.578
+    },
+    {
+     "word": "mitad",
+     "t": 5.66
+    },
+    {
+     "word": "de",
+     "t": 5.88
+    },
+    {
+     "word": "las",
+     "t": 5.95
+    },
+    {
+     "word": "que",
+     "t": 6.066
+    },
+    {
+     "word": "faltan,",
+     "t": 6.182
+    },
+    {
+     "word": "en",
+     "t": 6.693
+    },
+    {
+     "word": "seis",
+     "t": 6.844
+    },
+    {
+     "word": "provincias.",
+     "t": 6.995
+    }
+   ]
+  },
+  {
+   "file": "vo/vivienda/06.wav",
+   "seconds": 8.185,
+   "words": [
+    {
+     "word": "No",
+     "t": 0.04
+    },
+    {
+     "word": "es",
+     "t": 0.168
+    },
+    {
+     "word": "el",
+     "t": 0.261
+    },
+    {
+     "word": "casero:",
+     "t": 0.342
+    },
+    {
+     "word": "es",
+     "t": 0.957
+    },
+    {
+     "word": "que",
+     "t": 1.108
+    },
+    {
+     "word": "no",
+     "t": 1.224
+    },
+    {
+     "word": "se",
+     "t": 1.317
+    },
+    {
+     "word": "construye.",
+     "t": 1.41
+    },
+    {
+     "word": "Más",
+     "t": 2.234
+    },
+    {
+     "word": "suelo,",
+     "t": 2.408
+    },
+    {
+     "word": "permisos",
+     "t": 2.931
+    },
+    {
+     "word": "rápidos",
+     "t": 3.314
+    },
+    {
+     "word": "y",
+     "t": 3.848
+    },
+    {
+     "word": "construir",
+     "t": 3.987
+    },
+    {
+     "word": "más",
+     "t": 4.382
+    },
+    {
+     "word": "alto:",
+     "t": 4.556
+    },
+    {
+     "word": "donde",
+     "t": 5.172
+    },
+    {
+     "word": "ya",
+     "t": 5.439
+    },
+    {
+     "word": "se",
+     "t": 5.566
+    },
+    {
+     "word": "urbaniza,",
+     "t": 5.636
+    },
+    {
+     "word": "cabrían",
+     "t": 6.124
+    },
+    {
+     "word": "1,2",
+     "t": 6.565
+    },
+    {
+     "word": "millones",
+     "t": 7.111
+    },
+    {
+     "word": "de",
+     "t": 7.389
+    },
+    {
+     "word": "casas",
+     "t": 7.47
+    },
+    {
+     "word": "más.",
+     "t": 7.737
+    }
+   ]
+  },
+  {
+   "file": "vo/vivienda/07.wav",
+   "seconds": 7.11,
+   "words": [
+    {
+     "word": "Ahora",
+     "t": 0.04
+    },
+    {
+     "word": "ya",
+     "t": 0.284
+    },
+    {
+     "word": "sabes:",
+     "t": 0.4
+    },
+    {
+     "word": "no",
+     "t": 1.004
+    },
+    {
+     "word": "es",
+     "t": 1.131
+    },
+    {
+     "word": "el",
+     "t": 1.224
+    },
+    {
+     "word": "casero,",
+     "t": 1.306
+    },
+    {
+     "word": "es",
+     "t": 1.758
+    },
+    {
+     "word": "que",
+     "t": 1.909
+    },
+    {
+     "word": "no",
+     "t": 2.014
+    },
+    {
+     "word": "se",
+     "t": 2.095
+    },
+    {
+     "word": "construye.",
+     "t": 2.176
+    },
+    {
+     "word": "¿Conoces",
+     "t": 2.803
+    },
+    {
+     "word": "a",
+     "t": 3.256
+    },
+    {
+     "word": "alguien",
+     "t": 3.303
+    },
+    {
+     "word": "buscando",
+     "t": 3.535
+    },
+    {
+     "word": "piso?",
+     "t": 3.871
+    },
+    {
+     "word": "Mándaselo.",
+     "t": 4.475
+    },
+    {
+     "word": "Y",
+     "t": 5.299
+    },
+    {
+     "word": "más",
+     "t": 5.439
+    },
+    {
+     "word": "vídeos",
+     "t": 5.601
+    },
+    {
+     "word": "así,",
+     "t": 5.868
+    },
+    {
+     "word": "en",
+     "t": 6.298
+    },
+    {
+     "word": "el",
+     "t": 6.437
+    },
+    {
+     "word": "perfil.",
+     "t": 6.518
+    }
+   ]
+  }
+ ],
+ "derecha": [
+  {
+   "file": "vo/derecha/00.wav",
+   "seconds": 5.835,
+   "words": [
+    {
+     "word": "¿Se",
+     "t": 0
+    },
+    {
+     "word": "puede",
+     "t": 0.174
+    },
+    {
+     "word": "ser",
+     "t": 0.395
+    },
+    {
+     "word": "de",
+     "t": 0.546
+    },
+    {
+     "word": "derecha",
+     "t": 0.627
+    },
+    {
+     "word": "sin",
+     "t": 0.964
+    },
+    {
+     "word": "ser",
+     "t": 1.115
+    },
+    {
+     "word": "conservador?",
+     "t": 1.265
+    },
+    {
+     "word": "Querer",
+     "t": 2.125
+    },
+    {
+     "word": "pagar",
+     "t": 2.368
+    },
+    {
+     "word": "menos",
+     "t": 2.624
+    },
+    {
+     "word": "impuestos…",
+     "t": 2.856
+    },
+    {
+     "word": "y",
+     "t": 3.599
+    },
+    {
+     "word": "que",
+     "t": 3.75
+    },
+    {
+     "word": "nadie",
+     "t": 3.866
+    },
+    {
+     "word": "te",
+     "t": 4.087
+    },
+    {
+     "word": "diga",
+     "t": 4.191
+    },
+    {
+     "word": "con",
+     "t": 4.389
+    },
+    {
+     "word": "quién",
+     "t": 4.516
+    },
+    {
+     "word": "casarte",
+     "t": 4.667
+    },
+    {
+     "word": "o",
+     "t": 5.027
+    },
+    {
+     "word": "qué",
+     "t": 5.074
+    },
+    {
+     "word": "fumar.",
+     "t": 5.178
+    }
+   ]
+  },
+  {
+   "file": "vo/derecha/01.wav",
+   "seconds": 10.738,
+   "words": [
+    {
+     "word": "Si",
+     "t": 0.04
+    },
+    {
+     "word": "piensas",
+     "t": 0.191
+    },
+    {
+     "word": "así,",
+     "t": 0.504
+    },
+    {
+     "word": "no",
+     "t": 0.968
+    },
+    {
+     "word": "eres",
+     "t": 1.061
+    },
+    {
+     "word": "facha",
+     "t": 1.259
+    },
+    {
+     "word": "ni",
+     "t": 1.526
+    },
+    {
+     "word": "progre.",
+     "t": 1.619
+    },
+    {
+     "word": "Es",
+     "t": 2.257
+    },
+    {
+     "word": "que",
+     "t": 2.431
+    },
+    {
+     "word": "hay",
+     "t": 2.524
+    },
+    {
+     "word": "dos",
+     "t": 2.629
+    },
+    {
+     "word": "preguntas,",
+     "t": 2.78
+    },
+    {
+     "word": "no",
+     "t": 3.488
+    },
+    {
+     "word": "una:",
+     "t": 3.697
+    },
+    {
+     "word": "cuánto",
+     "t": 4.173
+    },
+    {
+     "word": "decide",
+     "t": 4.451
+    },
+    {
+     "word": "el",
+     "t": 4.753
+    },
+    {
+     "word": "Estado",
+     "t": 4.858
+    },
+    {
+     "word": "sobre",
+     "t": 5.148
+    },
+    {
+     "word": "tu",
+     "t": 5.357
+    },
+    {
+     "word": "dinero…",
+     "t": 5.45
+    },
+    {
+     "word": "y",
+     "t": 6.042
+    },
+    {
+     "word": "cuánto",
+     "t": 6.193
+    },
+    {
+     "word": "sobre",
+     "t": 6.448
+    },
+    {
+     "word": "tu",
+     "t": 6.645
+    },
+    {
+     "word": "vida.",
+     "t": 6.727
+    },
+    {
+     "word": "Libre",
+     "t": 7.214
+    },
+    {
+     "word": "en",
+     "t": 7.435
+    },
+    {
+     "word": "las",
+     "t": 7.516
+    },
+    {
+     "word": "dos:",
+     "t": 7.644
+    },
+    {
+     "word": "eso",
+     "t": 8.178
+    },
+    {
+     "word": "es",
+     "t": 8.352
+    },
+    {
+     "word": "ser",
+     "t": 8.422
+    },
+    {
+     "word": "libertario.",
+     "t": 8.561
+    },
+    {
+     "word": "Y",
+     "t": 9.269
+    },
+    {
+     "word": "puede",
+     "t": 9.397
+    },
+    {
+     "word": "que",
+     "t": 9.606
+    },
+    {
+     "word": "lo",
+     "t": 9.699
+    },
+    {
+     "word": "seas",
+     "t": 9.803
+    },
+    {
+     "word": "sin",
+     "t": 9.977
+    },
+    {
+     "word": "saberlo.",
+     "t": 10.105
+    }
+   ]
+  },
+  {
+   "file": "vo/derecha/02.wav",
+   "seconds": 7.722,
+   "words": [
+    {
+     "word": "Ahora",
+     "t": 0.04
+    },
+    {
+     "word": "busca",
+     "t": 0.296
+    },
+    {
+     "word": "en",
+     "t": 0.528
+    },
+    {
+     "word": "el",
+     "t": 0.621
+    },
+    {
+     "word": "mapa",
+     "t": 0.702
+    },
+    {
+     "word": "quién",
+     "t": 0.958
+    },
+    {
+     "word": "defiende",
+     "t": 1.132
+    },
+    {
+     "word": "eso",
+     "t": 1.457
+    },
+    {
+     "word": "en",
+     "t": 1.631
+    },
+    {
+     "word": "España.",
+     "t": 1.724
+    },
+    {
+     "word": "Arriba",
+     "t": 2.455
+    },
+    {
+     "word": "a",
+     "t": 2.734
+    },
+    {
+     "word": "la",
+     "t": 2.78
+    },
+    {
+     "word": "derecha…",
+     "t": 2.873
+    },
+    {
+     "word": "ningún",
+     "t": 3.523
+    },
+    {
+     "word": "partido",
+     "t": 3.791
+    },
+    {
+     "word": "con",
+     "t": 4.116
+    },
+    {
+     "word": "escaño.",
+     "t": 4.255
+    },
+    {
+     "word": "El",
+     "t": 4.917
+    },
+    {
+     "word": "único",
+     "t": 5.102
+    },
+    {
+     "word": "que",
+     "t": 5.335
+    },
+    {
+     "word": "está",
+     "t": 5.428
+    },
+    {
+     "word": "ahí,",
+     "t": 5.649
+    },
+    {
+     "word": "el",
+     "t": 5.974
+    },
+    {
+     "word": "Partido",
+     "t": 6.113
+    },
+    {
+     "word": "Libertario,",
+     "t": 6.403
+    },
+    {
+     "word": "no",
+     "t": 6.879
+    },
+    {
+     "word": "tiene",
+     "t": 6.972
+    },
+    {
+     "word": "ni",
+     "t": 7.135
+    },
+    {
+     "word": "uno.",
+     "t": 7.251
+    }
+   ]
+  },
+  {
+   "file": "vo/derecha/03.wav",
+   "seconds": 7.093,
+   "words": [
+    {
+     "word": "En",
+     "t": 0.04
+    },
+    {
+     "word": "el",
+     "t": 0.179
+    },
+    {
+     "word": "Congreso,",
+     "t": 0.272
+    },
+    {
+     "word": "cero",
+     "t": 0.934
+    },
+    {
+     "word": "diputados",
+     "t": 1.131
+    },
+    {
+     "word": "de",
+     "t": 1.526
+    },
+    {
+     "word": "350.",
+     "t": 1.653
+    },
+    {
+     "word": "Y",
+     "t": 2.965
+    },
+    {
+     "word": "de",
+     "t": 3.128
+    },
+    {
+     "word": "22",
+     "t": 3.197
+    },
+    {
+     "word": "partidos",
+     "t": 3.627
+    },
+    {
+     "word": "europeos",
+     "t": 3.975
+    },
+    {
+     "word": "que",
+     "t": 4.393
+    },
+    {
+     "word": "hemos",
+     "t": 4.486
+    },
+    {
+     "word": "analizado,",
+     "t": 4.707
+    },
+    {
+     "word": "ninguno",
+     "t": 5.427
+    },
+    {
+     "word": "defiende",
+     "t": 5.752
+    },
+    {
+     "word": "las",
+     "t": 6.065
+    },
+    {
+     "word": "dos",
+     "t": 6.181
+    },
+    {
+     "word": "libertades.",
+     "t": 6.297
+    }
+   ]
+  },
+  {
+   "file": "vo/derecha/04.wav",
+   "seconds": 5.783,
+   "words": [
+    {
+     "word": "En",
+     "t": 0.04
+    },
+    {
+     "word": "libertarios.eu",
+     "t": 0.168
+    },
+    {
+     "word": "no",
+     "t": 1.41
+    },
+    {
+     "word": "somos",
+     "t": 1.503
+    },
+    {
+     "word": "un",
+     "t": 1.782
+    },
+    {
+     "word": "partido",
+     "t": 1.851
+    },
+    {
+     "word": "ni",
+     "t": 2.281
+    },
+    {
+     "word": "te",
+     "t": 2.42
+    },
+    {
+     "word": "pedimos",
+     "t": 2.514
+    },
+    {
+     "word": "el",
+     "t": 2.839
+    },
+    {
+     "word": "voto.",
+     "t": 2.92
+    },
+    {
+     "word": "Solo",
+     "t": 3.535
+    },
+    {
+     "word": "queremos",
+     "t": 3.779
+    },
+    {
+     "word": "que",
+     "t": 4.104
+    },
+    {
+     "word": "estas",
+     "t": 4.197
+    },
+    {
+     "word": "ideas",
+     "t": 4.383
+    },
+    {
+     "word": "se",
+     "t": 4.592
+    },
+    {
+     "word": "vean,",
+     "t": 4.685
+    },
+    {
+     "word": "con",
+     "t": 5.149
+    },
+    {
+     "word": "datos.",
+     "t": 5.288
+    }
+   ]
+  },
+  {
+   "file": "vo/derecha/05.wav",
+   "seconds": 7.226,
+   "words": [
+    {
+     "word": "¿De",
+     "t": 0.04
+    },
+    {
+     "word": "derecha",
+     "t": 0.295
+    },
+    {
+     "word": "sin",
+     "t": 0.597
+    },
+    {
+     "word": "ser",
+     "t": 0.736
+    },
+    {
+     "word": "conservador?",
+     "t": 0.875
+    },
+    {
+     "word": "Se",
+     "t": 1.816
+    },
+    {
+     "word": "puede…",
+     "t": 1.944
+    },
+    {
+     "word": "pero",
+     "t": 2.478
+    },
+    {
+     "word": "hoy",
+     "t": 2.675
+    },
+    {
+     "word": "nadie",
+     "t": 2.838
+    },
+    {
+     "word": "te",
+     "t": 3.023
+    },
+    {
+     "word": "representa.",
+     "t": 3.105
+    },
+    {
+     "word": "¿Conoces",
+     "t": 3.824
+    },
+    {
+     "word": "a",
+     "t": 4.231
+    },
+    {
+     "word": "alguien",
+     "t": 4.289
+    },
+    {
+     "word": "así?",
+     "t": 4.533
+    },
+    {
+     "word": "Mándaselo.",
+     "t": 5.148
+    },
+    {
+     "word": "Y",
+     "t": 5.775
+    },
+    {
+     "word": "más",
+     "t": 5.914
+    },
+    {
+     "word": "vídeos,",
+     "t": 6.042
+    },
+    {
+     "word": "en",
+     "t": 6.437
+    },
+    {
+     "word": "el",
+     "t": 6.564
+    },
+    {
+     "word": "perfil.",
+     "t": 6.657
+    }
+   ]
+  }
+ ],
+ "impuestos": [
+  {
+   "file": "vo/impuestos/00.wav",
+   "seconds": 6.287,
+   "words": [
+    {
+     "word": "Imagina",
+     "t": 0
+    },
+    {
+     "word": "que",
+     "t": 0.441
+    },
+    {
+     "word": "al",
+     "t": 0.534
+    },
+    {
+     "word": "pagar",
+     "t": 0.627
+    },
+    {
+     "word": "tus",
+     "t": 0.859
+    },
+    {
+     "word": "impuestos",
+     "t": 1.01
+    },
+    {
+     "word": "te",
+     "t": 1.393
+    },
+    {
+     "word": "dieran",
+     "t": 1.486
+    },
+    {
+     "word": "un",
+     "t": 1.718
+    },
+    {
+     "word": "ticket,",
+     "t": 1.811
+    },
+    {
+     "word": "como",
+     "t": 2.461
+    },
+    {
+     "word": "en",
+     "t": 2.647
+    },
+    {
+     "word": "un",
+     "t": 2.74
+    },
+    {
+     "word": "restaurante.",
+     "t": 2.833
+    },
+    {
+     "word": "Nunca",
+     "t": 3.715
+    },
+    {
+     "word": "te",
+     "t": 4.005
+    },
+    {
+     "word": "lo",
+     "t": 4.087
+    },
+    {
+     "word": "dan.",
+     "t": 4.18
+    },
+    {
+     "word": "Así",
+     "t": 4.702
+    },
+    {
+     "word": "que",
+     "t": 4.934
+    },
+    {
+     "word": "lo",
+     "t": 5.039
+    },
+    {
+     "word": "hemos",
+     "t": 5.12
+    },
+    {
+     "word": "hecho",
+     "t": 5.317
+    },
+    {
+     "word": "nosotros.",
+     "t": 5.503
+    }
+   ]
+  },
+  {
+   "file": "vo/impuestos/01.wav",
+   "seconds": 7.327,
+   "words": [
+    {
+     "word": "Con",
+     "t": 0.04
+    },
+    {
+     "word": "30.000",
+     "t": 0.261
+    },
+    {
+     "word": "euros",
+     "t": 0.737
+    },
+    {
+     "word": "brutos,",
+     "t": 0.934
+    },
+    {
+     "word": "tu",
+     "t": 1.515
+    },
+    {
+     "word": "trabajo",
+     "t": 1.643
+    },
+    {
+     "word": "cuesta",
+     "t": 1.991
+    },
+    {
+     "word": "39.200.",
+     "t": 2.258
+    },
+    {
+     "word": "Esos",
+     "t": 3.686
+    },
+    {
+     "word": "9.200",
+     "t": 3.988
+    },
+    {
+     "word": "los",
+     "t": 4.719
+    },
+    {
+     "word": "paga",
+     "t": 4.859
+    },
+    {
+     "word": "tu",
+     "t": 5.056
+    },
+    {
+     "word": "empresa…",
+     "t": 5.126
+    },
+    {
+     "word": "y",
+     "t": 5.845
+    },
+    {
+     "word": "ni",
+     "t": 5.985
+    },
+    {
+     "word": "los",
+     "t": 6.078
+    },
+    {
+     "word": "ves",
+     "t": 6.229
+    },
+    {
+     "word": "en",
+     "t": 6.391
+    },
+    {
+     "word": "la",
+     "t": 6.473
+    },
+    {
+     "word": "nómina.",
+     "t": 6.565
+    }
+   ]
+  },
+  {
+   "file": "vo/impuestos/02.wav",
+   "seconds": 6.35,
+   "words": [
+    {
+     "word": "Súmale",
+     "t": 0.04
+    },
+    {
+     "word": "Seguridad",
+     "t": 0.388
+    },
+    {
+     "word": "Social",
+     "t": 0.736
+    },
+    {
+     "word": "e",
+     "t": 1.119
+    },
+    {
+     "word": "IRPF:",
+     "t": 1.235
+    },
+    {
+     "word": "casi",
+     "t": 2.257
+    },
+    {
+     "word": "16.000",
+     "t": 2.524
+    },
+    {
+     "word": "euros",
+     "t": 3
+    },
+    {
+     "word": "al",
+     "t": 3.221
+    },
+    {
+     "word": "año.",
+     "t": 3.302
+    },
+    {
+     "word": "Trabajas",
+     "t": 3.894
+    },
+    {
+     "word": "de",
+     "t": 4.324
+    },
+    {
+     "word": "enero",
+     "t": 4.393
+    },
+    {
+     "word": "a",
+     "t": 4.625
+    },
+    {
+     "word": "finales",
+     "t": 4.672
+    },
+    {
+     "word": "de",
+     "t": 4.985
+    },
+    {
+     "word": "mayo",
+     "t": 5.067
+    },
+    {
+     "word": "solo",
+     "t": 5.345
+    },
+    {
+     "word": "para",
+     "t": 5.543
+    },
+    {
+     "word": "pagarlos.",
+     "t": 5.67
+    }
+   ]
+  },
+  {
+   "file": "vo/impuestos/03.wav",
+   "seconds": 7.407,
+   "words": [
+    {
+     "word": "¿Y",
+     "t": 0.04
+    },
+    {
+     "word": "a",
+     "t": 0.272
+    },
+    {
+     "word": "dónde",
+     "t": 0.319
+    },
+    {
+     "word": "van?",
+     "t": 0.516
+    },
+    {
+     "word": "Siempre",
+     "t": 1.132
+    },
+    {
+     "word": "nos",
+     "t": 1.41
+    },
+    {
+     "word": "dicen:",
+     "t": 1.538
+    },
+    {
+     "word": "pensiones,",
+     "t": 2.037
+    },
+    {
+     "word": "sanidad,",
+     "t": 2.711
+    },
+    {
+     "word": "educación",
+     "t": 3.279
+    },
+    {
+     "word": "y",
+     "t": 3.848
+    },
+    {
+     "word": "seguridad.",
+     "t": 3.976
+    },
+    {
+     "word": "Es",
+     "t": 4.754
+    },
+    {
+     "word": "verdad…",
+     "t": 4.905
+    },
+    {
+     "word": "pero",
+     "t": 5.613
+    },
+    {
+     "word": "eso",
+     "t": 5.799
+    },
+    {
+     "word": "es",
+     "t": 5.938
+    },
+    {
+     "word": "el",
+     "t": 6.019
+    },
+    {
+     "word": "57",
+     "t": 6.101
+    },
+    {
+     "word": "%.",
+     "t": 6.704
+    }
+   ]
+  },
+  {
+   "file": "vo/impuestos/04.wav",
+   "seconds": 8.023,
+   "words": [
+    {
+     "word": "¿Y",
+     "t": 0.04
+    },
+    {
+     "word": "el",
+     "t": 0.296
+    },
+    {
+     "word": "otro",
+     "t": 0.389
+    },
+    {
+     "word": "43",
+     "t": 0.563
+    },
+    {
+     "word": "%?",
+     "t": 1.05
+    },
+    {
+     "word": "Paro",
+     "t": 1.817
+    },
+    {
+     "word": "y",
+     "t": 2.095
+    },
+    {
+     "word": "otras",
+     "t": 2.153
+    },
+    {
+     "word": "ayudas,",
+     "t": 2.351
+    },
+    {
+     "word": "administración,",
+     "t": 2.815
+    },
+    {
+     "word": "intereses",
+     "t": 3.523
+    },
+    {
+     "word": "de",
+     "t": 3.953
+    },
+    {
+     "word": "la",
+     "t": 4.034
+    },
+    {
+     "word": "deuda,",
+     "t": 4.127
+    },
+    {
+     "word": "subvenciones",
+     "t": 4.615
+    },
+    {
+     "word": "a",
+     "t": 5.114
+    },
+    {
+     "word": "empresas…",
+     "t": 5.16
+    },
+    {
+     "word": "Solo",
+     "t": 5.915
+    },
+    {
+     "word": "en",
+     "t": 6.136
+    },
+    {
+     "word": "intereses,",
+     "t": 6.229
+    },
+    {
+     "word": "70",
+     "t": 6.96
+    },
+    {
+     "word": "euros",
+     "t": 7.262
+    },
+    {
+     "word": "al",
+     "t": 7.494
+    },
+    {
+     "word": "mes.",
+     "t": 7.575
+    }
+   ]
+  },
+  {
+   "file": "vo/impuestos/05.wav",
+   "seconds": 7.733,
+   "words": [
+    {
+     "word": "No",
+     "t": 0.04
+    },
+    {
+     "word": "todo",
+     "t": 0.179
+    },
+    {
+     "word": "sobra:",
+     "t": 0.388
+    },
+    {
+     "word": "ahí",
+     "t": 0.841
+    },
+    {
+     "word": "va",
+     "t": 1.004
+    },
+    {
+     "word": "el",
+     "t": 1.073
+    },
+    {
+     "word": "paro.",
+     "t": 1.178
+    },
+    {
+     "word": "Pero",
+     "t": 1.642
+    },
+    {
+     "word": "si",
+     "t": 1.816
+    },
+    {
+     "word": "ese",
+     "t": 1.897
+    },
+    {
+     "word": "43",
+     "t": 2.06
+    },
+    {
+     "word": "%",
+     "t": 2.524
+    },
+    {
+     "word": "se",
+     "t": 2.873
+    },
+    {
+     "word": "redujera",
+     "t": 2.977
+    },
+    {
+     "word": "a",
+     "t": 3.291
+    },
+    {
+     "word": "la",
+     "t": 3.337
+    },
+    {
+     "word": "mitad,",
+     "t": 3.419
+    },
+    {
+     "word": "te",
+     "t": 3.93
+    },
+    {
+     "word": "quedarían",
+     "t": 4.046
+    },
+    {
+     "word": "unos",
+     "t": 4.382
+    },
+    {
+     "word": "280",
+     "t": 4.58
+    },
+    {
+     "word": "euros",
+     "t": 5.288
+    },
+    {
+     "word": "más",
+     "t": 5.497
+    },
+    {
+     "word": "al",
+     "t": 5.625
+    },
+    {
+     "word": "mes.",
+     "t": 5.694
+    },
+    {
+     "word": "Un",
+     "t": 6.159
+    },
+    {
+     "word": "14",
+     "t": 6.286
+    },
+    {
+     "word": "%",
+     "t": 6.681
+    },
+    {
+     "word": "más",
+     "t": 7.03
+    },
+    {
+     "word": "de",
+     "t": 7.146
+    },
+    {
+     "word": "sueldo.",
+     "t": 7.215
+    }
+   ]
+  },
+  {
+   "file": "vo/impuestos/06.wav",
+   "seconds": 5.217,
+   "words": [
+    {
+     "word": "Ahora",
+     "t": 0.04
+    },
+    {
+     "word": "ya",
+     "t": 0.272
+    },
+    {
+     "word": "tienes",
+     "t": 0.353
+    },
+    {
+     "word": "el",
+     "t": 0.585
+    },
+    {
+     "word": "ticket.",
+     "t": 0.678
+    },
+    {
+     "word": "¿Conoces",
+     "t": 1.177
+    },
+    {
+     "word": "a",
+     "t": 1.607
+    },
+    {
+     "word": "alguien",
+     "t": 1.653
+    },
+    {
+     "word": "que",
+     "t": 1.874
+    },
+    {
+     "word": "no",
+     "t": 1.978
+    },
+    {
+     "word": "sabe",
+     "t": 2.06
+    },
+    {
+     "word": "cuánto",
+     "t": 2.222
+    },
+    {
+     "word": "paga?",
+     "t": 2.443
+    },
+    {
+     "word": "Mándaselo.",
+     "t": 3
+    },
+    {
+     "word": "Y",
+     "t": 3.685
+    },
+    {
+     "word": "más",
+     "t": 3.836
+    },
+    {
+     "word": "vídeos,",
+     "t": 3.952
+    },
+    {
+     "word": "en",
+     "t": 4.463
+    },
+    {
+     "word": "el",
+     "t": 4.602
+    },
+    {
+     "word": "perfil.",
+     "t": 4.684
+    }
+   ]
+  }
+ ],
+ "vivienda-partidos": [
+  {
+   "file": "vo/vivienda-partidos/00.wav",
+   "seconds": 4.801,
+   "words": [
+    {
+     "word": "Hablemos",
+     "t": 0
+    },
+    {
+     "word": "de",
+     "t": 0.348
+    },
+    {
+     "word": "vivienda:",
+     "t": 0.43
+    },
+    {
+     "word": "qué",
+     "t": 1.068
+    },
+    {
+     "word": "prometen",
+     "t": 1.184
+    },
+    {
+     "word": "los",
+     "t": 1.498
+    },
+    {
+     "word": "partidos,",
+     "t": 1.614
+    },
+    {
+     "word": "qué",
+     "t": 2.287
+    },
+    {
+     "word": "votan…",
+     "t": 2.426
+    },
+    {
+     "word": "y",
+     "t": 3.123
+    },
+    {
+     "word": "quién",
+     "t": 3.286
+    },
+    {
+     "word": "te",
+     "t": 3.495
+    },
+    {
+     "word": "podría",
+     "t": 3.576
+    },
+    {
+     "word": "estar",
+     "t": 3.843
+    },
+    {
+     "word": "engañando.",
+     "t": 4.04
+    }
+   ]
+  },
+  {
+   "file": "vo/vivienda-partidos/01.wav",
+   "seconds": 9.834,
+   "words": [
+    {
+     "word": "¿Topar",
+     "t": 0.04
+    },
+    {
+     "word": "el",
+     "t": 0.447
+    },
+    {
+     "word": "alquiler",
+     "t": 0.528
+    },
+    {
+     "word": "en",
+     "t": 0.853
+    },
+    {
+     "word": "zonas",
+     "t": 0.934
+    },
+    {
+     "word": "tensionadas?",
+     "t": 1.19
+    },
+    {
+     "word": "PSOE,",
+     "t": 2.211
+    },
+    {
+     "word": "Sumar",
+     "t": 2.943
+    },
+    {
+     "word": "y",
+     "t": 3.686
+    },
+    {
+     "word": "Podemos",
+     "t": 3.837
+    },
+    {
+     "word": "lo",
+     "t": 4.185
+    },
+    {
+     "word": "prometen,",
+     "t": 4.266
+    },
+    {
+     "word": "y",
+     "t": 4.94
+    },
+    {
+     "word": "votaron",
+     "t": 5.067
+    },
+    {
+     "word": "a",
+     "t": 5.404
+    },
+    {
+     "word": "favor",
+     "t": 5.462
+    },
+    {
+     "word": "de",
+     "t": 5.683
+    },
+    {
+     "word": "la",
+     "t": 5.764
+    },
+    {
+     "word": "ley",
+     "t": 5.857
+    },
+    {
+     "word": "de",
+     "t": 6.008
+    },
+    {
+     "word": "vivienda.",
+     "t": 6.089
+    },
+    {
+     "word": "PP",
+     "t": 6.902
+    },
+    {
+     "word": "y",
+     "t": 7.32
+    },
+    {
+     "word": "Vox,",
+     "t": 7.471
+    },
+    {
+     "word": "ni",
+     "t": 8.086
+    },
+    {
+     "word": "lo",
+     "t": 8.225
+    },
+    {
+     "word": "prometen",
+     "t": 8.306
+    },
+    {
+     "word": "ni",
+     "t": 8.91
+    },
+    {
+     "word": "lo",
+     "t": 9.061
+    },
+    {
+     "word": "votaron.",
+     "t": 9.131
+    }
+   ]
+  },
+  {
+   "file": "vo/vivienda-partidos/02.wav",
+   "seconds": 9.206,
+   "words": [
+    {
+     "word": "¿Bajar",
+     "t": 0.04
+    },
+    {
+     "word": "el",
+     "t": 0.365
+    },
+    {
+     "word": "IVA",
+     "t": 0.458
+    },
+    {
+     "word": "de",
+     "t": 0.574
+    },
+    {
+     "word": "la",
+     "t": 0.655
+    },
+    {
+     "word": "primera",
+     "t": 0.736
+    },
+    {
+     "word": "vivienda",
+     "t": 1.003
+    },
+    {
+     "word": "del",
+     "t": 1.317
+    },
+    {
+     "word": "10",
+     "t": 1.456
+    },
+    {
+     "word": "al",
+     "t": 1.642
+    },
+    {
+     "word": "4",
+     "t": 1.746
+    },
+    {
+     "word": "%?",
+     "t": 2.013
+    },
+    {
+     "word": "En",
+     "t": 2.896
+    },
+    {
+     "word": "una",
+     "t": 3.058
+    },
+    {
+     "word": "moción,",
+     "t": 3.186
+    },
+    {
+     "word": "PP",
+     "t": 3.766
+    },
+    {
+     "word": "y",
+     "t": 4.138
+    },
+    {
+     "word": "Vox",
+     "t": 4.289
+    },
+    {
+     "word": "votaron",
+     "t": 4.637
+    },
+    {
+     "word": "sí.",
+     "t": 5.02
+    },
+    {
+     "word": "Sumar",
+     "t": 5.659
+    },
+    {
+     "word": "y",
+     "t": 6.123
+    },
+    {
+     "word": "Podemos,",
+     "t": 6.263
+    },
+    {
+     "word": "no.",
+     "t": 6.959
+    },
+    {
+     "word": "Y",
+     "t": 7.54
+    },
+    {
+     "word": "el",
+     "t": 7.656
+    },
+    {
+     "word": "PSOE",
+     "t": 7.749
+    },
+    {
+     "word": "se",
+     "t": 8.317
+    },
+    {
+     "word": "abstuvo.",
+     "t": 8.434
+    }
+   ]
+  },
+  {
+   "file": "vo/vivienda-partidos/03.wav",
+   "seconds": 10.716,
+   "words": [
+    {
+     "word": "¿Desalojar",
+     "t": 0.04
+    },
+    {
+     "word": "a",
+     "t": 0.586
+    },
+    {
+     "word": "los",
+     "t": 0.632
+    },
+    {
+     "word": "okupas",
+     "t": 0.772
+    },
+    {
+     "word": "en",
+     "t": 1.12
+    },
+    {
+     "word": "24",
+     "t": 1.19
+    },
+    {
+     "word": "horas?",
+     "t": 1.677
+    },
+    {
+     "word": "PP",
+     "t": 2.49
+    },
+    {
+     "word": "y",
+     "t": 2.769
+    },
+    {
+     "word": "Vox",
+     "t": 2.838
+    },
+    {
+     "word": "votaron",
+     "t": 3.187
+    },
+    {
+     "word": "sí.",
+     "t": 3.581
+    },
+    {
+     "word": "Sumar",
+     "t": 4.278
+    },
+    {
+     "word": "y",
+     "t": 4.603
+    },
+    {
+     "word": "Podemos,",
+     "t": 4.661
+    },
+    {
+     "word": "no.",
+     "t": 5.3
+    },
+    {
+     "word": "Y",
+     "t": 5.985
+    },
+    {
+     "word": "ojo:",
+     "t": 6.135
+    },
+    {
+     "word": "el",
+     "t": 6.611
+    },
+    {
+     "word": "PSOE",
+     "t": 6.751
+    },
+    {
+     "word": "promete",
+     "t": 6.96
+    },
+    {
+     "word": "desalojos",
+     "t": 7.215
+    },
+    {
+     "word": "en",
+     "t": 7.61
+    },
+    {
+     "word": "48",
+     "t": 7.726
+    },
+    {
+     "word": "horas.",
+     "t": 8.214
+    },
+    {
+     "word": "¿Votó",
+     "t": 8.841
+    },
+    {
+     "word": "la",
+     "t": 9.166
+    },
+    {
+     "word": "ley",
+     "t": 9.247
+    },
+    {
+     "word": "del",
+     "t": 9.351
+    },
+    {
+     "word": "PP?",
+     "t": 9.479
+    },
+    {
+     "word": "No.",
+     "t": 10.234
+    }
+   ]
+  },
+  {
+   "file": "vo/vivienda-partidos/04.wav",
+   "seconds": 13.63,
+   "words": [
+    {
+     "word": "¿Y",
+     "t": 0.04
+    },
+    {
+     "word": "cuando",
+     "t": 0.296
+    },
+    {
+     "word": "gobiernan?",
+     "t": 0.505
+    },
+    {
+     "word": "Rajoy",
+     "t": 1.329
+    },
+    {
+     "word": "prometió",
+     "t": 1.573
+    },
+    {
+     "word": "recuperar",
+     "t": 1.898
+    },
+    {
+     "word": "la",
+     "t": 2.258
+    },
+    {
+     "word": "deducción",
+     "t": 2.327
+    },
+    {
+     "word": "por",
+     "t": 2.71
+    },
+    {
+     "word": "vivienda:",
+     "t": 2.827
+    },
+    {
+     "word": "la",
+     "t": 3.465
+    },
+    {
+     "word": "recuperó…",
+     "t": 3.581
+    },
+    {
+     "word": "y",
+     "t": 4.347
+    },
+    {
+     "word": "un",
+     "t": 4.475
+    },
+    {
+     "word": "año",
+     "t": 4.545
+    },
+    {
+     "word": "después",
+     "t": 4.696
+    },
+    {
+     "word": "la",
+     "t": 5.056
+    },
+    {
+     "word": "quitó.",
+     "t": 5.137
+    },
+    {
+     "word": "Sánchez",
+     "t": 5.787
+    },
+    {
+     "word": "prometió",
+     "t": 6.17
+    },
+    {
+     "word": "183.000",
+     "t": 6.483
+    },
+    {
+     "word": "viviendas",
+     "t": 7.343
+    },
+    {
+     "word": "asequibles:",
+     "t": 7.679
+    },
+    {
+     "word": "la",
+     "t": 8.504
+    },
+    {
+     "word": "estadística",
+     "t": 8.573
+    },
+    {
+     "word": "oficial",
+     "t": 8.933
+    },
+    {
+     "word": "cuenta",
+     "t": 9.258
+    },
+    {
+     "word": "32.000",
+     "t": 9.525
+    },
+    {
+     "word": "protegidas",
+     "t": 10.083
+    },
+    {
+     "word": "terminadas",
+     "t": 10.535
+    },
+    {
+     "word": "desde",
+     "t": 10.965
+    },
+    {
+     "word": "2024,",
+     "t": 11.185
+    },
+    {
+     "word": "de",
+     "t": 12.312
+    },
+    {
+     "word": "todas",
+     "t": 12.428
+    },
+    {
+     "word": "las",
+     "t": 12.648
+    },
+    {
+     "word": "administraciones.",
+     "t": 12.776
+    }
+   ]
+  },
+  {
+   "file": "vo/vivienda-partidos/05.wav",
+   "seconds": 8.702,
+   "words": [
+    {
+     "word": "¿Quién",
+     "t": 0.04
+    },
+    {
+     "word": "te",
+     "t": 0.342
+    },
+    {
+     "word": "engaña?",
+     "t": 0.412
+    },
+    {
+     "word": "Ya",
+     "t": 1.178
+    },
+    {
+     "word": "lo",
+     "t": 1.34
+    },
+    {
+     "word": "has",
+     "t": 1.41
+    },
+    {
+     "word": "visto:",
+     "t": 1.526
+    },
+    {
+     "word": "a",
+     "t": 2.06
+    },
+    {
+     "word": "veces",
+     "t": 2.153
+    },
+    {
+     "word": "cumplen…",
+     "t": 2.397
+    },
+    {
+     "word": "y",
+     "t": 3.07
+    },
+    {
+     "word": "a",
+     "t": 3.151
+    },
+    {
+     "word": "veces",
+     "t": 3.198
+    },
+    {
+     "word": "no.",
+     "t": 3.477
+    },
+    {
+     "word": "¿Conoces",
+     "t": 3.918
+    },
+    {
+     "word": "a",
+     "t": 4.382
+    },
+    {
+     "word": "alguien",
+     "t": 4.429
+    },
+    {
+     "word": "que",
+     "t": 4.696
+    },
+    {
+     "word": "no",
+     "t": 4.8
+    },
+    {
+     "word": "sabe",
+     "t": 4.893
+    },
+    {
+     "word": "a",
+     "t": 5.079
+    },
+    {
+     "word": "quién",
+     "t": 5.137
+    },
+    {
+     "word": "votar?",
+     "t": 5.276
+    },
+    {
+     "word": "Mándaselo.",
+     "t": 5.88
+    },
+    {
+     "word": "Y",
+     "t": 6.669
+    },
+    {
+     "word": "más",
+     "t": 6.797
+    },
+    {
+     "word": "comparaciones,",
+     "t": 6.936
+    },
+    {
+     "word": "en",
+     "t": 7.703
+    },
+    {
+     "word": "el",
+     "t": 7.842
+    },
+    {
+     "word": "perfil.",
+     "t": 7.935
+    }
+   ]
+  }
+ ],
+ "impuestos-partidos": [
+  {
+   "file": "vo/impuestos-partidos/00.wav",
+   "seconds": 5.626,
+   "words": [
+    {
+     "word": "Hablemos",
+     "t": 0
+    },
+    {
+     "word": "de",
+     "t": 0.372
+    },
+    {
+     "word": "impuestos:",
+     "t": 0.441
+    },
+    {
+     "word": "todos",
+     "t": 1.289
+    },
+    {
+     "word": "dicen",
+     "t": 1.602
+    },
+    {
+     "word": "que",
+     "t": 1.846
+    },
+    {
+     "word": "los",
+     "t": 1.939
+    },
+    {
+     "word": "bajarán…",
+     "t": 2.043
+    },
+    {
+     "word": "o",
+     "t": 2.833
+    },
+    {
+     "word": "que",
+     "t": 2.949
+    },
+    {
+     "word": "pagarán",
+     "t": 3.065
+    },
+    {
+     "word": "los",
+     "t": 3.367
+    },
+    {
+     "word": "ricos.",
+     "t": 3.506
+    },
+    {
+     "word": "Veamos",
+     "t": 4.296
+    },
+    {
+     "word": "qué",
+     "t": 4.667
+    },
+    {
+     "word": "votan",
+     "t": 4.772
+    },
+    {
+     "word": "de",
+     "t": 5.004
+    },
+    {
+     "word": "verdad.",
+     "t": 5.085
+    }
+   ]
+  },
+  {
+   "file": "vo/impuestos-partidos/01.wav",
+   "seconds": 9.172,
+   "words": [
+    {
+     "word": "¿Subir",
+     "t": 0.04
+    },
+    {
+     "word": "los",
+     "t": 0.411
+    },
+    {
+     "word": "tramos",
+     "t": 0.551
+    },
+    {
+     "word": "del",
+     "t": 0.841
+    },
+    {
+     "word": "IRPF",
+     "t": 1.085
+    },
+    {
+     "word": "con",
+     "t": 1.909
+    },
+    {
+     "word": "la",
+     "t": 2.037
+    },
+    {
+     "word": "inflación,",
+     "t": 2.106
+    },
+    {
+     "word": "para",
+     "t": 2.814
+    },
+    {
+     "word": "que",
+     "t": 3
+    },
+    {
+     "word": "no",
+     "t": 3.105
+    },
+    {
+     "word": "pagues",
+     "t": 3.198
+    },
+    {
+     "word": "más",
+     "t": 3.441
+    },
+    {
+     "word": "solo",
+     "t": 3.639
+    },
+    {
+     "word": "porque",
+     "t": 3.859
+    },
+    {
+     "word": "sube",
+     "t": 4.08
+    },
+    {
+     "word": "el",
+     "t": 4.277
+    },
+    {
+     "word": "IPC?",
+     "t": 4.359
+    },
+    {
+     "word": "PP",
+     "t": 5.102
+    },
+    {
+     "word": "y",
+     "t": 5.369
+    },
+    {
+     "word": "Vox",
+     "t": 5.45
+    },
+    {
+     "word": "votaron",
+     "t": 5.659
+    },
+    {
+     "word": "sí.",
+     "t": 6.019
+    },
+    {
+     "word": "PSOE,",
+     "t": 6.542
+    },
+    {
+     "word": "Sumar",
+     "t": 7.111
+    },
+    {
+     "word": "y",
+     "t": 7.761
+    },
+    {
+     "word": "Podemos,",
+     "t": 7.923
+    },
+    {
+     "word": "no.",
+     "t": 8.794
+    }
+   ]
+  },
+  {
+   "file": "vo/impuestos-partidos/02.wav",
+   "seconds": 10.925,
+   "words": [
+    {
+     "word": "¿Un",
+     "t": 0.04
+    },
+    {
+     "word": "impuesto",
+     "t": 0.295
+    },
+    {
+     "word": "fijo",
+     "t": 0.597
+    },
+    {
+     "word": "a",
+     "t": 0.818
+    },
+    {
+     "word": "los",
+     "t": 0.864
+    },
+    {
+     "word": "patrimonios",
+     "t": 0.992
+    },
+    {
+     "word": "de",
+     "t": 1.456
+    },
+    {
+     "word": "más",
+     "t": 1.538
+    },
+    {
+     "word": "de",
+     "t": 1.665
+    },
+    {
+     "word": "10",
+     "t": 1.758
+    },
+    {
+     "word": "millones?",
+     "t": 1.932
+    },
+    {
+     "word": "Sumar",
+     "t": 2.675
+    },
+    {
+     "word": "y",
+     "t": 2.977
+    },
+    {
+     "word": "Podemos,",
+     "t": 3.035
+    },
+    {
+     "word": "sí.",
+     "t": 3.709
+    },
+    {
+     "word": "PP",
+     "t": 4.162
+    },
+    {
+     "word": "y",
+     "t": 4.556
+    },
+    {
+     "word": "Vox,",
+     "t": 4.684
+    },
+    {
+     "word": "no.",
+     "t": 5.241
+    },
+    {
+     "word": "¿Y",
+     "t": 5.706
+    },
+    {
+     "word": "el",
+     "t": 5.926
+    },
+    {
+     "word": "PSOE?",
+     "t": 6.019
+    },
+    {
+     "word": "También",
+     "t": 6.693
+    },
+    {
+     "word": "votó",
+     "t": 6.983
+    },
+    {
+     "word": "no…",
+     "t": 7.25
+    },
+    {
+     "word": "aunque",
+     "t": 7.993
+    },
+    {
+     "word": "ese",
+     "t": 8.202
+    },
+    {
+     "word": "mismo",
+     "t": 8.33
+    },
+    {
+     "word": "año,",
+     "t": 8.55
+    },
+    {
+     "word": "con",
+     "t": 8.91
+    },
+    {
+     "word": "el",
+     "t": 9.061
+    },
+    {
+     "word": "PSOE",
+     "t": 9.142
+    },
+    {
+     "word": "en",
+     "t": 9.374
+    },
+    {
+     "word": "el",
+     "t": 9.456
+    },
+    {
+     "word": "Gobierno,",
+     "t": 9.537
+    },
+    {
+     "word": "se",
+     "t": 9.932
+    },
+    {
+     "word": "aprobó",
+     "t": 10.001
+    },
+    {
+     "word": "uno",
+     "t": 10.234
+    },
+    {
+     "word": "temporal.",
+     "t": 10.361
+    }
+   ]
+  },
+  {
+   "file": "vo/impuestos-partidos/03.wav",
+   "seconds": 6.733,
+   "words": [
+    {
+     "word": "¿Gravar",
+     "t": 0.04
+    },
+    {
+     "word": "al",
+     "t": 0.411
+    },
+    {
+     "word": "75",
+     "t": 0.516
+    },
+    {
+     "word": "%",
+     "t": 1.119
+    },
+    {
+     "word": "los",
+     "t": 1.537
+    },
+    {
+     "word": "beneficios",
+     "t": 1.677
+    },
+    {
+     "word": "extra",
+     "t": 2.06
+    },
+    {
+     "word": "de",
+     "t": 2.257
+    },
+    {
+     "word": "la",
+     "t": 2.327
+    },
+    {
+     "word": "banca",
+     "t": 2.408
+    },
+    {
+     "word": "por",
+     "t": 2.629
+    },
+    {
+     "word": "la",
+     "t": 2.733
+    },
+    {
+     "word": "subida",
+     "t": 2.814
+    },
+    {
+     "word": "de",
+     "t": 3.058
+    },
+    {
+     "word": "tipos?",
+     "t": 3.151
+    },
+    {
+     "word": "Sumar",
+     "t": 3.766
+    },
+    {
+     "word": "y",
+     "t": 4.091
+    },
+    {
+     "word": "Podemos,",
+     "t": 4.149
+    },
+    {
+     "word": "sí.",
+     "t": 4.521
+    },
+    {
+     "word": "PSOE,",
+     "t": 4.939
+    },
+    {
+     "word": "PP",
+     "t": 5.357
+    },
+    {
+     "word": "y",
+     "t": 5.694
+    },
+    {
+     "word": "Vox,",
+     "t": 5.81
+    },
+    {
+     "word": "no.",
+     "t": 6.344
+    }
+   ]
+  },
+  {
+   "file": "vo/impuestos-partidos/04.wav",
+   "seconds": 9.16,
+   "words": [
+    {
+     "word": "¿Y",
+     "t": 0.04
+    },
+    {
+     "word": "cuando",
+     "t": 0.261
+    },
+    {
+     "word": "gobiernan?",
+     "t": 0.47
+    },
+    {
+     "word": "Rajoy",
+     "t": 1.19
+    },
+    {
+     "word": "dijo",
+     "t": 1.468
+    },
+    {
+     "word": "que",
+     "t": 1.677
+    },
+    {
+     "word": "su",
+     "t": 1.77
+    },
+    {
+     "word": "intención",
+     "t": 1.851
+    },
+    {
+     "word": "era",
+     "t": 2.177
+    },
+    {
+     "word": "no",
+     "t": 2.293
+    },
+    {
+     "word": "subir",
+     "t": 2.374
+    },
+    {
+     "word": "impuestos:",
+     "t": 2.583
+    },
+    {
+     "word": "once",
+     "t": 3.291
+    },
+    {
+     "word": "días",
+     "t": 3.547
+    },
+    {
+     "word": "después",
+     "t": 3.709
+    },
+    {
+     "word": "subió",
+     "t": 4.023
+    },
+    {
+     "word": "el",
+     "t": 4.266
+    },
+    {
+     "word": "IRPF.",
+     "t": 4.359
+    },
+    {
+     "word": "Y",
+     "t": 5.276
+    },
+    {
+     "word": "Sánchez",
+     "t": 5.427
+    },
+    {
+     "word": "prometió",
+     "t": 5.752
+    },
+    {
+     "word": "presentar",
+     "t": 6.042
+    },
+    {
+     "word": "los",
+     "t": 6.368
+    },
+    {
+     "word": "Presupuestos",
+     "t": 6.484
+    },
+    {
+     "word": "de",
+     "t": 6.913
+    },
+    {
+     "word": "2026:",
+     "t": 7.006
+    },
+    {
+     "word": "no",
+     "t": 8.063
+    },
+    {
+     "word": "llegó",
+     "t": 8.19
+    },
+    {
+     "word": "a",
+     "t": 8.364
+    },
+    {
+     "word": "presentarlos.",
+     "t": 8.422
+    }
+   ]
+  },
+  {
+   "file": "vo/impuestos-partidos/05.wav",
+   "seconds": 7.146,
+   "words": [
+    {
+     "word": "¿Quién",
+     "t": 0.04
+    },
+    {
+     "word": "te",
+     "t": 0.319
+    },
+    {
+     "word": "sube",
+     "t": 0.389
+    },
+    {
+     "word": "y",
+     "t": 0.598
+    },
+    {
+     "word": "quién",
+     "t": 0.679
+    },
+    {
+     "word": "te",
+     "t": 0.83
+    },
+    {
+     "word": "baja",
+     "t": 0.911
+    },
+    {
+     "word": "los",
+     "t": 1.085
+    },
+    {
+     "word": "impuestos?",
+     "t": 1.213
+    },
+    {
+     "word": "Ya",
+     "t": 1.979
+    },
+    {
+     "word": "lo",
+     "t": 2.119
+    },
+    {
+     "word": "has",
+     "t": 2.188
+    },
+    {
+     "word": "visto.",
+     "t": 2.293
+    },
+    {
+     "word": "¿Conoces",
+     "t": 2.78
+    },
+    {
+     "word": "a",
+     "t": 3.245
+    },
+    {
+     "word": "alguien",
+     "t": 3.291
+    },
+    {
+     "word": "que",
+     "t": 3.547
+    },
+    {
+     "word": "no",
+     "t": 3.663
+    },
+    {
+     "word": "sabe",
+     "t": 3.756
+    },
+    {
+     "word": "a",
+     "t": 3.941
+    },
+    {
+     "word": "quién",
+     "t": 3.999
+    },
+    {
+     "word": "votar?",
+     "t": 4.139
+    },
+    {
+     "word": "Mándaselo.",
+     "t": 4.731
+    },
+    {
+     "word": "Y",
+     "t": 5.451
+    },
+    {
+     "word": "más",
+     "t": 5.578
+    },
+    {
+     "word": "comparaciones,",
+     "t": 5.694
+    },
+    {
+     "word": "en",
+     "t": 6.298
+    },
+    {
+     "word": "el",
+     "t": 6.414
+    },
+    {
+     "word": "perfil.",
+     "t": 6.495
+    }
+   ]
+  }
+ ],
+ "pensiones-partidos": [
+  {
+   "file": "vo/pensiones-partidos/00.wav",
+   "seconds": 3.698,
+   "words": [
+    {
+     "word": "Hablemos",
+     "t": 0
+    },
+    {
+     "word": "de",
+     "t": 0.337
+    },
+    {
+     "word": "pensiones:",
+     "t": 0.418
+    },
+    {
+     "word": "todos",
+     "t": 1.173
+    },
+    {
+     "word": "prometen",
+     "t": 1.463
+    },
+    {
+     "word": "protegerlas…",
+     "t": 1.765
+    },
+    {
+     "word": "pero",
+     "t": 2.682
+    },
+    {
+     "word": "mira",
+     "t": 2.856
+    },
+    {
+     "word": "lo",
+     "t": 2.995
+    },
+    {
+     "word": "que",
+     "t": 3.077
+    },
+    {
+     "word": "votan.",
+     "t": 3.181
+    }
+   ]
+  },
+  {
+   "file": "vo/pensiones-partidos/01.wav",
+   "seconds": 12.052,
+   "words": [
+    {
+     "word": "Enero",
+     "t": 0.04
+    },
+    {
+     "word": "de",
+     "t": 0.342
+    },
+    {
+     "word": "2026:",
+     "t": 0.447
+    },
+    {
+     "word": "un",
+     "t": 1.596
+    },
+    {
+     "word": "decreto",
+     "t": 1.712
+    },
+    {
+     "word": "sube",
+     "t": 2.049
+    },
+    {
+     "word": "las",
+     "t": 2.211
+    },
+    {
+     "word": "pensiones",
+     "t": 2.351
+    },
+    {
+     "word": "un",
+     "t": 2.827
+    },
+    {
+     "word": "2,7",
+     "t": 3.001
+    },
+    {
+     "word": "%,",
+     "t": 3.744
+    },
+    {
+     "word": "junto",
+     "t": 4.394
+    },
+    {
+     "word": "a",
+     "t": 4.65
+    },
+    {
+     "word": "otras",
+     "t": 4.708
+    },
+    {
+     "word": "medidas.",
+     "t": 4.951
+    },
+    {
+     "word": "PSOE,",
+     "t": 5.683
+    },
+    {
+     "word": "Sumar",
+     "t": 6.403
+    },
+    {
+     "word": "y",
+     "t": 6.832
+    },
+    {
+     "word": "Podemos",
+     "t": 6.948
+    },
+    {
+     "word": "votaron",
+     "t": 7.494
+    },
+    {
+     "word": "sí.",
+     "t": 8.144
+    },
+    {
+     "word": "PP",
+     "t": 8.829
+    },
+    {
+     "word": "y",
+     "t": 9.421
+    },
+    {
+     "word": "Vox,",
+     "t": 9.595
+    },
+    {
+     "word": "no…",
+     "t": 10.199
+    },
+    {
+     "word": "y",
+     "t": 10.768
+    },
+    {
+     "word": "el",
+     "t": 10.884
+    },
+    {
+     "word": "decreto",
+     "t": 10.977
+    },
+    {
+     "word": "cayó.",
+     "t": 11.29
+    }
+   ]
+  },
+  {
+   "file": "vo/pensiones-partidos/02.wav",
+   "seconds": 5.34,
+   "words": [
+    {
+     "word": "Un",
+     "t": 0.04
+    },
+    {
+     "word": "mes",
+     "t": 0.179
+    },
+    {
+     "word": "después,",
+     "t": 0.318
+    },
+    {
+     "word": "la",
+     "t": 0.945
+    },
+    {
+     "word": "subida",
+     "t": 1.05
+    },
+    {
+     "word": "va",
+     "t": 1.317
+    },
+    {
+     "word": "sola",
+     "t": 1.421
+    },
+    {
+     "word": "en",
+     "t": 1.642
+    },
+    {
+     "word": "otro",
+     "t": 1.746
+    },
+    {
+     "word": "decreto.",
+     "t": 1.909
+    },
+    {
+     "word": "Ahora",
+     "t": 2.489
+    },
+    {
+     "word": "el",
+     "t": 2.721
+    },
+    {
+     "word": "PP",
+     "t": 2.814
+    },
+    {
+     "word": "vota",
+     "t": 2.988
+    },
+    {
+     "word": "sí.",
+     "t": 3.209
+    },
+    {
+     "word": "¿Y",
+     "t": 3.546
+    },
+    {
+     "word": "Vox?",
+     "t": 3.79
+    },
+    {
+     "word": "Otra",
+     "t": 4.521
+    },
+    {
+     "word": "vez",
+     "t": 4.765
+    },
+    {
+     "word": "no.",
+     "t": 4.916
+    }
+   ]
+  },
+  {
+   "file": "vo/pensiones-partidos/03.wav",
+   "seconds": 6.838,
+   "words": [
+    {
+     "word": "¿Cobrar",
+     "t": 0.04
+    },
+    {
+     "word": "la",
+     "t": 0.435
+    },
+    {
+     "word": "pensión",
+     "t": 0.505
+    },
+    {
+     "word": "y",
+     "t": 0.911
+    },
+    {
+     "word": "seguir",
+     "t": 1.05
+    },
+    {
+     "word": "trabajando?",
+     "t": 1.282
+    },
+    {
+     "word": "PP,",
+     "t": 2.292
+    },
+    {
+     "word": "PSOE",
+     "t": 2.954
+    },
+    {
+     "word": "y",
+     "t": 3.442
+    },
+    {
+     "word": "Sumar",
+     "t": 3.581
+    },
+    {
+     "word": "votaron",
+     "t": 4.069
+    },
+    {
+     "word": "sí.",
+     "t": 4.487
+    },
+    {
+     "word": "Vox",
+     "t": 5.067
+    },
+    {
+     "word": "y",
+     "t": 5.416
+    },
+    {
+     "word": "Podemos,",
+     "t": 5.508
+    },
+    {
+     "word": "no.",
+     "t": 6.321
+    }
+   ]
+  },
+  {
+   "file": "vo/pensiones-partidos/04.wav",
+   "seconds": 11.135,
+   "words": [
+    {
+     "word": "¿Y",
+     "t": 0.04
+    },
+    {
+     "word": "cuando",
+     "t": 0.307
+    },
+    {
+     "word": "gobiernan?",
+     "t": 0.551
+    },
+    {
+     "word": "Rajoy",
+     "t": 1.399
+    },
+    {
+     "word": "subió",
+     "t": 1.666
+    },
+    {
+     "word": "las",
+     "t": 1.863
+    },
+    {
+     "word": "pensiones",
+     "t": 2.003
+    },
+    {
+     "word": "un",
+     "t": 2.374
+    },
+    {
+     "word": "1",
+     "t": 2.444
+    },
+    {
+     "word": "%…",
+     "t": 2.641
+    },
+    {
+     "word": "y",
+     "t": 3.396
+    },
+    {
+     "word": "once",
+     "t": 3.5
+    },
+    {
+     "word": "meses",
+     "t": 3.651
+    },
+    {
+     "word": "después",
+     "t": 3.883
+    },
+    {
+     "word": "anuló",
+     "t": 4.209
+    },
+    {
+     "word": "la",
+     "t": 4.394
+    },
+    {
+     "word": "compensación",
+     "t": 4.476
+    },
+    {
+     "word": "por",
+     "t": 4.905
+    },
+    {
+     "word": "el",
+     "t": 5.01
+    },
+    {
+     "word": "IPC.",
+     "t": 5.091
+    },
+    {
+     "word": "Sánchez",
+     "t": 5.729
+    },
+    {
+     "word": "prometió",
+     "t": 6.089
+    },
+    {
+     "word": "5.000",
+     "t": 6.449
+    },
+    {
+     "word": "millones",
+     "t": 6.774
+    },
+    {
+     "word": "al",
+     "t": 7.088
+    },
+    {
+     "word": "año",
+     "t": 7.157
+    },
+    {
+     "word": "para",
+     "t": 7.343
+    },
+    {
+     "word": "la",
+     "t": 7.471
+    },
+    {
+     "word": "hucha",
+     "t": 7.541
+    },
+    {
+     "word": "de",
+     "t": 7.773
+    },
+    {
+     "word": "las",
+     "t": 7.842
+    },
+    {
+     "word": "pensiones:",
+     "t": 7.97
+    },
+    {
+     "word": "puso",
+     "t": 8.771
+    },
+    {
+     "word": "3.600",
+     "t": 9.073
+    },
+    {
+     "word": "y",
+     "t": 9.863
+    },
+    {
+     "word": "4.400.",
+     "t": 10.014
+    }
+   ]
+  },
+  {
+   "file": "vo/pensiones-partidos/05.wav",
+   "seconds": 7.145,
+   "words": [
+    {
+     "word": "¿Quién",
+     "t": 0.04
+    },
+    {
+     "word": "protege",
+     "t": 0.283
+    },
+    {
+     "word": "tu",
+     "t": 0.585
+    },
+    {
+     "word": "pensión?",
+     "t": 0.666
+    },
+    {
+     "word": "No",
+     "t": 1.421
+    },
+    {
+     "word": "siempre",
+     "t": 1.572
+    },
+    {
+     "word": "quien",
+     "t": 1.793
+    },
+    {
+     "word": "lo",
+     "t": 1.944
+    },
+    {
+     "word": "promete.",
+     "t": 2.013
+    },
+    {
+     "word": "¿Conoces",
+     "t": 2.583
+    },
+    {
+     "word": "a",
+     "t": 3.001
+    },
+    {
+     "word": "algún",
+     "t": 3.047
+    },
+    {
+     "word": "pensionista?",
+     "t": 3.244
+    },
+    {
+     "word": "Mándaselo.",
+     "t": 4.15
+    },
+    {
+     "word": "Y",
+     "t": 4.672
+    },
+    {
+     "word": "más",
+     "t": 4.812
+    },
+    {
+     "word": "comparaciones,",
+     "t": 4.928
+    },
+    {
+     "word": "en",
+     "t": 5.473
+    },
+    {
+     "word": "el",
+     "t": 5.59
+    },
+    {
+     "word": "perfil.",
+     "t": 5.682
+    }
+   ]
+  }
+ ],
+ "seguridad-partidos": [
+  {
+   "file": "vo/seguridad-partidos/00.wav",
+   "seconds": 3.733,
+   "words": [
+    {
+     "word": "Hablemos",
+     "t": 0
+    },
+    {
+     "word": "de",
+     "t": 0.348
+    },
+    {
+     "word": "seguridad",
+     "t": 0.43
+    },
+    {
+     "word": "en",
+     "t": 0.766
+    },
+    {
+     "word": "tu",
+     "t": 0.836
+    },
+    {
+     "word": "ciudad:",
+     "t": 0.906
+    },
+    {
+     "word": "qué",
+     "t": 1.509
+    },
+    {
+     "word": "prometen",
+     "t": 1.625
+    },
+    {
+     "word": "los",
+     "t": 1.974
+    },
+    {
+     "word": "partidos…",
+     "t": 2.101
+    },
+    {
+     "word": "y",
+     "t": 2.891
+    },
+    {
+     "word": "qué",
+     "t": 3.065
+    },
+    {
+     "word": "votan.",
+     "t": 3.193
+    }
+   ]
+  },
+  {
+   "file": "vo/seguridad-partidos/01.wav",
+   "seconds": 10.832,
+   "words": [
+    {
+     "word": "¿Más",
+     "t": 0.04
+    },
+    {
+     "word": "castigo",
+     "t": 0.354
+    },
+    {
+     "word": "para",
+     "t": 0.714
+    },
+    {
+     "word": "quien",
+     "t": 0.876
+    },
+    {
+     "word": "acumula",
+     "t": 1.039
+    },
+    {
+     "word": "hurtos?",
+     "t": 1.387
+    },
+    {
+     "word": "Salió",
+     "t": 2.2
+    },
+    {
+     "word": "adelante:",
+     "t": 2.478
+    },
+    {
+     "word": "PP",
+     "t": 3.245
+    },
+    {
+     "word": "y",
+     "t": 3.663
+    },
+    {
+     "word": "PSOE",
+     "t": 3.813
+    },
+    {
+     "word": "votaron",
+     "t": 4.348
+    },
+    {
+     "word": "sí.",
+     "t": 4.765
+    },
+    {
+     "word": "Sumar",
+     "t": 5.358
+    },
+    {
+     "word": "y",
+     "t": 5.694
+    },
+    {
+     "word": "Podemos,",
+     "t": 5.752
+    },
+    {
+     "word": "no.",
+     "t": 6.739
+    },
+    {
+     "word": "¿Y",
+     "t": 7.227
+    },
+    {
+     "word": "Vox?",
+     "t": 7.482
+    },
+    {
+     "word": "Votó",
+     "t": 8.283
+    },
+    {
+     "word": "sí",
+     "t": 8.608
+    },
+    {
+     "word": "al",
+     "t": 8.759
+    },
+    {
+     "word": "empezar…",
+     "t": 8.864
+    },
+    {
+     "word": "y",
+     "t": 9.735
+    },
+    {
+     "word": "no",
+     "t": 9.885
+    },
+    {
+     "word": "al",
+     "t": 10.013
+    },
+    {
+     "word": "final.",
+     "t": 10.106
+    }
+   ]
+  },
+  {
+   "file": "vo/seguridad-partidos/02.wav",
+   "seconds": 8.301,
+   "words": [
+    {
+     "word": "¿Pagar",
+     "t": 0.04
+    },
+    {
+     "word": "a",
+     "t": 0.447
+    },
+    {
+     "word": "policías",
+     "t": 0.505
+    },
+    {
+     "word": "y",
+     "t": 0.981
+    },
+    {
+     "word": "guardias",
+     "t": 1.039
+    },
+    {
+     "word": "civiles",
+     "t": 1.352
+    },
+    {
+     "word": "lo",
+     "t": 1.677
+    },
+    {
+     "word": "mismo",
+     "t": 1.759
+    },
+    {
+     "word": "que",
+     "t": 1.991
+    },
+    {
+     "word": "a",
+     "t": 2.084
+    },
+    {
+     "word": "Mossos",
+     "t": 2.142
+    },
+    {
+     "word": "y",
+     "t": 2.386
+    },
+    {
+     "word": "Ertzaintza?",
+     "t": 2.432
+    },
+    {
+     "word": "PP",
+     "t": 3.338
+    },
+    {
+     "word": "y",
+     "t": 3.616
+    },
+    {
+     "word": "Vox",
+     "t": 3.686
+    },
+    {
+     "word": "votaron",
+     "t": 3.941
+    },
+    {
+     "word": "sí.",
+     "t": 4.313
+    },
+    {
+     "word": "PSOE,",
+     "t": 4.87
+    },
+    {
+     "word": "Sumar",
+     "t": 5.427
+    },
+    {
+     "word": "y",
+     "t": 5.799
+    },
+    {
+     "word": "Podemos,",
+     "t": 5.903
+    },
+    {
+     "word": "no.",
+     "t": 6.6
+    },
+    {
+     "word": "Perdió",
+     "t": 7.134
+    },
+    {
+     "word": "por",
+     "t": 7.401
+    },
+    {
+     "word": "tres",
+     "t": 7.517
+    },
+    {
+     "word": "votos.",
+     "t": 7.703
+    }
+   ]
+  },
+  {
+   "file": "vo/seguridad-partidos/03.wav",
+   "seconds": 8.998,
+   "words": [
+    {
+     "word": "Julio",
+     "t": 0.04
+    },
+    {
+     "word": "de",
+     "t": 0.319
+    },
+    {
+     "word": "2026:",
+     "t": 0.424
+    },
+    {
+     "word": "entrada",
+     "t": 1.515
+    },
+    {
+     "word": "masiva",
+     "t": 1.863
+    },
+    {
+     "word": "de",
+     "t": 2.153
+    },
+    {
+     "word": "personas",
+     "t": 2.235
+    },
+    {
+     "word": "en",
+     "t": 2.571
+    },
+    {
+     "word": "Ceuta.",
+     "t": 2.664
+    },
+    {
+     "word": "¿Llamar",
+     "t": 3.361
+    },
+    {
+     "word": "a",
+     "t": 3.663
+    },
+    {
+     "word": "consultas",
+     "t": 3.721
+    },
+    {
+     "word": "al",
+     "t": 4.116
+    },
+    {
+     "word": "embajador",
+     "t": 4.197
+    },
+    {
+     "word": "en",
+     "t": 4.58
+    },
+    {
+     "word": "Marruecos?",
+     "t": 4.65
+    },
+    {
+     "word": "PP,",
+     "t": 5.509
+    },
+    {
+     "word": "Vox",
+     "t": 6.008
+    },
+    {
+     "word": "y",
+     "t": 6.345
+    },
+    {
+     "word": "Sumar",
+     "t": 6.426
+    },
+    {
+     "word": "votaron",
+     "t": 6.751
+    },
+    {
+     "word": "sí.",
+     "t": 7.134
+    },
+    {
+     "word": "PSOE",
+     "t": 7.61
+    },
+    {
+     "word": "y",
+     "t": 8.017
+    },
+    {
+     "word": "Podemos,",
+     "t": 8.133
+    },
+    {
+     "word": "no.",
+     "t": 8.655
+    }
+   ]
+  },
+  {
+   "file": "vo/seguridad-partidos/04.wav",
+   "seconds": 9.218,
+   "words": [
+    {
+     "word": "¿Y",
+     "t": 0.04
+    },
+    {
+     "word": "cuando",
+     "t": 0.307
+    },
+    {
+     "word": "gobiernan?",
+     "t": 0.516
+    },
+    {
+     "word": "El",
+     "t": 1.294
+    },
+    {
+     "word": "PSOE",
+     "t": 1.457
+    },
+    {
+     "word": "prometía",
+     "t": 1.758
+    },
+    {
+     "word": "autodeterminación",
+     "t": 2.084
+    },
+    {
+     "word": "para",
+     "t": 2.757
+    },
+    {
+     "word": "el",
+     "t": 2.885
+    },
+    {
+     "word": "Sáhara…",
+     "t": 2.978
+    },
+    {
+     "word": "y",
+     "t": 3.697
+    },
+    {
+     "word": "Sánchez",
+     "t": 3.848
+    },
+    {
+     "word": "apoyó",
+     "t": 4.162
+    },
+    {
+     "word": "el",
+     "t": 4.417
+    },
+    {
+     "word": "plan",
+     "t": 4.51
+    },
+    {
+     "word": "de",
+     "t": 4.661
+    },
+    {
+     "word": "Marruecos.",
+     "t": 4.742
+    },
+    {
+     "word": "Y",
+     "t": 5.52
+    },
+    {
+     "word": "PSOE",
+     "t": 5.683
+    },
+    {
+     "word": "y",
+     "t": 6.043
+    },
+    {
+     "word": "Podemos",
+     "t": 6.159
+    },
+    {
+     "word": "prometieron",
+     "t": 6.577
+    },
+    {
+     "word": "sustituir",
+     "t": 6.983
+    },
+    {
+     "word": "la",
+     "t": 7.389
+    },
+    {
+     "word": "ley",
+     "t": 7.47
+    },
+    {
+     "word": "mordaza:",
+     "t": 7.598
+    },
+    {
+     "word": "sigue",
+     "t": 8.353
+    },
+    {
+     "word": "vigente.",
+     "t": 8.631
+    }
+   ]
+  },
+  {
+   "file": "vo/seguridad-partidos/05.wav",
+   "seconds": 7.355,
+   "words": [
+    {
+     "word": "¿Quién",
+     "t": 0.04
+    },
+    {
+     "word": "te",
+     "t": 0.354
+    },
+    {
+     "word": "protege",
+     "t": 0.435
+    },
+    {
+     "word": "de",
+     "t": 0.737
+    },
+    {
+     "word": "verdad?",
+     "t": 0.807
+    },
+    {
+     "word": "No",
+     "t": 1.526
+    },
+    {
+     "word": "siempre",
+     "t": 1.666
+    },
+    {
+     "word": "quien",
+     "t": 1.933
+    },
+    {
+     "word": "lo",
+     "t": 2.084
+    },
+    {
+     "word": "promete.",
+     "t": 2.165
+    },
+    {
+     "word": "¿Conoces",
+     "t": 2.722
+    },
+    {
+     "word": "a",
+     "t": 3.198
+    },
+    {
+     "word": "alguien",
+     "t": 3.245
+    },
+    {
+     "word": "que",
+     "t": 3.512
+    },
+    {
+     "word": "no",
+     "t": 3.616
+    },
+    {
+     "word": "sabe",
+     "t": 3.709
+    },
+    {
+     "word": "a",
+     "t": 3.906
+    },
+    {
+     "word": "quién",
+     "t": 3.976
+    },
+    {
+     "word": "votar?",
+     "t": 4.127
+    },
+    {
+     "word": "Mándaselo.",
+     "t": 4.8
+    },
+    {
+     "word": "Y",
+     "t": 5.567
+    },
+    {
+     "word": "más",
+     "t": 5.718
+    },
+    {
+     "word": "comparaciones,",
+     "t": 5.868
+    },
+    {
+     "word": "en",
+     "t": 6.53
+    },
+    {
+     "word": "el",
+     "t": 6.681
+    },
+    {
+     "word": "perfil.",
+     "t": 6.762
+    }
+   ]
+  }
+ ],
+ "inmigracion-partidos": [
+  {
+   "file": "vo/inmigracion-partidos/00.wav",
+   "seconds": 4.232,
+   "words": [
+    {
+     "word": "Hablemos",
+     "t": 0
+    },
+    {
+     "word": "de",
+     "t": 0.395
+    },
+    {
+     "word": "inmigración:",
+     "t": 0.464
+    },
+    {
+     "word": "qué",
+     "t": 1.242
+    },
+    {
+     "word": "prometen",
+     "t": 1.358
+    },
+    {
+     "word": "los",
+     "t": 1.707
+    },
+    {
+     "word": "partidos…",
+     "t": 1.846
+    },
+    {
+     "word": "y",
+     "t": 2.635
+    },
+    {
+     "word": "qué",
+     "t": 2.798
+    },
+    {
+     "word": "votan,",
+     "t": 2.914
+    },
+    {
+     "word": "que",
+     "t": 3.262
+    },
+    {
+     "word": "no",
+     "t": 3.39
+    },
+    {
+     "word": "siempre",
+     "t": 3.483
+    },
+    {
+     "word": "cuadra.",
+     "t": 3.715
+    }
+   ]
+  },
+  {
+   "file": "vo/inmigracion-partidos/01.wav",
+   "seconds": 7.431,
+   "words": [
+    {
+     "word": "¿Tramitar",
+     "t": 0.04
+    },
+    {
+     "word": "una",
+     "t": 0.516
+    },
+    {
+     "word": "ley",
+     "t": 0.656
+    },
+    {
+     "word": "para",
+     "t": 0.83
+    },
+    {
+     "word": "dar",
+     "t": 0.981
+    },
+    {
+     "word": "papeles",
+     "t": 1.109
+    },
+    {
+     "word": "a",
+     "t": 1.457
+    },
+    {
+     "word": "los",
+     "t": 1.503
+    },
+    {
+     "word": "inmigrantes",
+     "t": 1.631
+    },
+    {
+     "word": "que",
+     "t": 2.072
+    },
+    {
+     "word": "ya",
+     "t": 2.2
+    },
+    {
+     "word": "viven",
+     "t": 2.304
+    },
+    {
+     "word": "aquí",
+     "t": 2.548
+    },
+    {
+     "word": "sin",
+     "t": 2.734
+    },
+    {
+     "word": "ellos?",
+     "t": 2.908
+    },
+    {
+     "word": "Votaron",
+     "t": 3.593
+    },
+    {
+     "word": "sí",
+     "t": 3.999
+    },
+    {
+     "word": "todos…",
+     "t": 4.15
+    },
+    {
+     "word": "menos",
+     "t": 4.847
+    },
+    {
+     "word": "Vox.",
+     "t": 5.126
+    },
+    {
+     "word": "Sí:",
+     "t": 5.834
+    },
+    {
+     "word": "el",
+     "t": 6.449
+    },
+    {
+     "word": "PP",
+     "t": 6.6
+    },
+    {
+     "word": "también.",
+     "t": 6.821
+    }
+   ]
+  },
+  {
+   "file": "vo/inmigracion-partidos/02.wav",
+   "seconds": 7.952,
+   "words": [
+    {
+     "word": "¿Restringir",
+     "t": 0.04
+    },
+    {
+     "word": "el",
+     "t": 0.62
+    },
+    {
+     "word": "arraigo,",
+     "t": 0.725
+    },
+    {
+     "word": "la",
+     "t": 1.398
+    },
+    {
+     "word": "vía",
+     "t": 1.514
+    },
+    {
+     "word": "para",
+     "t": 1.711
+    },
+    {
+     "word": "regularizarse",
+     "t": 1.874
+    },
+    {
+     "word": "tras",
+     "t": 2.373
+    },
+    {
+     "word": "años",
+     "t": 2.536
+    },
+    {
+     "word": "aquí?",
+     "t": 2.768
+    },
+    {
+     "word": "Vox",
+     "t": 3.372
+    },
+    {
+     "word": "y",
+     "t": 3.616
+    },
+    {
+     "word": "PP",
+     "t": 3.662
+    },
+    {
+     "word": "votaron",
+     "t": 3.871
+    },
+    {
+     "word": "sí.",
+     "t": 4.196
+    },
+    {
+     "word": "PSOE,",
+     "t": 4.718
+    },
+    {
+     "word": "Sumar",
+     "t": 5.229
+    },
+    {
+     "word": "y",
+     "t": 5.531
+    },
+    {
+     "word": "Podemos,",
+     "t": 5.589
+    },
+    {
+     "word": "no.",
+     "t": 6.274
+    },
+    {
+     "word": "Se",
+     "t": 6.739
+    },
+    {
+     "word": "rechazó",
+     "t": 6.866
+    },
+    {
+     "word": "por",
+     "t": 7.191
+    },
+    {
+     "word": "ocho",
+     "t": 7.319
+    },
+    {
+     "word": "votos.",
+     "t": 7.47
+    }
+   ]
+  },
+  {
+   "file": "vo/inmigracion-partidos/03.wav",
+   "seconds": 7.687,
+   "words": [
+    {
+     "word": "¿Repartir",
+     "t": 0.04
+    },
+    {
+     "word": "entre",
+     "t": 0.54
+    },
+    {
+     "word": "comunidades",
+     "t": 0.714
+    },
+    {
+     "word": "a",
+     "t": 1.167
+    },
+    {
+     "word": "los",
+     "t": 1.213
+    },
+    {
+     "word": "menores",
+     "t": 1.341
+    },
+    {
+     "word": "que",
+     "t": 1.631
+    },
+    {
+     "word": "llegan",
+     "t": 1.724
+    },
+    {
+     "word": "solos?",
+     "t": 1.956
+    },
+    {
+     "word": "PSOE,",
+     "t": 2.699
+    },
+    {
+     "word": "Sumar",
+     "t": 3.21
+    },
+    {
+     "word": "y",
+     "t": 3.512
+    },
+    {
+     "word": "Podemos",
+     "t": 3.57
+    },
+    {
+     "word": "votaron",
+     "t": 3.942
+    },
+    {
+     "word": "sí.",
+     "t": 4.267
+    },
+    {
+     "word": "PP",
+     "t": 4.894
+    },
+    {
+     "word": "y",
+     "t": 5.196
+    },
+    {
+     "word": "Vox,",
+     "t": 5.265
+    },
+    {
+     "word": "no…",
+     "t": 5.788
+    },
+    {
+     "word": "y",
+     "t": 6.484
+    },
+    {
+     "word": "no",
+     "t": 6.624
+    },
+    {
+     "word": "salió",
+     "t": 6.705
+    },
+    {
+     "word": "por",
+     "t": 6.891
+    },
+    {
+     "word": "seis",
+     "t": 7.007
+    },
+    {
+     "word": "votos.",
+     "t": 7.134
+    }
+   ]
+  },
+  {
+   "file": "vo/inmigracion-partidos/04.wav",
+   "seconds": 11.737,
+   "words": [
+    {
+     "word": "¿Y",
+     "t": 0.04
+    },
+    {
+     "word": "cuando",
+     "t": 0.272
+    },
+    {
+     "word": "gobiernan?",
+     "t": 0.457
+    },
+    {
+     "word": "Sumar",
+     "t": 1.34
+    },
+    {
+     "word": "prometió",
+     "t": 1.618
+    },
+    {
+     "word": "cerrar",
+     "t": 1.897
+    },
+    {
+     "word": "todos",
+     "t": 2.141
+    },
+    {
+     "word": "los",
+     "t": 2.338
+    },
+    {
+     "word": "CIE:",
+     "t": 2.466
+    },
+    {
+     "word": "en",
+     "t": 2.954
+    },
+    {
+     "word": "2026,",
+     "t": 3.116
+    },
+    {
+     "word": "el",
+     "t": 4.173
+    },
+    {
+     "word": "Gobierno",
+     "t": 4.312
+    },
+    {
+     "word": "del",
+     "t": 4.614
+    },
+    {
+     "word": "que",
+     "t": 4.742
+    },
+    {
+     "word": "forma",
+     "t": 4.858
+    },
+    {
+     "word": "parte",
+     "t": 5.113
+    },
+    {
+     "word": "creó",
+     "t": 5.392
+    },
+    {
+     "word": "uno",
+     "t": 5.612
+    },
+    {
+     "word": "nuevo",
+     "t": 5.752
+    },
+    {
+     "word": "en",
+     "t": 5.961
+    },
+    {
+     "word": "Algeciras.",
+     "t": 6.042
+    },
+    {
+     "word": "Y",
+     "t": 6.866
+    },
+    {
+     "word": "prometió",
+     "t": 7.017
+    },
+    {
+     "word": "una",
+     "t": 7.342
+    },
+    {
+     "word": "regularización",
+     "t": 7.481
+    },
+    {
+     "word": "permanente",
+     "t": 8.05
+    },
+    {
+     "word": "por",
+     "t": 8.433
+    },
+    {
+     "word": "ley:",
+     "t": 8.584
+    },
+    {
+     "word": "hubo",
+     "t": 9.072
+    },
+    {
+     "word": "una",
+     "t": 9.374
+    },
+    {
+     "word": "única,",
+     "t": 9.548
+    },
+    {
+     "word": "por",
+     "t": 9.931
+    },
+    {
+     "word": "decreto,",
+     "t": 10.094
+    },
+    {
+     "word": "con",
+     "t": 10.651
+    },
+    {
+     "word": "plazo",
+     "t": 10.79
+    },
+    {
+     "word": "hasta",
+     "t": 10.988
+    },
+    {
+     "word": "junio.",
+     "t": 11.162
+    }
+   ]
+  },
+  {
+   "file": "vo/inmigracion-partidos/05.wav",
+   "seconds": 7.494,
+   "words": [
+    {
+     "word": "¿Quién",
+     "t": 0.04
+    },
+    {
+     "word": "dice",
+     "t": 0.296
+    },
+    {
+     "word": "una",
+     "t": 0.458
+    },
+    {
+     "word": "cosa",
+     "t": 0.586
+    },
+    {
+     "word": "y",
+     "t": 0.783
+    },
+    {
+     "word": "vota",
+     "t": 0.841
+    },
+    {
+     "word": "otra?",
+     "t": 1.073
+    },
+    {
+     "word": "Ya",
+     "t": 1.654
+    },
+    {
+     "word": "lo",
+     "t": 1.805
+    },
+    {
+     "word": "has",
+     "t": 1.875
+    },
+    {
+     "word": "visto.",
+     "t": 1.979
+    },
+    {
+     "word": "¿Conoces",
+     "t": 2.56
+    },
+    {
+     "word": "a",
+     "t": 3.001
+    },
+    {
+     "word": "alguien",
+     "t": 3.047
+    },
+    {
+     "word": "que",
+     "t": 3.314
+    },
+    {
+     "word": "no",
+     "t": 3.419
+    },
+    {
+     "word": "sabe",
+     "t": 3.5
+    },
+    {
+     "word": "a",
+     "t": 3.674
+    },
+    {
+     "word": "quién",
+     "t": 3.732
+    },
+    {
+     "word": "votar?",
+     "t": 3.895
+    },
+    {
+     "word": "Mándaselo.",
+     "t": 4.696
+    },
+    {
+     "word": "Y",
+     "t": 5.485
+    },
+    {
+     "word": "más",
+     "t": 5.636
+    },
+    {
+     "word": "comparaciones,",
+     "t": 5.764
+    },
+    {
+     "word": "en",
+     "t": 6.716
+    },
+    {
+     "word": "el",
+     "t": 6.855
+    },
+    {
+     "word": "perfil.",
+     "t": 6.936
+    }
+   ]
+  }
+ ],
+ "sanidad-educacion-partidos": [
+  {
+   "file": "vo/sanidad-educacion-partidos/00.wav",
+   "seconds": 4.058,
+   "words": [
+    {
+     "word": "Hablemos",
+     "t": 0
+    },
+    {
+     "word": "de",
+     "t": 0.383
+    },
+    {
+     "word": "sanidad",
+     "t": 0.464
+    },
+    {
+     "word": "y",
+     "t": 0.778
+    },
+    {
+     "word": "educación:",
+     "t": 0.824
+    },
+    {
+     "word": "todos",
+     "t": 1.625
+    },
+    {
+     "word": "prometen",
+     "t": 1.916
+    },
+    {
+     "word": "defenderlas.",
+     "t": 2.218
+    },
+    {
+     "word": "Veamos",
+     "t": 3.088
+    },
+    {
+     "word": "qué",
+     "t": 3.448
+    },
+    {
+     "word": "votan.",
+     "t": 3.553
+    }
+   ]
+  },
+  {
+   "file": "vo/sanidad-educacion-partidos/01.wav",
+   "seconds": 10.043,
+   "words": [
+    {
+     "word": "¿Crear",
+     "t": 0.04
+    },
+    {
+     "word": "una",
+     "t": 0.4
+    },
+    {
+     "word": "Agencia",
+     "t": 0.505
+    },
+    {
+     "word": "Estatal",
+     "t": 0.772
+    },
+    {
+     "word": "de",
+     "t": 1.062
+    },
+    {
+     "word": "Salud",
+     "t": 1.143
+    },
+    {
+     "word": "Pública?",
+     "t": 1.352
+    },
+    {
+     "word": "El",
+     "t": 2.095
+    },
+    {
+     "word": "PP",
+     "t": 2.258
+    },
+    {
+     "word": "la",
+     "t": 2.49
+    },
+    {
+     "word": "llevaba",
+     "t": 2.571
+    },
+    {
+     "word": "en",
+     "t": 2.815
+    },
+    {
+     "word": "su",
+     "t": 2.896
+    },
+    {
+     "word": "programa…",
+     "t": 2.978
+    },
+    {
+     "word": "y",
+     "t": 3.686
+    },
+    {
+     "word": "votó",
+     "t": 3.814
+    },
+    {
+     "word": "no.",
+     "t": 4.069
+    },
+    {
+     "word": "PSOE,",
+     "t": 4.615
+    },
+    {
+     "word": "Sumar",
+     "t": 5.288
+    },
+    {
+     "word": "y",
+     "t": 5.694
+    },
+    {
+     "word": "Podemos,",
+     "t": 5.81
+    },
+    {
+     "word": "sí.",
+     "t": 6.565
+    },
+    {
+     "word": "Con",
+     "t": 7.111
+    },
+    {
+     "word": "el",
+     "t": 7.297
+    },
+    {
+     "word": "no",
+     "t": 7.378
+    },
+    {
+     "word": "de",
+     "t": 7.471
+    },
+    {
+     "word": "PP,",
+     "t": 7.552
+    },
+    {
+     "word": "Vox",
+     "t": 8.063
+    },
+    {
+     "word": "y",
+     "t": 8.55
+    },
+    {
+     "word": "Junts,",
+     "t": 8.724
+    },
+    {
+     "word": "la",
+     "t": 9.316
+    },
+    {
+     "word": "ley",
+     "t": 9.444
+    },
+    {
+     "word": "cayó.",
+     "t": 9.56
+    }
+   ]
+  },
+  {
+   "file": "vo/sanidad-educacion-partidos/02.wav",
+   "seconds": 7.383,
+   "words": [
+    {
+     "word": "¿Una",
+     "t": 0.04
+    },
+    {
+     "word": "tarjeta",
+     "t": 0.318
+    },
+    {
+     "word": "sanitaria",
+     "t": 0.62
+    },
+    {
+     "word": "que",
+     "t": 0.98
+    },
+    {
+     "word": "sirva",
+     "t": 1.084
+    },
+    {
+     "word": "en",
+     "t": 1.259
+    },
+    {
+     "word": "toda",
+     "t": 1.34
+    },
+    {
+     "word": "España?",
+     "t": 1.502
+    },
+    {
+     "word": "La",
+     "t": 2.257
+    },
+    {
+     "word": "propuso",
+     "t": 2.362
+    },
+    {
+     "word": "Vox.",
+     "t": 2.675
+    },
+    {
+     "word": "El",
+     "t": 3.29
+    },
+    {
+     "word": "PP,",
+     "t": 3.418
+    },
+    {
+     "word": "que",
+     "t": 3.766
+    },
+    {
+     "word": "también",
+     "t": 3.871
+    },
+    {
+     "word": "la",
+     "t": 4.08
+    },
+    {
+     "word": "promete,",
+     "t": 4.161
+    },
+    {
+     "word": "se",
+     "t": 4.556
+    },
+    {
+     "word": "abstuvo.",
+     "t": 4.637
+    },
+    {
+     "word": "PSOE,",
+     "t": 5.519
+    },
+    {
+     "word": "Sumar",
+     "t": 5.961
+    },
+    {
+     "word": "y",
+     "t": 6.228
+    },
+    {
+     "word": "Podemos,",
+     "t": 6.286
+    },
+    {
+     "word": "no.",
+     "t": 6.947
+    }
+   ]
+  },
+  {
+   "file": "vo/sanidad-educacion-partidos/03.wav",
+   "seconds": 8.139,
+   "words": [
+    {
+     "word": "¿Más",
+     "t": 0.04
+    },
+    {
+     "word": "plazas",
+     "t": 0.307
+    },
+    {
+     "word": "públicas",
+     "t": 0.551
+    },
+    {
+     "word": "de",
+     "t": 0.911
+    },
+    {
+     "word": "0",
+     "t": 1.016
+    },
+    {
+     "word": "a",
+     "t": 1.178
+    },
+    {
+     "word": "3",
+     "t": 1.271
+    },
+    {
+     "word": "años,",
+     "t": 1.434
+    },
+    {
+     "word": "con",
+     "t": 1.933
+    },
+    {
+     "word": "menos",
+     "t": 2.084
+    },
+    {
+     "word": "alumnos",
+     "t": 2.281
+    },
+    {
+     "word": "por",
+     "t": 2.56
+    },
+    {
+     "word": "aula?",
+     "t": 2.699
+    },
+    {
+     "word": "Los",
+     "t": 3.314
+    },
+    {
+     "word": "cinco",
+     "t": 3.488
+    },
+    {
+     "word": "prometen",
+     "t": 3.686
+    },
+    {
+     "word": "guarderías",
+     "t": 3.988
+    },
+    {
+     "word": "gratuitas",
+     "t": 4.359
+    },
+    {
+     "word": "o",
+     "t": 4.742
+    },
+    {
+     "word": "universales.",
+     "t": 4.789
+    },
+    {
+     "word": "PP",
+     "t": 5.601
+    },
+    {
+     "word": "y",
+     "t": 5.81
+    },
+    {
+     "word": "Vox",
+     "t": 5.868
+    },
+    {
+     "word": "votaron",
+     "t": 6.077
+    },
+    {
+     "word": "no…",
+     "t": 6.426
+    },
+    {
+     "word": "y",
+     "t": 6.937
+    },
+    {
+     "word": "la",
+     "t": 7.041
+    },
+    {
+     "word": "moción",
+     "t": 7.122
+    },
+    {
+     "word": "perdió",
+     "t": 7.343
+    },
+    {
+     "word": "por",
+     "t": 7.552
+    },
+    {
+     "word": "un",
+     "t": 7.691
+    },
+    {
+     "word": "voto.",
+     "t": 7.761
+    }
+   ]
+  },
+  {
+   "file": "vo/sanidad-educacion-partidos/04.wav",
+   "seconds": 12.724,
+   "words": [
+    {
+     "word": "¿Y",
+     "t": 0.04
+    },
+    {
+     "word": "cuando",
+     "t": 0.249
+    },
+    {
+     "word": "gobiernan?",
+     "t": 0.435
+    },
+    {
+     "word": "El",
+     "t": 1.189
+    },
+    {
+     "word": "PSOE",
+     "t": 1.34
+    },
+    {
+     "word": "prometió",
+     "t": 1.561
+    },
+    {
+     "word": "una",
+     "t": 1.839
+    },
+    {
+     "word": "ley",
+     "t": 1.956
+    },
+    {
+     "word": "con",
+     "t": 2.072
+    },
+    {
+     "word": "un",
+     "t": 2.211
+    },
+    {
+     "word": "máximo",
+     "t": 2.281
+    },
+    {
+     "word": "de",
+     "t": 2.582
+    },
+    {
+     "word": "120",
+     "t": 2.699
+    },
+    {
+     "word": "días",
+     "t": 3.093
+    },
+    {
+     "word": "para",
+     "t": 3.279
+    },
+    {
+     "word": "operarse:",
+     "t": 3.407
+    },
+    {
+     "word": "no",
+     "t": 4.266
+    },
+    {
+     "word": "hubo",
+     "t": 4.394
+    },
+    {
+     "word": "ley,",
+     "t": 4.556
+    },
+    {
+     "word": "y",
+     "t": 5.021
+    },
+    {
+     "word": "la",
+     "t": 5.16
+    },
+    {
+     "word": "espera",
+     "t": 5.23
+    },
+    {
+     "word": "media",
+     "t": 5.473
+    },
+    {
+     "word": "sigue",
+     "t": 5.763
+    },
+    {
+     "word": "en",
+     "t": 5.961
+    },
+    {
+     "word": "122",
+     "t": 6.077
+    },
+    {
+     "word": "días.",
+     "t": 6.727
+    },
+    {
+     "word": "Sumar",
+     "t": 7.284
+    },
+    {
+     "word": "prometió",
+     "t": 7.563
+    },
+    {
+     "word": "pasar",
+     "t": 7.83
+    },
+    {
+     "word": "MUFACE",
+     "t": 8.027
+    },
+    {
+     "word": "a",
+     "t": 8.399
+    },
+    {
+     "word": "la",
+     "t": 8.469
+    },
+    {
+     "word": "sanidad",
+     "t": 8.55
+    },
+    {
+     "word": "pública:",
+     "t": 8.817
+    },
+    {
+     "word": "el",
+     "t": 9.409
+    },
+    {
+     "word": "Gobierno",
+     "t": 9.537
+    },
+    {
+     "word": "renovó",
+     "t": 9.839
+    },
+    {
+     "word": "el",
+     "t": 10.059
+    },
+    {
+     "word": "concierto",
+     "t": 10.152
+    },
+    {
+     "word": "con",
+     "t": 10.512
+    },
+    {
+     "word": "aseguradoras",
+     "t": 10.628
+    },
+    {
+     "word": "privadas",
+     "t": 11.081
+    },
+    {
+     "word": "hasta",
+     "t": 11.464
+    },
+    {
+     "word": "2027.",
+     "t": 11.673
+    }
+   ]
+  },
+  {
+   "file": "vo/sanidad-educacion-partidos/05.wav",
+   "seconds": 7.065,
+   "words": [
+    {
+     "word": "¿Quién",
+     "t": 0.04
+    },
+    {
+     "word": "defiende",
+     "t": 0.296
+    },
+    {
+     "word": "de",
+     "t": 0.586
+    },
+    {
+     "word": "verdad",
+     "t": 0.656
+    },
+    {
+     "word": "lo",
+     "t": 0.911
+    },
+    {
+     "word": "que",
+     "t": 0.981
+    },
+    {
+     "word": "promete?",
+     "t": 1.085
+    },
+    {
+     "word": "Ya",
+     "t": 1.689
+    },
+    {
+     "word": "lo",
+     "t": 1.828
+    },
+    {
+     "word": "has",
+     "t": 1.898
+    },
+    {
+     "word": "visto.",
+     "t": 2.014
+    },
+    {
+     "word": "¿Conoces",
+     "t": 2.536
+    },
+    {
+     "word": "a",
+     "t": 2.908
+    },
+    {
+     "word": "algún",
+     "t": 3.059
+    },
+    {
+     "word": "médico,",
+     "t": 3.303
+    },
+    {
+     "word": "enfermera",
+     "t": 3.674
+    },
+    {
+     "word": "o",
+     "t": 4.185
+    },
+    {
+     "word": "profe?",
+     "t": 4.278
+    },
+    {
+     "word": "Mándaselo.",
+     "t": 4.684
+    },
+    {
+     "word": "Y",
+     "t": 5.427
+    },
+    {
+     "word": "más",
+     "t": 5.567
+    },
+    {
+     "word": "comparaciones,",
+     "t": 5.706
+    },
+    {
+     "word": "en",
+     "t": 6.24
+    },
+    {
+     "word": "el",
+     "t": 6.345
+    },
+    {
+     "word": "perfil.",
+     "t": 6.426
+    }
+   ]
+  }
+ ],
+ "corrupcion-partidos": [
+  {
+   "file": "vo/corrupcion-partidos/00.wav",
+   "seconds": 4,
+   "words": [
+    {
+     "word": "Hablemos",
+     "t": 0
+    },
+    {
+     "word": "de",
+     "t": 0.372
+    },
+    {
+     "word": "corrupción:",
+     "t": 0.453
+    },
+    {
+     "word": "todos",
+     "t": 1.335
+    },
+    {
+     "word": "prometen",
+     "t": 1.66
+    },
+    {
+     "word": "combatirla…",
+     "t": 2.02
+    },
+    {
+     "word": "veamos",
+     "t": 3.042
+    },
+    {
+     "word": "qué",
+     "t": 3.367
+    },
+    {
+     "word": "votan.",
+     "t": 3.471
+    }
+   ]
+  },
+  {
+   "file": "vo/corrupcion-partidos/01.wav",
+   "seconds": 10.368,
+   "words": [
+    {
+     "word": "¿Crear",
+     "t": 0.04
+    },
+    {
+     "word": "una",
+     "t": 0.412
+    },
+    {
+     "word": "oficina",
+     "t": 0.516
+    },
+    {
+     "word": "independiente",
+     "t": 0.83
+    },
+    {
+     "word": "contra",
+     "t": 1.329
+    },
+    {
+     "word": "la",
+     "t": 1.55
+    },
+    {
+     "word": "corrupción?",
+     "t": 1.642
+    },
+    {
+     "word": "PSOE,",
+     "t": 2.641
+    },
+    {
+     "word": "Sumar",
+     "t": 3.454
+    },
+    {
+     "word": "y",
+     "t": 3.93
+    },
+    {
+     "word": "Podemos",
+     "t": 4.081
+    },
+    {
+     "word": "votaron",
+     "t": 4.696
+    },
+    {
+     "word": "sí.",
+     "t": 5.125
+    },
+    {
+     "word": "PP",
+     "t": 5.903
+    },
+    {
+     "word": "y",
+     "t": 6.263
+    },
+    {
+     "word": "Vox,",
+     "t": 6.403
+    },
+    {
+     "word": "no.",
+     "t": 7.146
+    },
+    {
+     "word": "Y",
+     "t": 7.819
+    },
+    {
+     "word": "ojo:",
+     "t": 7.993
+    },
+    {
+     "word": "Vox",
+     "t": 8.643
+    },
+    {
+     "word": "prometía",
+     "t": 9.235
+    },
+    {
+     "word": "crear",
+     "t": 9.642
+    },
+    {
+     "word": "una.",
+     "t": 9.909
+    }
+   ]
+  },
+  {
+   "file": "vo/corrupcion-partidos/02.wav",
+   "seconds": 11.784,
+   "words": [
+    {
+     "word": "¿Un",
+     "t": 0.04
+    },
+    {
+     "word": "registro",
+     "t": 0.353
+    },
+    {
+     "word": "público",
+     "t": 0.69
+    },
+    {
+     "word": "de",
+     "t": 1.038
+    },
+    {
+     "word": "quién",
+     "t": 1.143
+    },
+    {
+     "word": "presiona",
+     "t": 1.305
+    },
+    {
+     "word": "a",
+     "t": 1.63
+    },
+    {
+     "word": "los",
+     "t": 1.688
+    },
+    {
+     "word": "políticos?",
+     "t": 1.839
+    },
+    {
+     "word": "El",
+     "t": 2.675
+    },
+    {
+     "word": "PP",
+     "t": 2.826
+    },
+    {
+     "word": "lo",
+     "t": 2.989
+    },
+    {
+     "word": "prometía…",
+     "t": 3.058
+    },
+    {
+     "word": "y",
+     "t": 3.894
+    },
+    {
+     "word": "votó",
+     "t": 4.01
+    },
+    {
+     "word": "no,",
+     "t": 4.277
+    },
+    {
+     "word": "sus",
+     "t": 4.753
+    },
+    {
+     "word": "137",
+     "t": 4.951
+    },
+    {
+     "word": "diputados.",
+     "t": 5.74
+    },
+    {
+     "word": "Vox,",
+     "t": 6.785
+    },
+    {
+     "word": "no.",
+     "t": 7.575
+    },
+    {
+     "word": "Podemos,",
+     "t": 8.178
+    },
+    {
+     "word": "que",
+     "t": 8.817
+    },
+    {
+     "word": "también",
+     "t": 8.921
+    },
+    {
+     "word": "lo",
+     "t": 9.142
+    },
+    {
+     "word": "prometía,",
+     "t": 9.223
+    },
+    {
+     "word": "se",
+     "t": 9.769
+    },
+    {
+     "word": "abstuvo.",
+     "t": 9.885
+    },
+    {
+     "word": "Y",
+     "t": 10.593
+    },
+    {
+     "word": "el",
+     "t": 10.709
+    },
+    {
+     "word": "decreto",
+     "t": 10.802
+    },
+    {
+     "word": "cayó.",
+     "t": 11.104
+    }
+   ]
+  },
+  {
+   "file": "vo/corrupcion-partidos/03.wav",
+   "seconds": 18.008,
+   "words": [
+    {
+     "word": "¿Y",
+     "t": 0.04
+    },
+    {
+     "word": "cuando",
+     "t": 0.261
+    },
+    {
+     "word": "gobiernan?",
+     "t": 0.469
+    },
+    {
+     "word": "Rajoy",
+     "t": 1.526
+    },
+    {
+     "word": "prometió",
+     "t": 1.909
+    },
+    {
+     "word": "hacer",
+     "t": 2.234
+    },
+    {
+     "word": "todo",
+     "t": 2.466
+    },
+    {
+     "word": "lo",
+     "t": 2.664
+    },
+    {
+     "word": "necesario",
+     "t": 2.745
+    },
+    {
+     "word": "para",
+     "t": 3.14
+    },
+    {
+     "word": "aclarar",
+     "t": 3.279
+    },
+    {
+     "word": "la",
+     "t": 3.558
+    },
+    {
+     "word": "verdad:",
+     "t": 3.639
+    },
+    {
+     "word": "el",
+     "t": 4.464
+    },
+    {
+     "word": "PP",
+     "t": 4.603
+    },
+    {
+     "word": "votó",
+     "t": 5.021
+    },
+    {
+     "word": "contra",
+     "t": 5.3
+    },
+    {
+     "word": "investigar",
+     "t": 5.509
+    },
+    {
+     "word": "la",
+     "t": 5.927
+    },
+    {
+     "word": "operación",
+     "t": 5.996
+    },
+    {
+     "word": "Kitchen.",
+     "t": 6.321
+    },
+    {
+     "word": "Sánchez",
+     "t": 6.995
+    },
+    {
+     "word": "llegó",
+     "t": 7.413
+    },
+    {
+     "word": "en",
+     "t": 7.668
+    },
+    {
+     "word": "2018",
+     "t": 7.749
+    },
+    {
+     "word": "prometiendo",
+     "t": 8.457
+    },
+    {
+     "word": "asumir",
+     "t": 8.852
+    },
+    {
+     "word": "responsabilidades",
+     "t": 9.108
+    },
+    {
+     "word": "por",
+     "t": 9.793
+    },
+    {
+     "word": "la",
+     "t": 9.909
+    },
+    {
+     "word": "corrupción…",
+     "t": 9.99
+    },
+    {
+     "word": "y",
+     "t": 10.838
+    },
+    {
+     "word": "en",
+     "t": 10.942
+    },
+    {
+     "word": "2026",
+     "t": 11.047
+    },
+    {
+     "word": "el",
+     "t": 12.138
+    },
+    {
+     "word": "Supremo",
+     "t": 12.277
+    },
+    {
+     "word": "condenó",
+     "t": 12.591
+    },
+    {
+     "word": "a",
+     "t": 12.858
+    },
+    {
+     "word": "su",
+     "t": 12.916
+    },
+    {
+     "word": "ministro",
+     "t": 13.02
+    },
+    {
+     "word": "Ábalos",
+     "t": 13.392
+    },
+    {
+     "word": "a",
+     "t": 13.763
+    },
+    {
+     "word": "24",
+     "t": 13.833
+    },
+    {
+     "word": "años",
+     "t": 14.355
+    },
+    {
+     "word": "de",
+     "t": 14.564
+    },
+    {
+     "word": "cárcel.",
+     "t": 14.646
+    },
+    {
+     "word": "La",
+     "t": 15.307
+    },
+    {
+     "word": "comisión",
+     "t": 15.424
+    },
+    {
+     "word": "que",
+     "t": 15.749
+    },
+    {
+     "word": "anunció",
+     "t": 15.842
+    },
+    {
+     "word": "sobre",
+     "t": 16.178
+    },
+    {
+     "word": "el",
+     "t": 16.364
+    },
+    {
+     "word": "caso",
+     "t": 16.457
+    },
+    {
+     "word": "Koldo",
+     "t": 16.712
+    },
+    {
+     "word": "nunca",
+     "t": 16.968
+    },
+    {
+     "word": "llegó",
+     "t": 17.177
+    },
+    {
+     "word": "al",
+     "t": 17.351
+    },
+    {
+     "word": "Pleno.",
+     "t": 17.432
+    }
+   ]
+  },
+  {
+   "file": "vo/corrupcion-partidos/04.wav",
+   "seconds": 8.317,
+   "words": [
+    {
+     "word": "¿Quién",
+     "t": 0.04
+    },
+    {
+     "word": "lucha",
+     "t": 0.341
+    },
+    {
+     "word": "de",
+     "t": 0.562
+    },
+    {
+     "word": "verdad",
+     "t": 0.632
+    },
+    {
+     "word": "contra",
+     "t": 0.875
+    },
+    {
+     "word": "la",
+     "t": 1.084
+    },
+    {
+     "word": "corrupción?",
+     "t": 1.177
+    },
+    {
+     "word": "No",
+     "t": 2.129
+    },
+    {
+     "word": "siempre",
+     "t": 2.269
+    },
+    {
+     "word": "quien",
+     "t": 2.512
+    },
+    {
+     "word": "lo",
+     "t": 2.663
+    },
+    {
+     "word": "promete.",
+     "t": 2.733
+    },
+    {
+     "word": "¿Conoces",
+     "t": 3.383
+    },
+    {
+     "word": "a",
+     "t": 3.848
+    },
+    {
+     "word": "alguien",
+     "t": 3.906
+    },
+    {
+     "word": "que",
+     "t": 4.161
+    },
+    {
+     "word": "no",
+     "t": 4.277
+    },
+    {
+     "word": "sabe",
+     "t": 4.382
+    },
+    {
+     "word": "a",
+     "t": 4.556
+    },
+    {
+     "word": "quién",
+     "t": 4.614
+    },
+    {
+     "word": "votar?",
+     "t": 4.765
+    },
+    {
+     "word": "Mándaselo.",
+     "t": 5.543
+    },
+    {
+     "word": "Y",
+     "t": 6.367
+    },
+    {
+     "word": "más",
+     "t": 6.529
+    },
+    {
+     "word": "comparaciones,",
+     "t": 6.692
+    },
+    {
+     "word": "en",
+     "t": 7.505
+    },
+    {
+     "word": "el",
+     "t": 7.656
+    },
+    {
+     "word": "perfil.",
+     "t": 7.737
+    }
+   ]
+  }
  ]
 }

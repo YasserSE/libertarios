@@ -1,0 +1,66 @@
+{
+ "url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion156/20260127/Votacion001/VOT_20260127153134.json",
+ "fecha": "27/1/2026",
+ "titulo": "Convalidación o derogación de Reales Decretos-leyes.",
+ "expediente": "Real Decreto-ley 16/2025, de 23 de diciembre, por el que se prorrogan determinadas medidas para hacer frente a situaciones de vulnerabilidad social, y se adoptan medidas urgentes en materia tributaria y de Seguridad Social.",
+ "totales": {
+  "asentimiento": "No",
+  "presentes": 349,
+  "afavor": 171,
+  "enContra": 178,
+  "abstenciones": 0,
+  "noVotan": 1
+ },
+ "partidos": {
+  "pp": {
+   "si": 0,
+   "no": 137,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "no",
+    "strong": true
+   }
+  },
+  "psoe": {
+   "si": 120,
+   "no": 0,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  },
+  "vox": {
+   "si": 0,
+   "no": 33,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "no",
+    "strong": true
+   }
+  },
+  "sumar": {
+   "si": 26,
+   "no": 0,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  },
+  "podemos": {
+   "si": 4,
+   "no": 0,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  }
+ }
+}

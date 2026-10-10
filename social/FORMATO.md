@@ -122,3 +122,86 @@ sh scripts/render-posts.sh <partido>   # carrusel → out/final/post-<partido>/
 - **Cuadrante del Reel de presentación:** es el de la web (`InteractiveQuadrant.tsx`).
   - Ejes: economía en horizontal (intervención → libre mercado) y sociedad en vertical (control → libertad).
   - Esquinas: Liberal social, Libertario, Autoritario de izquierda y Autoritario de derecha.
+
+## 9. Vídeos explicativos (vivienda, ¿derecha?, impuestos, vivienda por partidos)
+
+Usan el mismo diseño «papeleta» con otro esquema: un **gancho**, varias escenas con datos y un **cierre** que invita a aprender más («más vídeos en el perfil» y el test de la bio).
+
+- **Un fichero por vídeo:** `src/explainers/<id>.ts`, con `header`, `rail` y escenas `{ rail, script, min, scene }`. La escena dice qué enseña (`questions`, `vs`, `stats`, `stamps`, `donut`, `case`, `provinces`, `headline`, `axes`, `partyMap`, `receipt`, `partyGrid`, `dvhList`, `who`, `ending`). Cada elemento lleva su `cue`, la palabra del guion con la que aparece.
+- **Pantallas:** `src/components/scenes.tsx`. **Composición:** `src/Explainer.tsx` (`reel-<id>`). **Carrusel:** `post-<id>`.
+- **Voz continua:** `npm run tts -- <id>` pide **una sola toma** con el guion entero y la corta por escenas con los tiempos por carácter. Así la voz suena fluida, sin pausas bruscas entre escenas. Ajustes: velocidad 1,2 (el máximo de ElevenLabs), estabilidad 0,38 y estilo 0,3.
+- **Duración de cada escena:** 0,05 s + la voz + 0,1 s; el cierre se alarga 1,2 s.
+- **Fuentes:** cada cifra de pantalla lleva su fuente. La tabla completa está en `captions/fuentes-explicativos.md`.
+- **Comprobación:** `npm run check` compara la voz del vídeo de vivienda por partidos con los datos del test, y comprueba el «0 de 22» y que no haya ningún partido libertario con escaño.
+- **Dos voces:** vivienda, ¿derecha? e impuestos hablan con la voz de la web (libertaria, con contrapunto). Vivienda por partidos es neutral, como los Reels de partidos.
+
+## 10. Criterios de guion y QA (para planificar y revisar cada vídeo nuevo)
+
+Salen de la revisión de 2026-10-10 contra Reels virales de divulgación: Kurzgesagt, Johnny Harris, Vox, VisualPolitik, Rallo y Maldita. También se apoyan en lo que publican Instagram y TikTok y en un estudio sobre los TikTok de Maldita y Newtral (EPI, «Viralizar la verdad»).
+
+**Qué mide Instagram:** tiempo de visionado, likes por alcance y **envíos por DM** por alcance. Para llegar a gente que no nos sigue, lo que más pesa son los envíos. El objetivo del vídeo es un «no lo sabía» que alguien quiera mandar.
+
+### Escribir para el oído, no para leer
+- **El número va delante del sustantivo,** como se habla: «solo se terminaron 92.000 casas», no «casas terminadas: 92.000».
+- **Nada de etiquetas de tabla** («Las empresas, un 8 %»). Frases completas con conectores: «Por eso…», «Entonces…», «Ahora…».
+- **Los ejemplos suenan a ejemplos:** «Ya se ha probado: en San Francisco…, en Estocolmo…».
+- **Español correcto:** «tampoco», no «también no». «En libertarios.eu no somos…», no «Libertarios punto eu no es…» (la pronunciación la pone `sayAs`).
+
+### Estructura del efecto «no lo sabía»
+1. **Lo que la gente cree,** luego **el giro** y luego **una comparación que se sienta:** por mes, «uno de cada diez», «de enero a finales de mayo». Una cifra suelta no sorprende; la distancia con lo que esperabas, sí.
+2. **La sorpresa más fuerte va justo después del gancho,** no en el medio.
+
+### Un mensaje central («el punch»), dicho con todas las letras
+- **Antes de escribir el guion,** apunta en una frase lo que la gente se tiene que llevar. Por ejemplo, impuestos: «no te dan ticket; siempre te dicen pensiones, sanidad, educación y seguridad, pero eso es el 57 %; si el resto fuera la mitad, cobrarías un 14 % más».
+- **Cada escena empuja hacia esa frase.** Lo que no empuja se quita, aunque sea un buen dato.
+- **El gancho dice de qué va el vídeo** («Hablemos de vivienda: …»), y el cierre repite el punch en una frase («No es el casero: es que no se construye»).
+- **Si el punch es un supuesto** («si se redujera a la mitad»), el supuesto se dice en pantalla y se calcula en código.
+
+### Checklist (puntuar 0/1/2 antes de grabar y después de renderizar)
+
+| # | Criterio |
+|---|---|
+| 1 | **Promesa o tensión en los primeros 3 s,** en voz y en pantalla. Nada de intro de canal. |
+| 2 | **Pregunta abierta antes de los 6 s.** La respuesta se guarda (bucle abierto). |
+| 3 | **Primer dato que responde antes de los 15–20 s,** y el giro final se reserva. |
+| 4 | **Un dato «para mandar por DM»:** una sola cifra que alguien enviaría. |
+| 5 | **Formato de comprobación o veredicto** («¿votan lo que prometen? Lo comprobamos») mejor que «así funciona X». En los TikTok de Maldita y Newtral, los verificados tenían 2,4× más probabilidad de superar la media de likes. |
+| 6 | **Menos de 60 s,** salvo que los datos de retención justifiquen más. |
+| 7 | **Una idea por pantalla.** Se entiende sin sonido y la tira de subtítulos no tapa el dato. |
+| 8 | **Cada cifra con su fuente en pantalla** y en `captions/fuentes-explicativos.md`. |
+| 9 | **La respuesta llega antes del CTA,** y el CTA dura unos 3 s (`min: 3.5` en el cierre). |
+| 10 | **El cierre vuelve al principio:** la última frase responde a la primera, en bucle. |
+| 11 | **El cierre invita a mandarlo** a alguien a quien le sirva, concreto para el tema, y a ver más en el perfil. Ejemplos: «¿Conoces a algún pensionista? Mándaselo. Y más comparaciones, en el perfil.», «¿Conoces a alguien buscando piso?». Pantalla de cierre con `shareTo` (tarjeta «Enviar a…» + «↗ MÁS EN EL PERFIL»). El comentario se pide en el texto del post, no en la voz. |
+| 12 | **Voz femenina** (Cristina). En el mismo estudio, presentadora mujer = el doble de probabilidad de compartidos por encima de la media. |
+| 13 | **Neutralidad en los vídeos de partidos:** si el gancho señala a alguien, que salga de los datos y nombre a los dos grandes cuando los datos lo permitan. |
+| 14 | **Probar el gancho con Trial Reels** de Instagram: dos aperturas, enseñadas solo a gente que no nos sigue. Se queda la que retiene. |
+
+**Folclore sin fuente primaria (no usar como regla):** «el 50 % se va en 3 s», «21–34 s es lo ideal», «cambiar la imagen cada 2–4 s».
+
+## 11. Vídeos por temas: «lo que prometen y lo que votan»
+
+Mismo formato que vivienda por partidos:
+- **Gancho** «Hablemos de X: qué prometen… y qué votan».
+- **Tres votaciones** con programa y voto de PP, PSOE, Vox, Sumar y Podemos.
+- **«Cuando gobiernan»**, solo si hay entradas de PP o PSOE en «dijo / hizo».
+- **Cierre** «¿Te ha sorprendido? Comenta» + test.
+
+**Dónde está cada pieza:**
+- **Código:** `src/explainers/party-video.ts` (filas comunes) y `topic-partidos.ts` / `impuestos-partidos.ts` (guiones).
+- **Si el tema está en el test:** se usa `fromDataset`.
+- **Si no está:** se buscan votaciones y promesas y van a `src/explainers/extra-votes.ts`.
+  - **Voto:** URL del JSON de datos abiertos del Congreso.
+  - **Promesa:** cita literal con página del PDF. Sin cita clara → `sin`.
+  - **Recuento:** se guarda la salida de `npm run afinidad:vote -- <url> --json` (en `Libertarios/`) resumida en `data/votes/<id>.json`. `npm run check` falla si el vídeo no coincide.
+  - **Rate limit:** congreso.es corta si se piden muchas votaciones seguidas. Hay que espaciarlas unos 45 s.
+
+**Neutralidad:**
+- Una toma en consideración se dice «tramitar», no «aprobar».
+- Los decretos ómnibus se dicen «junto a otras medidas».
+- No se atribuyen motivos a un voto si no están verificados.
+
+**Equilibrio (owner, 2026-10-10).** Los programas de izquierda prometen mucho y, si solo se eligen votaciones sobre propuestas suyas, salen «coherentes» y el vídeo tiene un ganador claro. Para evitarlo:
+- Cada vídeo por partidos enseña al menos **una contradicción del Gobierno (PSOE, Sumar; Podemos cuando gobernó)** y **una de la oposición (PP, Vox)**, todas verificadas.
+- **«Cuando gobiernan» incluye siempre a quien gobierna ahora,** porque es quien tiene más hechos que contrastar.
+- Si los datos no lo permiten, se avisa al dueño antes de publicar.
+- **Lenguaje neutro:** se enseñan votos y hechos, sin calificativos. Lo que no se puede verificar («no dijeron nada») no se dice.

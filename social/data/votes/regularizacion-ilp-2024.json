@@ -1,0 +1,66 @@
+{
+ "url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion034/20240409/Votacion001/VOT_20240409210631.json",
+ "fecha": "9/4/2024",
+ "titulo": "Toma en consideración de Proposiciones de Ley de iniciativa popular.",
+ "expediente": "Proposición de Ley para una regularización extraordinaria para personas extranjeras en España (corresponde al número de expediente 120/000026/0000 de la XIV Legislatura).",
+ "totales": {
+  "asentimiento": "No",
+  "presentes": 343,
+  "afavor": 310,
+  "enContra": 33,
+  "abstenciones": 0,
+  "noVotan": 6
+ },
+ "partidos": {
+  "pp": {
+   "si": 136,
+   "no": 0,
+   "abstencion": 0,
+   "ausente": 1,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  },
+  "psoe": {
+   "si": 118,
+   "no": 0,
+   "abstencion": 0,
+   "ausente": 1,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  },
+  "vox": {
+   "si": 0,
+   "no": 33,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "no",
+    "strong": true
+   }
+  },
+  "sumar": {
+   "si": 24,
+   "no": 0,
+   "abstencion": 0,
+   "ausente": 2,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  },
+  "podemos": {
+   "si": 3,
+   "no": 0,
+   "abstencion": 0,
+   "ausente": 1,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  }
+ }
+}

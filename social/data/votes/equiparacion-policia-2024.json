@@ -1,0 +1,66 @@
+{
+ "url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion068/20241016/Votacion001/VOT_20241017130151.json",
+ "fecha": "16/10/2024",
+ "titulo": "Proposiciones no de Ley.",
+ "expediente": "Proposición no de Ley del Grupo Parlamentario Popular en el Congreso, sobre equiparación salarial real y total de la Policía Nacional y la Guardia Civil, así como su jubilación anticipada.\n",
+ "totales": {
+  "asentimiento": "No",
+  "presentes": 345,
+  "afavor": 171,
+  "enContra": 174,
+  "abstenciones": 0,
+  "noVotan": 5
+ },
+ "partidos": {
+  "pp": {
+   "si": 136,
+   "no": 0,
+   "abstencion": 0,
+   "ausente": 1,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  },
+  "psoe": {
+   "si": 0,
+   "no": 119,
+   "abstencion": 0,
+   "ausente": 1,
+   "mayoria": {
+    "vote": "no",
+    "strong": true
+   }
+  },
+  "vox": {
+   "si": 33,
+   "no": 0,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  },
+  "sumar": {
+   "si": 0,
+   "no": 24,
+   "abstencion": 0,
+   "ausente": 2,
+   "mayoria": {
+    "vote": "no",
+    "strong": true
+   }
+  },
+  "podemos": {
+   "si": 0,
+   "no": 4,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "no",
+    "strong": true
+   }
+  }
+ }
+}

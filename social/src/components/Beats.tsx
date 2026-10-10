@@ -252,7 +252,23 @@ export const DvhBeat: React.FC<{ chapter: Chapter; n: number; dvh: Dvh; frames: 
 
 /* ── Final ──────────────────────────────────────────────────────────── */
 
-export const EndingBeat: React.FC<{ title?: string[]; cta?: string[]; body?: string }> = ({
+/** Cierre «compártelo»: tarjeta de enviar a alguien + «más en el perfil». */
+const ShareCard: React.FC<{ to: string; style: React.CSSProperties }> = ({ to, style }) => (
+  <div style={{ position: "absolute", left: 44, right: 44, top: 464, border: `6px solid ${C.ink}`, background: C.white, boxShadow: `-12px 12px 0 ${C.ink}`, ...style }}>
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "14px 22px", borderBottom: `4px solid ${C.ink}`, background: C.paper, font: `700 28px ${MONO}`, letterSpacing: 1 }}>
+      <span>ENVIAR A…</span>
+      <span style={{ fontSize: 34 }}>✈</span>
+    </div>
+    <div style={{ padding: "26px 26px 30px", display: "flex", alignItems: "center", gap: 22 }}>
+      <span style={{ width: 86, height: 86, borderRadius: "50%", border: `5px solid ${C.ink}`, background: C.mint, display: "grid", placeItems: "center", font: `700 50px ${GROTESK}`, flexShrink: 0 }}>?</span>
+      <span style={{ flex: 1, font: `700 40px ${GROTESK}`, lineHeight: 1.05 }}>{to}</span>
+      <span style={{ font: `700 46px ${GROTESK}`, letterSpacing: -2, background: C.teal, border: `5px solid ${C.ink}`, padding: "8px 18px" }}>ENVIAR</span>
+    </div>
+  </div>
+);
+
+export const EndingBeat: React.FC<{ title?: string[]; cta?: string[]; body?: string; shareTo?: string }> = ({
+  shareTo,
   title = ["¿Quieres", "saber", "más?"],
   cta = ["¿A quién", "votar?"],
   body = "15 preguntas. Tus respuestas, comparadas con programas y votaciones.",
@@ -285,6 +301,9 @@ export const EndingBeat: React.FC<{ title?: string[]; cta?: string[]; body?: str
         ))}
       </div>
 
+      {shareTo ? (
+        <ShareCard to={shareTo} style={{ opacity: interpolate(cardIn, [0, 0.3], [0, 1], { extrapolateRight: "clamp" }), transform: `translateY(${(1 - cardIn) * 80}px) scale(${pulse})` }} />
+      ) : (
       <div
         style={{
           position: "absolute",
@@ -324,6 +343,7 @@ export const EndingBeat: React.FC<{ title?: string[]; cta?: string[]; body?: str
           </span>
         </div>
       </div>
+      )}
 
       {body ? (
         <div style={{ position: "absolute", left: 44, right: 300, top: 818, font: `700 30px ${GROTESK}`, lineHeight: 1.2, ...useEnter(30) }}>
@@ -344,10 +364,10 @@ export const EndingBeat: React.FC<{ title?: string[]; cta?: string[]; body?: str
           ...useEnter(36, { y: 30 }),
         }}
       >
-        ↗ LINK EN LA BIO
+        {shareTo ? "↗ MÁS EN EL PERFIL" : "↗ LINK EN LA BIO"}
       </div>
       <Src style={{ position: "absolute", left: 44, bottom: 16, fontSize: 20, color: C.ink, ...useEnter(44, { y: 10 }) }}>
-        Test neutral · gratis · no pedimos el voto
+        {shareTo ? "@libertarios.eu · test «¿A quién votar?» en la bio" : "Test neutral · gratis · no pedimos el voto"}
       </Src>
     </>
   );

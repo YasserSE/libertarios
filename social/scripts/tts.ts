@@ -7,6 +7,10 @@
  * Clave: ELEVENLABS_API_KEY o el fichero ~/.config/elevenlabs/key (nunca en el repo).
  * Voz: ELEVENLABS_VOICE_ID (por defecto, la elegida abajo).
  *
+ * Vídeos explicativos (src/explainers): modo continuo. Una sola toma con el guion
+ * entero, cortada por escenas con los tiempos de cada carácter: entonación
+ * natural entre escenas y sin pausas bruscas (`--beats` fuerza una toma por escena).
+ *
  * Se usa /with-timestamps porque devuelve el tiempo de cada carácter: con eso
  * se sacan los tiempos exactos de cada palabra para subtítulos y cortes.
  * Lo que se dice es el guion de build.ts; solo cambia la pronunciación de
@@ -17,6 +21,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { buildReel, words, type VoClip } from "../src/build";
 import { INTRO } from "../src/intro-script";
+import { EXPLAINERS } from "../src/explainers";
 
 const API = "https://api.elevenlabs.io/v1";
 const MODEL = "eleven_multilingual_v2";
@@ -36,6 +41,7 @@ const sayAs = (w: string) =>
     .replace(/^IRPF/, "i erre pe efe")
     .replace(/^PP(?=\W|$)/, "pepé")
     .replace(/^PSOE/, "pesóe")
+    .replace(/^libertarios\.eu/, "libertarios punto eu")
     .replace(/^37,5/, "treinta y siete y media");
 
 async function listVoices() {
@@ -68,7 +74,8 @@ async function speak(voice: string, text: string, prev: string, next: string) {
       language_code: "es",
       previous_text: prev || undefined,
       next_text: next || undefined,
-      voice_settings: { stability: 0.45, similarity_boost: 0.8, style: 0.25, use_speaker_boost: true, speed: 1.15 },
+      // Voz más fluida y algo más rápida (10-10-2026): velocidad máxima de ElevenLabs.
+      voice_settings: { stability: 0.38, similarity_boost: 0.8, style: 0.3, use_speaker_boost: true, speed: 1.2 },
     }),
   });
   if (!res.ok) throw new Error(`ElevenLabs ${res.status}: ${await res.text()}`);
@@ -83,7 +90,9 @@ async function main() {
     process.exit(1);
   }
 
-  const reel = { beats: arg === "intro" ? INTRO : buildReel(arg).beats };
+  const explainer = EXPLAINERS[arg];
+  const reel = { beats: explainer ? explainer.scenes : arg === "intro" ? INTRO : buildReel(arg).beats };
+  if (explainer && !process.argv.includes("--beats")) return continuous(arg, reel.beats.map((b) => b.script));
   const dir = new URL(`../public/vo/${arg}/`, import.meta.url).pathname;
   mkdirSync(dir, { recursive: true });
   const manifestPath = new URL("../src/vo-manifest.json", import.meta.url).pathname;
@@ -132,6 +141,54 @@ async function main() {
   manifest[arg] = clips;
   writeFileSync(manifestPath, JSON.stringify(manifest, null, 1));
   console.log(`\n→ src/vo-manifest.json (${arg})`);
+}
+
+/** Una toma para todo el guion, cortada por escenas. */
+async function continuous(id: string, scripts: string[]) {
+  const dir = new URL(`../public/vo/${id}/`, import.meta.url).pathname;
+  mkdirSync(dir, { recursive: true });
+  const scenes = scripts.map((sc) => {
+    const shown = words(sc);
+    const parts = shown.map(sayAs);
+    return { shown, parts, text: parts.join(" ") };
+  });
+  const text = scenes.map((s) => s.text).join(" ");
+  const starts: number[] = [];
+  let off = 0;
+  for (const s of scenes) {
+    starts.push(off);
+    off += s.text.length + 1;
+  }
+  const { audio_base64, alignment } = await speak(DEFAULT_VOICE, text, "", "");
+  const full = `${dir}full.mp3`;
+  writeFileSync(full, Buffer.from(audio_base64, "base64"));
+  const total = Number(
+    execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", full]).toString().trim(),
+  );
+  const at = (i: number) => alignment.character_start_times_seconds[i] ?? total;
+  // cada escena empieza un pelín antes de su primera letra para no comerse el ataque
+  const cut = starts.map((c, i) => (i === 0 ? 0 : Math.max(0, at(c) - 0.04)));
+  const clips: VoClip[] = scenes.map((s, i) => {
+    const name = String(i).padStart(2, "0");
+    const from = cut[i];
+    const to = i + 1 < scenes.length ? cut[i + 1] : total;
+    const wav = `${dir}${name}.wav`;
+    execFileSync("ffmpeg", ["-v", "error", "-y", "-i", full, "-ss", from.toFixed(3), "-to", to.toFixed(3), "-ar", "48000", "-ac", "1", wav]);
+    let o = starts[i];
+    const timed = s.shown.map((word, k) => {
+      const t = at(o) - from;
+      o += s.parts[k].length + 1;
+      return { word, t: Number(Math.max(0, t).toFixed(3)) };
+    });
+    console.log(`${name} ${(to - from).toFixed(2)}s  ${s.text}`);
+    return { file: `vo/${id}/${name}.wav`, seconds: Number((to - from).toFixed(3)), words: timed };
+  });
+  execFileSync("rm", [full]);
+  const manifestPath = new URL("../src/vo-manifest.json", import.meta.url).pathname;
+  const manifest = JSON.parse(readFileSync(manifestPath, "utf8")) as Record<string, VoClip[]>;
+  manifest[id] = clips;
+  writeFileSync(manifestPath, JSON.stringify(manifest, null, 1));
+  console.log(`\n→ src/vo-manifest.json (${id}, toma continua de ${total.toFixed(1)} s)`);
 }
 
 main().catch((e) => {

@@ -1,0 +1,66 @@
+{
+ "url": "https://www.congreso.es/webpublica/opendata/votaciones/Leg15/Sesion119/20250617/Votacion002/VOT_20250617203252.json",
+ "fecha": "17/6/2025",
+ "titulo": "Toma en consideración de Proposiciones de Ley.",
+ "expediente": "Proposición de Ley del Grupo Parlamentario VOX, Orgánica por la que se modifica la Ley Orgánica 10/1995, de 23 de noviembre, del Código Penal, al objeto de tipificar penalmente el transporte y almacenamiento de combustibles líquidos predeterminados al narcotráfico.",
+ "totales": {
+  "asentimiento": "No",
+  "presentes": 343,
+  "afavor": 171,
+  "enContra": 172,
+  "abstenciones": 0,
+  "noVotan": 6
+ },
+ "partidos": {
+  "pp": {
+   "si": 137,
+   "no": 0,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  },
+  "psoe": {
+   "si": 0,
+   "no": 116,
+   "abstencion": 0,
+   "ausente": 3,
+   "mayoria": {
+    "vote": "no",
+    "strong": true
+   }
+  },
+  "vox": {
+   "si": 33,
+   "no": 0,
+   "abstencion": 0,
+   "ausente": 0,
+   "mayoria": {
+    "vote": "si",
+    "strong": true
+   }
+  },
+  "sumar": {
+   "si": 0,
+   "no": 25,
+   "abstencion": 0,
+   "ausente": 1,
+   "mayoria": {
+    "vote": "no",
+    "strong": true
+   }
+  },
+  "podemos": {
+   "si": 0,
+   "no": 3,
+   "abstencion": 0,
+   "ausente": 1,
+   "mayoria": {
+    "vote": "no",
+    "strong": true
+   }
+  }
+ }
+}
