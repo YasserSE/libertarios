@@ -101,8 +101,14 @@ export const impuestos: Explainer = {
   scenes: [
     {
       rail: 0,
-      min: 3.5,
-      script: "Imagina que al pagar tus impuestos te dieran un ticket, como en un restaurante. Nunca te lo dan. Así que lo hemos hecho nosotros.",
+      min: 2.5,
+      script: "¿Y si tus impuestos vinieran con ticket? Como en un restaurante.",
+      scene: { kind: "headline", lines: ["¿Y si", "tus", "impuestos", "vinieran", "con ticket?"], highlight: 4, sub: "Como en un restaurante.", subCue: "restaurante" },
+    },
+    {
+      rail: 0,
+      min: 2.5,
+      script: "Nunca te lo dan. Así que lo hemos hecho nosotros.",
       scene: {
         kind: "receipt",
         title: "TICKET · TUS IMPUESTOS",
